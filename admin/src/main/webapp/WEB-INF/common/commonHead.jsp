@@ -20,6 +20,15 @@
         <link rel="stylesheet" media="screen" href="vendors/bootstrap-wysihtml5-rails-b3/vendor/assets/stylesheets/bootstrap-wysihtml5/core-b3.css">
         <!-- Datatables -->
         <link rel="stylesheet" media="screen" href="<%=path%>/css/DT_bootstrap.css">
+		<!-- 调整容器的大小以扩大表格 -->
+		<style>
+		   @media (min-width: 1200px) {
+			  .container {
+			    width: 1500px;
+			  }
+			}
+		</style>
+		
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>

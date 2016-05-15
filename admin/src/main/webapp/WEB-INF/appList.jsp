@@ -176,12 +176,14 @@
                                 <div class="panel-heading">
                                     <div class="text-muted bootstrap-admin-box-title">Applications</div>
                                 </div>
-                                <div class="bootstrap-admin-panel-content">
+                                <div class="bootstrap-admin-panel-content" style="width:auto">
                                     <table class="table table-striped table-bordered" id="example">
                                         <thead>
                                             <tr>
                                                 <th>App Id</th>
                                                 <th>Company Id</th>
+                                                <th>Company Name</th>
+                                                <th>Company Contacts</th>
                                                 <th>Cur Uid</th>
                                                 <th>Begin Uid</th>
                                                 <th>End Uid</th>
@@ -194,13 +196,15 @@
                                         <tbody>
                                            <c:forEach var="app"  items="${requestScope.apps}">
                                                 <tr class="odd gradeX">
-	                                                <td>${app.appid}</td>
-	                                                <td>${app.company[0].companyId}</td>
-	                                                <td>${app.curUid}</td>
-	                                                <td>${app.beginUid}</td>
-	                                                <td>${app.endUid}</td>
-	                                                <td>${app.contacts}</td>
-	                                                <td>${app.description}</td>
+	                                                <td><input type="text" style="width:100px" value=${app.appid}></td>
+	                                                <td><input type="text" style="width:100px" value=${app.company[0].companyId}></td>
+	                                                <td><input type="text" style="width:100px" value=${app.company[0].companyName}></td>
+	                                                <td><input type="text" style="width:100px" value=${app.company[0].contacts}></td>
+	                                                <td><input type="text" style="width:100px" value=${app.curUid}></td>
+	                                                <td><input type="text" style="width:100px" value=${app.beginUid}></td>
+	                                                <td><input type="text" style="width:100px" value=${app.endUid}></td>
+	                                                <td><input type="text" style="width:100px" value=${app.contacts}></td>
+	                                                <td><input type="text" style="width:100px" value=${app.description}></td>
 	                                                <td><a href="<%=path%>/appDetail">Detail</a></td>
                                             	</tr>
 										   </c:forEach>
