@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+	default-autowire="byName">
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://120.25.167.84:3306/snail" />
+        <property name="username" value="root" />
+        <property name="password" value="00715701" />
+        <property name="maxWait" value="7200000" />
+        <property name="maxActive" value="28" />
+        <property name="maxIdle" value="28" />
+		<property name="initialSize" value="2" />
+        <property name="minIdle" value="0" />
+        <property name="timeBetweenEvictionRunsMillis" value="300000" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testWhileIdle" value="true" />
+        <property name="validationQuery" value="select 1 from dual" />
+    </bean>
+    <context:component-scan base-package="com.snail.audio.admin.service,com.snail.audio.admin.dao"/>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="mapperLocations" value="classpath*:com/**/mapper/*Mapper*.xml" /> 
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="com.snail.***.entity" />
+    </bean>
+    
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="annotationClass" value="javax.annotation.Resource"></property>
+        <property name="basePackage" value="com.snail.audio.admin.*mapper" />
+    </bean>  
+    
+	
+</beans>
