@@ -33,4 +33,10 @@ public class BaseControl {
 		return "appDetail";
     	
     }
+	@RequestMapping("/appAction")
+	public String test(App app){
+		System.out.println(app);
+		return "appDetail";
+		
+	}
 }

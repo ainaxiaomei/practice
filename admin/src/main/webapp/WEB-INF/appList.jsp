@@ -7,6 +7,8 @@
         <%String path=getServletContext().getContextPath();%>
         <title>Tables | Bootstrap 3.x Admin Theme</title>
         <jsp:include page="common/commonHead.jsp"></jsp:include>
+       <script type="text/javascript" charset="utf8" src="<%=path%>/vendors/datatables/extensions/Select/js/dataTables.select.min.js"></script>
+        
     </head>
     <body class="bootstrap-admin-with-small-navbar">
         <!-- small navbar -->
@@ -196,16 +198,16 @@
                                         <tbody>
                                            <c:forEach var="app"  items="${requestScope.apps}">
                                                 <tr class="odd gradeX">
-	                                                <td><input type="text" style="width:100px" value=${app.appid}></td>
-	                                                <td><input type="text" style="width:100px" value=${app.company[0].companyId}></td>
-	                                                <td><input type="text" style="width:100px" value=${app.company[0].companyName}></td>
-	                                                <td><input type="text" style="width:100px" value=${app.company[0].contacts}></td>
-	                                                <td><input type="text" style="width:100px" value=${app.curUid}></td>
-	                                                <td><input type="text" style="width:100px" value=${app.beginUid}></td>
-	                                                <td><input type="text" style="width:100px" value=${app.endUid}></td>
-	                                                <td><input type="text" style="width:100px" value=${app.contacts}></td>
-	                                                <td><input type="text" style="width:100px" value=${app.description}></td>
-	                                                <td><a href="<%=path%>/appDetail">Detail</a></td>
+	                                                <td><input type="text" name="appid" style="width:100px" value=${app.appid}></td>
+	                                                <td><input type="text" name="company[0].companyId" style="width:100px" value=${app.company[0].companyId}></td>
+	                                                <td><input type="text" name="company[0].companyName" style="width:100px" value=${app.company[0].companyName}></td>
+	                                                <td><input type="text" name="company[0].contacts" style="width:100px" value=${app.company[0].contacts}></td>
+	                                                <td><input type="text" name="curUid" style="width:100px" value=${app.curUid}></td>
+	                                                <td><input type="text" name="beginUid" style="width:100px" value=${app.beginUid}></td>
+	                                                <td><input type="text" name="endUid" style="width:100px" value=${app.endUid}></td>
+	                                                <td><input type="text" name="contacts" style="width:100px" value=${app.contacts}></td>
+	                                                <td><input type="text" name="description" style="width:100px" value=${app.description}></td>
+	                                                <td><a href="javascript:modifyApp()">Modify</a></td>
                                             	</tr>
 										   </c:forEach>
                                         </tbody>
@@ -217,7 +219,33 @@
                 </div>
             </div>
         </div>
-        
+        <script>
+          function modifyApp(){
+        	  //获取table对象
+        	  var table = $('#example').DataTable();
+        	  var a=table.row({ selected: true });
+        	  alert(a.data());
+        	  var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
+        	  sendData(datas);
+          }
+          function sendData(datas){
+        	  $.ajax(
+        		{ type:"POST",
+        		  url:"<%=path%>/appAction",
+        		  data:datas,
+        		  success:function(){
+        			  alert("success");
+        			  },
+        		  error:function(msg){
+        			  alert(msg);
+        		  	}
+        		 }
+        		  
+        		  
+        	  );
+        	      
+          }
+        </script>
        <jsp:include page="common/commonFooter.jsp"></jsp:include>
     </body>
 </html>

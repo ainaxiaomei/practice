@@ -22,4 +22,13 @@
     <include refid="Company_Column_List" />
     FROM app,companys WHERE app.company_id=companys.company_id limit #{0},#{1}
   </select>
+  <!--修改一条应用信息--> 
+  <update id="updateApplication">
+  update App set
+    username = #{username},
+    password = #{password},
+    email = #{email},
+    bio = #{bio}
+  where id = #{id}
+</update>
 </mapper>
