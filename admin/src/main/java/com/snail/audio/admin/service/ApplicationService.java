@@ -30,5 +30,12 @@ public class ApplicationService implements IApplicationService {
 		}
 		return appDao.deleteApplication(app.getAppid());
 	}
+	@Override
+	public int addApplication(App app) {
+		//保存company表
+		companyDao.saveCompany(app.getCompany().get(0));
+		//保存app表
+		return appDao.addApplication(app);
+	}
 
 }

@@ -23,5 +23,9 @@ public class ApplicaitonDAO implements IApplicationDao{
 	public int deleteApplication(int appId) {
 		return appMapperExt.deleteByPrimaryKey(appId);
 	}
+	@Override
+	public int addApplication(App app) {
+		return appMapperExt.insert(app);
+	}
 	
 }

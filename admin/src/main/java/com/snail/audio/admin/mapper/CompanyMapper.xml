@@ -9,7 +9,7 @@
   <sql id="Base_Column_List" >
     company_id, company_name, contacts
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer"  >
     select 
     <include refid="Base_Column_List" />
     from companys
@@ -19,10 +19,10 @@
     delete from companys
     where company_id = #{companyId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.snail.audio.admin.entity.Company" >
-    insert into companys (company_id, company_name, contacts
+  <insert id="insert" parameterType="com.snail.audio.admin.entity.Company" useGeneratedKeys="true" keyProperty="companyId">
+    insert into companys ( company_name, contacts
       )
-    values (#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}
+    values ( #{companyName,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.Company" >

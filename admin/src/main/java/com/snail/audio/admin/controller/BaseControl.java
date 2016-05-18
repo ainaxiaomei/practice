@@ -47,4 +47,11 @@ public class BaseControl {
 		return "appDetail";
 		
 	}
+	@RequestMapping("/saveApp")
+	public String saveApp(App app,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.addApplication(app);
+		return "appDetail";
+		
+	}
 }

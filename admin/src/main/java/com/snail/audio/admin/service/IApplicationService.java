@@ -13,4 +13,6 @@ public interface IApplicationService {
      public int ModifyApplication(App app);
      //删除应用
      public int deleteApplication(App app);
+     //新增应用
+     public int addApplication(App app);
 }

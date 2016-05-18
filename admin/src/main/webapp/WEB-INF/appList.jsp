@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
                                     <table class="table table-striped table-bordered" id="example">
-                                        <thead><a href="javascript:addApp()">add</a>
+                                        <thead><a href="javascript:addAppRow()">add</a>
                                             <tr>
                                                 <th>App Id</th>
                                                 <th>Company Id</th>
@@ -207,7 +207,7 @@
                                         <tbody>
                                            <c:forEach var="app"  items="${requestScope.apps}">
                                                 <tr class="odd gradeX">
-	                                                <td><input type="text" name="appid" style="width:100px" value=${app.appid} readonly="true"></td>
+	                                                <td><input type="text" name="appid" style="width:100px" value=${app.appid} readonly="true" /></td>
 	                                                <td><input type="text" name="company[0].companyId" style="width:100px" readonly="true" value=${app.company[0].companyId}></td>
 	                                                <td><input type="text" name="company[0].companyName" style="width:100px" value=${app.company[0].companyName}></td>
 	                                                <td><input type="text" name="company[0].contacts" style="width:100px" value=${app.company[0].contacts}></td>
@@ -243,6 +243,23 @@
             	} );
             }
          );
+          function addApp(){
+        	  if(!confirm("Are You Sure To Save ?")){
+        		  return;
+        	  }
+        	//获取table对象
+        	  var table = $('#example').DataTable();
+        	  var Trnode=table.row(curSelectIndex).node();
+        	  var datas=row2jason(Trnode);
+        	 // var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
+        	  sendData(datas,"<%=path%>/saveApp");
+          }
+          function deleteAppRow(){
+        	//获取table对象
+        	  var table = $('#example').DataTable();
+        	  var row=table.row(curSelectIndex);
+        	  row.remove().draw();
+          }
           function saveApp(){
         	  if(!confirm("Are You Sure To Modify ?")){
         		  return;
@@ -254,10 +271,20 @@
         	 // var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
         	  sendData(datas,"<%=path%>/modifyApp");
           }
-          function addApp(){
+          function addAppRow(){
         	//获取table对象
         	  var table = $('#example').DataTable();
-        	  table.row.add(['genetate','<input type="text" name="company[0].companyId" value="genarate" style="width:100px" readonly="true">','<input type="text" name="company[0].companyName" style="width:100px" value=${app.company[0].companyName}>','','','','','','','']).draw();
+        	  table.row.add(
+        			  ['<input type="text" name="appid" style="width:100px" value="-1" readonly="true">',
+        		       '<input type="text" name="company[0].companyId" value="-1" style="width:100px" readonly="true">',
+        		       '<input type="text" name="company[0].companyName" style="width:100px" value=${app.company[0].companyName}>',
+        		       '<input type="text" name="company[0].contacts" style="width:100px" value=${company[0].contacts}>',
+        		       '<input type="text" name="curUid" style="width:100px" value=${app.curUid}>',
+        		       '<input type="text" name="beginUid" style="width:100px" value=${app.beginUid}>',
+        		       '<input type="text" name="endUid" style="width:100px" value=${app.endUid}>',
+        		       '<input type="text" name="contacts" style="width:100px" value=${app.contacts}>',
+        		       '<input type="text" name="description" style="width:100px" value=${app.description}>',
+        		       '<a href="javascript:addApp()">save</a>&nbsp<a href="javascript:deleteAppRow()">delete</a>']).draw();
           }
           function deleteApp(){
         	  if(!confirm("Are You Sure To Delete ?")){

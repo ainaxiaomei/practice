@@ -17,5 +17,9 @@ public class CompanyDao implements ICompanyDao {
 	public int deleteCompany(int companyId) {
 		return companyMapperExt.deleteByPrimaryKey(companyId);
 	}
+	@Override
+	public int saveCompany(Company comapny) {
+		return companyMapperExt.insert(comapny);
+	}
 
 }
