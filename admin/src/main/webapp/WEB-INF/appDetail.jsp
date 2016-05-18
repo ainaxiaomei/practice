@@ -162,7 +162,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header">
-                                <h1>Forms</h1>
+                                <h1>Application Detail</h1>
                             </div>
                         </div>
                     </div>
@@ -171,12 +171,12 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">Form Example</div>
+                                    <div class="text-muted bootstrap-admin-box-title"></div>
                                 </div>
                                 <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
                                     <form class="form-horizontal">
                                         <fieldset>
-                                            <legend>Form Horizontal</legend>
+                                            <legend>Application Server Config</legend>
                                             <div class="form-group">
                                                 <label class="col-lg-2 control-label" for="focusedInput">Focused input</label>
                                                 <div class="col-lg-10">

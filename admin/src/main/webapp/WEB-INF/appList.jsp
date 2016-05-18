@@ -174,7 +174,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header">
-                                <h1>Tables</h1>
+                                <h1>Application Config</h1>
                             </div>
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
                                     <table class="table table-striped table-bordered" id="example">
-                                        <thead><a href="javascript:addAppRow()">add</a>
+                                        <thead><span style="color:red">Click AppId To Show Application Detail</span><a href="javascript:addAppRow()">add</a>
                                             <tr>
                                                 <th>App Id</th>
                                                 <th>Company Id</th>
@@ -207,7 +207,7 @@
                                         <tbody>
                                            <c:forEach var="app"  items="${requestScope.apps}">
                                                 <tr class="odd gradeX">
-	                                                <td><input type="text" name="appid" style="width:100px" value=${app.appid} readonly="true" /></td>
+	                                                <td onclick="appDetail()" style="cursor:pointer"><input type="text" name="appid" style="width:100px;cursor:pointer" value=${app.appid} readonly="true" /></td>
 	                                                <td><input type="text" name="company.companyId" style="width:100px" readonly="true" value=${app.company.companyId}></td>
 	                                                <td><input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}></td>
 	                                                <td><input type="text" name="company.contacts" style="width:100px" value=${app.company.contacts}></td>
@@ -243,6 +243,9 @@
             	} );
             }
          );
+          function appDetail(){
+        	  window.location.href="<%=path%>/appDetail";
+          }
           function addApp(){
         	  if(!confirm("Are You Sure To Save ?")){
         		  return;
