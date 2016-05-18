@@ -208,9 +208,9 @@
                                            <c:forEach var="app"  items="${requestScope.apps}">
                                                 <tr class="odd gradeX">
 	                                                <td><input type="text" name="appid" style="width:100px" value=${app.appid} readonly="true" /></td>
-	                                                <td><input type="text" name="company[0].companyId" style="width:100px" readonly="true" value=${app.company[0].companyId}></td>
-	                                                <td><input type="text" name="company[0].companyName" style="width:100px" value=${app.company[0].companyName}></td>
-	                                                <td><input type="text" name="company[0].contacts" style="width:100px" value=${app.company[0].contacts}></td>
+	                                                <td><input type="text" name="company.companyId" style="width:100px" readonly="true" value=${app.company.companyId}></td>
+	                                                <td><input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}></td>
+	                                                <td><input type="text" name="company.contacts" style="width:100px" value=${app.company.contacts}></td>
 	                                                <td><input type="text" name="curUid" style="width:100px" value=${app.curUid}></td>
 	                                                <td><input type="text" name="beginUid" style="width:100px" value=${app.beginUid}></td>
 	                                                <td><input type="text" name="endUid" style="width:100px" value=${app.endUid}></td>
@@ -276,9 +276,9 @@
         	  var table = $('#example').DataTable();
         	  table.row.add(
         			  ['<input type="text" name="appid" style="width:100px" value="-1" readonly="true">',
-        		       '<input type="text" name="company[0].companyId" value="-1" style="width:100px" readonly="true">',
-        		       '<input type="text" name="company[0].companyName" style="width:100px" value=${app.company[0].companyName}>',
-        		       '<input type="text" name="company[0].contacts" style="width:100px" value=${company[0].contacts}>',
+        		       '<input type="text" name="company.companyId" value="-1" style="width:100px" readonly="true">',
+        		       '<input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}>',
+        		       '<input type="text" name="company.contacts" style="width:100px" value=${company.contacts}>',
         		       '<input type="text" name="curUid" style="width:100px" value=${app.curUid}>',
         		       '<input type="text" name="beginUid" style="width:100px" value=${app.beginUid}>',
         		       '<input type="text" name="endUid" style="width:100px" value=${app.endUid}>',
@@ -302,6 +302,7 @@
               		  success:function(){
               		  row.remove().draw();
               			  alert("success!");
+              			 location.reload();sss
               			  },
               		  error:function(msg){
               			  alert("error!"+msg);
@@ -329,6 +330,7 @@
         		  data:datas,
         		  success:function(){
         			  alert("success!");
+        			  location.reload();
         			  },
         		  error:function(msg){
         			  alert("error!"+msg);

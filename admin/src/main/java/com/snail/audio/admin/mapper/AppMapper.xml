@@ -24,10 +24,10 @@
     where appid = #{appid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.snail.audio.admin.entity.App" useGeneratedKeys="true" keyProperty="appid">
-    insert into app (appid, company_id, contacts, 
+    insert into app ( company_id, contacts, 
       description, begin_uid, cur_uid, 
       end_uid)
-    values (#{appid,jdbcType=INTEGER}, #{company[0].companyId}, #{contacts,jdbcType=VARCHAR}, 
+    values ( #{company.companyId}, #{contacts,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{beginUid,jdbcType=INTEGER}, #{curUid,jdbcType=INTEGER}, 
       #{endUid,jdbcType=INTEGER})
   </insert>

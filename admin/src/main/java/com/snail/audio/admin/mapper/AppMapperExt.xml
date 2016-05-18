@@ -8,11 +8,11 @@
     <result column="begin_uid" jdbcType="INTEGER" property="beginUid" />
     <result column="cur_uid" jdbcType="INTEGER" property="curUid" />
     <result column="end_uid" jdbcType="INTEGER" property="endUid" />
-    <collection property="company" ofType="com.snail.audio.admin.entity.Company">
-         <id property="companyId" column="company_Id"/>
+    <association property="company" javaType="com.snail.audio.admin.entity.Company">
+    	 <id property="companyId" column="company_Id"/>
          <result property="companyName" column="company_name"/>
          <result property="contacts" column="company_contacts"/>
-    </collection>
+    </association>
   </resultMap>
   <sql id="Company_Column_List" >
      company_name,companys.company_Id,companys.contacts as company_contacts

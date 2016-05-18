@@ -5,7 +5,7 @@ import java.util.List;
 public class App {
     private Integer appid;
 
-    private List<Company> company;
+    private Company company;
 
     private String contacts;
 
@@ -24,13 +24,11 @@ public class App {
     public void setAppid(Integer appid) {
         this.appid = appid;
     }
-
-    
-    public List<Company> getCompany() {
+	public Company getCompany() {
 		return company;
 	}
 
-	public void setCompany(List<Company> company) {
+	public void setCompany(Company company) {
 		this.company = company;
 	}
 

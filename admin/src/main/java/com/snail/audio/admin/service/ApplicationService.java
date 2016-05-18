@@ -20,12 +20,12 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public int ModifyApplication(App app) {
 		appDao.ModityApplication(app);
-		return companyDao.ModityCompany(app.getCompany().get(0));
+		return companyDao.ModityCompany(app.getCompany());
 	}
 	@Override
 	public int deleteApplication(App app) {
 		
-		if(app.getAppid()<0||app.getCompany().get(0).getCompanyId()<0){
+		if(app.getAppid()<0||app.getCompany().getCompanyId()<0){
 			throw new RuntimeException("Primapry Key Can Not Be Null!");
 		}
 		return appDao.deleteApplication(app.getAppid());
@@ -33,7 +33,7 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public int addApplication(App app) {
 		//保存company表
-		companyDao.saveCompany(app.getCompany().get(0));
+		companyDao.saveCompany(app.getCompany());
 		//保存app表
 		return appDao.addApplication(app);
 	}
