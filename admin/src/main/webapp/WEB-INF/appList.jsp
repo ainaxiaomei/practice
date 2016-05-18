@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
                                     <table class="table table-striped table-bordered" id="example">
-                                        <thead>
+                                        <thead><a href="javascript:addApp()">add</a>
                                             <tr>
                                                 <th>App Id</th>
                                                 <th>Company Id</th>
@@ -254,15 +254,35 @@
         	 // var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
         	  sendData(datas,"<%=path%>/modifyApp");
           }
+          function addApp(){
+        	//获取table对象
+        	  var table = $('#example').DataTable();
+        	  table.row.add(['genetate','<input type="text" name="company[0].companyId" value="genarate" style="width:100px" readonly="true">','<input type="text" name="company[0].companyName" style="width:100px" value=${app.company[0].companyName}>','','','','','','','']).draw();
+          }
           function deleteApp(){
         	  if(!confirm("Are You Sure To Delete ?")){
         		  return;
         	  }
         	  //获取table对象
         	  var table = $('#example').DataTable();
-        	  var Trnode=table.row(curSelectIndex).node();
+        	  var row=table.row(curSelectIndex);
+        	  var Trnode =row.node();
         	  var datas=row2jason(Trnode);
-        	  sendData(datas,"<%=path%>/deleteApp");
+        	  $.ajax(
+              		{ type:"POST",
+              		  url:"<%=path%>/deleteApp",
+              		  data:datas,
+              		  success:function(){
+              		  row.remove().draw();
+              			  alert("success!");
+              			  },
+              		  error:function(msg){
+              			  alert("error!"+msg);
+              		  	}
+              		 }
+              		  
+              		  
+              	  );
           }
           function row2jason(Trnode){
         	  var data=new Object();
