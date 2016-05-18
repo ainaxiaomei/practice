@@ -207,7 +207,7 @@
 	                                                <td><input type="text" name="endUid" style="width:100px" value=${app.endUid}></td>
 	                                                <td><input type="text" name="contacts" style="width:100px" value=${app.contacts}></td>
 	                                                <td><input type="text" name="description" style="width:100px" value=${app.description}></td>
-	                                                <td><a href="javascript:modifyApp()">Modify</a></td>
+	                                                <td><a href="javascript:saveApp()">save</a></td>
                                             	</tr>
 										   </c:forEach>
                                         </tbody>
@@ -220,14 +220,39 @@
             </div>
         </div>
         <script>
-          function modifyApp(){
+          //当前选中的行号
+          var curSelectIndex=-1;
+          $(document).ready(
+            //监听表格选中事件
+            function(){
+            	//获取table对象
+          	    var table = $('#example').DataTable();
+            	table.on( 'select', function ( e, dt, type, indexes ) {
+            	    if ( type === 'row' ) {
+            	    	curSelectIndex=indexes;
+            	    }
+            	} );
+            }
+         );
+          function saveApp(){
         	  //获取table对象
         	  var table = $('#example').DataTable();
-        	  var a=table.row({ selected: true });
-        	  alert(a.data());
-        	  var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
+        	  var Trnode=table.row(curSelectIndex).node();
+        	  var datas=row2jason(Trnode);
+        	 // var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
         	  sendData(datas);
           }
+          function row2jason(Trnode){
+        	  var data=new Object();
+			  var cells=Trnode.cells;
+			  for(var i=0;i<cells.length;i++){
+				  data[cells[i].firstChild.name]=cells[i].firstChild.value
+			      
+			  }
+			  return data;
+          }
+          	 
+          
           function sendData(datas){
         	  $.ajax(
         		{ type:"POST",
