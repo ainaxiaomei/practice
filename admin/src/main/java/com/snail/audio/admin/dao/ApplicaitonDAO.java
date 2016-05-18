@@ -15,5 +15,13 @@ public class ApplicaitonDAO implements IApplicationDao{
 		List<App> result=appMapperExt.getApplications(start,end);
 		return result;
 	}
+	@Override
+	public int ModityApplication(App app) {
+		return appMapperExt.updateByPrimaryKeySelective(app);
+	}
+	@Override
+	public int deleteApplication(int appId) {
+		return appMapperExt.deleteByPrimaryKey(appId);
+	}
 	
 }

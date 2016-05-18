@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.snail.audio.admin.dao.CompanyMapper" >
+<mapper namespace="com.snail.audio.admin.mapper.CompanyMapperExt" >
   <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.Company" >
     <id column="company_id" property="companyId" jdbcType="INTEGER" />
     <result column="company_name" property="companyName" jdbcType="VARCHAR" />

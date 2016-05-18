@@ -8,6 +8,8 @@ import com.snail.audio.admin.entity.App;
 
 @Resource
 public interface AppMapperExt extends AppMapper {
-	//²éÑ¯ËùÓÐÓ¦ÓÃÐÅÏ¢
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ï¢
 	public List<App> getApplications(int start,int end);
+	//æ›´æ–°appè¡¨
+	public int updateByPrimaryKeySelective(App app);
 }

@@ -33,9 +33,17 @@ public class BaseControl {
 		return "appDetail";
     	
     }
-	@RequestMapping("/appAction")
-	public String test(App app){
-		System.out.println(app);
+	@RequestMapping("/modifyApp")
+	public String modifyApp(App app,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.ModifyApplication(app);
+		return "appDetail";
+		
+	}
+	@RequestMapping("/deleteApp")
+	public String deleteApp(App app,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.deleteApplication(app);
 		return "appDetail";
 		
 	}
