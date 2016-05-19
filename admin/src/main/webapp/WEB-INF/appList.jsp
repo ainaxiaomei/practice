@@ -253,7 +253,7 @@
         	//获取table对象
         	  var table = $('#example').DataTable();
         	  var Trnode=table.row(curSelectIndex).node();
-        	  var datas=row2jason(Trnode);
+        	  var datas=row2json(Trnode);
         	 // var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
         	  sendData(datas,"<%=path%>/saveApp");
           }
@@ -270,7 +270,7 @@
         	  //获取table对象
         	  var table = $('#example').DataTable();
         	  var Trnode=table.row(curSelectIndex).node();
-        	  var datas=row2jason(Trnode);
+        	  var datas=row2json(Trnode);
         	 // var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
         	  sendData(datas,"<%=path%>/modifyApp");
           }
@@ -297,7 +297,7 @@
         	  var table = $('#example').DataTable();
         	  var row=table.row(curSelectIndex);
         	  var Trnode =row.node();
-        	  var datas=row2jason(Trnode);
+        	  var datas=row2json(Trnode);
         	  $.ajax(
               		{ type:"POST",
               		  url:"<%=path%>/deleteApp",
@@ -315,7 +315,7 @@
               		  
               	  );
           }
-          function row2jason(Trnode){
+          function row2json(Trnode){
         	  var data=new Object();
 			  var cells=Trnode.cells;
 			  for(var i=0;i<cells.length;i++){
