@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <title>Forms | Bootstrap 3.x Admin Theme</title>
+        <%String path=getServletContext().getContextPath();%>
+        <title>Tables | Bootstrap 3.x Admin Theme</title>
         <jsp:include page="common/commonHead.jsp"></jsp:include>
+       <script type="text/javascript" charset="utf8" src="<%=path%>/vendors/datatables/extensions/Select/js/dataTables.select.min.js"></script>
+        <style type="text/css">
+		input
+		{
+		  border-top:0px ;
+		  border-left:0px ;
+		  border-right:0px ;
+		  border-bottom:0px ;
+		  
+		}
+       </style> 
     </head>
     <body class="bootstrap-admin-with-small-navbar">
         <!-- small navbar -->
@@ -104,10 +116,10 @@
                         <li class="disabled">
                             <a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Statistics (Charts)</a><!-- stats.html -->
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="forms.html"><i class="glyphicon glyphicon-chevron-right"></i> Forms</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="tables.html"><i class="glyphicon glyphicon-chevron-right"></i> Tables</a>
                         </li>
                         <li>
@@ -162,165 +174,236 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header">
-                                <h1>Application Detail</h1>
+                                <h1>Server Config</h1>
                             </div>
                         </div>
                     </div>
 
+                   
+                    <!-- AUDIO 配置 -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="panel panel-default bootstrap-admin-no-table-panel">
+                            <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title"></div>
+                                    <div class="text-muted bootstrap-admin-box-title">Audio Server</div>
                                 </div>
-                                <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                    <form class="form-horizontal">
-                                        <fieldset>
-                                            <legend>Application Server Config</legend>
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label" for="focusedInput">Focused input</label>
-                                                <div class="col-lg-10">
-                                                    <input class="form-control" id="focusedInput" type="text" value="This is focused...">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label">Uneditable input</label>
-                                                <div class="col-lg-10">
-                                                    <span class="form-control">Some value here</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label" for="disabledInput">Disabled input</label>
-                                                <div class="col-lg-10">
-                                                    <input class="form-control disabled" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label" for="optionsCheckbox2">Disabled checkbox</label>
-                                                <div class="col-lg-10">
-                                                    <label>
-                                                        <input type="checkbox" id="optionsCheckbox2" value="option1" disabled="">
-                                                        This is a disabled checkbox
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-warning">
-                                                <label class="col-lg-2 control-label" for="inputError">Input with warning</label>
-                                                <div class="col-lg-10">
-                                                    <input type="text" id="inputWarning" class="form-control">
-                                                    <span class="help-block">Something may have gone wrong</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-error">
-                                                <label class="col-lg-2 control-label" for="inputError">Input with error</label>
-                                                <div class="col-lg-10">
-                                                    <input type="text" id="inputError" class="form-control">
-                                                    <span class="help-block">Please correct the error</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-error">
-                                                <label class="col-lg-2 control-label" for="inputError">Input group with error</label>
-                                                <div class="col-lg-10">
-                                                    <div class="input-group">
-                                                        <input type="text" id="inputError" class="form-control">
-                                                        <span class="input-group-addon">%</span>
-                                                    </div>
-                                                    <span class="help-block">Please correct the error</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label class="col-lg-2 control-label" for="inputError">Input with success</label>
-                                                <div class="col-lg-10">
-                                                    <input type="text" id="inputSuccess" class="form-control">
-                                                    <span class="help-block">Woohoo!</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label class="col-lg-2 control-label" for="selectError">Select with success</label>
-                                                <div class="col-lg-10">
-                                                    <select id="selectError" class="form-control">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
-                                                    <span class="help-block">Woohoo!</span>
-                                                </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
-                                            <button type="reset" class="btn btn-default">Cancel</button>
-                                        </fieldset>
-                                    </form>
+                                <div class="bootstrap-admin-panel-content" style="width:auto">
+                                    <table class="table table-striped table-bordered" id="audioTable">
+                                        <thead><a href="javascript:addAppRow()">add</a>
+                                            <tr>
+                                                <th>Server Id</th>
+                                                <th>Server Name</th>
+                                                <th>DSP Number</th>
+                                                <th>SVC URL</th>
+                                                <th>HTTP URL</th>
+                                                <th>Begin Uid</th>
+                                                <th>Com URL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           <c:forEach var="app"  items="${requestScope.apps}">
+                                                <tr class="odd gradeX">
+	                                                <td><input type="text" name="appid"  value=${app.appid} readonly="true" /></td>
+	                                                <td><input type="text" name="company.companyId" style="width:100px" readonly="true" value=${app.company.companyId}></td>
+	                                                <td><input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}></td>
+	                                                <td><input type="text" name="company.contacts" style="width:100px" value=${app.company.contacts}></td>
+	                                                <td><input type="text" name="curUid" style="width:100px" value=${app.curUid}></td>
+	                                                <td><input type="text" name="beginUid" style="width:100px" value=${app.beginUid}></td>
+	                                                <td><input type="text" name="endUid" style="width:100px" value=${app.endUid}></td>
+	                                                <td><input type="text" name="contacts" style="width:100px" value=${app.contacts}></td>
+	                                                <td><input type="text" name="description" style="width:100px" value=${app.description}></td>
+	                                                <td><a href="javascript:saveApp()">save</a>&nbsp<a href="javascript:deleteApp()">delete</a></td>
+                                            	</tr>
+										   </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+                 <!-- MCU 配置 -->
+               	 <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="text-muted bootstrap-admin-box-title">MCU Server</div>
+                                </div>
+                                <div class="bootstrap-admin-panel-content" style="width:auto">
+                                    <table class="table table-striped table-bordered" id="mcuTable">
+                                        <thead><a href="javascript:addAppRow()">add</a>
+                                            <tr>
+                                                <th>Server Id</th>
+                                                <th>Server Name</th>
+                                                <th>DSP Number</th>
+                                                <th>SVC URL</th>
+                                                <th>HTTP URL</th>
+                                                <th>Begin Uid</th>
+                                                <th>Com URL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           <c:forEach var="app"  items="${requestScope.apps}">
+                                                <tr class="odd gradeX">
+	                                                <td><input type="text" name="appid" style="width:100px" value=${app.appid} readonly="true" /></td>
+	                                                <td><input type="text" name="company.companyId" style="width:100px" readonly="true" value=${app.company.companyId}></td>
+	                                                <td><input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}></td>
+	                                                <td><input type="text" name="company.contacts" style="width:100px" value=${app.company.contacts}></td>
+	                                                <td><input type="text" name="curUid" style="width:100px" value=${app.curUid}></td>
+	                                                <td><input type="text" name="beginUid" style="width:100px" value=${app.beginUid}></td>
+	                                                <td><input type="text" name="endUid" style="width:100px" value=${app.endUid}></td>
+	                                                <td><input type="text" name="contacts" style="width:100px" value=${app.contacts}></td>
+	                                                <td><input type="text" name="description" style="width:100px" value=${app.description}></td>
+	                                                <td><a href="javascript:saveApp()">save</a>&nbsp<a href="javascript:deleteApp()">delete</a></td>
+                                            	</tr>
+										   </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
                 </div>
             </div>
         </div>
-
-       <jsp:include page="common/commonFooter.jsp"></jsp:include>
-
-       
-
-        <script type="text/javascript">
-            $(function() {
-                $('.datepicker').datepicker();
-                $('.uniform_on').uniform();
-                $('.chzn-select').chosen();
-                $('.selectize-select').selectize();
-                $('.textarea-wysihtml5').wysihtml5({
-                    stylesheets: [
-                        'vendors/bootstrap-wysihtml5-rails-b3/vendor/assets/stylesheets/bootstrap-wysihtml5/wysiwyg-color.css'
-                    ]
-                });
-
-                $('#rootwizard').bootstrapWizard({
-                    'nextSelector': '.next',
-                    'previousSelector': '.previous',
-                    onNext: function(tab, navigation, index) {
-                        var $total = navigation.find('li').length;
-                        var $current = index + 1;
-                        var $percent = ($current / $total) * 100;
-                        $('#rootwizard').find('.progress-bar').css('width', $percent + '%');
-                        // If it's the last tab then hide the last button and show the finish instead
-                        if ($current >= $total) {
-                            $('#rootwizard').find('.pager .next').hide();
-                            $('#rootwizard').find('.pager .finish').show();
-                            $('#rootwizard').find('.pager .finish').removeClass('disabled');
-                        } else {
-                            $('#rootwizard').find('.pager .next').show();
-                            $('#rootwizard').find('.pager .finish').hide();
-                        }
-                    },
-                    onPrevious: function(tab, navigation, index) {
-                        var $total = navigation.find('li').length;
-                        var $current = index + 1;
-                        var $percent = ($current / $total) * 100;
-                        $('#rootwizard').find('.progress-bar').css('width', $percent + '%');
-                        // If it's the last tab then hide the last button and show the finish instead
-                        if ($current >= $total) {
-                            $('#rootwizard').find('.pager .next').hide();
-                            $('#rootwizard').find('.pager .finish').show();
-                            $('#rootwizard').find('.pager .finish').removeClass('disabled');
-                        } else {
-                            $('#rootwizard').find('.pager .next').show();
-                            $('#rootwizard').find('.pager .finish').hide();
-                        }
-                    },
-                    onTabShow: function(tab, navigation, index) {
-                        var $total = navigation.find('li').length;
-                        var $current = index + 1;
-                        var $percent = ($current / $total) * 100;
-                        $('#rootwizard').find('.bar').css({width: $percent + '%'});
-                    }
-                });
-                $('#rootwizard .finish').click(function() {
-                    alert('Finished!, Starting over!');
-                    $('#rootwizard').find('a[href*=\'tab1\']').trigger('click');
-                });
-            });
+        <script>
+           
+          //当前选中的行号
+          var curSelectIndex=-1;
+          $(document).ready(
+            function(){
+            	// 初始化表格
+            	$('#audioTable').dataTable( {
+					select:true,
+					searching:false,
+					paging: false,
+					"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+					"sPaginationType": "bootstrap",
+					"oLanguage": {
+						"sLengthMenu": "_MENU_ records per page"
+					}
+				} );
+            	$('#mcuTable').dataTable( {
+					select:true,
+					searching:false,
+					paging: false,
+					"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+					"sPaginationType": "bootstrap",
+					"oLanguage": {
+						"sLengthMenu": "_MENU_ records per page"
+					}
+				} );
+            	//获取table对象
+          	    var table = $('#audioTable').DataTable();
+             	//监听表格选中事件
+            	table.on( 'select', function ( e, dt, type, indexes ) {
+            	    if ( type === 'row' ) {
+            	    	curSelectIndex=indexes;
+            	    }
+            	} );
+            }
+         );
+          function appDetail(){
+        	  window.location.href="<%=path%>/appDetail";
+          }
+          function addApp(){
+        	  if(!confirm("Are You Sure To Save ?")){
+        		  return;
+        	  }
+        	//获取table对象
+        	  var table = $('#audioTable').DataTable();
+        	  var Trnode=table.row(curSelectIndex).node();
+        	  var datas=row2jason(Trnode);
+        	 // var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
+        	  sendData(datas,"<%=path%>/saveApp");
+          }
+          function deleteAppRow(){
+        	//获取table对象
+        	  var table = $('#audioTable').DataTable();
+        	  var row=table.row(curSelectIndex);
+        	  row.remove().draw();
+          }
+          function saveApp(){
+        	  if(!confirm("Are You Sure To Modify ?")){
+        		  return;
+        	  }
+        	  //获取table对象
+        	  var table = $('#audioTable').DataTable();
+        	  var Trnode=table.row(curSelectIndex).node();
+        	  var datas=row2jason(Trnode);
+        	 // var datas={"appid":123,"scompany[0].companyId":123,"company[0].companyName":123};
+        	  sendData(datas,"<%=path%>/modifyApp");
+          }
+          function addAppRow(){
+        	//获取table对象
+        	  var table = $('#audioTable').DataTable();
+        	  table.row.add(
+        			  ['<input type="text" name="appid" style="width:100px" value="-1" readonly="true">',
+        		       '<input type="text" name="company.companyId" value="-1" style="width:100px" readonly="true">',
+        		       '<input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}>',
+        		       '<input type="text" name="company.contacts" style="width:100px" value=${company.contacts}>',
+        		       '<input type="text" name="curUid" style="width:100px" value=${app.curUid}>',
+        		       '<input type="text" name="beginUid" style="width:100px" value=${app.beginUid}>',
+        		       '<input type="text" name="endUid" style="width:100px" value=${app.endUid}>',
+        		       '<input type="text" name="contacts" style="width:100px" value=${app.contacts}>',
+        		       '<input type="text" name="description" style="width:100px" value=${app.description}>',
+        		       '<a href="javascript:addApp()">save</a>&nbsp<a href="javascript:deleteAppRow()">delete</a>']).draw();
+          }
+          function deleteApp(){
+        	  if(!confirm("Are You Sure To Delete ?")){
+        		  return;
+        	  }
+        	  //获取table对象
+        	  var table = $('#audioTable').DataTable();
+        	  var row=table.row(curSelectIndex);
+        	  var Trnode =row.node();
+        	  var datas=row2jason(Trnode);
+        	  $.ajax(
+              		{ type:"POST",
+              		  url:"<%=path%>/deleteApp",
+              		  data:datas,
+              		  success:function(){
+              		  row.remove().draw();
+              			  alert("success!");
+              			 location.reload();sss
+              			  },
+              		  error:function(msg){
+              			  alert("error!"+msg);
+              		  	}
+              		 }
+              		  
+              		  
+              	  );
+          }
+          function row2jason(Trnode){
+        	  var data=new Object();
+			  var cells=Trnode.cells;
+			  for(var i=0;i<cells.length;i++){
+				  data[cells[i].firstChild.name]=cells[i].firstChild.value
+			      
+			  }
+			  return data;
+          }
+          	 
+          
+          function sendData(datas,url){
+        	  $.ajax(
+        		{ type:"POST",
+        		  url:url,
+        		  data:datas,
+        		  success:function(){
+        			  alert("success!");
+        			  location.reload();
+        			  },
+        		  error:function(msg){
+        			  alert("error!"+msg);
+        		  	}
+        		 }
+        		  
+        		  
+        	  );
+        	      
+          }
         </script>
+       <jsp:include page="common/commonFooter.jsp"></jsp:include>
     </body>
 </html>
