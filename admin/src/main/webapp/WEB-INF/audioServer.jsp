@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MCU Server Config</title>
+        <title>Audio Server Config</title>
         <jsp:include page="common/commonHead.jsp"></jsp:include>
          <%String path=getServletContext().getContextPath();%>
     </head>
@@ -163,7 +163,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header">
-                                <h1>MCU Server</h1>
+                                <h1>Audio Server</h1>
                             </div>
                         </div>
                     </div>
@@ -218,10 +218,10 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">MCU Server</div>
+                                    <div class="text-muted bootstrap-admin-box-title">Audio Server</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="mcuTable">
+                                    <table class="table table-striped table-bordered" id="audioServer">
                                         <thead><a href="javascript:addAppRow()">add</a>
                                             <tr>
                                                 <th>Server Id</th>
@@ -261,7 +261,7 @@
        
 
         <script type="text/javascript">
-            var mcuTable;
+            var audioServer;
             /**
               	将查询条件转化为字符串发送到服务端
             **/
@@ -272,12 +272,12 @@
             }
             $(function() {
             	//初始化表格
-            	    mcuTable=$('#mcuTable').dataTable( {
+            	    audioServer=$('#audioServer').dataTable( {
 					select:true,
 					searching:false,
 					paging: false,
 					ajax: {
-						"url": "<%=path%>/mcuServerSearch",
+						"url": "<%=path%>/audioServerSearch",
 					    "type": "POST",
 					    "dataSrc": "",
 					    "data":condition2Json
@@ -302,7 +302,7 @@
 
             })
            function serachMcu(){
-            	var table=$('#mcuTable').DataTable(); 
+            	var table=$('#audioServer').DataTable(); 
             	table.ajax.reload();
             }  
         </script>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.AudioServerMapperExt" >
+  
+<select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from audio_servers
+    where 1=1
+    <if test="audio.serverId != null" >
+        and server_id=#{audio.serverId,jdbcType=INTEGER}
+      </if>
+      <if test="audio.serverName != null and audio.serverName!='' " >
+        and server_name=#{audio.serverName,jdbcType=VARCHAR}
+      </if>
+      <if test="audio.dspnum != null" >
+        and dspnum=#{audio.dspnum,jdbcType=INTEGER}
+      </if>
+      <if test="audio.svcUrl != null and audio.svcUrl!='' " >
+        and svc_url=#{audio.svcUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="audio.httpUrl != null and audio.httpUrl!='' " >
+        and http_url=#{audio.httpUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="audio.comUrl != null and audio.comUrl!='' " >
+        and com_url=#{audio.comUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
+  </select>
+</mapper>

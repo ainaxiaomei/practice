@@ -41,6 +41,19 @@
 		<property name="annotationClass" value="javax.annotation.Resource"></property>
         <property name="basePackage" value="com.snail.audio.admin.*mapper" />
     </bean>  
-    
+    <!-- 事务配置 -->
+    <bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	</bean>
+	<tx:advice id="defaultTxAdvice">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="servicePointCut"
+			expression="(execution(* *.service.*.*(..)))" />
+		<aop:advisor pointcut-ref="servicePointCut" advice-ref="defaultTxAdvice" />
+	</aop:config>
 	
 </beans>

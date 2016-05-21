@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.snail.audio.admin.mapper.AudioServerMapper" >
+<mapper namespace="com.snail.audio.admin.mapper.AudioServerMapperExt" >
   <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.AudioServer" >
     <id column="server_id" property="serverId" jdbcType="INTEGER" />
     <result column="server_name" property="serverName" jdbcType="VARCHAR" />
