@@ -43,7 +43,7 @@ public class BaseControl {
 	@RequestMapping("/mcuServerSearch")
 	public void mcuServerSearch(HttpServletRequest request,HttpServletResponse response,McuServer mcu) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		List<McuServer> list=service.getMCUServer(mcu);
+		List<McuServer> list=service.getMCUServer(mcu,-1,-1);
 		//将list转换为json字符创
 	    String result =JSONArray.fromObject(list).toString();
 		response.getWriter().printf(result);

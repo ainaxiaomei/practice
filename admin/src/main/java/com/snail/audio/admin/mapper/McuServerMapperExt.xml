@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.snail.audio.admin.mapper.McuServerMapperExt" >
-  <select id="selectByCondition"  resultMap="BaseResultMap" parameterType="com.snail.audio.admin.entity.McuServer" >
+  <select id="selectByCondition"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from mcu_servers
     where 1=1
-    <if test="serverId != null" >
-        and server_id=#{serverId,jdbcType=INTEGER}
+    <if test="mcu.serverId != null" >
+        and server_id=#{mcu.serverId,jdbcType=INTEGER}
       </if>
-      <if test="serverName != null and serverName!='' " >
-        and server_name=#{serverName,jdbcType=VARCHAR}
+      <if test="mcu.serverName != null and mcu.serverName!='' " >
+        and server_name=#{mcu.serverName,jdbcType=VARCHAR}
       </if>
-      <if test="dspnum != null" >
-        and dspnum=#{dspnum,jdbcType=INTEGER}
+      <if test="mcu.dspnum != null" >
+        and dspnum=#{mcu.dspnum,jdbcType=INTEGER}
       </if>
-      <if test="svcUrl != null and svcUrl!='' " >
-        and svc_url=#{svcUrl,jdbcType=VARCHAR}
+      <if test="mcu.svcUrl != null and mcu.svcUrl!='' " >
+        and svc_url=#{mcu.svcUrl,jdbcType=VARCHAR}
       </if>
-      <if test="httpUrl != null and httpUrl!='' " >
-        and http_url=#{httpUrl,jdbcType=VARCHAR}
+      <if test="mcu.httpUrl != null and mcu.httpUrl!='' " >
+        and http_url=#{mcu.httpUrl,jdbcType=VARCHAR}
       </if>
-      <if test="comUrl != null and comUrl!='' " >
-        and com_url=#{comUrl,jdbcType=VARCHAR}
+      <if test="mcu.comUrl != null and mcu.comUrl!='' " >
+        and com_url=#{mcu.comUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
       </if>
   </select>
 </mapper>

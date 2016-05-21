@@ -17,5 +17,5 @@ public interface IApplicationService {
      //新增应用
      public int addApplication(App app);
      //查询mcu
-     public List<McuServer>getMCUServer(McuServer mcu);
+     public List<McuServer>getMCUServer(McuServer mcu,int start,int end);
 }

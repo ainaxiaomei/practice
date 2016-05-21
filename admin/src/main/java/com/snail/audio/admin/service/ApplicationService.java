@@ -42,8 +42,8 @@ public class ApplicationService implements IApplicationService {
 		return appDao.addApplication(app);
 	}
 	@Override
-	public List<McuServer> getMCUServer(McuServer mcu) {
-		return mcuDao.getMCU(mcu);
+	public List<McuServer> getMCUServer(McuServer mcu,int start,int end) {
+		return mcuDao.getMCU(mcu,start,end);
 	}
 
 }

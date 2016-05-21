@@ -30,8 +30,8 @@ public class MCUDao implements IMCUDao{
 	}
 
 	@Override
-	public List<McuServer> getMCU(McuServer mcu) {
-		return mcuServerMapperExt.selectByCondition(mcu);
+	public List<McuServer> getMCU(McuServer mcu,int start,int end) {
+		return mcuServerMapperExt.selectByCondition(mcu,start, end);
 	}
 	
 	
