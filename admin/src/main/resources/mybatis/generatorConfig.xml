@@ -46,21 +46,31 @@
                selectByExampleQueryId="false">
             
         </table>
-        -->
+        
         <table tableName="audio_servers" domainObjectName="AudioServer"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <!--<columnRenamingRule searchString="^D_"
-                                replaceString=""/>-->
+            
         </table>
         <table tableName="mcu_servers" domainObjectName="McuServer"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <!--<columnRenamingRule searchString="^D_"
-                                replaceString=""/>-->
+           
         </table>
-
+        -->
+        <table tableName="ftp_servers" domainObjectName="FTPServer"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            
+        </table>
+        <table tableName="app_resource" domainObjectName="AppResource"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+           
+        </table>
     </context>
 </generatorConfiguration>

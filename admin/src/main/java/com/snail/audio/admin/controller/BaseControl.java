@@ -27,7 +27,7 @@ import net.sf.json.JSONArray;
 @Controller
 public class BaseControl {
 	@RequestMapping("/appList")
-    public String toHome(Model model,HttpServletRequest request){
+    public String toAppList(Model model,HttpServletRequest request){
 		
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<App> apps=service.getApplication(0, 5);
@@ -45,6 +45,12 @@ public class BaseControl {
 	public String toAudioServer(Model model,HttpServletRequest request){
 		
 		return "audioServer";
+		
+	}
+	@RequestMapping("/home")
+	public String toHome(Model model,HttpServletRequest request){
+		
+		return "home";
 		
 	}
 	@RequestMapping("/audioServerSearch")
