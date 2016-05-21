@@ -383,26 +383,7 @@
 			  }
 			  return data;
           }
-          	 
           
-          function sendData(datas,url){
-        	  $.ajax(
-        		{ type:"POST",
-        		  url:url,
-        		  data:datas,
-        		  success:function(){
-        			  alert("success!");
-        			  location.reload();
-        			  },
-        		  error:function(msg){
-        			  alert("error!"+msg);
-        		  	}
-        		 }
-        		  
-        		  
-        	  );
-        	      
-          }
         </script>
        <jsp:include page="common/commonFooter.jsp"></jsp:include>
     </body>

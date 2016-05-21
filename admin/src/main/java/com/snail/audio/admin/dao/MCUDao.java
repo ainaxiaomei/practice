@@ -28,6 +28,11 @@ public class MCUDao implements IMCUDao{
 	public int modifyMCU(McuServer mcu) {
 		return mcuServerMapperExt.updateByPrimaryKeySelective(mcu);
 	}
+
+	@Override
+	public List<McuServer> getMCU(McuServer mcu) {
+		return mcuServerMapperExt.selectByCondition(mcu);
+	}
 	
 	
 	

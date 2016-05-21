@@ -28,7 +28,26 @@
 			  }
 			}
 		</style>
-		
+		<script>
+		function sendData(datas,url){
+      	  $.ajax(
+      		{ type:"POST",
+      		  url:url,
+      		  data:datas,
+      		  success:function(){
+      			  alert("success!");
+      			  location.reload();
+      			  },
+      		  error:function(msg){
+      			  alert("error!"+msg);
+      		  	}
+      		 }
+      		  
+      		  
+      	  );
+      	      
+        }
+		</script>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>

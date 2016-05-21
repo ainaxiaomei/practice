@@ -12,4 +12,5 @@ public interface IMCUDao {
 	public int addMCU(McuServer mcu);
 	public int deleteMCU(int serverId);
 	public int modifyMCU(McuServer mcu);
+	public List<McuServer> getMCU(McuServer mcu);
 }

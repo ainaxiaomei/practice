@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.snail.audio.admin.dao.IApplicationDao;
 import com.snail.audio.admin.dao.ICompanyDao;
+import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.entity.App;
+import com.snail.audio.admin.entity.McuServer;
 @Service
 public class ApplicationService implements IApplicationService {
 	@Autowired
 	private IApplicationDao appDao;
 	@Autowired
 	private ICompanyDao companyDao;
+	@Autowired
+	private IMCUDao mcuDao;
 	public List<App> getApplication(int start, int end) {
 		return appDao.getApplicationt(start, end);
 	}
@@ -36,6 +40,10 @@ public class ApplicationService implements IApplicationService {
 		companyDao.saveCompany(app.getCompany());
 		//保存app表
 		return appDao.addApplication(app);
+	}
+	@Override
+	public List<McuServer> getMCUServer(McuServer mcu) {
+		return mcuDao.getMCU(mcu);
 	}
 
 }
