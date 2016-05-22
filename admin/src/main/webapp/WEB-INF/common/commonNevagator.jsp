@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8" isELIgnored="false" %>
+    <%String path=getServletContext().getContextPath();%>
  <!-- left, vertical navbar -->
                 <div class="col-md-2 bootstrap-admin-col-left">
                     <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
@@ -9,26 +10,20 @@
                         <li>
                             <a href="dashboard.html"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
                         </li>
-                        <li class="disabled">
-                            <a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Calendar</a><!-- calendar.html -->
-                        </li>
-                        <li class="disabled">
-                            <a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Statistics (Charts)</a><!-- stats.html -->
-                        </li>
                         <li class="active">
-                            <a href="forms.html"><i class="glyphicon glyphicon-chevron-right"></i> Forms</a>
+                            <a href="<%=path %>/appList"><i class="glyphicon glyphicon-chevron-right"></i> Applications</a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="glyphicon glyphicon-chevron-right"></i> Tables</a>
+                            <a href="<%=path %>/appResource"><i class="glyphicon glyphicon-chevron-right"></i> App Resource</a>
                         </li>
                         <li>
-                            <a href="buttons-and-icons.html"><i class="glyphicon glyphicon-chevron-right"></i> Buttons &amp; Icons</a>
+                            <a href="<%=path %>/mcuServer"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Server</a>
                         </li>
                         <li>
-                            <a href="wysiwyg-editors.html"><i class="glyphicon glyphicon-chevron-right"></i> WYSIWYG Editors</a>
+                            <a href="<%=path %>/audioServer"><i class="glyphicon glyphicon-chevron-right"></i> Audio Server</a>
                         </li>
                         <li>
-                            <a href="ui-and-interface.html"><i class="glyphicon glyphicon-chevron-right"></i> UI &amp; Interface</a>
+                            <a href="<%=path %>/ftpServer"><i class="glyphicon glyphicon-chevron-right"></i> Ftp Server</a>
                         </li>
                         <li>
                             <a href="error-pages.html"><i class="glyphicon glyphicon-chevron-right"></i> Error pages</a>
