@@ -9,10 +9,12 @@ import com.snail.audio.admin.dao.IAppResourceDao;
 import com.snail.audio.admin.dao.IApplicationDao;
 import com.snail.audio.admin.dao.IAudioDao;
 import com.snail.audio.admin.dao.ICompanyDao;
+import com.snail.audio.admin.dao.IFtpServerDao;
 import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
+import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.McuServer;
 @Service
 public class ApplicationService implements IApplicationService {
@@ -26,6 +28,8 @@ public class ApplicationService implements IApplicationService {
 	private IAudioDao audioDao;
 	@Autowired
 	private IAppResourceDao appResourceDao;
+	@Autowired
+	private IFtpServerDao ftpDao;
 	public List<App> getApplication(int start, int end) {
 		return appDao.getApplicationt(start, end);
 	}
@@ -60,6 +64,10 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public List<AppResource> getAppResource(AppResource appResource, int start, int end) {
 		return appResourceDao.getAppResource(appResource, start, end);
+	}
+	@Override
+	public List<FTPServer> getFtpServer(FTPServer ftp, int start, int end) {
+		return ftpDao.getFtp(ftp, start, end);
 	}
 
 }

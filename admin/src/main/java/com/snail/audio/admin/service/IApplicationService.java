@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
+import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.McuServer;
 @Service
 public interface IApplicationService {
@@ -24,4 +25,7 @@ public interface IApplicationService {
      public List<AudioServer>getAudioServer(AudioServer mcu,int start,int end);
      //查询appResource
      public List<AppResource>getAppResource(AppResource appResource,int start,int end);
+     //查询ftp
+     public List<FTPServer>getFtpServer(FTPServer ftp,int start,int end);
+
 }

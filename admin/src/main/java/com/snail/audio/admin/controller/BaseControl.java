@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
+import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.McuServer;
 import com.snail.audio.admin.service.IApplicationService;
 
@@ -60,12 +61,27 @@ public class BaseControl {
 		return "appResource";
 		
 	}
+	@RequestMapping("/ftpServer")
+	public String toFtpServer(Model model,HttpServletRequest request){
+		
+		return "ftpServer";
+		
+	}
 	@RequestMapping("/audioServerSearch")
 	public void audioServerSearch(HttpServletRequest request,HttpServletResponse response,AudioServer audio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<AudioServer> list=service.getAudioServer(audio,-1,-1);
 		//将list转换为json字符创
 	    String result =JSONArray.fromObject(list).toString();
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/ftpServerSearch")
+	public void ftpServerSearch(HttpServletRequest request,HttpServletResponse response,FTPServer ftp) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<FTPServer> list=service.getFtpServer(ftp,-1,-1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
 		response.getWriter().printf(result);
 		
 	}
