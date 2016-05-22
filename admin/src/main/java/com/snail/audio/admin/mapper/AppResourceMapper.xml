@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.AppResourceMapperExt" >
+  <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.AppResource" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="appid" property="appid" jdbcType="INTEGER" />
+    <result column="roomid" property="roomid" jdbcType="INTEGER" />
+    <result column="gp_left_id" property="gpLeftId" jdbcType="INTEGER" />
+    <result column="gp_right_id" property="gpRightId" jdbcType="INTEGER" />
+    <result column="gp_type" property="gpType" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, appid, roomid, gp_left_id, gp_right_id, gp_type, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from app_resource
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from app_resource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.snail.audio.admin.entity.AppResource" >
+    insert into app_resource (id, appid, roomid, 
+      gp_left_id, gp_right_id, gp_type, 
+      description)
+    values (#{id,jdbcType=INTEGER}, #{appid,jdbcType=INTEGER}, #{roomid,jdbcType=INTEGER}, 
+      #{gpLeftId,jdbcType=INTEGER}, #{gpRightId,jdbcType=INTEGER}, #{gpType,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.AppResource" >
+    insert into app_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appid != null" >
+        appid,
+      </if>
+      <if test="roomid != null" >
+        roomid,
+      </if>
+      <if test="gpLeftId != null" >
+        gp_left_id,
+      </if>
+      <if test="gpRightId != null" >
+        gp_right_id,
+      </if>
+      <if test="gpType != null" >
+        gp_type,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=INTEGER},
+      </if>
+      <if test="roomid != null" >
+        #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="gpLeftId != null" >
+        #{gpLeftId,jdbcType=INTEGER},
+      </if>
+      <if test="gpRightId != null" >
+        #{gpRightId,jdbcType=INTEGER},
+      </if>
+      <if test="gpType != null" >
+        #{gpType,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.snail.audio.admin.entity.AppResource" >
+    update app_resource
+    <set >
+      <if test="appid != null" >
+        appid = #{appid,jdbcType=INTEGER},
+      </if>
+      <if test="roomid != null" >
+        roomid = #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="gpLeftId != null" >
+        gp_left_id = #{gpLeftId,jdbcType=INTEGER},
+      </if>
+      <if test="gpRightId != null" >
+        gp_right_id = #{gpRightId,jdbcType=INTEGER},
+      </if>
+      <if test="gpType != null" >
+        gp_type = #{gpType,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.snail.audio.admin.entity.AppResource" >
+    update app_resource
+    set appid = #{appid,jdbcType=INTEGER},
+      roomid = #{roomid,jdbcType=INTEGER},
+      gp_left_id = #{gpLeftId,jdbcType=INTEGER},
+      gp_right_id = #{gpRightId,jdbcType=INTEGER},
+      gp_type = #{gpType,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.AppResourceMapperExt" >
+  <select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_resource
+    where 1=1
+    <if test="appResource.Id != null" >
+        and id=#{appResource.Id}
+      </if>
+      <if test="appResource.appid != null" >
+        and appid=#{appResource.appid}
+      </if>
+      <if test="appResource.roomid != null" >
+        and roomid=#{appResource.roomid}
+      </if>
+      <if test="appResource.gpLeftId != null " >
+        and gp_left_id=#{appResource.gpLeftId}
+      </if>
+      <if test="appResource.gpRightId != null " >
+        and gp_right_id=#{appResource.gpRightId}
+      </if>
+      <if test="appResource.gpType != null  " >
+        and gp_type=#{appResource.gpType}
+      </if>
+      <if test="appResource.description != null and appResource.description !='' " >
+        and description=#{appResource.description}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
+  </select>
+</mapper>

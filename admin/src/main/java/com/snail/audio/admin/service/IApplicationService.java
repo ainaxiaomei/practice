@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.snail.audio.admin.entity.App;
+import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.McuServer;
 @Service
@@ -21,5 +22,6 @@ public interface IApplicationService {
      public List<McuServer>getMCUServer(McuServer mcu,int start,int end);
      //查询audio
      public List<AudioServer>getAudioServer(AudioServer mcu,int start,int end);
-
+     //查询appResource
+     public List<AppResource>getAppResource(AppResource appResource,int start,int end);
 }

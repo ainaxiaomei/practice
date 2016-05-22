@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.snail.audio.admin.dao.IAppResourceDao;
 import com.snail.audio.admin.dao.IApplicationDao;
 import com.snail.audio.admin.dao.IAudioDao;
 import com.snail.audio.admin.dao.ICompanyDao;
 import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.entity.App;
+import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.McuServer;
 @Service
@@ -22,6 +24,8 @@ public class ApplicationService implements IApplicationService {
 	private IMCUDao mcuDao;
 	@Autowired
 	private IAudioDao audioDao;
+	@Autowired
+	private IAppResourceDao appResourceDao;
 	public List<App> getApplication(int start, int end) {
 		return appDao.getApplicationt(start, end);
 	}
@@ -52,6 +56,10 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public List<AudioServer> getAudioServer(AudioServer audio, int start, int end) {
 		return audioDao.getAudioServer(audio, start, end);
+	}
+	@Override
+	public List<AppResource> getAppResource(AppResource appResource, int start, int end) {
+		return appResourceDao.getAppResource(appResource, start, end);
 	}
 
 }

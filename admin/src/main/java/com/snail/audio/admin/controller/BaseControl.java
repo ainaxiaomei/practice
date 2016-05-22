@@ -18,6 +18,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.snail.audio.admin.entity.App;
+import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.McuServer;
 import com.snail.audio.admin.service.IApplicationService;
@@ -53,12 +54,27 @@ public class BaseControl {
 		return "home";
 		
 	}
+	@RequestMapping("/appResource")
+	public String toAppResource(Model model,HttpServletRequest request){
+		
+		return "appResource";
+		
+	}
 	@RequestMapping("/audioServerSearch")
 	public void audioServerSearch(HttpServletRequest request,HttpServletResponse response,AudioServer audio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<AudioServer> list=service.getAudioServer(audio,-1,-1);
 		//将list转换为json字符创
 	    String result =JSONArray.fromObject(list).toString();
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/appResourceSearch")
+	public void appResourceSearch(HttpServletRequest request,HttpServletResponse response,AppResource appResource) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<AppResource> list=service.getAppResource(appResource, -1, -1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
 		response.getWriter().printf(result);
 		
 	}
