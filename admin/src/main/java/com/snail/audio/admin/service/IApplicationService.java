@@ -19,6 +19,10 @@ public interface IApplicationService {
      public int deleteApplication(App app);
      //新增应用
      public int addApplication(App app);
+     //新增mcu
+     public int addMcu(McuServer mcu);
+     //修改mcu
+     public int modifyMcu(McuServer mcu);
      //查询mcu
      public List<McuServer>getMCUServer(McuServer mcu,int start,int end);
      //查询audio

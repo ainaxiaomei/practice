@@ -69,5 +69,13 @@ public class ApplicationService implements IApplicationService {
 	public List<FTPServer> getFtpServer(FTPServer ftp, int start, int end) {
 		return ftpDao.getFtp(ftp, start, end);
 	}
+	@Override
+	public int addMcu(McuServer mcu) {
+		return mcuDao.addMCU(mcu);
+	}
+	@Override
+	public int modifyMcu(McuServer mcu) {
+		return mcuDao.modifyMCU(mcu);
+	}
 
 }

@@ -240,7 +240,7 @@
             	table.ajax.reload();
             } 
            function addMcu(){
-        	   window.showModalDialog("son.htm", arg, 'help:no');
+        	   window.showModalDialog("<%=path%>/mcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
 
            }
            function modifyMcu(){

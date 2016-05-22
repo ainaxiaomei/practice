@@ -67,6 +67,19 @@ public class BaseControl {
 		return "ftpServer";
 		
 	}
+	@RequestMapping("/mcuServerAdd")
+	public String mcuServerAdd(Model model,HttpServletRequest request){
+		
+		return "mcuServerAdd";
+		
+	}
+	@RequestMapping("/saveMcuServer")
+	public String saveMcuServer(McuServer mcu,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.addMcu(mcu);
+		return "mcuServerAdd";
+		
+	}
 	@RequestMapping("/audioServerSearch")
 	public void audioServerSearch(HttpServletRequest request,HttpServletResponse response,AudioServer audio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
