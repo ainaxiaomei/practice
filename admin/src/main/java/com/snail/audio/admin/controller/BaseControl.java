@@ -73,11 +73,24 @@ public class BaseControl {
 		return "mcuServerAdd";
 		
 	}
+	@RequestMapping("/ftpServerAdd")
+	public String toFtpServerAdd(Model model,HttpServletRequest request){
+		
+		return "ftpServerAdd";
+		
+	}
 	@RequestMapping("/saveMcuServer")
 	public String saveMcuServer(McuServer mcu,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.addMcu(mcu);
 		return "mcuServerAdd";
+		
+	}
+	@RequestMapping("/saveFtpServer")
+	public String saveFtpServer(FTPServer ftp,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.saveFtp(ftp);
+		return "ftpServerAdd";
 		
 	}
 	@RequestMapping("/audioServerSearch")

@@ -177,7 +177,7 @@
 					                     <button type="button" onclick="addMcu()" class="btn btn-primary">Add</button>
 					                     <button type="button" onclick="modifyMcu()" class="btn btn-primary">Modify</button>
 					                     <button type="button" onclick="deleteMcu()" class="btn btn-primary">Delete</button>
-                                </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -204,7 +204,7 @@
             	    mcuTable=$('#mcuTable').dataTable( {
 					select:true,
 					searching:false,
-					paging: false,
+					paging: true,
 					ajax: {
 						"url": "<%=path%>/mcuServerSearch",
 					    "type": "POST",

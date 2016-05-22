@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
                                     <table class="table table-striped table-bordered" id="ftpTable">
-                                        <thead><a href="javascript:addAppRow()">add</a>
+                                        <thead>
                                             <tr>
                                                 <th>Server Id</th>
                                                 <th>Server Name</th>
@@ -164,6 +164,9 @@
 										   </c:forEach>
                                         </tbody>
                                     </table>
+                                    <button type="button" onclick="addMcu()" class="btn btn-primary">Add</button>
+					                 <button type="button" onclick="modifyMcu()" class="btn btn-primary">Modify</button>
+					                 <button type="button" onclick="deleteMcu()" class="btn btn-primary">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +194,7 @@
             	    ftpTable=$('#ftpTable').dataTable( {
 					select:true,
 					searching:false,
-					paging: false,
+					paging: true,
 					ajax: {
 						"url": "<%=path%>/ftpServerSearch",
 					    "type": "POST",
@@ -218,6 +221,14 @@
             	var table=$('#ftpTable').DataTable(); 
             	table.ajax.reload();
             }  
+            function addMcu(){
+         	   window.showModalDialog("<%=path%>/ftpServerAdd","","dialogWidth=800px;dialogHeight=600px");
+
+            }
+            function modifyMcu(){
+         	   
+            }
+            function deleteMcu(){}
         </script>
     </body>
 </html>

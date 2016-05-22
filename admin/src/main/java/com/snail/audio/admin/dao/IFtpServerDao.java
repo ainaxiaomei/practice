@@ -11,4 +11,6 @@ import com.snail.audio.admin.entity.McuServer;
 @Repository
 public interface IFtpServerDao {
 	public List<FTPServer> getFtp(FTPServer ftp,int start,int end);
+	public int saveFtp(FTPServer ftp);
+	public int modifyFtp(FTPServer ftp);
 }

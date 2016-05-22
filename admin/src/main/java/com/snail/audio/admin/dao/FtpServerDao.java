@@ -21,6 +21,16 @@ public class FtpServerDao implements IFtpServerDao{
 		return ftpServerMapperExt.selectByCondition(ftp, start, end);
 	}
 
+	@Override
+	public int saveFtp(FTPServer ftp) {
+		return ftpServerMapperExt.insertSelective(ftp);
+	}
+
+	@Override
+	public int modifyFtp(FTPServer ftp) {
+		return ftpServerMapperExt.updateByPrimaryKey(ftp);
+	}
+
 	
 	
 	

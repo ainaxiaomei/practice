@@ -190,6 +190,9 @@
 										   </c:forEach>
                                         </tbody>
                                     </table>
+                                    <button type="button" onclick="addAppRes()" class="btn btn-primary">Add</button>
+					                <button type="button" onclick="modifyAppRes()" class="btn btn-primary">Modify</button>
+					                <button type="button" onclick="deleteAppRes()" class="btn btn-primary">Delete</button>
                                 </div>
                             </div>
                         </div>

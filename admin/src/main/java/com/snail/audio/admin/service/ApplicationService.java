@@ -77,5 +77,13 @@ public class ApplicationService implements IApplicationService {
 	public int modifyMcu(McuServer mcu) {
 		return mcuDao.modifyMCU(mcu);
 	}
+	@Override
+	public int saveFtp(FTPServer ftp) {
+		return ftpDao.saveFtp(ftp);
+	}
+	@Override
+	public int modifyFtp(FTPServer ftp) {
+		return ftpDao.modifyFtp(ftp);
+	}
 
 }

@@ -182,6 +182,9 @@
 										   </c:forEach>
                                         </tbody>
                                     </table>
+                                    <button type="button" onclick="addAudio()" class="btn btn-primary">Add</button>
+					                 <button type="button" onclick="modifyAudio()" class="btn btn-primary">Modify</button>
+					                 <button type="button" onclick="deleteAudio()" class="btn btn-primary">Delete</button>
                                 </div>
                             </div>
                         </div>

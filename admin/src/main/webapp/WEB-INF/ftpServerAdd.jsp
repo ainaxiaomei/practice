@@ -71,35 +71,21 @@
                                     <div class="text-muted bootstrap-admin-box-title">MCU Server Information</div>
                                 </div>
                                 <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                    <form class="form-horizontal" role="form" id="mcuForm">
+                                    <form class="form-horizontal" role="form" id="ftpForm">
 					                    <fieldset>
 					                       <div class="form-group">
 					                          <label class="col-sm-1 control-label" >Server Name</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" name="serverName" type="text"/>
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Dsp Number</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" name="dspnum" type="text"/>
-					                          </div>
 					                          <label class="col-sm-1 control-label" >SVC Url</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  name="svcUrl" type="text" />
 					                          </div>
 					                       </div>
-					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >Http Url</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="httpUrl" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Com Url</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="comUrl" type="text"/>
-					                          </div>
-					                       </div>
 					                    </fieldset> 
 					                    <div >   
-					                     <button type="button" onclick="saveMcu()" class="btn btn-primary">Save</button>
+					                     <button type="button" onclick="saveFtp()" class="btn btn-primary">Save</button>
 					                    </div>
 					                </form>
                                 </div>
@@ -117,11 +103,11 @@
        
 
         <script type="text/javascript">
-           function saveMcu(){
+           function saveFtp(){
         	   $.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/saveMcuServer",
-                 		  data:$("#mcuForm").serialize(),
+                 		  url:"<%=path%>/saveFtpServer",
+                 		  data:$("#ftpForm").serialize(),
                  		  success:function(){
                  		  alert("Add Success");
                  		  window.close();

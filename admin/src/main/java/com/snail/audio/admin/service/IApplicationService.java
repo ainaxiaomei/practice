@@ -31,5 +31,9 @@ public interface IApplicationService {
      public List<AppResource>getAppResource(AppResource appResource,int start,int end);
      //查询ftp
      public List<FTPServer>getFtpServer(FTPServer ftp,int start,int end);
+     //新增ftp
+     public int saveFtp(FTPServer ftp);
+     //修改ftp
+     public int modifyFtp(FTPServer ftp);
 
 }
