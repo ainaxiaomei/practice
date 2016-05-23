@@ -10,11 +10,13 @@ import com.snail.audio.admin.dao.IApplicationDao;
 import com.snail.audio.admin.dao.IAudioDao;
 import com.snail.audio.admin.dao.ICompanyDao;
 import com.snail.audio.admin.dao.IFtpServerDao;
+import com.snail.audio.admin.dao.IGateDao;
 import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
 @Service
 public class ApplicationService implements IApplicationService {
@@ -30,6 +32,8 @@ public class ApplicationService implements IApplicationService {
 	private IAppResourceDao appResourceDao;
 	@Autowired
 	private IFtpServerDao ftpDao;
+	@Autowired
+	private IGateDao gateDao;
 	public List<App> getApplication(int start, int end) {
 		return appDao.getApplicationt(start, end);
 	}
@@ -110,6 +114,22 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public int deleteAudioServer(int serverId) {
 		return audioDao.deleteAudio(serverId);
+	}
+	@Override
+	public int deleteGateServer(int serverId) {
+		return gateDao.deleteGate(serverId);
+	}
+	@Override
+	public int addGateServer(IndexGate gate) {
+		return gateDao.addGate(gate);
+	}
+	@Override
+	public int modifyGate(IndexGate gate) {
+		return gateDao.modifyGate(gate);
+	}
+	@Override
+	public List<IndexGate> getGateServer(IndexGate gate, int start, int end) {
+		return gateDao.getGateServer(gate, start, end);
 	}
 
 }

@@ -8,6 +8,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
 @Service
 public interface IApplicationService {
@@ -47,5 +48,13 @@ public interface IApplicationService {
      public int saveFtp(FTPServer ftp);
      //修改ftp
      public int modifyFtp(FTPServer ftp);
+     //删除gate
+     public int deleteGateServer(int serverId);
+     //新增gate
+     public int addGateServer(IndexGate gate);
+     //修改gate
+     public int modifyGate(IndexGate gate);
+     //查询gate
+     public List<IndexGate>getGateServer(IndexGate ftp,int start,int end);
 
 }

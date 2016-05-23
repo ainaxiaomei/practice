@@ -21,6 +21,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
 import com.snail.audio.admin.service.IApplicationService;
 
@@ -47,6 +48,12 @@ public class BaseControl {
 	public String toAudioServer(Model model,HttpServletRequest request){
 		
 		return "audioServer";
+		
+	}
+	@RequestMapping("/gateServer")
+	public String toGateServer(Model model,HttpServletRequest request){
+		
+		return "gateServer";
 		
 	}
 	@RequestMapping("/home")
@@ -155,12 +162,34 @@ public class BaseControl {
 		response.getWriter().printf(result);
 		
 	}
+	@RequestMapping("/gateServerSearch")
+	public void gateServerSearch(HttpServletRequest request,HttpServletResponse response,IndexGate gate) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<IndexGate> list=service.getGateServer(gate,-1,-1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.getWriter().printf(result);
+		
+	}
 	@RequestMapping("/mcuServerDelete")
 	public String mcuServerDelete(HttpServletRequest request ) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		String serverId=request.getParameter("serverId");
 		if(serverId!=null&&!"".equals(serverId)){
 			service.deleteMcu(Integer.valueOf(serverId));
+			return "mcuServerAdd";
+		}else{
+			throw new RuntimeException("Server Id "+serverId +" error!");
+		}
+		
+		
+	}
+	@RequestMapping("/gateServerDelete")
+	public String gateServerDelete(HttpServletRequest request ) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		String serverId=request.getParameter("serverId");
+		if(serverId!=null&&!"".equals(serverId)){
+			service.deleteGateServer(Integer.valueOf(serverId));
 			return "mcuServerAdd";
 		}else{
 			throw new RuntimeException("Server Id "+serverId +" error!");

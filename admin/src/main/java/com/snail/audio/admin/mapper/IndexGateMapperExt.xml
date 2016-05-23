@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.snail.audio.admin.mapper.IndexGateMapperExt" >
- 
+ <select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from index_gate
+    where 1=1
+    <if test="gate.serverId != null" >
+        and server_id=#{gate.serverId,jdbcType=INTEGER}
+      </if>
+      <if test="gate.serverName != null and gate.serverName!='' " >
+        and server_name=#{gate.serverName,jdbcType=VARCHAR}
+      </if>
+      <if test="gate.dspnum != null" >
+        and dspnum=#{gate.dspnum,jdbcType=INTEGER}
+      </if>
+      <if test="gate.svcUrl != null and gate.svcUrl!='' " >
+        and svc_url=#{gate.svcUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="gate.httpUrl != null and gate.httpUrl!='' " >
+        and http_url=#{gate.httpUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
+  </select>
 </mapper>

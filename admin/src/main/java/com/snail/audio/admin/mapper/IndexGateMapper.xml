@@ -30,9 +30,7 @@
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.IndexGate" >
     insert into index_gate
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="serverId != null" >
-        server_id,
-      </if>
+      
       <if test="serverName != null" >
         server_name,
       </if>
@@ -47,9 +45,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="serverId != null" >
-        #{serverId,jdbcType=INTEGER},
-      </if>
+      
       <if test="serverName != null" >
         #{serverName,jdbcType=VARCHAR},
       </if>

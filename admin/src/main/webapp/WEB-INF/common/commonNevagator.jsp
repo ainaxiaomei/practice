@@ -26,7 +26,7 @@
                             <a href="<%=path %>/ftpServer"><i class="glyphicon glyphicon-chevron-right"></i> Ftp Server</a>
                         </li>
                         <li>
-                            <a href="error-pages.html"><i class="glyphicon glyphicon-chevron-right"></i> Gate Server</a>
+                            <a href="<%=path %>/gateServer"><i class="glyphicon glyphicon-chevron-right"></i> Gate Server</a>
                         </li>
                         <li>
                             <a href="error-pages.html"><i class="glyphicon glyphicon-chevron-right"></i> Membdb Server</a>
