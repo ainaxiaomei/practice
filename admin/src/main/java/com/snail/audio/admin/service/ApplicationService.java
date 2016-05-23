@@ -107,5 +107,9 @@ public class ApplicationService implements IApplicationService {
 	public int deleteMcu(int id) {
 		return mcuDao.deleteMCU(id);
 	}
+	@Override
+	public int deleteAudioServer(int serverId) {
+		return audioDao.deleteAudio(serverId);
+	}
 
 }

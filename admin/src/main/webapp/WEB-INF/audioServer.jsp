@@ -198,7 +198,7 @@
        
 
         <script type="text/javascript">
-            var audioServer;
+        var curSelectIndex=-1;
             /**
               	将查询条件转化为字符串发送到服务端
             **/
@@ -252,10 +252,64 @@
 
             }
            function modifyAudio(){
-         	   
+        	   if(curSelectIndex<0){
+        		   alert("Please Select A Row !");
+        		   return;
+        	   }
+        	   var object=new Object();
+        	   object.action="MODIFY";
+        	   var table = $('#audioServer').DataTable();
+        	   var Tnode=table.row(curSelectIndex).node();
+        	   var cells=Tnode.cells;
+        	   var columns= [
+							"serverId" ,
+							 "serverName" ,
+			                 "dspnum",
+			                "svcUrl" ,
+			                 "httpUrl" ,
+			                 "comUrl" 
+			                
+			            ];
+ 			   for(var i=0;i<cells.length;i++){
+ 				  object[columns[i]]=cells[i].innerText;
+ 			      
+ 			  }
+        	   var returnVal=window.showModalDialog("<%=path%>/audioServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   if(returnVal="success"){
+        		   //刷新表格
+        		   var table=$('#audioServer').DataTable(); 
+             	  table.ajax.reload();
+        	   }
             }
           function deleteAudio(){
-        	  
+        	  if(curSelectIndex<0){
+       		   alert("Please Select A Row !");
+       		   return;
+       	   }
+       	   if(!confirm("Are You Sure To Delete ?")){
+        		  return;
+        	  }
+       	   
+       	 //获取table对象
+        	  var table = $('#audioServer').DataTable();
+        	  var Tnode=table.row(curSelectIndex).node();
+        	  var id= Tnode.cells[0].firstChild.nodeValue;
+        	 $.ajax(
+             		{ type:"POST",
+             		  url:"<%=path%>/audioServerDelete",
+             		  data:"serverId="+id,
+             		  success:function(){
+             		  alert("Delete Success");
+             		  var table=$('#audioServer').DataTable(); 
+               	  table.ajax.reload();
+             			  },
+             		  error:function(msg){
+             			  alert("error!"+msg);
+             		  	}
+             		 }
+             		  
+             		  
+             	  );
           }
         </script>
     </body>

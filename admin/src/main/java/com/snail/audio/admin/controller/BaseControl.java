@@ -168,11 +168,30 @@ public class BaseControl {
 		
 		
 	}
+	@RequestMapping("/audioServerDelete")
+	public String audioServerDelete(HttpServletRequest request ) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		String serverId=request.getParameter("serverId");
+		if(serverId!=null&&!"".equals(serverId)){
+			service.deleteAudioServer(Integer.valueOf(serverId));
+			return "mcuServerAdd";
+		}else{
+			throw new RuntimeException("Server Id "+serverId +" error!");
+		}
+		
+		
+	}
 	@RequestMapping("/mcuServerModify")
 	public String mcuServerModify(HttpServletRequest request,McuServer mcu) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		 service.modifyMcu(mcu);
 		 return "mcuServerAdd";
+	}
+	@RequestMapping("/audioServerModify")
+	public String audioServerModify(HttpServletRequest request,AudioServer audio) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.modifyAudioServer(audio);
+		return "mcuServerAdd";
 	}
 	@RequestMapping("/appDetail")
     public String toForm(Model model,HttpServletRequest request){

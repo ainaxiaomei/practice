@@ -31,6 +31,11 @@ public class AudioDao implements IAudioDao{
 		return audioServerMapperExt.updateByPrimaryKeySelective(audio);
 	}
 
+	@Override
+	public int deleteAudio(int serverId) {
+		return audioServerMapperExt.deleteByPrimaryKey(serverId);
+	}
+
 
 	
 	

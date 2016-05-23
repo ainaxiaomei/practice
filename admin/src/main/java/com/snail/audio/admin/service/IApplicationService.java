@@ -33,6 +33,8 @@ public interface IApplicationService {
      public int saveAudioServer(AudioServer audio);
      //修改audio
      public int modifyAudioServer(AudioServer audio);
+     //删除audio
+     public int deleteAudioServer(int serverId);
      //查询appResource
      public List<AppResource>getAppResource(AppResource appResource,int start,int end);
      //新增appResource

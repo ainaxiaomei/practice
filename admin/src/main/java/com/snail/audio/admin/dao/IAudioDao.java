@@ -13,4 +13,5 @@ public interface IAudioDao {
 	public List<AudioServer> getAudioServer(AudioServer audio,int start,int end);
 	public int saveAudioServer(AudioServer audio);
 	public int modifyAudioServer(AudioServer audio);
+	public int deleteAudio(int serverId);
 }
