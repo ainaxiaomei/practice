@@ -85,5 +85,13 @@ public class ApplicationService implements IApplicationService {
 	public int modifyFtp(FTPServer ftp) {
 		return ftpDao.modifyFtp(ftp);
 	}
+	@Override
+	public int saveAudioServer(AudioServer audio) {
+		return audioDao.saveAudioServer(audio);
+	}
+	@Override
+	public int modifyAudioServer(AudioServer audio) {
+		return audioDao.modifyAudioServer(audio);
+	}
 
 }

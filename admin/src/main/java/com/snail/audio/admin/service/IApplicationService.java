@@ -26,7 +26,11 @@ public interface IApplicationService {
      //查询mcu
      public List<McuServer>getMCUServer(McuServer mcu,int start,int end);
      //查询audio
-     public List<AudioServer>getAudioServer(AudioServer mcu,int start,int end);
+     public List<AudioServer>getAudioServer(AudioServer audio,int start,int end);
+     //新增audio
+     public int saveAudioServer(AudioServer audio);
+     //修改audio
+     public int modifyAudioServer(AudioServer audio);
      //查询appResource
      public List<AppResource>getAppResource(AppResource appResource,int start,int end);
      //查询ftp

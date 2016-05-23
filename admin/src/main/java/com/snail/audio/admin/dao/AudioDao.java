@@ -21,6 +21,16 @@ public class AudioDao implements IAudioDao{
 		return audioServerMapperExt.selectByCondition(audio, start, end);
 	}
 
+	@Override
+	public int saveAudioServer(AudioServer audio) {
+		return audioServerMapperExt.insertSelective(audio);
+	}
+
+	@Override
+	public int modifyAudioServer(AudioServer audio) {
+		return audioServerMapperExt.updateByPrimaryKeySelective(audio);
+	}
+
 
 	
 	

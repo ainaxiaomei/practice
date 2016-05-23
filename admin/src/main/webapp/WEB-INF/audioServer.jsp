@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
                                     <table class="table table-striped table-bordered" id="audioServer">
-                                        <thead><a href="javascript:addAppRow()">add</a>
+                                        <thead>
                                             <tr>
                                                 <th>Server Id</th>
                                                 <th>Server Name</th>
@@ -241,7 +241,17 @@
            function serachMcu(){
             	var table=$('#audioServer').DataTable(); 
             	table.ajax.reload();
-            }  
+            } 
+           function addAudio(){
+         	   window.showModalDialog("<%=path%>/audioServerAdd","","dialogWidth=800px;dialogHeight=600px");
+
+            }
+           function modifyAudio(){
+         	   
+            }
+          function deleteAudio(){
+        	  
+          }
         </script>
     </body>
 </html>
