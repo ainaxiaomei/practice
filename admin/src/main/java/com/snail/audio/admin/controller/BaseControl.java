@@ -155,6 +155,25 @@ public class BaseControl {
 		response.getWriter().printf(result);
 		
 	}
+	@RequestMapping("/mcuServerDelete")
+	public String mcuServerDelete(HttpServletRequest request ) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		String serverId=request.getParameter("serverId");
+		if(serverId!=null&&!"".equals(serverId)){
+			service.deleteMcu(Integer.valueOf(serverId));
+			return "mcuServerAdd";
+		}else{
+			throw new RuntimeException("Server Id "+serverId +" error!");
+		}
+		
+		
+	}
+	@RequestMapping("/mcuServerModify")
+	public String mcuServerModify(HttpServletRequest request,McuServer mcu) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		 service.modifyMcu(mcu);
+		 return "mcuServerAdd";
+	}
 	@RequestMapping("/appDetail")
     public String toForm(Model model,HttpServletRequest request){
 		return "appDetail";

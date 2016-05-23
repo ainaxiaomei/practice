@@ -103,5 +103,9 @@ public class ApplicationService implements IApplicationService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public int deleteMcu(int id) {
+		return mcuDao.deleteMCU(id);
+	}
 
 }

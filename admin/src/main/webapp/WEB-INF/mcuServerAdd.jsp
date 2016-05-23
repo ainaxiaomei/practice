@@ -76,30 +76,31 @@
 					                       <div class="form-group">
 					                          <label class="col-sm-1 control-label" >Server Name</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" name="serverName" type="text"/>
+					                             <input class="form-control" id="serverId" name="serverId" type="text" style="display:none"/>
+					                             <input class="form-control" id="serverName" name="serverName" type="text"/>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Dsp Number</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" name="dspnum" type="text"/>
+					                             <input class="form-control" id="dspnum" name="dspnum" type="text"/>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >SVC Url</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="svcUrl" type="text" />
+					                             <input class="form-control" id="svcUrl" name="svcUrl" type="text" />
 					                          </div>
 					                       </div>
 					                       <div class="form-group">
 					                          <label class="col-sm-1 control-label" >Http Url</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="httpUrl" type="text"/>
+					                             <input class="form-control"  id="httpUrl" name="httpUrl" type="text"/>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Com Url</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="comUrl" type="text"/>
+					                             <input class="form-control"  id="comUrl" name="comUrl" type="text"/>
 					                          </div>
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
-					                     <button type="button" onclick="saveMcu()" class="btn btn-primary">Save</button>
+					                     <button type="button" id="saveButton"  class="btn btn-primary">Save</button>
 					                    </div>
 					                </form>
                                 </div>
@@ -117,6 +118,51 @@
        
 
         <script type="text/javascript">
+	        $(function() {
+	        	var param=window.dialogArguments;
+	        	if(param.action=="MODIFY"){
+	        		//是修改界面
+	        		//改变单击事件
+	        		$("#saveButton").click(modifyMcu);
+	        		//填充表单
+	        		 var columns= [
+	   							"serverId" ,
+	   							 "serverName" ,
+	   			                 "dspnum",
+	   			                "svcUrl" ,
+	   			                 "httpUrl" ,
+	   			                 "comUrl" 
+	   			                
+	   			            ];
+	        		for(var i=0;i<columns.length;i++){
+	        			var a=$("#"+columns[i]);
+	        			a.val(param[columns[i]]);
+	        		}
+	        	}else{
+	        		//是新增页面
+	        		//改变单击事件
+	        		$("#saveButton").click(saveMcu);
+	        	}
+	        })
+	       function modifyMcu(){
+	        	$.ajax(
+                 		{ type:"POST",
+                 		  url:"<%=path%>/mcuServerModify",
+                 		  data:$("#mcuForm").serialize(),
+                 		  success:function(){
+                 		  alert("Modify Success");
+                 		  window.returnValue = "success";  //返回值
+                 		  window.close();
+                 			  },
+                 		  error:function(msg){
+                 			  alert("error!"+msg);
+                 			 window.returnValue = "error";  //返回值
+                 		  	}
+                 		 }
+                 		  
+                 		  
+                 	  );
+	        }
            function saveMcu(){
         	   $.ajax(
                  		{ type:"POST",
@@ -124,9 +170,11 @@
                  		  data:$("#mcuForm").serialize(),
                  		  success:function(){
                  		  alert("Add Success");
+                 		 window.returnValue = "success";  //返回值
                  		  window.close();
                  			  },
                  		  error:function(msg){
+                 		 window.returnValue = "error";  //返回值
                  			  alert("error!"+msg);
                  		  	}
                  		 }

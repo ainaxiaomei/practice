@@ -23,6 +23,8 @@ public interface IApplicationService {
      public int addMcu(McuServer mcu);
      //修改mcu
      public int modifyMcu(McuServer mcu);
+     //删除mcu
+     public int deleteMcu(int id);
      //查询mcu
      public List<McuServer>getMCUServer(McuServer mcu,int start,int end);
      //查询audio

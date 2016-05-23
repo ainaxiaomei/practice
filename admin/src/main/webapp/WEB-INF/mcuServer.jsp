@@ -235,18 +235,83 @@
                 	} );
 
             })
+            //查询
            function serachMcu(){
             	var table=$('#mcuTable').DataTable(); 
             	table.ajax.reload();
             } 
+            //新增
            function addMcu(){
-        	   window.showModalDialog("<%=path%>/mcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
+        	   if(returnVal="success"){
+        		   //刷新表格
+        		   var table=$('#mcuTable').DataTable(); 
+             	  table.ajax.reload();
+        	   }
 
            }
+           //修改
            function modifyMcu(){
-        	   
+        	   if(curSelectIndex<0){
+        		   alert("Please Select A Row !");
+        		   return;
+        	   }
+        	   var object=new Object();
+        	   object.action="MODIFY";
+        	   var table = $('#mcuTable').DataTable();
+        	   var Tnode=table.row(curSelectIndex).node();
+        	   var cells=Tnode.cells;
+        	   var columns= [
+							"serverId" ,
+							 "serverName" ,
+			                 "dspnum",
+			                "svcUrl" ,
+			                 "httpUrl" ,
+			                 "comUrl" 
+			                
+			            ];
+ 			   for(var i=0;i<cells.length;i++){
+ 				  object[columns[i]]=cells[i].innerText;
+ 			      
+ 			  }
+        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   if(returnVal="success"){
+        		   //刷新表格
+        		   var table=$('#mcuTable').DataTable(); 
+             	  table.ajax.reload();
+        	   }
            }
-           function deleteMcu(){}
+           //删除
+           function deleteMcu(){
+        	   if(curSelectIndex<0){
+        		   alert("Please Select A Row !");
+        		   return;
+        	   }
+        	   if(!confirm("Are You Sure To Delete ?")){
+         		  return;
+         	  }
+        	   
+        	 //获取table对象
+         	  var table = $('#mcuTable').DataTable();
+         	  var Tnode=table.row(curSelectIndex).node();
+         	  var id= Tnode.cells[0].firstChild.nodeValue;
+         	 $.ajax(
+              		{ type:"POST",
+              		  url:"<%=path%>/mcuServerDelete",
+              		  data:"serverId="+id,
+              		  success:function(){
+              		  alert("Delete Success");
+              		  var table=$('#mcuTable').DataTable(); 
+                	  table.ajax.reload();
+              			  },
+              		  error:function(msg){
+              			  alert("error!"+msg);
+              		  	}
+              		 }
+              		  
+              		  
+              	  );
+           }
         </script>
     </body>
 </html>

@@ -235,7 +235,12 @@
 						"sLengthMenu": "_MENU_ records per page"
 					}
 				} );
-
+            	    var table = $('#audioServer').DataTable();
+                	table.on( 'select', function ( e, dt, type, indexes ) {
+                	    if ( type === 'row' ) {
+                	    	curSelectIndex=indexes;
+                	    }
+                	} );
 
             })
            function serachMcu(){
