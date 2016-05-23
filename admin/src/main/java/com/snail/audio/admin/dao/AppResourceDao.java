@@ -17,6 +17,14 @@ public class AppResourceDao implements IAppResourceDao {
 	public List<AppResource> getAppResource(AppResource appResource, int start, int end) {
 		return appResourceMapperExt.selectByCondition(appResource, start, end);
 	}
+	@Override
+	public int saveAppRes(AppResource appRes) {
+		return appResourceMapperExt.insertSelective(appRes);
+	}
+	@Override
+	public int modifyAppRes(AppResource appRes) {
+		return appResourceMapperExt.updateByPrimaryKeySelective(appRes);
+	}
 
 
 }

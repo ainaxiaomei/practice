@@ -212,7 +212,7 @@
             	    audioServer=$('#audioServer').dataTable( {
 					select:true,
 					searching:false,
-					paging: false,
+					paging: true,
 					ajax: {
 						"url": "<%=path%>/audioServerSearch",
 					    "type": "POST",

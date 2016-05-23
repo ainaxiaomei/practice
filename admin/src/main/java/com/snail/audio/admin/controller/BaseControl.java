@@ -85,6 +85,12 @@ public class BaseControl {
 		return "audioServerAdd";
 		
 	}
+	@RequestMapping("/appResAdd")
+	public String toAppResAdd(Model model,HttpServletRequest request){
+		
+		return "appResAdd";
+		
+	}
 	@RequestMapping("/saveMcuServer")
 	public String saveMcuServer(McuServer mcu,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
@@ -103,6 +109,13 @@ public class BaseControl {
 	public String saveAudioServer(AudioServer audio,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.saveAudioServer(audio);
+		return "ftpServerAdd";
+		
+	}
+	@RequestMapping("/saveAppRes")
+	public String saveAppRes(AppResource appRes,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.saveAppRes(appRes);
 		return "ftpServerAdd";
 		
 	}

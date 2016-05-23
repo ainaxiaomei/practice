@@ -34,9 +34,6 @@
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.AppResource" >
     insert into app_resource
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="appid != null" >
         appid,
       </if>
@@ -57,9 +54,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="appid != null" >
         #{appid,jdbcType=INTEGER},
       </if>

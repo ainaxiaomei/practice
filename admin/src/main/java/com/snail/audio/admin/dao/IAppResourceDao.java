@@ -12,4 +12,6 @@ import com.snail.audio.admin.entity.McuServer;
 @Repository
 public interface IAppResourceDao {
 	public List<AppResource> getAppResource(AppResource appResource,int start,int end);
+	public int saveAppRes(AppResource appRes);
+	public int modifyAppRes(AppResource appRes);
 }

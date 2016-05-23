@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
                                     <table class="table table-striped table-bordered" id="appRresource">
-                                        <thead><a href="javascript:addAppRow()">add</a>
+                                        <thead>
                                             <tr>
                                                 <th> Id</th>
                                                 <th>App Id</th>
@@ -175,19 +175,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           <c:forEach var="app"  items="${requestScope.apps}">
-                                                <tr class="odd gradeX">
-	                                                <td><input type="text" name="appid" style="width:100px" value=${app.appid} readonly="true" /></td>
-	                                                <td><input type="text" name="company.companyId" style="width:100px" readonly="true" value=${app.company.companyId}></td>
-	                                                <td><input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}></td>
-	                                                <td><input type="text" name="company.contacts" style="width:100px" value=${app.company.contacts}></td>
-	                                                <td><input type="text" name="curUid" style="width:100px" value=${app.curUid}></td>
-	                                                <td><input type="text" name="endUid" style="width:100px" value=${app.endUid}></td>
-	                                                <td><input type="text" name="contacts" style="width:100px" value=${app.contacts}></td>
-	                                                <td><input type="text" name="description" style="width:100px" value=${app.description}></td>
-	                                                <td><a href="javascript:saveApp()">save</a>&nbsp<a href="javascript:deleteApp()">delete</a></td>
-                                            	</tr>
-										   </c:forEach>
+                                           
                                         </tbody>
                                     </table>
                                     <button type="button" onclick="addAppRes()" class="btn btn-primary">Add</button>
@@ -220,7 +208,7 @@
             	    appRresource=$('#appRresource').dataTable( {
 					select:true,
 					searching:false,
-					paging: false,
+					paging: true,
 					ajax: {
 						"url": "<%=path%>/appResourceSearch",
 					    "type": "POST",
@@ -251,6 +239,14 @@
             	var table=$('#appRresource').DataTable(); 
             	table.ajax.reload();
             }  
+            function addAppRes(){
+         	   window.showModalDialog("<%=path%>/appResAdd","","dialogWidth=800px;dialogHeight=600px");
+
+            }
+            function modifyAppRes(){
+         	   
+            }
+            function deleteAppRes(){}
         </script>
     </body>
 </html>

@@ -93,5 +93,15 @@ public class ApplicationService implements IApplicationService {
 	public int modifyAudioServer(AudioServer audio) {
 		return audioDao.modifyAudioServer(audio);
 	}
+	@Override
+	public int saveAppRes(AppResource appRes) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int modifyAppRes(AppResource appRes) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

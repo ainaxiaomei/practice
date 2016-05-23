@@ -33,6 +33,10 @@ public interface IApplicationService {
      public int modifyAudioServer(AudioServer audio);
      //查询appResource
      public List<AppResource>getAppResource(AppResource appResource,int start,int end);
+     //新增appResource
+     public int saveAppRes(AppResource appRes);
+     //修改appResource
+     public int modifyAppRes(AppResource appRes);
      //查询ftp
      public List<FTPServer>getFtpServer(FTPServer ftp,int start,int end);
      //新增ftp
