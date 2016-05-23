@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.IndexDbMapper" >
+  <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.IndexDb" >
+    <id column="server_id" property="serverId" jdbcType="INTEGER" />
+    <result column="svc_url" property="svcUrl" jdbcType="VARCHAR" />
+    <result column="http_url" property="httpUrl" jdbcType="VARCHAR" />
+    <result column="valid" property="valid" jdbcType="BIT" />
+    <result column="appids" property="appids" jdbcType="VARCHAR" />
+    <result column="roomid_min" property="roomidMin" jdbcType="INTEGER" />
+    <result column="roomid_max" property="roomidMax" jdbcType="INTEGER" />
+    <result column="dspnum" property="dspnum" jdbcType="INTEGER" />
+    <result column="server_name" property="serverName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    server_id, svc_url, http_url, valid, appids, roomid_min, roomid_max, dspnum, server_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from index_db
+    where server_id = #{serverId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from index_db
+    where server_id = #{serverId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.snail.audio.admin.entity.IndexDb" >
+    insert into index_db (server_id, svc_url, http_url, 
+      valid, appids, roomid_min, 
+      roomid_max, dspnum, server_name
+      )
+    values (#{serverId,jdbcType=INTEGER}, #{svcUrl,jdbcType=VARCHAR}, #{httpUrl,jdbcType=VARCHAR}, 
+      #{valid,jdbcType=BIT}, #{appids,jdbcType=VARCHAR}, #{roomidMin,jdbcType=INTEGER}, 
+      #{roomidMax,jdbcType=INTEGER}, #{dspnum,jdbcType=INTEGER}, #{serverName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.IndexDb" >
+    insert into index_db
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serverId != null" >
+        server_id,
+      </if>
+      <if test="svcUrl != null" >
+        svc_url,
+      </if>
+      <if test="httpUrl != null" >
+        http_url,
+      </if>
+      <if test="valid != null" >
+        valid,
+      </if>
+      <if test="appids != null" >
+        appids,
+      </if>
+      <if test="roomidMin != null" >
+        roomid_min,
+      </if>
+      <if test="roomidMax != null" >
+        roomid_max,
+      </if>
+      <if test="dspnum != null" >
+        dspnum,
+      </if>
+      <if test="serverName != null" >
+        server_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serverId != null" >
+        #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="svcUrl != null" >
+        #{svcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="httpUrl != null" >
+        #{httpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
+      </if>
+      <if test="appids != null" >
+        #{appids,jdbcType=VARCHAR},
+      </if>
+      <if test="roomidMin != null" >
+        #{roomidMin,jdbcType=INTEGER},
+      </if>
+      <if test="roomidMax != null" >
+        #{roomidMax,jdbcType=INTEGER},
+      </if>
+      <if test="dspnum != null" >
+        #{dspnum,jdbcType=INTEGER},
+      </if>
+      <if test="serverName != null" >
+        #{serverName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.snail.audio.admin.entity.IndexDb" >
+    update index_db
+    <set >
+      <if test="svcUrl != null" >
+        svc_url = #{svcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="httpUrl != null" >
+        http_url = #{httpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=BIT},
+      </if>
+      <if test="appids != null" >
+        appids = #{appids,jdbcType=VARCHAR},
+      </if>
+      <if test="roomidMin != null" >
+        roomid_min = #{roomidMin,jdbcType=INTEGER},
+      </if>
+      <if test="roomidMax != null" >
+        roomid_max = #{roomidMax,jdbcType=INTEGER},
+      </if>
+      <if test="dspnum != null" >
+        dspnum = #{dspnum,jdbcType=INTEGER},
+      </if>
+      <if test="serverName != null" >
+        server_name = #{serverName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where server_id = #{serverId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.snail.audio.admin.entity.IndexDb" >
+    update index_db
+    set svc_url = #{svcUrl,jdbcType=VARCHAR},
+      http_url = #{httpUrl,jdbcType=VARCHAR},
+      valid = #{valid,jdbcType=BIT},
+      appids = #{appids,jdbcType=VARCHAR},
+      roomid_min = #{roomidMin,jdbcType=INTEGER},
+      roomid_max = #{roomidMax,jdbcType=INTEGER},
+      dspnum = #{dspnum,jdbcType=INTEGER},
+      server_name = #{serverName,jdbcType=VARCHAR}
+    where server_id = #{serverId,jdbcType=INTEGER}
+  </update>
+</mapper>

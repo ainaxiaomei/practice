@@ -59,7 +59,7 @@
                selectByExampleQueryId="false">
            
         </table>
-        -->
+        
         <table tableName="ftp_servers" domainObjectName="FTPServer"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -67,6 +67,19 @@
             
         </table>
         <table tableName="app_resource" domainObjectName="AppResource"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+           
+        </table>
+        -->
+        <table tableName="index_db" domainObjectName="IndexDb"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            
+        </table>
+        <table tableName="index_gate" domainObjectName="IndexGate"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
