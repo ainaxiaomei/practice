@@ -23,9 +23,6 @@
                             <a href="<%=path %>/audioServer"><i class="glyphicon glyphicon-chevron-right"></i> Audio Server</a>
                         </li>
                         <li>
-                            <a href="<%=path %>/ftpServer"><i class="glyphicon glyphicon-chevron-right"></i> Ftp Server</a>
-                        </li>
-                        <li>
                             <a href="<%=path %>/gateServer"><i class="glyphicon glyphicon-chevron-right"></i> Gate Server</a>
                         </li>
                         <li>

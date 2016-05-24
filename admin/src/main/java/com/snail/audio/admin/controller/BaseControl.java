@@ -80,6 +80,12 @@ public class BaseControl {
 		return "mcuServerAdd";
 		
 	}
+	@RequestMapping("/gateServerAdd")
+	public String gateServerAdd(Model model,HttpServletRequest request){
+		
+		return "gateServerAdd";
+		
+	}
 	@RequestMapping("/ftpServerAdd")
 	public String toFtpServerAdd(Model model,HttpServletRequest request){
 		
@@ -116,6 +122,13 @@ public class BaseControl {
 	public String saveAudioServer(AudioServer audio,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.saveAudioServer(audio);
+		return "ftpServerAdd";
+		
+	}
+	@RequestMapping("/saveGateServer")
+	public String saveGateServer(IndexGate gate,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.saveGateServer(gate);
 		return "ftpServerAdd";
 		
 	}
@@ -215,6 +228,12 @@ public class BaseControl {
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		 service.modifyMcu(mcu);
 		 return "mcuServerAdd";
+	}
+	@RequestMapping("/gateServerModify")
+	public String gateServerModify(HttpServletRequest request,IndexGate gate) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.modifyGate(gate);
+		return "mcuServerAdd";
 	}
 	@RequestMapping("/audioServerModify")
 	public String audioServerModify(HttpServletRequest request,AudioServer audio) throws IOException{

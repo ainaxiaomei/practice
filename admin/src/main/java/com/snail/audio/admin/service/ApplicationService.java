@@ -120,7 +120,7 @@ public class ApplicationService implements IApplicationService {
 		return gateDao.deleteGate(serverId);
 	}
 	@Override
-	public int addGateServer(IndexGate gate) {
+	public int saveGateServer(IndexGate gate) {
 		return gateDao.addGate(gate);
 	}
 	@Override

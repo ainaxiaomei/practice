@@ -51,7 +51,7 @@ public interface IApplicationService {
      //删除gate
      public int deleteGateServer(int serverId);
      //新增gate
-     public int addGateServer(IndexGate gate);
+     public int saveGateServer(IndexGate gate);
      //修改gate
      public int modifyGate(IndexGate gate);
      //查询gate
