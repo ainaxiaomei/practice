@@ -5,10 +5,10 @@
                 <div class="col-md-2 bootstrap-admin-col-left">
                     <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
                         <li>
-                            <a href="about.html"><i class="glyphicon glyphicon-chevron-right"></i> About</a>
+                            <a href="#"><i class="glyphicon glyphicon-chevron-right"></i> About</a>
                         </li>
                         <li>
-                            <a href="dashboard.html"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
+                            <a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
                         </li>
                         <li class="active">
                             <a href="<%=path %>/appList"><i class="glyphicon glyphicon-chevron-right"></i> Applications</a>
