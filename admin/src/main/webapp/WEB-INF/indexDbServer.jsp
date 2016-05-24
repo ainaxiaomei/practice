@@ -262,7 +262,7 @@
             } 
             //新增
            function addIndexDb(){
-        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/indexDbServerAdd","","dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#indexDbTable').DataTable(); 
@@ -282,19 +282,22 @@
         	   var Tnode=table.row(curSelectIndex).node();
         	   var cells=Tnode.cells;
         	   var columns= [
-							"serverId" ,
-							 "serverName" ,
-			                 "dspnum",
-			                "svcUrl" ,
-			                 "httpUrl" ,
-			                 "comUrl" 
-			                
-			            ];
+	   							"serverId" ,
+	   							 "serverName" ,
+	   			                 "dspnum",
+	   			                "svcUrl" ,
+	   			                 "httpUrl" ,
+	   			                 "appids" ,
+	   			                 "roomidMin" ,
+	   			                 "roomidMax" ,
+	   			                 "valid" 
+	   			                
+	   			            ];
  			   for(var i=0;i<cells.length;i++){
  				  object[columns[i]]=cells[i].innerText;
  			      
  			  }
-        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/indexDbServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#indexDbTable').DataTable(); 
@@ -317,7 +320,7 @@
          	  var id= Tnode.cells[0].firstChild.nodeValue;
          	 $.ajax(
               		{ type:"POST",
-              		  url:"<%=path%>/mcuServerDelete",
+              		  url:"<%=path%>/indexDbServerDelete",
               		  data:"serverId="+id,
               		  success:function(){
               		  alert("Delete Success");

@@ -111,6 +111,12 @@ public class BaseControl {
 		return "appResAdd";
 		
 	}
+	@RequestMapping("/indexDbServerAdd")
+	public String toIndexDbServerAdd(Model model,HttpServletRequest request){
+		
+		return "indexDbServerAdd";
+		
+	}
 	@RequestMapping("/saveMcuServer")
 	public String saveMcuServer(McuServer mcu,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
@@ -136,6 +142,13 @@ public class BaseControl {
 	public String saveGateServer(IndexGate gate,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.saveGateServer(gate);
+		return "ftpServerAdd";
+		
+	}
+	@RequestMapping("/saveIndexDbServer")
+	public String saveIndexDbServer(IndexDb indexdb,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.saveIndexDbServer(indexdb);
 		return "ftpServerAdd";
 		
 	}
@@ -239,6 +252,19 @@ public class BaseControl {
 		
 		
 	}
+	@RequestMapping("/indexDbServerDelete")
+	public String indexDbServerDelete(HttpServletRequest request ) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		String serverId=request.getParameter("serverId");
+		if(serverId!=null&&!"".equals(serverId)){
+			service.deleteIndexDbServer(Integer.valueOf(serverId));
+			return "mcuServerAdd";
+		}else{
+			throw new RuntimeException("Server Id "+serverId +" error!");
+		}
+		
+		
+	}
 	@RequestMapping("/mcuServerModify")
 	public String mcuServerModify(HttpServletRequest request,McuServer mcu) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
@@ -255,6 +281,12 @@ public class BaseControl {
 	public String audioServerModify(HttpServletRequest request,AudioServer audio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.modifyAudioServer(audio);
+		return "mcuServerAdd";
+	}
+	@RequestMapping("/indexDbServerModify")
+	public String indexDbServerModify(HttpServletRequest request,IndexDb indexdb) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.modifyIndexDbServer(indexdb);
 		return "mcuServerAdd";
 	}
 	@RequestMapping("/appDetail")
