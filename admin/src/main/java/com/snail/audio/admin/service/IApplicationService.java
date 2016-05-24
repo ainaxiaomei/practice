@@ -14,7 +14,7 @@ import com.snail.audio.admin.entity.McuServer;
 @Service
 public interface IApplicationService {
 	 //查询所有应用
-     public List<App> getApplication(int start,int end);
+     public List<App> getApplication(int start,int pageSize);
      //修改应用信息
      public int ModifyApplication(App app);
      //删除应用
@@ -28,9 +28,9 @@ public interface IApplicationService {
      //删除mcu
      public int deleteMcu(int id);
      //查询mcu
-     public List<McuServer>getMCUServer(McuServer mcu,int start,int end);
+     public List<McuServer>getMCUServer(McuServer mcu,int start,int pageSize);
      //查询audio
-     public List<AudioServer>getAudioServer(AudioServer audio,int start,int end);
+     public List<AudioServer>getAudioServer(AudioServer audio,int start,int pageSize);
      //新增audio
      public int saveAudioServer(AudioServer audio);
      //修改audio
@@ -38,13 +38,13 @@ public interface IApplicationService {
      //删除audio
      public int deleteAudioServer(int serverId);
      //查询appResource
-     public List<AppResource>getAppResource(AppResource appResource,int start,int end);
+     public List<AppResource>getAppResource(AppResource appResource,int start,int pageSize);
      //新增appResource
      public int saveAppRes(AppResource appRes);
      //修改appResource
      public int modifyAppRes(AppResource appRes);
      //查询ftp
-     public List<FTPServer>getFtpServer(FTPServer ftp,int start,int end);
+     public List<FTPServer>getFtpServer(FTPServer ftp,int start,int pageSize);
      //新增ftp
      public int saveFtp(FTPServer ftp);
      //修改ftp
@@ -56,9 +56,9 @@ public interface IApplicationService {
      //修改gate
      public int modifyGate(IndexGate gate);
      //查询gate
-     public List<IndexGate>getGateServer(IndexGate ftp,int start,int end);
+     public List<IndexGate>getGateServer(IndexGate ftp,int start,int pageSize);
      //查询indexDb
-     public List<IndexDb>getIndexDbServer(IndexDb indexdb,int start,int end);
+     public List<IndexDb>getIndexDbServer(IndexDb indexdb,int start,int pageSize);
      //新增indexDb
      public int saveIndexDbServer(IndexDb indexdb);
      //修改indexDb

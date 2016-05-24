@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.GroupAudioMapper" >
+  <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.GroupAudio" >
+    <id column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="cur_usernum" property="curUsernum" jdbcType="INTEGER" />
+    <result column="max_usernum" property="maxUsernum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    group_id, cur_usernum, max_usernum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from group_audio
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from group_audio
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.snail.audio.admin.entity.GroupAudio" >
+    insert into group_audio (group_id, cur_usernum, max_usernum
+      )
+    values (#{groupId,jdbcType=INTEGER}, #{curUsernum,jdbcType=INTEGER}, #{maxUsernum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.GroupAudio" >
+    insert into group_audio
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="curUsernum != null" >
+        cur_usernum,
+      </if>
+      <if test="maxUsernum != null" >
+        max_usernum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="curUsernum != null" >
+        #{curUsernum,jdbcType=INTEGER},
+      </if>
+      <if test="maxUsernum != null" >
+        #{maxUsernum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.snail.audio.admin.entity.GroupAudio" >
+    update group_audio
+    <set >
+      <if test="curUsernum != null" >
+        cur_usernum = #{curUsernum,jdbcType=INTEGER},
+      </if>
+      <if test="maxUsernum != null" >
+        max_usernum = #{maxUsernum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.snail.audio.admin.entity.GroupAudio" >
+    update group_audio
+    set cur_usernum = #{curUsernum,jdbcType=INTEGER},
+      max_usernum = #{maxUsernum,jdbcType=INTEGER}
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+</mapper>

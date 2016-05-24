@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <classPathEntry
-            location="D:/mysql-connector-java-5.1.10-bin.jar"/>
+            location="D:/mysql-connector-java-5.1.22-bin.jar"/>
     <context id="mysql" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="false"/>
@@ -72,7 +72,7 @@
                selectByExampleQueryId="false">
            
         </table>
-        -->
+       
         <table tableName="index_db" domainObjectName="IndexDb"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -80,6 +80,31 @@
             
         </table>
         <table tableName="index_gate" domainObjectName="IndexGate"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+           
+        </table>
+         -->
+         <table tableName="group_mcu" domainObjectName="GroupMcu"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            
+        </table>
+        <table tableName="group_mcu_servers" domainObjectName="GroupMcuServers"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            
+        </table>
+        <table tableName="group_audio" domainObjectName="GroupAudio"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+           
+        </table>
+        <table tableName="group_audio_servers" domainObjectName="GroupAudioServers"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

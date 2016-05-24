@@ -38,8 +38,8 @@ public class ApplicationService implements IApplicationService {
 	private IGateDao gateDao;
 	@Autowired
 	private IIndexDbDao indeDbDao;
-	public List<App> getApplication(int start, int end) {
-		return appDao.getApplicationt(start, end);
+	public List<App> getApplication(int start, int pageSize) {
+		return appDao.getApplicationt(start, pageSize);
 	}
 	@Override
 	public int ModifyApplication(App app) {
@@ -62,20 +62,20 @@ public class ApplicationService implements IApplicationService {
 		return appDao.addApplication(app);
 	}
 	@Override
-	public List<McuServer> getMCUServer(McuServer mcu,int start,int end) {
-		return mcuDao.getMCU(mcu,start,end);
+	public List<McuServer> getMCUServer(McuServer mcu,int start,int pageSize) {
+		return mcuDao.getMCU(mcu,start,pageSize);
 	}
 	@Override
-	public List<AudioServer> getAudioServer(AudioServer audio, int start, int end) {
-		return audioDao.getAudioServer(audio, start, end);
+	public List<AudioServer> getAudioServer(AudioServer audio, int start, int pageSize) {
+		return audioDao.getAudioServer(audio, start, pageSize);
 	}
 	@Override
-	public List<AppResource> getAppResource(AppResource appResource, int start, int end) {
-		return appResourceDao.getAppResource(appResource, start, end);
+	public List<AppResource> getAppResource(AppResource appResource, int start, int pageSize) {
+		return appResourceDao.getAppResource(appResource, start, pageSize);
 	}
 	@Override
-	public List<FTPServer> getFtpServer(FTPServer ftp, int start, int end) {
-		return ftpDao.getFtp(ftp, start, end);
+	public List<FTPServer> getFtpServer(FTPServer ftp, int start, int pageSize) {
+		return ftpDao.getFtp(ftp, start, pageSize);
 	}
 	@Override
 	public int addMcu(McuServer mcu) {
@@ -131,12 +131,12 @@ public class ApplicationService implements IApplicationService {
 		return gateDao.modifyGate(gate);
 	}
 	@Override
-	public List<IndexGate> getGateServer(IndexGate gate, int start, int end) {
-		return gateDao.getGateServer(gate, start, end);
+	public List<IndexGate> getGateServer(IndexGate gate, int start, int pageSize) {
+		return gateDao.getGateServer(gate, start, pageSize);
 	}
 	@Override
-	public List<IndexDb> getIndexDbServer(IndexDb indexdb, int start, int end) {
-		return indeDbDao.getIndexDb(indexdb, start, end);
+	public List<IndexDb> getIndexDbServer(IndexDb indexdb, int start, int pageSize) {
+		return indeDbDao.getIndexDb(indexdb, start, pageSize);
 	}
 	@Override
 	public int saveIndexDbServer(IndexDb indexdb) {
