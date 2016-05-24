@@ -5,61 +5,48 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.snail.audio.admin.service.IApplicationService;
 @Controller
 public class DeleteControl {
 	@RequestMapping("/mcuServerDelete")
-	public String mcuServerDelete(HttpServletRequest request ) throws IOException{
+	@ResponseBody
+	public String mcuServerDelete(HttpServletRequest request,@RequestParam("serverId") int serverId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String serverId=request.getParameter("serverId");
-		if(serverId!=null&&!"".equals(serverId)){
-			service.deleteMcu(Integer.valueOf(serverId));
-			return "mcuServerAdd";
-		}else{
-			throw new RuntimeException("Server Id "+serverId +" error!");
-		}
+		service.deleteMcu(Integer.valueOf(serverId));
+		return "success";
 		
 		
 	}
+	@ResponseBody
 	@RequestMapping("/gateServerDelete")
-	public String gateServerDelete(HttpServletRequest request ) throws IOException{
+	public String gateServerDelete(HttpServletRequest request ,@RequestParam("serverId") int serverId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String serverId=request.getParameter("serverId");
-		if(serverId!=null&&!"".equals(serverId)){
-			service.deleteGateServer(Integer.valueOf(serverId));
-			return "mcuServerAdd";
-		}else{
-			throw new RuntimeException("Server Id "+serverId +" error!");
-		}
+		service.deleteGateServer(Integer.valueOf(serverId));
+		return "success";
 		
 		
 	}
 	@RequestMapping("/audioServerDelete")
-	public String audioServerDelete(HttpServletRequest request ) throws IOException{
+	@ResponseBody
+	public String audioServerDelete(HttpServletRequest request ,@RequestParam("serverId") int serverId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String serverId=request.getParameter("serverId");
-		if(serverId!=null&&!"".equals(serverId)){
-			service.deleteAudioServer(Integer.valueOf(serverId));
-			return "mcuServerAdd";
-		}else{
-			throw new RuntimeException("Server Id "+serverId +" error!");
-		}
+		service.deleteAudioServer(Integer.valueOf(serverId));
+		return "success";
 		
 		
 	}
 	@RequestMapping("/indexDbServerDelete")
-	public String indexDbServerDelete(HttpServletRequest request ) throws IOException{
+	@ResponseBody
+	public String indexDbServerDelete(HttpServletRequest request ,@RequestParam("serverId") int serverId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String serverId=request.getParameter("serverId");
-		if(serverId!=null&&!"".equals(serverId)){
-			service.deleteIndexDbServer(Integer.valueOf(serverId));
-			return "mcuServerAdd";
-		}else{
-			throw new RuntimeException("Server Id "+serverId +" error!");
-		}
+		service.deleteIndexDbServer(Integer.valueOf(serverId));
+		return "success";
 		
 		
 	}
