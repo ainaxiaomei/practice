@@ -30,6 +30,42 @@ import net.sf.json.JSONArray;
 
 @Controller
 public class BaseControl {
+	@RequestMapping("/mcuServerAdd")
+	public String mcuServerAdd(Model model,HttpServletRequest request){
+		
+		return "mcuServerAdd";
+		
+	}
+	@RequestMapping("/gateServerAdd")
+	public String gateServerAdd(Model model,HttpServletRequest request){
+		
+		return "gateServerAdd";
+		
+	}
+	@RequestMapping("/ftpServerAdd")
+	public String toFtpServerAdd(Model model,HttpServletRequest request){
+		
+		return "ftpServerAdd";
+		
+	}
+	@RequestMapping("/audioServerAdd")
+	public String toAudioServerAdd(Model model,HttpServletRequest request){
+		
+		return "audioServerAdd";
+		
+	}
+	@RequestMapping("/appResAdd")
+	public String toAppResAdd(Model model,HttpServletRequest request){
+		
+		return "appResAdd";
+		
+	}
+	@RequestMapping("/indexDbServerAdd")
+	public String toIndexDbServerAdd(Model model,HttpServletRequest request){
+		
+		return "indexDbServerAdd";
+		
+	}
 	@RequestMapping("/appList")
     public String toAppList(Model model,HttpServletRequest request){
 		
@@ -81,84 +117,8 @@ public class BaseControl {
 		return "ftpServer";
 		
 	}
-	@RequestMapping("/mcuServerAdd")
-	public String mcuServerAdd(Model model,HttpServletRequest request){
-		
-		return "mcuServerAdd";
-		
-	}
-	@RequestMapping("/gateServerAdd")
-	public String gateServerAdd(Model model,HttpServletRequest request){
-		
-		return "gateServerAdd";
-		
-	}
-	@RequestMapping("/ftpServerAdd")
-	public String toFtpServerAdd(Model model,HttpServletRequest request){
-		
-		return "ftpServerAdd";
-		
-	}
-	@RequestMapping("/audioServerAdd")
-	public String toAudioServerAdd(Model model,HttpServletRequest request){
-		
-		return "audioServerAdd";
-		
-	}
-	@RequestMapping("/appResAdd")
-	public String toAppResAdd(Model model,HttpServletRequest request){
-		
-		return "appResAdd";
-		
-	}
-	@RequestMapping("/indexDbServerAdd")
-	public String toIndexDbServerAdd(Model model,HttpServletRequest request){
-		
-		return "indexDbServerAdd";
-		
-	}
-	@RequestMapping("/saveMcuServer")
-	public String saveMcuServer(McuServer mcu,HttpServletRequest request){
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.addMcu(mcu);
-		return "mcuServerAdd";
-		
-	}
-	@RequestMapping("/saveFtpServer")
-	public String saveFtpServer(FTPServer ftp,HttpServletRequest request){
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.saveFtp(ftp);
-		return "ftpServerAdd";
-		
-	}
-	@RequestMapping("/saveAudioServer")
-	public String saveAudioServer(AudioServer audio,HttpServletRequest request){
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.saveAudioServer(audio);
-		return "ftpServerAdd";
-		
-	}
-	@RequestMapping("/saveGateServer")
-	public String saveGateServer(IndexGate gate,HttpServletRequest request){
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.saveGateServer(gate);
-		return "ftpServerAdd";
-		
-	}
-	@RequestMapping("/saveIndexDbServer")
-	public String saveIndexDbServer(IndexDb indexdb,HttpServletRequest request){
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.saveIndexDbServer(indexdb);
-		return "ftpServerAdd";
-		
-	}
-	@RequestMapping("/saveAppRes")
-	public String saveAppRes(AppResource appRes,HttpServletRequest request){
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.saveAppRes(appRes);
-		return "ftpServerAdd";
-		
-	}
+	
+	
 	@RequestMapping("/audioServerSearch")
 	public void audioServerSearch(HttpServletRequest request,HttpServletResponse response,AudioServer audio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
@@ -213,82 +173,8 @@ public class BaseControl {
 		response.getWriter().printf(result);
 		
 	}
-	@RequestMapping("/mcuServerDelete")
-	public String mcuServerDelete(HttpServletRequest request ) throws IOException{
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String serverId=request.getParameter("serverId");
-		if(serverId!=null&&!"".equals(serverId)){
-			service.deleteMcu(Integer.valueOf(serverId));
-			return "mcuServerAdd";
-		}else{
-			throw new RuntimeException("Server Id "+serverId +" error!");
-		}
-		
-		
-	}
-	@RequestMapping("/gateServerDelete")
-	public String gateServerDelete(HttpServletRequest request ) throws IOException{
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String serverId=request.getParameter("serverId");
-		if(serverId!=null&&!"".equals(serverId)){
-			service.deleteGateServer(Integer.valueOf(serverId));
-			return "mcuServerAdd";
-		}else{
-			throw new RuntimeException("Server Id "+serverId +" error!");
-		}
-		
-		
-	}
-	@RequestMapping("/audioServerDelete")
-	public String audioServerDelete(HttpServletRequest request ) throws IOException{
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String serverId=request.getParameter("serverId");
-		if(serverId!=null&&!"".equals(serverId)){
-			service.deleteAudioServer(Integer.valueOf(serverId));
-			return "mcuServerAdd";
-		}else{
-			throw new RuntimeException("Server Id "+serverId +" error!");
-		}
-		
-		
-	}
-	@RequestMapping("/indexDbServerDelete")
-	public String indexDbServerDelete(HttpServletRequest request ) throws IOException{
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String serverId=request.getParameter("serverId");
-		if(serverId!=null&&!"".equals(serverId)){
-			service.deleteIndexDbServer(Integer.valueOf(serverId));
-			return "mcuServerAdd";
-		}else{
-			throw new RuntimeException("Server Id "+serverId +" error!");
-		}
-		
-		
-	}
-	@RequestMapping("/mcuServerModify")
-	public String mcuServerModify(HttpServletRequest request,McuServer mcu) throws IOException{
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		 service.modifyMcu(mcu);
-		 return "mcuServerAdd";
-	}
-	@RequestMapping("/gateServerModify")
-	public String gateServerModify(HttpServletRequest request,IndexGate gate) throws IOException{
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyGate(gate);
-		return "mcuServerAdd";
-	}
-	@RequestMapping("/audioServerModify")
-	public String audioServerModify(HttpServletRequest request,AudioServer audio) throws IOException{
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyAudioServer(audio);
-		return "mcuServerAdd";
-	}
-	@RequestMapping("/indexDbServerModify")
-	public String indexDbServerModify(HttpServletRequest request,IndexDb indexdb) throws IOException{
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyIndexDbServer(indexdb);
-		return "mcuServerAdd";
-	}
+	
+	
 	@RequestMapping("/appDetail")
     public String toForm(Model model,HttpServletRequest request){
 		return "appDetail";
