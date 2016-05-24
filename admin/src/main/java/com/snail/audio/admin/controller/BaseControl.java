@@ -21,6 +21,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
 import com.snail.audio.admin.service.IApplicationService;
@@ -54,6 +55,12 @@ public class BaseControl {
 	public String toGateServer(Model model,HttpServletRequest request){
 		
 		return "gateServer";
+		
+	}
+	@RequestMapping("/indexDbServer")
+	public String toIndexDbServer(Model model,HttpServletRequest request){
+		
+		return "indexDbServer";
 		
 	}
 	@RequestMapping("/home")
@@ -179,6 +186,15 @@ public class BaseControl {
 	public void gateServerSearch(HttpServletRequest request,HttpServletResponse response,IndexGate gate) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<IndexGate> list=service.getGateServer(gate,-1,-1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/indexDbServerSearch")
+	public void indexDbServerSearch(HttpServletRequest request,HttpServletResponse response,IndexDb indexdb) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<IndexDb> list=service.getIndexDbServer(indexdb, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
 		response.getWriter().printf(result);

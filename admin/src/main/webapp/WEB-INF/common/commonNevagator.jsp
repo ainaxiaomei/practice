@@ -26,7 +26,7 @@
                             <a href="<%=path %>/gateServer"><i class="glyphicon glyphicon-chevron-right"></i> Gate Server</a>
                         </li>
                         <li>
-                            <a href="error-pages.html"><i class="glyphicon glyphicon-chevron-right"></i> Membdb Server</a>
+                            <a href="<%=path %>/indexDbServer"><i class="glyphicon glyphicon-chevron-right"></i> Membdb Server</a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i> Mcu Group Config</a>

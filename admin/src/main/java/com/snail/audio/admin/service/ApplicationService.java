@@ -11,11 +11,13 @@ import com.snail.audio.admin.dao.IAudioDao;
 import com.snail.audio.admin.dao.ICompanyDao;
 import com.snail.audio.admin.dao.IFtpServerDao;
 import com.snail.audio.admin.dao.IGateDao;
+import com.snail.audio.admin.dao.IIndexDbDao;
 import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
 @Service
@@ -34,6 +36,8 @@ public class ApplicationService implements IApplicationService {
 	private IFtpServerDao ftpDao;
 	@Autowired
 	private IGateDao gateDao;
+	@Autowired
+	private IIndexDbDao indeDbDao;
 	public List<App> getApplication(int start, int end) {
 		return appDao.getApplicationt(start, end);
 	}
@@ -104,7 +108,6 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int modifyAppRes(AppResource appRes) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
@@ -130,6 +133,22 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public List<IndexGate> getGateServer(IndexGate gate, int start, int end) {
 		return gateDao.getGateServer(gate, start, end);
+	}
+	@Override
+	public List<IndexDb> getIndexDbServer(IndexDb indexdb, int start, int end) {
+		return indeDbDao.getIndexDb(indexdb, start, end);
+	}
+	@Override
+	public int saveIndexDbServer(IndexDb indexdb) {
+		return indeDbDao.addIndexDb(indexdb);
+	}
+	@Override
+	public int modifyIndexDbServer(IndexDb indexdb) {
+		return indeDbDao.modifyIndexDb(indexdb);
+	}
+	@Override
+	public int deleteIndexDbServer(int serverId) {
+		return indeDbDao.deleteIndexDb(serverId);
 	}
 
 }

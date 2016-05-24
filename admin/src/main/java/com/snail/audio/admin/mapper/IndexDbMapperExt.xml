@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.IndexDbMapperExt" >
+   <select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from index_db
+    where 1=1
+    <if test="indexDb.serverId != null" >
+        and server_id=#{indexDb.serverId,jdbcType=INTEGER}
+      </if>
+      <if test="indexDb.serverName != null and indexDb.serverName!='' " >
+        and server_name=#{indexDb.serverName,jdbcType=VARCHAR}
+      </if>
+      <if test="indexDb.dspnum != null" >
+        and dspnum=#{indexDb.dspnum,jdbcType=INTEGER}
+      </if>
+      <if test="indexDb.svcUrl != null and indexDb.svcUrl!='' " >
+        and svc_url=#{indexDb.svcUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="indexDb.httpUrl != null and indexDb.httpUrl!='' " >
+        and http_url=#{indexDb.httpUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="indexDb.valid != null and indexDb.valid!='' " >
+        and valid=#{indexDb.valid}
+      </if>
+      <if test="indexDb.appids != null and indexDb.appids!='' " >
+        and appids=#{indexDb.appids}
+      </if>
+      <if test="indexDb.roomidMin != null and indexDb.roomidMin>0 " >
+        and roomid_min=#{indexDb.roomidMin}
+      </if>
+      <if test="indexDb.roomidMax != null and indexDb.roomidMax>0 " >
+        and roomid_max=#{indexDb.roomidMax}
+      </if>
+      
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
+  </select>
+</mapper>
