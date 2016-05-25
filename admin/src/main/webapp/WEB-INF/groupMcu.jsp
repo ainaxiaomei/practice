@@ -157,9 +157,10 @@
                                     </table>
                                     <div >   
 					                 </div>
-					                     <button type="button" onclick="addGroupMcu()" class="btn btn-primary">Add</button>
-					                     <button type="button" onclick="modifyGroupMcu()" class="btn btn-primary">Modify</button>
-					                     <button type="button" onclick="deleteGroupMcu()" class="btn btn-primary">Delete</button>
+					                     <button type="button" onclick="addGroupMcu()"  id="addButton"  class="btn btn-primary">Add</button>
+					                     <button type="button" onclick="modifyGroupMcu()" id="modifyButton"  class="btn btn-primary">Modify</button>
+					                     <button type="button" onclick="deleteGroupMcu()" id="deleteButton" class="btn btn-primary">Delete</button>
+					                     <button type="button" onclick="selectGroupMcu()" id="selectButton" class="btn btn-primary">Select</button>
                                     </div>
                             </div>
                         </div>
@@ -212,8 +213,27 @@
                 	    	curSelectIndex=indexes;
                 	    }
                 	} );
+                	//样式处理
+                	var param=window.dialogArguments;
+    	        	if(param&&param.action=="SELECT"){
+    	        		//选择页面
+    	        		$("#modifyButton").hide();
+    	        		$("#deleteButton").hide();
+    	        	}else{
+    	        		$("#selectButton").hide();
+    	        	}
 
             })
+            //选择
+            function selectGroupMcu(){
+            	//获取serverId
+             	  var table = $('#groupMcuTable').DataTable();
+             	  var Tnode=table.row(curSelectIndex).node();
+             	  var id= Tnode.cells[0].firstChild.nodeValue;
+             	  //返回serverId
+               window.returnValue = id;  //返回值
+     		     window.close();
+            }
             //查询
            function serachMcu(){
             	var table=$('#groupMcuTable').DataTable(); 
