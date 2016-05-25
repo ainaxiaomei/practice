@@ -141,7 +141,7 @@
 	        	}else{
 	        		//是新增页面
 	        		//改变单击事件
-	        		$("#saveButton").click(rowDblClick);
+	        		$("#saveButton").click(saveMcu);
 	        	}
 	        });
 	        
@@ -199,7 +199,7 @@
            function saveMcu(){
         	   $.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/saveMcuServer",
+                 		  url:"<%=path%>/saveGroupMcuServer",
                  		  data:$("#mcuForm").serialize(),
                  		  success:function(){
                  		  alert("Add Success");

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.snail.audio.admin.mapper.GroupMcuServersMapper" >
+<mapper namespace="com.snail.audio.admin.mapper.GroupMcuServersMapperExt" >
   <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.GroupMcuServers" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="group_id" property="groupId" jdbcType="INTEGER" />
@@ -34,9 +34,6 @@
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.GroupMcuServers" >
     insert into group_mcu_servers
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="groupId != null" >
         group_id,
       </if>
@@ -57,9 +54,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="groupId != null" >
         #{groupId,jdbcType=INTEGER},
       </if>

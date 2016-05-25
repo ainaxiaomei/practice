@@ -12,6 +12,7 @@ import com.snail.audio.admin.dao.ICompanyDao;
 import com.snail.audio.admin.dao.IFtpServerDao;
 import com.snail.audio.admin.dao.IGateDao;
 import com.snail.audio.admin.dao.IGroupMCUDao;
+import com.snail.audio.admin.dao.IGroupMcuServerDao;
 import com.snail.audio.admin.dao.IIndexDbDao;
 import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.entity.App;
@@ -19,6 +20,7 @@ import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupMcu;
+import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
@@ -42,6 +44,8 @@ public class ApplicationService implements IApplicationService {
 	private IIndexDbDao indeDbDao;
 	@Autowired
 	private IGroupMCUDao groupMcuDao;
+	@Autowired
+	private IGroupMcuServerDao groupMcuServerDao;
 	public List<App> getApplication(int start, int pageSize) {
 		return appDao.getApplicationt(start, pageSize);
 	}
@@ -155,20 +159,39 @@ public class ApplicationService implements IApplicationService {
 		return indeDbDao.deleteIndexDb(serverId);
 	}
 	@Override
-	public int saveGroupMcuServer(GroupMcu groupMcu) {
+	public int saveGroupMcu(GroupMcu groupMcu) {
 		return groupMcuDao.addGroupMCU(groupMcu);
 	}
 	@Override
-	public int modifyGroupMcuServer(GroupMcu groupMcu) {
+	public int modifyGroupMcu(GroupMcu groupMcu) {
 		return groupMcuDao.modifyGroupMCU(groupMcu);
 	}
 	@Override
-	public int deleteGroupMcuServer(int groupId) {
+	public int deleteGroupMcu(int groupId) {
 		return groupMcuDao.deleteGroupMCU(groupId);
 	}
 	@Override
 	public List<GroupMcu> getGroupMcu(GroupMcu groupMcu, int start, int pageSize) {
 		return groupMcuDao.getGroupMCU(groupMcu, start, pageSize);
+	}
+	@Override
+	public int saveGroupMcuServer(GroupMcuServers groupMcuServer) {
+		return groupMcuServerDao.addGroupMcuServer(groupMcuServer);
+	}
+	@Override
+	public int modifyGroupMcuServer(GroupMcuServers groupMcu) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int deleteGroupMcuServer(int groupId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public List<GroupMcu> getGroupMcuServer(GroupMcuServers groupMcu, int start, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

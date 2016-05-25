@@ -11,6 +11,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
@@ -63,6 +64,14 @@ public class AddControl {
 	public String saveAppRes(AppResource appRes,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.saveAppRes(appRes);
+		return "success";
+		
+	}
+	@RequestMapping("/saveGroupMcuServer")
+	@ResponseBody
+	public String saveGroupMcuServer(GroupMcuServers groupMcuSercers,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.saveGroupMcuServer(groupMcuSercers);
 		return "success";
 		
 	}
