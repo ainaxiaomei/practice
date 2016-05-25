@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.GroupMcuMapperExt" >
+  <select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from group_mcu
+    where 1=1
+    <if test="groupMcu.groupId != null" >
+        and group_id=#{groupMcu.groupId}
+      </if>
+      <if test="groupMcu.curUsernum != null and groupMcu.curUsernum>0 " >
+        and cur_usernum=#{groupMcu.curUsernum}
+      </if>
+      <if test="groupMcu.maxUsernum != null and groupMcu.maxUsernum>0 " >
+        and max_usernum=#{groupMcu.maxUsernum}
+      </if>
+      
+  </select>
+</mapper>

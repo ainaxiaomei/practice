@@ -11,12 +11,14 @@ import com.snail.audio.admin.dao.IAudioDao;
 import com.snail.audio.admin.dao.ICompanyDao;
 import com.snail.audio.admin.dao.IFtpServerDao;
 import com.snail.audio.admin.dao.IGateDao;
+import com.snail.audio.admin.dao.IGroupMCUDao;
 import com.snail.audio.admin.dao.IIndexDbDao;
 import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
@@ -38,6 +40,8 @@ public class ApplicationService implements IApplicationService {
 	private IGateDao gateDao;
 	@Autowired
 	private IIndexDbDao indeDbDao;
+	@Autowired
+	private IGroupMCUDao groupMcuDao;
 	public List<App> getApplication(int start, int pageSize) {
 		return appDao.getApplicationt(start, pageSize);
 	}
@@ -149,6 +153,22 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public int deleteIndexDbServer(int serverId) {
 		return indeDbDao.deleteIndexDb(serverId);
+	}
+	@Override
+	public int saveGroupMcuServer(GroupMcu groupMcu) {
+		return groupMcuDao.addGroupMCU(groupMcu);
+	}
+	@Override
+	public int modifyGroupMcuServer(GroupMcu groupMcu) {
+		return groupMcuDao.modifyGroupMCU(groupMcu);
+	}
+	@Override
+	public int deleteGroupMcuServer(int groupId) {
+		return groupMcuDao.deleteGroupMCU(groupId);
+	}
+	@Override
+	public List<GroupMcu> getGroupMcu(GroupMcu groupMcu, int start, int pageSize) {
+		return groupMcuDao.getGroupMCU(groupMcu, start, pageSize);
 	}
 
 }

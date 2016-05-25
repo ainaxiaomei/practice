@@ -8,6 +8,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
@@ -65,5 +66,13 @@ public interface IApplicationService {
      public int modifyIndexDbServer(IndexDb indexdb);
      //删除indexDb
      public int deleteIndexDbServer(int serverId);
+     //新增groupMcu
+     public int saveGroupMcuServer(GroupMcu groupMcu);
+     //修改groupMcu
+     public int modifyGroupMcuServer(GroupMcu groupMcu);
+     //删除groupMcu
+     public int deleteGroupMcuServer(int groupId);
+     //查询groupMcu
+     public List<GroupMcu>getGroupMcu(GroupMcu groupMcu,int start,int pageSize);
 
 }

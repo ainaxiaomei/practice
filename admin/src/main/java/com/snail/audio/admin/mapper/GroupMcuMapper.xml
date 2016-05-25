@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.snail.audio.admin.mapper.GroupMcuMapper" >
+<mapper namespace="com.snail.audio.admin.mapper.GroupMcuMapperExt" >
   <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.GroupMcu" >
     <id column="group_id" property="groupId" jdbcType="INTEGER" />
     <result column="cur_usernum" property="curUsernum" jdbcType="INTEGER" />
@@ -28,9 +28,6 @@
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.GroupMcu" >
     insert into group_mcu
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="groupId != null" >
-        group_id,
-      </if>
       <if test="curUsernum != null" >
         cur_usernum,
       </if>
@@ -39,9 +36,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="groupId != null" >
-        #{groupId,jdbcType=INTEGER},
-      </if>
       <if test="curUsernum != null" >
         #{curUsernum,jdbcType=INTEGER},
       </if>
