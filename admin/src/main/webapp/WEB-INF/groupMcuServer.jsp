@@ -297,8 +297,8 @@
          	  var id= Tnode.cells[0].firstChild.nodeValue;
          	 $.ajax(
               		{ type:"POST",
-              		  url:"<%=path%>/mcuServerDelete",
-              		  data:"serverId="+id,
+              		  url:"<%=path%>/groupMcuServerDelete",
+              		  data:"Id="+id,
               		  success:function(){
               		  alert("Delete Success");
               		  var table=$('#groupMcuServerTable').DataTable(); 

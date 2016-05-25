@@ -50,11 +50,20 @@ public class DeleteControl {
 		
 		
 	}
-	@RequestMapping("/groupMcuServerDelete")
+	@RequestMapping("/groupMcuDelete")
 	@ResponseBody
 	public String groupServerDelete(HttpServletRequest request ,@RequestParam("groupId") int groupId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.deleteGroupMcuServer(Integer.valueOf(groupId));
+		return "success";
+		
+		
+	}
+	@RequestMapping("/groupMcuServerDelete")
+	@ResponseBody
+	public String groupMcuServerDelete(HttpServletRequest request ,@RequestParam("Id") int Id) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.deleteGroupMcuServer(Integer.valueOf(Id));
 		return "success";
 		
 		
