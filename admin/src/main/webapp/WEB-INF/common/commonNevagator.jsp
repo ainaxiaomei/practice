@@ -3,6 +3,14 @@
     <%String path=getServletContext().getContextPath();%>
  <!-- left, vertical navbar -->
                 <div class="col-md-2 bootstrap-admin-col-left">
+                    <script>
+                    $(document).ready( function () {
+                    	$("li").click(liclick);
+                		function liclick(e){
+                		  e.currentTarget.className="active";
+                		}
+                    });
+                    </script>
                     <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-chevron-right"></i> About</a>
@@ -10,7 +18,7 @@
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="<%=path %>/appList"><i class="glyphicon glyphicon-chevron-right"></i> Applications</a>
                         </li>
                         <li>
@@ -31,8 +39,8 @@
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i> Mcu Group Config</a>
                             <ul class="nav navbar-collapse bootstrap-admin-navbar-side">
-                                <li><a href="about.html"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Group</a></li>
-                                <li><a href="about.html"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Group Server</a></li>
+                                <li><a href="<%=path %>/groupMcu"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Group</a></li>
+                                <li><a href="<%=path %>/groupMcuServer"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Group Server</a></li>
                             </ul>
                         </li>
                         <li>
@@ -62,3 +70,4 @@
                         </li>
                     </ul>
                 </div>
+                

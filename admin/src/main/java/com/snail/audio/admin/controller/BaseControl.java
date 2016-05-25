@@ -66,6 +66,12 @@ public class BaseControl {
 		return "indexDbServerAdd";
 		
 	}
+	@RequestMapping("/groupMcuServerAdd")
+	public String toGroupMcuServerAdd(Model model,HttpServletRequest request){
+		
+		return "groupMcuServerAdd";
+		
+	}
 	@RequestMapping("/appList")
     public String toAppList(Model model,HttpServletRequest request){
 		
@@ -115,6 +121,18 @@ public class BaseControl {
 	public String toFtpServer(Model model,HttpServletRequest request){
 		
 		return "ftpServer";
+		
+	}
+	@RequestMapping("/groupMcu")
+	public String toGroupMcu(Model model,HttpServletRequest request){
+		
+		return "groupMcu";
+		
+	}
+	@RequestMapping("/groupMcuServer")
+	public String toGroupMcuServer(Model model,HttpServletRequest request){
+		
+		return "groupMcuServer";
 		
 	}
 	

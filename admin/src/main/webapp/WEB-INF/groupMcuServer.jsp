@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MCU Server Config</title>
+        <title>Group MCU Server Config</title>
         <jsp:include page="common/commonHead.jsp"></jsp:include>
          <%String path=getServletContext().getContextPath();%>
     </head>
@@ -99,7 +99,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header">
-                                <h1>MCU Server</h1>
+                                <h1>Group Mcu Server</h1>
                             </div>
                         </div>
                     </div>
@@ -114,31 +114,31 @@
                                     <form class="form-horizontal" role="form" id="searchForm">
 					                    <fieldset>
 					                       <div class="form-group">
+					                          <label class="col-sm-1 control-label" >Id</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" name="id" type="text"/>
+					                          </div>
 					                          <label class="col-sm-1 control-label" >Server Id</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" name="serverId" type="text" />
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Server Name</label>
+					                          <label class="col-sm-1 control-label" >Group Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" name="serverName" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Dsp Number</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" name="dspnum" type="text"/>
+					                             <input class="form-control" name="groupId" type="text"/>
 					                          </div>
 					                       </div>
 					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >SVC Url</label>
+					                          <label class="col-sm-1 control-label" >Level</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="svcUrl" type="text" />
+					                             <input class="form-control"  name="level" type="text" />
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Http Url</label>
+					                          <label class="col-sm-1 control-label" >Left Parent Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="httpUrl" type="text"/>
+					                             <input class="form-control"  name="leftParentId" type="text"/>
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Com Url</label>
+					                          <label class="col-sm-1 control-label" >Right Parent Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="comUrl" type="text"/>
+					                             <input class="form-control"  name="rightParentId" type="text"/>
 					                          </div>
 					                       </div>
 					                    </fieldset> 
@@ -154,18 +154,18 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">MCU Server</div>
+                                    <div class="text-muted bootstrap-admin-box-title">Group Mcu Server</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="mcuTable">
+                                    <table class="table table-striped table-bordered" id="groupMcuServerTable">
                                         <thead>
                                             <tr>
+                                                <th>Id</th>
                                                 <th>Server Id</th>
-                                                <th>Server Name</th>
-                                                <th>DSP Number</th>
-                                                <th>SVC URL</th>
-                                                <th>HTTP URL</th>
-                                                <th>Com URL</th>
+                                                <th>Group Id</th>
+                                                <th>Left Parent Id</th>
+                                                <th>Right Parent Id</th>
+                                                <th>Level</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -174,10 +174,9 @@
                                     </table>
                                     <div >   
 					                 </div>
-					                     <button type="button" onclick="addMcu()"  id="addButton" class="btn btn-primary">Add</button>
-					                     <button type="button" onclick="modifyMcu()" id="modifyButton" class="btn btn-primary">Modify</button>
-					                     <button type="button" onclick="deleteMcu()" id="deleteButton" class="btn btn-primary">Delete</button>
-					                     <button type="button" onclick="selectMcu()" id="selectButton" class="btn btn-primary">Select</button>
+					                     <button type="button" onclick="addGroupMcuServer()" class="btn btn-primary">Add</button>
+					                     <button type="button" onclick="modifyGroupMcuServer()" class="btn btn-primary">Modify</button>
+					                     <button type="button" onclick="deleteGroupMcuServer()" class="btn btn-primary">Delete</button>
                                     </div>
                             </div>
                         </div>
@@ -202,7 +201,7 @@
             }
             $(function() {
             	//初始化表格
-            	    mcuTable=$('#mcuTable').dataTable( {
+            	    groupMcuServerTable=$('#groupMcuServerTable').dataTable( {
 					select:true,
 					searching:false,
 					paging: true,
@@ -228,59 +227,38 @@
 						"sLengthMenu": "_MENU_ records per page"
 					}
 				} );
-            	    //表格选择时间
-            	    var table = $('#mcuTable').DataTable();
+            	    var table = $('#groupMcuServerTable').DataTable();
                 	table.on( 'select', function ( e, dt, type, indexes ) {
                 	    if ( type === 'row' ) {
                 	    	curSelectIndex=indexes;
                 	    }
                 	} );
-                	//样式处理
-                	var param=window.dialogArguments;
-    	        	if(param&&param.action=="SELECT"){
-    	        		//选择页面
-    	        		$("#modifyButton").hide();
-    	        		$("#deleteButton").hide();
-    	        	}else{
-    	        		$("#selectButton").hide();
-    	        	}
 
-            });
-            //选择mcuServer
-            function selectMcu(){
-            	//获取serverId
-           	  var table = $('#mcuTable').DataTable();
-           	  var Tnode=table.row(curSelectIndex).node();
-           	  var id= Tnode.cells[0].firstChild.nodeValue;
-           	  //返回serverId
-             window.returnValue = id;  //返回值
-   		     window.close();
-            }
-            
+            })
             //查询
            function serachMcu(){
-            	var table=$('#mcuTable').DataTable(); 
+            	var table=$('#groupMcuServerTable').DataTable(); 
             	table.ajax.reload();
             } 
             //新增
-           function addMcu(){
-        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
+           function addGroupMcuServer(){
+        	   var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
-        		   var table=$('#mcuTable').DataTable(); 
+        		   var table=$('#groupMcuServerTable').DataTable(); 
              	  table.ajax.reload();
         	   }
 
            }
            //修改
-           function modifyMcu(){
+           function modifyGroupMcuServer(){
         	   if(curSelectIndex<0){
         		   alert("Please Select A Row !");
         		   return;
         	   }
         	   var object=new Object();
         	   object.action="MODIFY";
-        	   var table = $('#mcuTable').DataTable();
+        	   var table = $('#groupMcuServerTable').DataTable();
         	   var Tnode=table.row(curSelectIndex).node();
         	   var cells=Tnode.cells;
         	   var columns= [
@@ -299,12 +277,12 @@
         	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
-        		   var table=$('#mcuTable').DataTable(); 
+        		   var table=$('#groupMcuServerTable').DataTable(); 
              	  table.ajax.reload();
         	   }
            }
            //删除
-           function deleteMcu(){
+           function deleteGroupMcuServer(){
         	   if(curSelectIndex<0){
         		   alert("Please Select A Row !");
         		   return;
@@ -314,7 +292,7 @@
          	  }
         	   
         	 //获取table对象
-         	  var table = $('#mcuTable').DataTable();
+         	  var table = $('#groupMcuServerTable').DataTable();
          	  var Tnode=table.row(curSelectIndex).node();
          	  var id= Tnode.cells[0].firstChild.nodeValue;
          	 $.ajax(
@@ -323,7 +301,7 @@
               		  data:"serverId="+id,
               		  success:function(){
               		  alert("Delete Success");
-              		  var table=$('#mcuTable').DataTable(); 
+              		  var table=$('#groupMcuServerTable').DataTable(); 
                 	  table.ajax.reload();
               			  },
               		  error:function(msg){

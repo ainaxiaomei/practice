@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MCU Server Config</title>
+        <title>Group MCU Config</title>
         <jsp:include page="common/commonHead.jsp"></jsp:include>
          <%String path=getServletContext().getContextPath();%>
     </head>
@@ -99,7 +99,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header">
-                                <h1>MCU Server</h1>
+                                <h1>Group MCU Server</h1>
                             </div>
                         </div>
                     </div>
@@ -114,31 +114,17 @@
                                     <form class="form-horizontal" role="form" id="searchForm">
 					                    <fieldset>
 					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >Server Id</label>
+					                          <label class="col-sm-1 control-label" >Group Id</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" name="serverId" type="text" />
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Server Name</label>
+					                          <label class="col-sm-1 control-label" >Cur UserNum</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" name="serverName" type="text"/>
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Dsp Number</label>
+					                          <label class="col-sm-1 control-label" >Max UserNum</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" name="dspnum" type="text"/>
-					                          </div>
-					                       </div>
-					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >SVC Url</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="svcUrl" type="text" />
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Http Url</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="httpUrl" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Com Url</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="comUrl" type="text"/>
 					                          </div>
 					                       </div>
 					                    </fieldset> 
@@ -154,18 +140,15 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">MCU Server</div>
+                                    <div class="text-muted bootstrap-admin-box-title">Group MCU Server</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
                                     <table class="table table-striped table-bordered" id="mcuTable">
                                         <thead>
                                             <tr>
-                                                <th>Server Id</th>
-                                                <th>Server Name</th>
-                                                <th>DSP Number</th>
-                                                <th>SVC URL</th>
-                                                <th>HTTP URL</th>
-                                                <th>Com URL</th>
+                                                <th>Group Id</th>
+                                                <th>Cur UserNum</th>
+                                                <th>Max UserNum</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -174,10 +157,9 @@
                                     </table>
                                     <div >   
 					                 </div>
-					                     <button type="button" onclick="addMcu()"  id="addButton" class="btn btn-primary">Add</button>
-					                     <button type="button" onclick="modifyMcu()" id="modifyButton" class="btn btn-primary">Modify</button>
-					                     <button type="button" onclick="deleteMcu()" id="deleteButton" class="btn btn-primary">Delete</button>
-					                     <button type="button" onclick="selectMcu()" id="selectButton" class="btn btn-primary">Select</button>
+					                     <button type="button" onclick="addMcu()" class="btn btn-primary">Add</button>
+					                     <button type="button" onclick="modifyMcu()" class="btn btn-primary">Modify</button>
+					                     <button type="button" onclick="deleteMcu()" class="btn btn-primary">Delete</button>
                                     </div>
                             </div>
                         </div>
@@ -228,35 +210,14 @@
 						"sLengthMenu": "_MENU_ records per page"
 					}
 				} );
-            	    //表格选择时间
             	    var table = $('#mcuTable').DataTable();
                 	table.on( 'select', function ( e, dt, type, indexes ) {
                 	    if ( type === 'row' ) {
                 	    	curSelectIndex=indexes;
                 	    }
                 	} );
-                	//样式处理
-                	var param=window.dialogArguments;
-    	        	if(param&&param.action=="SELECT"){
-    	        		//选择页面
-    	        		$("#modifyButton").hide();
-    	        		$("#deleteButton").hide();
-    	        	}else{
-    	        		$("#selectButton").hide();
-    	        	}
 
-            });
-            //选择mcuServer
-            function selectMcu(){
-            	//获取serverId
-           	  var table = $('#mcuTable').DataTable();
-           	  var Tnode=table.row(curSelectIndex).node();
-           	  var id= Tnode.cells[0].firstChild.nodeValue;
-           	  //返回serverId
-             window.returnValue = id;  //返回值
-   		     window.close();
-            }
-            
+            })
             //查询
            function serachMcu(){
             	var table=$('#mcuTable').DataTable(); 
