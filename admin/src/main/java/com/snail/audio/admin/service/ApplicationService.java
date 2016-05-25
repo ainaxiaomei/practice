@@ -184,14 +184,12 @@ public class ApplicationService implements IApplicationService {
 		return 0;
 	}
 	@Override
-	public int deleteGroupMcuServer(int groupId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteGroupMcuServer(int id) {
+		return groupMcuServerDao.deleteGroupMcuServer(id);
 	}
 	@Override
-	public List<GroupMcu> getGroupMcuServer(GroupMcuServers groupMcu, int start, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GroupMcuServers> getGroupMcuServer(GroupMcuServers groupMcu, int start, int pageSize) {
+		return groupMcuServerDao.getMCU(groupMcu, start, pageSize);
 	}
 
 }

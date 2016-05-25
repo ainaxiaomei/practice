@@ -190,7 +190,7 @@
 					searching:false,
 					paging: true,
 					ajax: {
-						"url": "<%=path%>/groupMcuServerSearch",
+						"url": "<%=path%>/groupMcuSearch",
 					    "type": "POST",
 					    "dataSrc": "",
 					    "data":condition2Json

@@ -206,19 +206,19 @@
 					searching:false,
 					paging: true,
 					ajax: {
-						"url": "<%=path%>/mcuServerSearch",
+						"url": "<%=path%>/groupMcuServerSearch",
 					    "type": "POST",
 					    "dataSrc": "",
 					    "data":condition2Json
 					    
 					},
 					"columns": [
+								{ "data": "id" },
 								{ "data": "serverId" },
-								{ "data": "serverName" },
-				                { "data": "dspnum" },
-				                { "data": "svcUrl" },
-				                { "data": "httpUrl" },
-				                { "data": "comUrl" }
+								{ "data": "groupId" },
+				                { "data": "leftParentId" },
+				                { "data": "rightParentId" },
+				                { "data": "level" }
 				                
 				            ],
 					"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",

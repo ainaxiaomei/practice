@@ -82,7 +82,7 @@ public interface IApplicationService {
      //删除groupMcuserver
      public int deleteGroupMcuServer(int groupId);
      //查询groupMcuserver
-     public List<GroupMcu>getGroupMcuServer(GroupMcuServers groupMcu,int start,int pageSize);
+     public List<GroupMcuServers>getGroupMcuServer(GroupMcuServers groupMcu,int start,int pageSize);
      
 
 }

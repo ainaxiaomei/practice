@@ -33,8 +33,7 @@ public class GroupMcuServerDao implements IGroupMcuServerDao{
 
 	@Override
 	public List<GroupMcuServers> getMCU(GroupMcuServers groupMcuServer, int start, int end) {
-		// TODO Auto-generated method stub
-		return null;
+		return groupMcuServerMapperExt.selectByCondition(groupMcuServer, start, end);
 	}
 
 	
