@@ -180,8 +180,7 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int modifyGroupMcuServer(GroupMcuServers groupMcu) {
-		// TODO Auto-generated method stub
-		return 0;
+		return groupMcuServerDao.modifyGroupMcuServer(groupMcu);
 	}
 	@Override
 	public int deleteGroupMcuServer(int id) {

@@ -262,19 +262,19 @@
         	   var Tnode=table.row(curSelectIndex).node();
         	   var cells=Tnode.cells;
         	   var columns= [
-							"serverId" ,
-							 "serverName" ,
-			                 "dspnum",
-			                "svcUrl" ,
-			                 "httpUrl" ,
-			                 "comUrl" 
+							"id" ,
+							 "serverId" ,
+			                 "groupId",
+			                "leftParentId" ,
+			                 "rightParentId" ,
+			                 "level" 
 			                
 			            ];
  			   for(var i=0;i<cells.length;i++){
  				  object[columns[i]]=cells[i].innerText;
  			      
  			  }
-        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#groupMcuServerTable').DataTable(); 

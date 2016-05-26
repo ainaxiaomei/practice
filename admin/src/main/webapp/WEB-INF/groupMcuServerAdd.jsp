@@ -71,17 +71,17 @@
                                     <div class="text-muted bootstrap-admin-box-title">Group MCU Server Information</div>
                                 </div>
                                 <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                    <form class="form-horizontal" role="form" id="mcuForm">
+                                    <form class="form-horizontal" role="form" id="groupMcuServer">
 					                     <fieldset>
 					                       <div class="form-group">
 					                          <input class="form-control" id="id" name="id" type="text" style="display:none"/>
 					                          <label class="col-sm-1 control-label" >Server Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="serverId" name="serverId" type="text" /><a href="#" onclick="selectServerId()">select</a>
+					                             <input class="form-control" id="serverId" name="serverId" type="text" disabled=""/><a href="#" onclick="selectServerId()">select</a>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Group Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="groupId" name="groupId" type="text"/><a href="#" onclick="selectGroupId()">select</a>
+					                             <input class="form-control" id="groupId" name="groupId" type="text" disabled=""/><a href="#" onclick="selectGroupId()">select</a>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Level</label>
 					                          <div class="col-sm-3">
@@ -91,11 +91,11 @@
 					                       <div class="form-group">
 					                          <label class="col-sm-1 control-label" >Left Parent Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="leftParentId" name="leftParentId" type="text"/><a href="#" onclick="selectLeftParent()">select</a>
+					                             <input class="form-control"  id="leftParentId" name="leftParentId" type="text" disabled=""/><a href="#" onclick="selectLeftParent()">select</a>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Right Parent Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="rightParentId" name="rightParentId" type="text"/><a href="#" onclick="selectRightParent()">select</a>
+					                             <input class="form-control"  id="rightParentId" name="rightParentId" type="text" disabled=""/><a href="#" onclick="selectRightParent()">select</a>
 					                          </div>
 					                       </div>
 					                    </fieldset>  
@@ -123,17 +123,17 @@
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
 	        		//改变单击事件
-	        		$("#saveButton").click(modifyMcu);
+	        		$("#saveButton").click(modifyGroupMcuServer);
 	        		//填充表单
 	        		 var columns= [
-	   							"serverId" ,
-	   							 "serverName" ,
-	   			                 "dspnum",
-	   			                "svcUrl" ,
-	   			                 "httpUrl" ,
-	   			                 "comUrl" 
-	   			                
-	   			            ];
+							"id" ,
+							 "serverId" ,
+			                 "groupId",
+			                "leftParentId" ,
+			                 "rightParentId" ,
+			                 "level" 
+			                
+			            ];
 	        		for(var i=0;i<columns.length;i++){
 	        			var a=$("#"+columns[i]);
 	        			a.val(param[columns[i]]);
@@ -141,7 +141,7 @@
 	        	}else{
 	        		//是新增页面
 	        		//改变单击事件
-	        		$("#saveButton").click(saveMcu);
+	        		$("#saveButton").click(saveMcuGroupServer);
 	        	}
 	        });
 	        
@@ -177,11 +177,11 @@
 	        	//将返回值填到表单
 	        	$("#rightParentId").val(returnVal);
 	        }
-	       function modifyMcu(){
+	       function modifyGroupMcuServer(){
 	        	$.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/mcuServerModify",
-                 		  data:$("#mcuForm").serialize(),
+                 		  url:"<%=path%>/groupMcuServerModify",
+                 		  data:$("#groupMcuServer").serialize(),
                  		  success:function(){
                  		  alert("Modify Success");
                  		  window.returnValue = "success";  //返回值
@@ -196,11 +196,11 @@
                  		  
                  	  );
 	        }
-           function saveMcu(){
+           function saveMcuGroupServer(){
         	   $.ajax(
                  		{ type:"POST",
                  		  url:"<%=path%>/saveGroupMcuServer",
-                 		  data:$("#mcuForm").serialize(),
+                 		  data:$("#groupMcuServer").serialize(),
                  		  success:function(){
                  		  alert("Add Success");
                  		 window.returnValue = "success";  //返回值
