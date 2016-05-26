@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Audio Server Config</title>
+        <title>Group Audio Server Config</title>
         <jsp:include page="common/commonHead.jsp"></jsp:include>
          <%String path=getServletContext().getContextPath();%>
     </head>
@@ -91,13 +91,15 @@
             <!-- left, vertical navbar & content -->
             <div class="row">
                 <!-- left, vertical navbar -->
-               	<jsp:include page="common/commonNevagator.jsp"></jsp:include>                
+               <jsp:include page="common/commonNevagator.jsp"></jsp:include>                
+
+
                 <!-- content -->
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header">
-                                <h1>Audio Server</h1>
+                                <h1>Group Audio Server</h1>
                             </div>
                         </div>
                     </div>
@@ -112,31 +114,31 @@
                                     <form class="form-horizontal" role="form" id="searchForm">
 					                    <fieldset>
 					                       <div class="form-group">
+					                          <label class="col-sm-1 control-label" >Id</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" name="id" type="text"/>
+					                          </div>
 					                          <label class="col-sm-1 control-label" >Server Id</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" name="serverId" type="text" />
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Server Name</label>
+					                          <label class="col-sm-1 control-label" >Group Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" name="serverName" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Dsp Number</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" name="dspnum" type="text"/>
+					                             <input class="form-control" name="groupId" type="text"/>
 					                          </div>
 					                       </div>
 					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >SVC Url</label>
+					                          <label class="col-sm-1 control-label" >Level</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="svcUrl" type="text" />
+					                             <input class="form-control"  name="level" type="text" />
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Http Url</label>
+					                          <label class="col-sm-1 control-label" >Left Parent Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="httpUrl" type="text"/>
+					                             <input class="form-control"  name="leftParentId" type="text"/>
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Com Url</label>
+					                          <label class="col-sm-1 control-label" >Right Parent Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="comUrl" type="text"/>
+					                             <input class="form-control"  name="rightParentId" type="text"/>
 					                          </div>
 					                       </div>
 					                    </fieldset> 
@@ -152,41 +154,31 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">Audio Server</div>
+                                    <div class="text-muted bootstrap-admin-box-title">Group Audio Server</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="audioServer">
+                                    <table class="table table-striped table-bordered" id="groupMcuServerTable">
                                         <thead>
                                             <tr>
+                                                <th>Id</th>
                                                 <th>Server Id</th>
-                                                <th>Server Name</th>
-                                                <th>DSP Number</th>
-                                                <th>SVC URL</th>
-                                                <th>HTTP URL</th>
-                                                <th>Com URL</th>
+                                                <th>Group Id</th>
+                                                <th>Left Parent Id</th>
+                                                <th>Right Parent Id</th>
+                                                <th>Level</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           <c:forEach var="app"  items="${requestScope.apps}">
-                                                <tr class="odd gradeX">
-	                                                <td><input type="text" name="appid" style="width:100px" value=${app.appid} readonly="true" /></td>
-	                                                <td><input type="text" name="company.companyId" style="width:100px" readonly="true" value=${app.company.companyId}></td>
-	                                                <td><input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}></td>
-	                                                <td><input type="text" name="company.contacts" style="width:100px" value=${app.company.contacts}></td>
-	                                                <td><input type="text" name="curUid" style="width:100px" value=${app.curUid}></td>
-	                                                <td><input type="text" name="endUid" style="width:100px" value=${app.endUid}></td>
-	                                                <td><input type="text" name="contacts" style="width:100px" value=${app.contacts}></td>
-	                                                <td><input type="text" name="description" style="width:100px" value=${app.description}></td>
-	                                                <td><a href="javascript:saveApp()">save</a>&nbsp<a href="javascript:deleteApp()">delete</a></td>
-                                            	</tr>
-										   </c:forEach>
+                                           
                                         </tbody>
                                     </table>
-                                    <button type="button" onclick="addAudio()" id="addButton" class="btn btn-primary">Add</button>
-					                 <button type="button" onclick="modifyAudio()" id="modifyButton" class="btn btn-primary">Modify</button>
-					                 <button type="button" onclick="deleteAudio()" id="deleteButton" class="btn btn-primary">Delete</button>
-					                 <button type="button" onclick="selectAudio()" id="selectButton" class="btn btn-primary">Select</button>
-                                </div>
+                                    <div >   
+					                 </div>
+					                     <button type="button" id="" onclick="addGroupAudioServer()" class="btn btn-primary">Add</button>
+					                     <button type="button" id="modifyButton" onclick="modifyGroupAudioServer()" class="btn btn-primary">Modify</button>
+					                     <button type="button" id="deleteButton" onclick="deelteGroupAudioServer()" class="btn btn-primary">Delete</button>
+					                     <button type="button" id="selectButton" onclick="selectGroupAudioServer()" class="btn btn-primary">Select</button>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -199,7 +191,7 @@
        
 
         <script type="text/javascript">
-        var curSelectIndex=-1;
+            var curSelectIndex=-1;
             /**
               	将查询条件转化为字符串发送到服务端
             **/
@@ -210,24 +202,24 @@
             }
             $(function() {
             	//初始化表格
-            	    audioServer=$('#audioServer').dataTable( {
+            	    groupMcuServerTable=$('#groupMcuServerTable').dataTable( {
 					select:true,
 					searching:false,
 					paging: true,
 					ajax: {
-						"url": "<%=path%>/audioServerSearch",
+						"url": "<%=path%>/groupAudioServerSearch",
 					    "type": "POST",
 					    "dataSrc": "",
 					    "data":condition2Json
 					    
 					},
 					"columns": [
+								{ "data": "id" },
 								{ "data": "serverId" },
-								{ "data": "serverName" },
-				                { "data": "dspnum" },
-				                { "data": "svcUrl" },
-				                { "data": "httpUrl" },
-				                { "data": "comUrl" }
+								{ "data": "groupId" },
+				                { "data": "leftParentId" },
+				                { "data": "rightParentId" },
+				                { "data": "level" }
 				                
 				            ],
 					"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
@@ -236,7 +228,7 @@
 						"sLengthMenu": "_MENU_ records per page"
 					}
 				} );
-            	    var table = $('#audioServer').DataTable();
+            	    var table = $('#groupMcuServerTable').DataTable();
                 	table.on( 'select', function ( e, dt, type, indexes ) {
                 	    if ( type === 'row' ) {
                 	    	curSelectIndex=indexes;
@@ -253,84 +245,92 @@
     	        	}
 
             });
-            function selectAudio(){
+            function selectGroupAudioServer(){
             	//获取serverId
-             	  var table = $('#audioServer').DataTable();
-             	  var Tnode=table.row(curSelectIndex).node();
-             	  var id= Tnode.cells[0].firstChild.nodeValue;
-             	  //返回serverId
-               window.returnValue = id;  //返回值
-     		     window.close();
+           	  var table = $('#groupMcuTable').DataTable();
+           	  var Tnode=table.row(curSelectIndex).node();
+           	  var id= Tnode.cells[0].firstChild.nodeValue;
+           	  //返回serverId
+             window.returnValue = id;  //返回值
+   		     window.close();
             }
-            
+            //查询
            function serachMcu(){
-            	var table=$('#audioServer').DataTable(); 
+            	var table=$('#groupMcuServerTable').DataTable(); 
             	table.ajax.reload();
             } 
-           function addAudio(){
-         	   window.showModalDialog("<%=path%>/audioServerAdd","","dialogWidth=800px;dialogHeight=600px");
+            //新增
+           function addGroupAudioServer(){
+        	   var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd","","dialogWidth=800px;dialogHeight=600px");
+        	   if(returnVal="success"){
+        		   //刷新表格
+        		   var table=$('#groupMcuServerTable').DataTable(); 
+             	  table.ajax.reload();
+        	   }
 
-            }
-           function modifyAudio(){
+           }
+           //修改
+           function modifyGroupAudioServer(){
         	   if(curSelectIndex<0){
         		   alert("Please Select A Row !");
         		   return;
         	   }
         	   var object=new Object();
         	   object.action="MODIFY";
-        	   var table = $('#audioServer').DataTable();
+        	   var table = $('#groupMcuServerTable').DataTable();
         	   var Tnode=table.row(curSelectIndex).node();
         	   var cells=Tnode.cells;
         	   var columns= [
-							"serverId" ,
-							 "serverName" ,
-			                 "dspnum",
-			                "svcUrl" ,
-			                 "httpUrl" ,
-			                 "comUrl" 
+							"id" ,
+							 "serverId" ,
+			                 "groupId",
+			                "leftParentId" ,
+			                 "rightParentId" ,
+			                 "level" 
 			                
 			            ];
  			   for(var i=0;i<cells.length;i++){
  				  object[columns[i]]=cells[i].innerText;
  			      
  			  }
-        	   var returnVal=window.showModalDialog("<%=path%>/audioServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
-        		   var table=$('#audioServer').DataTable(); 
+        		   var table=$('#groupMcuServerTable').DataTable(); 
              	  table.ajax.reload();
         	   }
-            }
-          function deleteAudio(){
-        	  if(curSelectIndex<0){
-       		   alert("Please Select A Row !");
-       		   return;
-       	   }
-       	   if(!confirm("Are You Sure To Delete ?")){
-        		  return;
-        	  }
-       	   
-       	 //获取table对象
-        	  var table = $('#audioServer').DataTable();
-        	  var Tnode=table.row(curSelectIndex).node();
-        	  var id= Tnode.cells[0].firstChild.nodeValue;
-        	 $.ajax(
-             		{ type:"POST",
-             		  url:"<%=path%>/audioServerDelete",
-             		  data:"serverId="+id,
-             		  success:function(){
-             		  alert("Delete Success");
-             		  var table=$('#audioServer').DataTable(); 
-               	  table.ajax.reload();
-             			  },
-             		  error:function(msg){
-             			  alert("error!"+msg);
-             		  	}
-             		 }
-             		  
-             		  
-             	  );
-          }
+           }
+           //删除
+           function deelteGroupAudioServer(){
+        	   if(curSelectIndex<0){
+        		   alert("Please Select A Row !");
+        		   return;
+        	   }
+        	   if(!confirm("Are You Sure To Delete ?")){
+         		  return;
+         	  }
+        	   
+        	 //获取table对象
+         	  var table = $('#groupMcuServerTable').DataTable();
+         	  var Tnode=table.row(curSelectIndex).node();
+         	  var id= Tnode.cells[0].firstChild.nodeValue;
+         	 $.ajax(
+              		{ type:"POST",
+              		  url:"<%=path%>/groupAudioServerDelete",
+              		  data:"Id="+id,
+              		  success:function(){
+              		  alert("Delete Success");
+              		  var table=$('#groupMcuServerTable').DataTable(); 
+                	  table.ajax.reload();
+              			  },
+              		  error:function(msg){
+              			  alert("error!"+msg);
+              		  	}
+              		 }
+              		  
+              		  
+              	  );
+           }
         </script>
     </body>
 </html>

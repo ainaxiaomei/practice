@@ -12,6 +12,7 @@ import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
+import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
@@ -74,6 +75,14 @@ public class AddControl {
 	public String saveGroupMcuServer(GroupMcuServers groupMcuSercers,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.saveGroupMcuServer(groupMcuSercers);
+		return "success";
+		
+	}
+	@RequestMapping("/saveGroupAudioServer")
+	@ResponseBody
+	public String saveGroupAudioServer(GroupAudioServers groupAudioSercers,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.saveGroupAudioServer(groupAudioSercers);
 		return "success";
 		
 	}

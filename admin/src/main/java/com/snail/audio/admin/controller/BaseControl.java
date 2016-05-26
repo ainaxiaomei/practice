@@ -22,6 +22,7 @@ import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
+import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
@@ -73,6 +74,18 @@ public class BaseControl {
 	public String toGroupMcuServerAdd(Model model,HttpServletRequest request){
 		
 		return "groupMcuServerAdd";
+		
+	}
+	@RequestMapping("/groupAudioServer")
+	public String toGroupAudioServer(Model model,HttpServletRequest request){
+		
+		return "groupAudioServer";
+		
+	}
+	@RequestMapping("/groupAudioServerAdd")
+	public String toGroupAudioServerAdd(Model model,HttpServletRequest request){
+		
+		return "groupAudioServerAdd";
 		
 	}
 	@RequestMapping("/appList")
@@ -198,6 +211,15 @@ public class BaseControl {
 	public void mcuServerSearch(HttpServletRequest request,HttpServletResponse response,McuServer mcu) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<McuServer> list=service.getMCUServer(mcu,-1,-1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/groupAudioServerSearch")
+	public void mcuServerSearch(HttpServletRequest request,HttpServletResponse response,GroupAudioServers groupAudio) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<GroupAudioServers> list=service.getGroupAudioServer(groupAudio,-1,-1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
 		response.getWriter().printf(result);

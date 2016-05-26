@@ -12,6 +12,7 @@ import com.snail.audio.admin.dao.ICompanyDao;
 import com.snail.audio.admin.dao.IFtpServerDao;
 import com.snail.audio.admin.dao.IGateDao;
 import com.snail.audio.admin.dao.IGroupAudioDao;
+import com.snail.audio.admin.dao.IGroupAudioServerDao;
 import com.snail.audio.admin.dao.IGroupMCUDao;
 import com.snail.audio.admin.dao.IGroupMcuServerDao;
 import com.snail.audio.admin.dao.IIndexDbDao;
@@ -21,6 +22,7 @@ import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
+import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
@@ -48,6 +50,8 @@ public class ApplicationService implements IApplicationService {
 	private IGroupMCUDao groupMcuDao;
 	@Autowired
 	private IGroupMcuServerDao groupMcuServerDao;
+	@Autowired
+	private IGroupAudioServerDao groupAudioServerDao;
 	@Autowired
 	private IGroupAudioDao groupAudioDao;
 	public List<App> getApplication(int start, int pageSize) {
@@ -209,6 +213,22 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public List<GroupAudio> getGroupAudio(GroupAudio groupAudio, int start, int pageSize) {
 		return groupAudioDao.getGroupAudio(groupAudio, start, pageSize);
+	}
+	@Override
+	public int saveGroupAudioServer(GroupAudioServers groupAudio) {
+		return groupAudioServerDao.addGroupAudioServer(groupAudio);
+	}
+	@Override
+	public int modifyGroupAudioServer(GroupAudioServers groupAudio) {
+		return groupAudioServerDao.modifyGroupAudioServer(groupAudio);
+	}
+	@Override
+	public int deleteGroupAudioServer(int groupId) {
+		return groupAudioServerDao.deleteGroupAudioServer(groupId);
+	}
+	@Override
+	public List<GroupAudioServers> getGroupAudioServer(GroupAudioServers groupAudio, int start, int pageSize) {
+		return groupAudioServerDao.getAudio(groupAudio, start, pageSize);
 	}
 
 }

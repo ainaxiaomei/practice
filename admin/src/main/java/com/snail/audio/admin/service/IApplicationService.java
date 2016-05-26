@@ -9,6 +9,7 @@ import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
+import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
@@ -92,6 +93,14 @@ public interface IApplicationService {
      public int deleteGroupMcuServer(int groupId);
      //查询groupMcuserver
      public List<GroupMcuServers>getGroupMcuServer(GroupMcuServers groupMcu,int start,int pageSize);
+     //新增groupAudioserver
+     public int saveGroupAudioServer(GroupAudioServers groupMcu);
+     //修改groupAudioserver
+     public int modifyGroupAudioServer(GroupAudioServers groupMcu);
+     //删除groupAudioserver
+     public int deleteGroupAudioServer(int groupId);
+     //查询groupAudioserver
+     public List<GroupAudioServers>getGroupAudioServer(GroupAudioServers groupMcu,int start,int pageSize);
      
 
 }
