@@ -12,6 +12,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.GroupAudio;
+import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
@@ -53,6 +54,13 @@ public class ModifyControl {
 	public String groupMcuServerModify(HttpServletRequest request,GroupMcuServers groupMcuServer) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.modifyGroupMcuServer(groupMcuServer);
+		return "success";
+	}
+	@RequestMapping("/groupAudioServerModify")
+	@ResponseBody
+	public String groupAudioServerModify(HttpServletRequest request,GroupAudioServers groupAudioServer) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.modifyGroupAudioServer(groupAudioServer);
 		return "success";
 	}
 	@RequestMapping("/mcuGroupModify")

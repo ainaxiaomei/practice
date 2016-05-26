@@ -180,7 +180,7 @@
 	       function modifyGroupAudioServer(){
 	        	$.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/groupMcuServerModify",
+                 		  url:"<%=path%>/groupAudioServerModify",
                  		  data:$("#groupAudioServer").serialize(),
                  		  success:function(){
                  		  alert("Modify Success");
