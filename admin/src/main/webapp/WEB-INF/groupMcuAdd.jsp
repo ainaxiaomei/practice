@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MCU Server Config</title>
+        <title>Group MCU Config</title>
         <jsp:include page="common/commonHead.jsp"></jsp:include>
          <%String path=getServletContext().getContextPath();%>
     </head>
@@ -59,7 +59,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header">
-                                <h1>MCU Server</h1>
+                                <h1>Group MCU </h1>
                             </div>
                         </div>
                     </div>
@@ -68,34 +68,20 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">MCU Server Information</div>
+                                    <div class="text-muted bootstrap-admin-box-title">Group MCU Information</div>
                                 </div>
                                 <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
                                     <form class="form-horizontal" role="form" id="mcuForm">
 					                    <fieldset>
 					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >Server Name</label>
+					                          <input class="form-control" id="groupId" name="groupId" type="text" style="display:none"/>
+					                          <label class="col-sm-1 control-label" >Cur UserNum</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="serverId" name="serverId" type="text" style="display:none"/>
-					                             <input class="form-control" id="serverName" name="serverName" type="text"/>
+					                             <input class="form-control" id="curUsernum" name="curUsernum" type="text"/>
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Dsp Number</label>
+					                          <label class="col-sm-1 control-label" >Max UserNum</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="dspnum" name="dspnum" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >SVC Url</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" id="svcUrl" name="svcUrl" type="text" />
-					                          </div>
-					                       </div>
-					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >Http Url</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="httpUrl" name="httpUrl" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Com Url</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="comUrl" name="comUrl" type="text"/>
+					                             <input class="form-control" id="maxUsernum" name="maxUsernum" type="text"/>
 					                          </div>
 					                       </div>
 					                    </fieldset> 
@@ -123,16 +109,12 @@
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
 	        		//改变单击事件
-	        		$("#saveButton").click(modifyMcu);
+	        		$("#saveButton").click(modifyGroupMcu);
 	        		//填充表单
 	        		 var columns= [
-	   							"serverId" ,
-	   							 "serverName" ,
-	   			                 "dspnum",
-	   			                "svcUrl" ,
-	   			                 "httpUrl" ,
-	   			                 "comUrl" 
-	   			                
+	   							"groupId" ,
+	   							 "curUsernum" ,
+	   			                 "maxUsernum"
 	   			            ];
 	        		for(var i=0;i<columns.length;i++){
 	        			var a=$("#"+columns[i]);
@@ -141,13 +123,13 @@
 	        	}else{
 	        		//是新增页面
 	        		//改变单击事件
-	        		$("#saveButton").click(saveMcu);
+	        		$("#saveButton").click(saveGroupMcu);
 	        	}
 	        })
-	       function modifyMcu(){
+	       function modifyGroupMcu(){
 	        	$.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/mcuServerModify",
+                 		  url:"<%=path%>/mcuGroupModify",
                  		  data:$("#mcuForm").serialize(),
                  		  success:function(){
                  		  alert("Modify Success");
@@ -163,10 +145,10 @@
                  		  
                  	  );
 	        }
-           function saveMcu(){
+           function saveGroupMcu(){
         	   $.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/saveMcuServer",
+                 		  url:"<%=path%>/saveGroupMcu",
                  		  data:$("#mcuForm").serialize(),
                  		  success:function(){
                  		  alert("Add Success");

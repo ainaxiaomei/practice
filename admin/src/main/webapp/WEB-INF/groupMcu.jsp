@@ -241,7 +241,7 @@
             } 
             //新增
            function addGroupMcu(){
-        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/groupMcuAdd","","dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#groupMcuTable').DataTable(); 
@@ -261,19 +261,15 @@
         	   var Tnode=table.row(curSelectIndex).node();
         	   var cells=Tnode.cells;
         	   var columns= [
-							"serverId" ,
-							 "curUsernum" ,
-			                 "dspnum",
-			                "svcUrl" ,
-			                 "httpUrl" ,
-			                 "comUrl" 
-			                
-			            ];
+	   							"groupId" ,
+	   							 "curUsernum" ,
+	   			                 "maxUsernum"
+	   			            ];
  			   for(var i=0;i<cells.length;i++){
  				  object[columns[i]]=cells[i].innerText;
  			      
  			  }
-        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/groupMcuAdd",object,"dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#groupMcuTable').DataTable(); 
