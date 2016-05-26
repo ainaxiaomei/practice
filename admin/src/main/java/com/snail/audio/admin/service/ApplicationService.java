@@ -11,6 +11,7 @@ import com.snail.audio.admin.dao.IAudioDao;
 import com.snail.audio.admin.dao.ICompanyDao;
 import com.snail.audio.admin.dao.IFtpServerDao;
 import com.snail.audio.admin.dao.IGateDao;
+import com.snail.audio.admin.dao.IGroupAudioDao;
 import com.snail.audio.admin.dao.IGroupMCUDao;
 import com.snail.audio.admin.dao.IGroupMcuServerDao;
 import com.snail.audio.admin.dao.IIndexDbDao;
@@ -19,6 +20,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
@@ -46,6 +48,8 @@ public class ApplicationService implements IApplicationService {
 	private IGroupMCUDao groupMcuDao;
 	@Autowired
 	private IGroupMcuServerDao groupMcuServerDao;
+	@Autowired
+	private IGroupAudioDao groupAudioDao;
 	public List<App> getApplication(int start, int pageSize) {
 		return appDao.getApplicationt(start, pageSize);
 	}
@@ -189,6 +193,22 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public List<GroupMcuServers> getGroupMcuServer(GroupMcuServers groupMcu, int start, int pageSize) {
 		return groupMcuServerDao.getMCU(groupMcu, start, pageSize);
+	}
+	@Override
+	public int saveGroupAudio(GroupAudio groupAudio) {
+		return groupAudioDao.addGroupAudio(groupAudio);
+	}
+	@Override
+	public int modifyGroupAudio(GroupAudio groupAudio) {
+		return groupAudioDao.modifyGroupAudio(groupAudio);
+	}
+	@Override
+	public int deleteGroupAudio(int groupId) {
+		return groupAudioDao.deleteGroupAudio(groupId);
+	}
+	@Override
+	public List<GroupAudio> getGroupAudio(GroupAudio groupAudio, int start, int pageSize) {
+		return groupAudioDao.getGroupAudio(groupAudio, start, pageSize);
 	}
 
 }

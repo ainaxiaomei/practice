@@ -21,6 +21,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.FTPServer;
+import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
@@ -107,6 +108,12 @@ public class BaseControl {
 		return "indexDbServer";
 		
 	}
+	@RequestMapping("/groupAudio")
+	public String toGroupAudio(Model model,HttpServletRequest request){
+		
+		return "groupAudio";
+		
+	}
 	@RequestMapping("/home")
 	public String toHome(Model model,HttpServletRequest request){
 		
@@ -135,6 +142,12 @@ public class BaseControl {
 	public String toGroupMcuAdd(Model model,HttpServletRequest request){
 		
 		return "groupMcuAdd";
+		
+	}
+	@RequestMapping("/groupAudioAdd")
+	public String toGroupAudioAdd(Model model,HttpServletRequest request){
+		
+		return "groupAudioAdd";
 		
 	}
 	@RequestMapping("/groupMcuServer")
@@ -212,6 +225,15 @@ public class BaseControl {
 	public void groupMcuServerSearch(HttpServletRequest request,HttpServletResponse response,GroupMcuServers group) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<GroupMcuServers> list=service.getGroupMcuServer(group, -1, -1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/groupAudioSearch")
+	public void groupAudioSearch(HttpServletRequest request,HttpServletResponse response,GroupAudio groupAudio) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<GroupAudio> list=service.getGroupAudio(groupAudio, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
 		response.getWriter().printf(result);

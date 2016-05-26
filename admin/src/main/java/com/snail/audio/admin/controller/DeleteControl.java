@@ -59,6 +59,15 @@ public class DeleteControl {
 		
 		
 	}
+	@RequestMapping("/groupAudioDelete")
+	@ResponseBody
+	public String groupAudioDelete(HttpServletRequest request ,@RequestParam("groupId") int groupId) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.deleteGroupAudio(Integer.valueOf(groupId));
+		return "success";
+		
+		
+	}
 	@RequestMapping("/groupMcuServerDelete")
 	@ResponseBody
 	public String groupMcuServerDelete(HttpServletRequest request ,@RequestParam("Id") int Id) throws IOException{

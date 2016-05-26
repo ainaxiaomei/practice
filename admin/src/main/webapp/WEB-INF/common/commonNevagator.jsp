@@ -46,7 +46,7 @@
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i> Audio Group Config</a>
                             <ul class="nav navbar-collapse bootstrap-admin-navbar-side">
-                                <li><a href="about.html"><i class="glyphicon glyphicon-chevron-right"></i> Audio Group</a></li>
+                                <li><a href="<%=path %>/groupAudio"><i class="glyphicon glyphicon-chevron-right"></i> Audio Group</a></li>
                                 <li><a href="about.html"><i class="glyphicon glyphicon-chevron-right"></i> Audio Group Server</a></li>
                             </ul>
                         </li>
