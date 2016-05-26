@@ -54,7 +54,7 @@ public class DeleteControl {
 	@ResponseBody
 	public String groupServerDelete(HttpServletRequest request ,@RequestParam("groupId") int groupId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.deleteGroupMcuServer(Integer.valueOf(groupId));
+		service.deleteGroupMcu(Integer.valueOf(groupId));
 		return "success";
 		
 		
