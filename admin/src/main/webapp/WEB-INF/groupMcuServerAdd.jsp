@@ -89,6 +89,10 @@
 					                          </div>
 					                       </div>
 					                       <div class="form-group">
+					                          <label class="col-sm-1 control-label" >Parent </label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control"  id="parentId" name="parentId" type="text" readOnly="true"/><a href="#" onclick="selectParent()">select</a>
+					                          </div>
 					                          <label class="col-sm-1 control-label" >Left Parent Id</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="leftParentId" name="leftParentId" type="text" readOnly="true"/><a href="#" onclick="selectLeftParent()">select</a>
@@ -129,6 +133,7 @@
 							"id" ,
 							 "serverId" ,
 			                 "groupId",
+			                 "parentId",
 			                "leftParentId" ,
 			                 "rightParentId" ,
 			                 "level" 
@@ -160,6 +165,14 @@
 	        	var returnVal=window.showModalDialog("<%=path%>/groupMcu",object,"dialogWidth=1000px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#groupId").val(returnVal);
+	        }
+	       function selectParent(e){
+	        	//传参
+	        	var object=new Object();
+	        	object.action="SELECT";
+	        	var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1000px;dialogHeight=900px");
+	        	//将返回值填到表单
+	        	$("#parentId").val(returnVal);
 	        }
 	       function selectLeftParent(e){
 	        	//传参
