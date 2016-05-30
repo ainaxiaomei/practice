@@ -80,7 +80,7 @@
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Room Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="roomid" name="roomid" type="text"/>
+					                             <input class="form-control" id="roomid" name="roomid" value="0" type="text"/>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Group Type</label>
 					                          <div class="col-sm-3"   >
@@ -97,7 +97,7 @@
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Group Right Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="gpRightId" name="gpRightId" type="text" readonly="true"/><a id="rightGroupSelect" style="display:none" href="#" onclick="selectgpRightId()">select</a>
+					                             <input class="form-control"  id="gpRightId" name="gpRightId" type="text" readonly="true" value="0"/><a id="rightGroupSelect" style="display:none" href="#" onclick="selectgpRightId()">select</a>
 					                          </div>
 					                           <label class="col-sm-1 control-label" >Description</label>
 					                          <div class="col-sm-3">
@@ -144,7 +144,12 @@
         	  }
            }
            function selectAppId(){
-        	   
+        	 //传参
+	        	var object=new Object();
+	        	object.action="SELECT";
+	        	var returnVal=window.showModalDialog("<%=path%>/appList?action=SELECT",object,"dialogWidth=1500px;dialogHeight=600px");
+	        	//将返回值填到表单
+	        	$("#appid").val(returnVal);
            }
            function selectgpLeftId(){
         	 //传参
@@ -169,10 +174,13 @@
                  		  data:$("#appResForm").serialize(),
                  		  success:function(){
                  		  alert("Add Success");
+                 		 window.returnValue = "success";  //返回值
                  		  window.close();
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
+                 			 window.returnValue = "error";  //返回值
+                    		  window.close();
                  		  	}
                  		 }
                  		  

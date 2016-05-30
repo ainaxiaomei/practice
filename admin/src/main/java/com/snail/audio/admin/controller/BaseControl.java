@@ -14,6 +14,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
@@ -89,8 +90,10 @@ public class BaseControl {
 		
 	}
 	@RequestMapping("/appList")
-    public String toAppList(Model model,HttpServletRequest request){
-		
+    public String toAppList(Model model,HttpServletRequest request,@RequestParam(required=false,name="action") String action){
+		if("SELECT".equals(action)){
+			request.setAttribute("action", "SELECT");
+		}
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<App> apps=service.getApplication(0, 5);
 		model.addAttribute("apps",apps);

@@ -152,7 +152,14 @@
 	                                                <td><input type="text" name="endUid" style="width:100px" value=${app.endUid}></td>
 	                                                <td><input type="text" name="contacts" style="width:100px" value=${app.contacts}></td>
 	                                                <td><input type="text" name="description" style="width:100px" value=${app.description}></td>
-	                                                <td><a href="javascript:saveApp()">save</a>&nbsp<a href="javascript:deleteApp()">delete</a></td>
+	                                                <c:choose>
+													   <c:when test="${requestScope.action=='SELECT'}">  
+													    <td><a href="javascript:selectApp()">select</a></td>
+													   </c:when>
+													   <c:otherwise> 
+													    <td><a href="javascript:saveApp()">save</a>&nbsp<a href="javascript:deleteApp()">delete</a></td>
+													   </c:otherwise>
+													</c:choose>
                                             	</tr>
 										   </c:forEach>
                                         </tbody>
@@ -177,8 +184,23 @@
             	    	curSelectIndex=indexes;
             	    }
             	} );
+            	//根据类型处理页面
+            	var param=window.dialogArguments;
+	        	if(param&&param.action=="SELECT"){
+	        		
+	        	}
             }
+            
          );
+          function selectApp(){
+        	//获取appId
+           	  var table = $('#example').DataTable();
+           	  var Tnode=table.row(curSelectIndex).node();
+           	  var id= Tnode.cells[0].firstChild.value;
+        	  //返回appId
+              window.returnValue = id;  //返回值
+    		  window.close();
+          }
           function appDetail(){
         	  window.location.href="<%=path%>/appDetail";
           }

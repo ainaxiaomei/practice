@@ -240,8 +240,12 @@
             	table.ajax.reload();
             }  
             function addAppRes(){
-         	   window.showModalDialog("<%=path%>/appResAdd","","dialogWidth=800px;dialogHeight=600px");
-
+         	   var returnVal=window.showModalDialog("<%=path%>/appResAdd","","dialogWidth=800px;dialogHeight=600px");
+	         	  if(returnVal="success"){
+	       		   //刷新表格
+	       		   var table=$('#appRresource').DataTable(); 
+	            	  table.ajax.reload();
+	       	   }
             }
             function modifyAppRes(){
          	   

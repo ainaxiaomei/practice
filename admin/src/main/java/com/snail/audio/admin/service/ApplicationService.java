@@ -119,8 +119,7 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int saveAppRes(AppResource appRes) {
-		// TODO Auto-generated method stub
-		return 0;
+		return appResourceDao.saveAppRes(appRes);
 	}
 	@Override
 	public int modifyAppRes(AppResource appRes) {
