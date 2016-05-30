@@ -194,6 +194,7 @@
        
 
         <script type="text/javascript">
+           var curSelectIndex=-1;
             var appRresource;
             /**
               	将查询条件转化为字符串发送到服务端
@@ -232,7 +233,13 @@
 						"sLengthMenu": "_MENU_ records per page"
 					}
 				} );
-
+            	  //表格选择
+            	    var table = $('#appRresource').DataTable();
+                	table.on( 'select', function ( e, dt, type, indexes ) {
+                	    if ( type === 'row' ) {
+                	    	curSelectIndex=indexes;
+                	    }
+                	} );
 
             })
            function serachMcu(){
@@ -248,9 +255,66 @@
 	       	   }
             }
             function modifyAppRes(){
-         	   
+            	 if(curSelectIndex<0){
+          		   alert("Please Select A Row !");
+          		   return;
+          	   }
+          	   var object=new Object();
+          	   object.action="MODIFY";
+          	   var table = $('#appRresource').DataTable();
+          	   var Tnode=table.row(curSelectIndex).node();
+          	   var cells=Tnode.cells;
+          	   var columns= [
+  							"id" ,
+  							 "appid" ,
+  			                 "roomid",
+  			                "gpLeftId" ,
+  			                 "gpRightId" ,
+  			                 "gpType" ,
+  			                 "description"
+  			                
+  			            ];
+   			   for(var i=0;i<cells.length;i++){
+   				  object[columns[i]]=cells[i].innerText;
+   			      
+   			  }
+          	   var returnVal=window.showModalDialog("<%=path%>/appResAdd",object,"dialogWidth=800px;dialogHeight=600px");
+          	   if(returnVal="success"){
+          		   //刷新表格
+          		   var table=$('#appRresource').DataTable(); 
+               	  table.ajax.reload();
+          	   }
             }
-            function deleteAppRes(){}
+            function deleteAppRes(){
+            	if(curSelectIndex<0){
+         		   alert("Please Select A Row !");
+         		   return;
+         	   }
+         	   if(!confirm("Are You Sure To Delete ?")){
+          		  return;
+          	  }
+         	   
+         	 //获取table对象
+          	  var table = $('#appRresource').DataTable();
+          	  var Tnode=table.row(curSelectIndex).node();
+          	  var id= Tnode.cells[0].firstChild.nodeValue;
+          	 $.ajax(
+               		{ type:"POST",
+               		  url:"<%=path%>/appResDelete",
+               		  data:"Id="+id,
+               		  success:function(){
+               		  alert("Delete Success");
+               		  var table=$('#appRresource').DataTable(); 
+                 	  table.ajax.reload();
+               			  },
+               		  error:function(msg){
+               			  alert("error!"+msg);
+               		  	}
+               		 }
+               		  
+               		  
+               	  );
+            }
         </script>
     </body>
 </html>

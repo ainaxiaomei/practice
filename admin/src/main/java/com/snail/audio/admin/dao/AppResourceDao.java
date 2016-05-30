@@ -25,6 +25,10 @@ public class AppResourceDao implements IAppResourceDao {
 	public int modifyAppRes(AppResource appRes) {
 		return appResourceMapperExt.updateByPrimaryKeySelective(appRes);
 	}
+	@Override
+	public int deleteAppRes(int id) {
+		return appResourceMapperExt.deleteByPrimaryKey(id);
+	}
 
 
 }

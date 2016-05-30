@@ -74,6 +74,7 @@
                                     <form class="form-horizontal" role="form" id="appResForm">
 					                    <fieldset>
 					                       <div class="form-group">
+					                          <input class="form-control" id="id" name="id" type="text"  style="display:none"/>
 					                          <label class="col-sm-1 control-label" >App Id</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" id="appid" name="appid" type="text" readonly="true"/><a href="#" onclick="selectAppId()">select</a>
@@ -106,7 +107,7 @@
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
-					                     <button type="button" onclick="saveAppRes()" class="btn btn-primary">Save</button>
+					                     <button id="saveButton" type="button"  class="btn btn-primary">Save</button>
 					                    </div>
 					                </form>
                                 </div>
@@ -127,6 +128,31 @@
 	        $(function() {
 	        	//增加下拉框事件
 	        	$("#gpType").change(groupTypeChange);
+	        	var param=window.dialogArguments;
+	        	if(param.action=="MODIFY"){
+	        		//是修改界面
+	        		//改变单击事件
+	        		$("#saveButton").click(modifyAppRes);
+	        		//填充表单
+	        		  var columns= [
+  							"id" ,
+  							 "appid" ,
+  			                 "roomid",
+  			                "gpLeftId" ,
+  			                 "gpRightId" ,
+  			                 "gpType" ,
+  			                 "description"
+  			                
+  			            ];
+	        		for(var i=0;i<columns.length;i++){
+	        			var a=$("#"+columns[i]);
+	        			a.val(param[columns[i]]);
+	        		}
+	        	}else{
+	        		//是新增页面
+	        		//改变单击事件
+	        		$("#saveButton").click(saveAppRes);
+	        	}
 	        });
            var groupSelectUrl="<%=path%>/groupMcu";
            function groupTypeChange(){
@@ -186,6 +212,25 @@
                  		  
                  		  
                  	  );
+           }
+           function modifyAppRes(){
+        	   $.ajax(
+                		{ type:"POST",
+                		  url:"<%=path%>/appResModify",
+                		  data:$("#appResForm").serialize(),
+                		  success:function(){
+                		  alert("Modify Success");
+                		  window.returnValue = "success";  //返回值
+                		  window.close();
+                			  },
+                		  error:function(msg){
+                			  alert("error!"+msg);
+                			 window.returnValue = "error";  //返回值
+                		  	}
+                		 }
+                		  
+                		  
+                	  );
            }
         </script>
     </body>

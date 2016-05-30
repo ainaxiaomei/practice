@@ -86,4 +86,13 @@ public class DeleteControl {
 		
 		
 	}
+	@RequestMapping("/appResDelete")
+	@ResponseBody
+	public String appResDelete(HttpServletRequest request ,@RequestParam("Id") int id) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.deleteAppRes(id);
+		return "success";
+		
+		
+	}
 }

@@ -228,7 +228,7 @@
 						"sLengthMenu": "_MENU_ records per page"
 					}
 				} );
-            	    //表格选择时间
+            	    //表格选择
             	    var table = $('#mcuTable').DataTable();
                 	table.on( 'select', function ( e, dt, type, indexes ) {
                 	    if ( type === 'row' ) {

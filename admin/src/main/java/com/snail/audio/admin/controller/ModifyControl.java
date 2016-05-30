@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
@@ -75,6 +76,13 @@ public class ModifyControl {
 	public String audioGroupModify(HttpServletRequest request,GroupAudio groupAudio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.modifyGroupAudio(groupAudio);
+		return "success";
+	}
+	@RequestMapping("/appResModify")
+	@ResponseBody
+	public String appResModify(HttpServletRequest request,AppResource appRes) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.modifyAppRes(appRes);
 		return "success";
 	}
 }

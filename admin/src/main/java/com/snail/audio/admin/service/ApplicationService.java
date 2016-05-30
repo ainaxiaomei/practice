@@ -123,7 +123,7 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int modifyAppRes(AppResource appRes) {
-		return 0;
+		return appResourceDao.modifyAppRes(appRes);
 	}
 	@Override
 	public int deleteMcu(int id) {
@@ -228,6 +228,10 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public List<GroupAudioServers> getGroupAudioServer(GroupAudioServers groupAudio, int start, int pageSize) {
 		return groupAudioServerDao.getAudio(groupAudio, start, pageSize);
+	}
+	@Override
+	public int deleteAppRes(int id) {
+		return appResourceDao.deleteAppRes(id);
 	}
 
 }

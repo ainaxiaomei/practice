@@ -47,6 +47,8 @@ public interface IApplicationService {
      public int saveAppRes(AppResource appRes);
      //修改appResource
      public int modifyAppRes(AppResource appRes);
+     //删除appResource
+     public int deleteAppRes(int id);
      //查询ftp
      public List<FTPServer>getFtpServer(FTPServer ftp,int start,int pageSize);
      //新增ftp

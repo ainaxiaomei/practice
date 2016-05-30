@@ -14,4 +14,5 @@ public interface IAppResourceDao {
 	public List<AppResource> getAppResource(AppResource appResource,int start,int end);
 	public int saveAppRes(AppResource appRes);
 	public int modifyAppRes(AppResource appRes);
+	public int deleteAppRes(int id);
 }
