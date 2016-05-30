@@ -76,29 +76,32 @@
 					                       <div class="form-group">
 					                          <label class="col-sm-1 control-label" >App Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" name="appid" type="text"/>
+					                             <input class="form-control" id="appid" name="appid" type="text" readonly="true"/><a href="#" onclick="selectAppId()">select</a>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Room Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" name="roomid" type="text"/>
+					                             <input class="form-control" id="roomid" name="roomid" type="text"/>
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Group Left Id</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="gpLeftId" type="text" />
+					                          <label class="col-sm-1 control-label" >Group Type</label>
+					                          <div class="col-sm-3"   >
+					                              <select class="form-control" id="gpType" name="gpType"> 
+											      <option value="0">Mcu Group</option> 
+											      <option value="1">Audio Group</option> 
+											      </select>
 					                          </div>
 					                       </div>
 					                       <div class="form-group">
+					                          <label class="col-sm-1 control-label" >Group Left Id</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control"  id="gpLeftId" name="gpLeftId" type="text" readonly="true"/><a href="#" onclick="selectgpLeftId()">select</a>
+					                          </div>
 					                          <label class="col-sm-1 control-label" >Group Right Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="gpRightId" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Group Type</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="gpType" type="text"/>
+					                             <input class="form-control"  id="gpRightId" name="gpRightId" type="text" readonly="true"/><a id="rightGroupSelect" style="display:none" href="#" onclick="selectgpRightId()">select</a>
 					                          </div>
 					                           <label class="col-sm-1 control-label" >Description</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="description" type="text" />
+					                             <input class="form-control"  id="description" name="description" type="text" />
 					                          </div>
 					                       </div>
 					                    </fieldset> 
@@ -121,6 +124,44 @@
        
 
         <script type="text/javascript">
+	        $(function() {
+	        	//增加下拉框事件
+	        	$("#gpType").change(groupTypeChange);
+	        });
+           var groupSelectUrl="<%=path%>/groupMcu";
+           function groupTypeChange(){
+        	  var selectValue=$(this).children('option:selected').val();
+        	  if(selectValue==1){
+        		  //audio group
+        		  groupSelectUrl="<%=path%>/groupAudio";
+        		  //audio 有rightgroup
+        		  $("#rightGroupSelect").show();
+        	  }else if(selectValue==0){
+        		  //mcu group
+        		  groupSelectUrl="<%=path%>/groupMcu";
+        		  //mcu 没有rightgroup
+        		  $("#rightGroupSelect").hide();
+        	  }
+           }
+           function selectAppId(){
+        	   
+           }
+           function selectgpLeftId(){
+        	 //传参
+	        	var object=new Object();
+	        	object.action="SELECT";
+	        	var returnVal=window.showModalDialog(groupSelectUrl,object,"dialogWidth=1000px;dialogHeight=900px");
+	        	//将返回值填到表单
+	        	$("#gpLeftId").val(returnVal);
+           }
+           function selectgpRightId(){
+        	 //传参
+	        	var object=new Object();
+	        	object.action="SELECT";
+	        	var returnVal=window.showModalDialog(groupSelectUrl,object,"dialogWidth=1000px;dialogHeight=900px");
+	        	//将返回值填到表单
+	        	$("#gpLeftId").val(returnVal);
+           }
            function saveAppRes(){
         	   $.ajax(
                  		{ type:"POST",
