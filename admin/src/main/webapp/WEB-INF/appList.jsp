@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
                                     <table class="table table-striped table-bordered" id="example">
-                                        <thead><span style="color:red">Click AppId To Show Application Detail</span><a href="javascript:addAppRow()">add</a>
+                                        <thead><a href="javascript:addAppRow()">add</a>
                                             <tr>
                                                 <th>App Id</th>
                                                 <th>Company Id</th>
@@ -187,7 +187,7 @@
             	//根据类型处理页面
             	var param=window.dialogArguments;
 	        	if(param&&param.action=="SELECT"){
-	        		
+	        		$("input").attr("readonly",true);
 	        	}
             }
             
