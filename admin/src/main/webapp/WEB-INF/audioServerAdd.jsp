@@ -170,10 +170,13 @@
                  		  data:$("#audioForm").serialize(),
                  		  success:function(){
                  		  alert("Add Success");
+                 		  window.returnValue = "success";  //返回值
                  		  window.close();
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
+                 			 window.returnValue = "error";  //返回值
+                    		  window.close();
                  		  	}
                  		 }
                  		  

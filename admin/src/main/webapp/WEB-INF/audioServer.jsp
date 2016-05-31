@@ -269,7 +269,11 @@
             } 
            function addAudio(){
          	   window.showModalDialog("<%=path%>/audioServerAdd","","dialogWidth=800px;dialogHeight=600px");
-
+	         	  if(returnVal="success"){
+	       		   //刷新表格
+	       		   var table=$('#audioServer').DataTable(); 
+	            	  table.ajax.reload();
+	       	   }
             }
            function modifyAudio(){
         	   if(curSelectIndex<0){

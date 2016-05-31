@@ -180,6 +180,7 @@ public class BaseControl {
 		List<AudioServer> list=service.getAudioServer(audio,-1,-1);
 		//将list转换为json字符创
 	    String result =JSONArray.fromObject(list).toString();
+	    response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -189,6 +190,7 @@ public class BaseControl {
 		List<GroupMcu> list=service.getGroupMcu(groupMcu, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -198,6 +200,7 @@ public class BaseControl {
 		List<FTPServer> list=service.getFtpServer(ftp,-1,-1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -207,6 +210,7 @@ public class BaseControl {
 		List<AppResource> list=service.getAppResource(appResource, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -216,6 +220,7 @@ public class BaseControl {
 		List<McuServer> list=service.getMCUServer(mcu,-1,-1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -225,6 +230,7 @@ public class BaseControl {
 		List<GroupAudioServers> list=service.getGroupAudioServer(groupAudio,-1,-1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -234,6 +240,7 @@ public class BaseControl {
 		List<IndexGate> list=service.getGateServer(gate,-1,-1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -243,6 +250,7 @@ public class BaseControl {
 		List<IndexDb> list=service.getIndexDbServer(indexdb, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -252,6 +260,7 @@ public class BaseControl {
 		List<GroupMcuServers> list=service.getGroupMcuServer(group, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -261,6 +270,7 @@ public class BaseControl {
 		List<GroupAudio> list=service.getGroupAudio(groupAudio, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
