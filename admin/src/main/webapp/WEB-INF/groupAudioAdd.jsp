@@ -74,7 +74,10 @@
                                     <form class="form-horizontal" role="form" id="audioForm">
 					                    <fieldset>
 					                       <div class="form-group">
-					                          <input class="form-control" id="groupId" name="groupId" type="text" style="display:none"/>
+					                       <label class="col-sm-1 control-label" >Group Id</label>
+					                          <div class="col-sm-3">
+					                           <input class="form-control" id="groupId" name="groupId" type="text" />
+					                          </div>
 					                          <label class="col-sm-1 control-label" >Cur UserNum</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" id="curUsernum" name="curUsernum" type="text"/>
