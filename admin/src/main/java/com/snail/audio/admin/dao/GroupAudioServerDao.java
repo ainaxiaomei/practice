@@ -37,6 +37,16 @@ public class GroupAudioServerDao implements IGroupAudioServerDao{
 		return groupAudioServerMapperExt.selectByCondition(groupAudioServer, start, end);
 	}
 
+	@Override
+	public int deleteByGroupId(int groupId) {
+		return groupAudioServerMapperExt.deleteByGroupId(groupId);
+	}
+
+	@Override
+	public int deleteByServerId(int serverId) {
+		return groupAudioServerMapperExt.deleteByServerId(serverId);
+	}
+
 	
 	
 	

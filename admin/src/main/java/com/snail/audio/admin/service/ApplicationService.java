@@ -132,7 +132,8 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int deleteAudioServer(int serverId) {
-		return audioDao.deleteAudio(serverId);
+		 audioDao.deleteAudio(serverId);
+		 return groupAudioServerDao.deleteByServerId(serverId);
 	}
 	@Override
 	public int deleteGateServer(int serverId) {
@@ -209,7 +210,8 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int deleteGroupAudio(int groupId) {
-		return groupAudioDao.deleteGroupAudio(groupId);
+		 groupAudioDao.deleteGroupAudio(groupId);
+		 return groupAudioServerDao.deleteByGroupId(groupId);
 	}
 	@Override
 	public List<GroupAudio> getGroupAudio(GroupAudio groupAudio, int start, int pageSize) {
