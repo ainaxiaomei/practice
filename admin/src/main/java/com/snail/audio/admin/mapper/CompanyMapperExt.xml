@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.snail.audio.admin.mapper.CompanyMapperExt">
-  
-  
+  <select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from companys
+    where 1=1
+      <if test="company.companyId != null" >
+        and company_id=#{company.companyId,jdbcType=INTEGER}
+      </if>
+      <if test="company.companyName != null and company.companyName!='' " >
+        and company_name=#{company.companyName,jdbcType=VARCHAR}
+      </if>
+      <if test="company.contacts != null and company.contacts!=''" >
+        and contacts=#{company.contacts,jdbcType=INTEGER}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
+  </select>
 </mapper>

@@ -20,6 +20,7 @@ import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
+import com.snail.audio.admin.entity.Company;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
@@ -236,6 +237,22 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public int deleteAppRes(int id) {
 		return appResourceDao.deleteAppRes(id);
+	}
+	@Override
+	public List<Company> getCompany(Company company, int start, int pagSize) {
+		return companyDao.getCpmpany(company, start, pagSize);
+	}
+	@Override
+	public int saveCompany(Company company) {
+		return companyDao.saveCompany(company);
+	}
+	@Override
+	public int ModifyCompany(Company company) {
+		return companyDao.ModityCompany(company);
+	}
+	@Override
+	public int deleteCompany(int CompanyId) {
+		return companyDao.deleteCompany(CompanyId);
 	}
 
 }

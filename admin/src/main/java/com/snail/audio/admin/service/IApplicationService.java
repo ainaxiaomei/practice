@@ -2,11 +2,13 @@ package com.snail.audio.admin.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
+import com.snail.audio.admin.entity.Company;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
@@ -103,6 +105,15 @@ public interface IApplicationService {
      public int deleteGroupAudioServer(int groupId);
      //查询groupAudioserver
      public List<GroupAudioServers>getGroupAudioServer(GroupAudioServers groupMcu,int start,int pageSize);
+     //查询company
+     public List<Company> getCompany(Company company,int start,int pagSize);
+     //新增company
+     public int saveCompany(Company company);
+     //修改company
+     public int ModifyCompany(Company company);
+     //删除company 
+     public int deleteCompany(int CompanyId);
+
      
 
 }

@@ -1,5 +1,7 @@
 package com.snail.audio.admin.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +22,10 @@ public class CompanyDao implements ICompanyDao {
 	@Override
 	public int saveCompany(Company comapny) {
 		return companyMapperExt.insertSelective(comapny);
+	}
+	@Override
+	public List<Company> getCpmpany(Company company,int start,int pageSize) {
+		return companyMapperExt.selectByCondition(company, start, pageSize);
 	}
 
 }

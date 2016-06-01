@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
+import com.snail.audio.admin.entity.Company;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
@@ -106,6 +107,12 @@ public class BaseControl {
 		return "mcuServer";
 		
 	}
+	@RequestMapping("/company")
+	public String toCompany(Model model,HttpServletRequest request){
+		
+		return "company";
+		
+	}
 	@RequestMapping("/audioServer")
 	public String toAudioServer(Model model,HttpServletRequest request){
 		
@@ -181,6 +188,16 @@ public class BaseControl {
 		//将list转换为json字符创
 	    String result =JSONArray.fromObject(list).toString();
 	    response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/comapnySearch")
+	public void comapnySearch(HttpServletRequest request,HttpServletResponse response,Company company) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<Company> list=service.getCompany(company,-1,-1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
