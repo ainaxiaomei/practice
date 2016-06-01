@@ -175,7 +175,8 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int deleteGroupMcu(int groupId) {
-		return groupMcuDao.deleteGroupMCU(groupId);
+		 groupMcuDao.deleteGroupMCU(groupId);
+		 return groupMcuServerDao.deleteGroupMCUByGroupId(groupId);
 	}
 	@Override
 	public List<GroupMcu> getGroupMcu(GroupMcu groupMcu, int start, int pageSize) {

@@ -36,6 +36,16 @@ public class GroupMcuServerDao implements IGroupMcuServerDao{
 		return groupMcuServerMapperExt.selectByCondition(groupMcuServer, start, end);
 	}
 
+	@Override
+	public int deleteGroupMCUByGroupId(int groupId) {
+		return groupMcuServerMapperExt.deleteByGroupId(groupId);
+	}
+
+	@Override
+	public int deleteGroupMCUByServerId(int serverId) {
+		return groupMcuServerMapperExt.deleteByServerId(serverId);
+	}
+
 	
 	
 	

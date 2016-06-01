@@ -31,4 +31,12 @@
         limit #{start},#{end}
       </if>
   </select>
+  <delete id="deleteByGroupId" parameterType="java.lang.Integer" >
+    delete from group_mcu_servers
+    where group_id = #{group_id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByServerId" parameterType="java.lang.Integer" >
+    delete from group_mcu_servers
+    where server_id = #{server_id,jdbcType=INTEGER}
+  </delete>
 </mapper>

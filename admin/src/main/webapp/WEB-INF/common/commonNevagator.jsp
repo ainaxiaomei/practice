@@ -3,14 +3,6 @@
     <%String path=getServletContext().getContextPath();%>
  <!-- left, vertical navbar -->
                 <div class="col-md-2 bootstrap-admin-col-left">
-                    <script>
-                    $(document).ready( function () {
-                    	$("li").click(liclick);
-                		function liclick(e){
-                		  e.currentTarget.className="active";
-                		}
-                    });
-                    </script>
                     <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-chevron-right"></i> About</a>
@@ -25,27 +17,23 @@
                             <a href="<%=path %>/appResource"><i class="glyphicon glyphicon-chevron-right"></i> App Resource</a>
                         </li>
                         <li>
-                            <a href="<%=path %>/mcuServer"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Server</a>
-                        </li>
-                        <li>
-                            <a href="<%=path %>/audioServer"><i class="glyphicon glyphicon-chevron-right"></i> Audio Server</a>
-                        </li>
-                        <li>
                             <a href="<%=path %>/gateServer"><i class="glyphicon glyphicon-chevron-right"></i> Gate Server</a>
                         </li>
                         <li>
                             <a href="<%=path %>/indexDbServer"><i class="glyphicon glyphicon-chevron-right"></i> Membdb Server</a>
                         </li>
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-chevron-down"></i> Mcu Group Config</a>
+                            <a href="#"><i class="glyphicon glyphicon-chevron-down"></i> Mcu Config</a>
                             <ul class="nav navbar-collapse bootstrap-admin-navbar-side">
+                                 <li><a href="<%=path %>/mcuServer"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Server</a></li>
                                 <li><a href="<%=path %>/groupMcu"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Group</a></li>
                                 <li><a href="<%=path %>/groupMcuServer"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Group Server</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-chevron-down"></i> Audio Group Config</a>
+                            <a href="#"><i class="glyphicon glyphicon-chevron-down"></i> Audio Config</a>
                             <ul class="nav navbar-collapse bootstrap-admin-navbar-side">
+                                <li><a href="<%=path %>/audioServer"><i class="glyphicon glyphicon-chevron-right"></i> Audio Server</a></li>
                                 <li><a href="<%=path %>/groupAudio"><i class="glyphicon glyphicon-chevron-right"></i> Audio Group</a></li>
                                 <li><a href="<%=path %>/groupAudioServer"><i class="glyphicon glyphicon-chevron-right"></i> Audio Group Server</a></li>
                             </ul>

@@ -11,4 +11,5 @@ public interface IGroupMCUDao {
 	public int deleteGroupMCU(int groupId);
 	public int modifyGroupMCU(GroupMcu groupMcu);
 	public List<GroupMcu> getGroupMCU(GroupMcu groupMcu,int start,int pageSize);
+	
 }

@@ -14,4 +14,6 @@ public interface IGroupMcuServerDao {
 	public int deleteGroupMcuServer(int id);
 	public int modifyGroupMcuServer(GroupMcuServers groupMcuServer);
 	public List<GroupMcuServers> getMCU(GroupMcuServers groupMcuServer,int start,int end);
+	public int deleteGroupMCUByGroupId(int groupId);
+	public int deleteGroupMCUByServerId(int serverId);
 }

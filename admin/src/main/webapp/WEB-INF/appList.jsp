@@ -236,11 +236,11 @@
         	//获取table对象
         	  var table = $('#example').DataTable();
         	  table.row.add(
-        			  ['<input type="text" name="appid" style="width:100px" value="-1" readonly="true">',
-        		       '<input type="text" name="company.companyId" value="-1" style="width:100px" readonly="true">',
+        			  ['<input type="text" name="appid" style="width:100px"  >',
+        		       '<input type="text" name="company.companyId"  style="width:100px" >',
         		       '<input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}>',
         		       '<input type="text" name="company.contacts" style="width:100px" value=${company.contacts}>',
-        		       '<input type="text" name="curUid" style="width:100px" value=${app.curUid}>',
+        		       '<input type="text" name="curUid" readonly="true" style="width:100px" value=${app.curUid} >',
         		       '<input type="text" name="beginUid" style="width:100px" value=${app.beginUid}>',
         		       '<input type="text" name="endUid" style="width:100px" value=${app.endUid}>',
         		       '<input type="text" name="contacts" style="width:100px" value=${app.contacts}>',

@@ -11,30 +11,30 @@ import com.snail.audio.admin.entity.McuServer;
 import com.snail.audio.admin.mapper.AppMapperExt;
 import com.snail.audio.admin.mapper.GroupMcuMapperExt;
 import com.snail.audio.admin.mapper.GroupMcuServersMapper;
+import com.snail.audio.admin.mapper.GroupMcuServersMapperExt;
 import com.snail.audio.admin.mapper.McuServerMapperExt;
 @Repository
 public class GroupMCUDao implements IGroupMCUDao{
 	@Autowired
-	private GroupMcuMapperExt  groupMcuServerMapperExt;
-
+	private GroupMcuMapperExt  groupMcuMapperExt;
 	@Override
 	public int addGroupMCU(GroupMcu groupMcu) {
-		return groupMcuServerMapperExt.insertSelective(groupMcu);
+		return groupMcuMapperExt.insertSelective(groupMcu);
 	}
 
 	@Override
 	public int deleteGroupMCU(int groupId) {
-		return groupMcuServerMapperExt.deleteByPrimaryKey(groupId);
+		return groupMcuMapperExt.deleteByPrimaryKey(groupId);
 	}
 
 	@Override
 	public int modifyGroupMCU(GroupMcu groupMcu) {
-		return groupMcuServerMapperExt.updateByPrimaryKeySelective(groupMcu);
+		return groupMcuMapperExt.updateByPrimaryKeySelective(groupMcu);
 	}
 
 	@Override
 	public List<GroupMcu> getGroupMCU(GroupMcu groupMcu, int start, int pageSize) {
-		return groupMcuServerMapperExt.selectByCondition(groupMcu, start, pageSize);
+		return groupMcuMapperExt.selectByCondition(groupMcu, start, pageSize);
 	}
 
 	

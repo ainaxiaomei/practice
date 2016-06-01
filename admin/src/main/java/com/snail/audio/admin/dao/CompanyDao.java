@@ -19,7 +19,7 @@ public class CompanyDao implements ICompanyDao {
 	}
 	@Override
 	public int saveCompany(Company comapny) {
-		return companyMapperExt.insert(comapny);
+		return companyMapperExt.insertSelective(comapny);
 	}
 
 }
