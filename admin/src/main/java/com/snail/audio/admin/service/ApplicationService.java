@@ -55,27 +55,22 @@ public class ApplicationService implements IApplicationService {
 	private IGroupAudioServerDao groupAudioServerDao;
 	@Autowired
 	private IGroupAudioDao groupAudioDao;
-	public List<App> getApplication(int start, int pageSize) {
-		return appDao.getApplicationt(start, pageSize);
+	public List<App> getApplication(App app,int start, int pageSize) {
+		return appDao.getApplicationt(app, start,  pageSize);
 	}
 	@Override
 	public int ModifyApplication(App app) {
-		appDao.ModityApplication(app);
-		return companyDao.ModityCompany(app.getCompany());
+		return appDao.ModityApplication(app);
 	}
 	@Override
-	public int deleteApplication(App app) {
+	public int deleteApplication(int appId) {
 		
-		if(app.getAppid()<0||app.getCompany().getCompanyId()<0){
-			throw new RuntimeException("Primapry Key Can Not Be Null!");
-		}
-		return appDao.deleteApplication(app.getAppid());
+		
+		return appDao.deleteApplication(appId);
 	}
 	@Override
 	public int addApplication(App app) {
-		//保存company表
-		companyDao.saveCompany(app.getCompany());
-		//保存app表
+		
 		return appDao.addApplication(app);
 	}
 	@Override

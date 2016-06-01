@@ -90,17 +90,7 @@ public class BaseControl {
 		return "groupAudioServerAdd";
 		
 	}
-	@RequestMapping("/appList")
-    public String toAppList(Model model,HttpServletRequest request,@RequestParam(required=false,name="action") String action){
-		if("SELECT".equals(action)){
-			request.setAttribute("action", "SELECT");
-		}
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		List<App> apps=service.getApplication(0, 5);
-		model.addAttribute("apps",apps);
-		return "appList";
-    	
-    }
+	
 	@RequestMapping("/mcuServer")
 	public String toMCUServer(Model model,HttpServletRequest request){
 		
@@ -111,6 +101,12 @@ public class BaseControl {
 	public String toCompany(Model model,HttpServletRequest request){
 		
 		return "company";
+		
+	}
+	@RequestMapping("/app")
+	public String toApp(Model model,HttpServletRequest request){
+		
+		return "app";
 		
 	}
 	@RequestMapping("/audioServer")
@@ -188,6 +184,16 @@ public class BaseControl {
 		//将list转换为json字符创
 	    String result =JSONArray.fromObject(list).toString();
 	    response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/appSearch")
+	public void appSearch(HttpServletRequest request,HttpServletResponse response,App app) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<App> list=service.getApplication(app, -1,-1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}
@@ -306,9 +312,9 @@ public class BaseControl {
 		
 	}
 	@RequestMapping("/deleteApp")
-	public String deleteApp(App app,HttpServletRequest request){
+	public String deleteApp(HttpServletRequest request,@RequestParam("appId")int appId){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.deleteApplication(app);
+		service.deleteApplication(appId);
 		return "appDetail";
 		
 	}

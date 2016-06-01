@@ -11,7 +11,7 @@
                             <a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
                         </li>
                         <li >
-                            <a href="<%=path %>/appList"><i class="glyphicon glyphicon-chevron-right"></i> Applications</a>
+                            <a href="<%=path %>/app"><i class="glyphicon glyphicon-chevron-right"></i> Apps</a>
                         </li>
                         <li>
                             <a href="<%=path %>/appResource"><i class="glyphicon glyphicon-chevron-right"></i> App Resource</a>

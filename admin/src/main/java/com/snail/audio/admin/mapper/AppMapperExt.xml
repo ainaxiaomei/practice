@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.snail.audio.admin.mapper.AppMapperExt">
+  <!--
   <resultMap id="AppResultMap" type="com.snail.audio.admin.entity.App" >
     <id column="appid" jdbcType="INTEGER" property="appid" />
     <result column="contacts" jdbcType="VARCHAR" property="contacts" />
@@ -13,7 +14,7 @@
          <result property="companyName" column="company_name"/>
          <result property="contacts" column="company_contacts"/>
     </association>
-  </resultMap>
+  </resultMap>  
   <sql id="Company_Column_List" >
      company_name,companys.company_Id,companys.contacts as company_contacts
   </sql>
@@ -21,5 +22,36 @@
     select <include refid="Base_Column_List" />,
     <include refid="Company_Column_List" />
     FROM app,companys WHERE app.company_id=companys.company_id limit #{0},#{1}
+  </select>
+  -->
+  <select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app
+    where 1=1
+      <if test="app.appid != null" >
+        and appid=#{app.appid,jdbcType=INTEGER}
+      </if>
+      <if test="app.companyId != null and app.serverName!='' " >
+        and company_id=#{app.companyId,jdbcType=VARCHAR}
+      </if>
+      <if test="app.beginUid != null" >
+        and begin_uid=#{app.beginUid,jdbcType=INTEGER}
+      </if>
+      <if test="app.curUid != null and app.curUid!='' " >
+        and cur_uid=#{app.curUid,jdbcType=VARCHAR}
+      </if>
+      <if test="app.endUid != null and app.endUid!='' " >
+        and end_uid=#{app.endUid,jdbcType=VARCHAR}
+      </if>
+      <if test="app.contacts != null and app.contacts!='' " >
+        and contacts=#{app.contacts,jdbcType=VARCHAR}
+      </if>
+      <if test="app.description != null and app.description!='' " >
+        and description=#{app.description,jdbcType=VARCHAR}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
   </select>
 </mapper>

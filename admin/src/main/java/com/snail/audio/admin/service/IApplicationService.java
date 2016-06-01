@@ -20,11 +20,11 @@ import com.snail.audio.admin.entity.McuServer;
 @Service
 public interface IApplicationService {
 	 //查询所有应用
-     public List<App> getApplication(int start,int pageSize);
+     public List<App> getApplication(App app,int start,int pageSize);
      //修改应用信息
      public int ModifyApplication(App app);
      //删除应用
-     public int deleteApplication(App app);
+     public int deleteApplication(int  appId);
      //新增应用
      public int addApplication(App app);
      //新增mcu

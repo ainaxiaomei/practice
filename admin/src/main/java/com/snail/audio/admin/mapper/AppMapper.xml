@@ -11,7 +11,7 @@
     <result column="end_uid" property="endUid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    appid, app.contacts, description, begin_uid, cur_uid, end_uid
+    appid,company_id, app.contacts, description, begin_uid, cur_uid, end_uid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
