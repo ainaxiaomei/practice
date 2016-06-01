@@ -155,7 +155,7 @@
                                     <div class="text-muted bootstrap-admin-box-title">Audio Server</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="audioServer">
+                                    <table class="table  table-bordered" id="audioServer">
                                         <thead>
                                             <tr>
                                                 <th>Server Id</th>

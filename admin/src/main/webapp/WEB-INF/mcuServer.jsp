@@ -157,7 +157,7 @@
                                     <div class="text-muted bootstrap-admin-box-title">MCU Server</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="mcuTable">
+                                    <table class="table  table-bordered" id="mcuTable">
                                         <thead>
                                             <tr>
                                                 <th>Server Id</th>

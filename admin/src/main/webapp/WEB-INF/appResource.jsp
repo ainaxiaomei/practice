@@ -162,7 +162,7 @@
                                     <div class="text-muted bootstrap-admin-box-title">App Resource</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="appRresource">
+                                    <table class="table  table-bordered" id="appRresource">
                                         <thead>
                                             <tr>
                                                 <th> Id</th>

@@ -143,7 +143,7 @@
                                     <div class="text-muted bootstrap-admin-box-title">Group Audio </div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="groupAudioTable">
+                                    <table class="table  table-bordered" id="groupAudioTable">
                                         <thead>
                                             <tr>
                                                 <th>Group Id</th>

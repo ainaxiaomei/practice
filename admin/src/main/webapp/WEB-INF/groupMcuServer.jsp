@@ -163,7 +163,7 @@
                                     <div class="text-muted bootstrap-admin-box-title">Group Mcu Server</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="groupMcuServerTable">
+                                    <table class="table  table-bordered" id="groupMcuServerTable">
                                         <thead>
                                             <tr>
                                                 <th>Id</th>

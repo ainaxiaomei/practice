@@ -171,7 +171,7 @@
                                     <div class="text-muted bootstrap-admin-box-title">Memddb Server</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="indexDbTable">
+                                    <table class="table  table-bordered" id="indexDbTable">
                                         <thead>
                                             <tr>
                                                 <th>Server Id</th>

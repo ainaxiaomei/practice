@@ -3,6 +3,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%String path=getServletContext().getContextPath();%>
+        <link rel="stylesheet" media="screen" href="<%=path%>/vendors/datatables/css/jquery.dataTables.css">
         <!-- Bootstrap -->
         <link rel="stylesheet" media="screen" href="<%=path%>/css/bootstrap.min.css">
         <link rel="stylesheet" media="screen" href="<%=path%>/css/bootstrap-theme.min.css">

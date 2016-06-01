@@ -124,7 +124,7 @@
                                     <div class="text-muted bootstrap-admin-box-title">Applications</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="example">
+                                    <table class="table  table-bordered" id="example">
                                         <thead><a href="javascript:addAppRow()">add</a>
                                             <tr>
                                                 <th>App Id</th>
