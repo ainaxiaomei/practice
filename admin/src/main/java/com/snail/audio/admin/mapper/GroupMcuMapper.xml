@@ -28,6 +28,9 @@
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.GroupMcu" >
     insert into group_mcu
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        group_id,
+      </if>
       <if test="curUsernum != null" >
         cur_usernum,
       </if>
@@ -36,6 +39,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
       <if test="curUsernum != null" >
         #{curUsernum,jdbcType=INTEGER},
       </if>
