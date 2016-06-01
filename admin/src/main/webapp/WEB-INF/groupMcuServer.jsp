@@ -128,10 +128,6 @@
 					                          </div>
 					                       </div>
 					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >Parent</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="parentId" type="text" />
-					                          </div>
 					                          <label class="col-sm-1 control-label" >Left Parent Id</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  name="leftParentId" type="text"/>
@@ -140,8 +136,6 @@
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  name="rightParentId" type="text"/>
 					                          </div>
-					                       </div>
-					                       <div class="form-group">
 					                          <label class="col-sm-1 control-label" >Level</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  name="level" type="text" />
@@ -169,7 +163,6 @@
                                                 <th>Id</th>
                                                 <th>Server Id</th>
                                                 <th>Group Id</th>
-                                                <th>Parent Id</th>
                                                 <th>Left Parent Id</th>
                                                 <th>Right Parent Id</th>
                                                 <th>Level</th>
@@ -223,7 +216,6 @@
 								{ "data": "id" },
 								{ "data": "serverId" },
 								{ "data": "groupId" },
-								{ "data": "parentId" },
 				                { "data": "leftParentId" },
 				                { "data": "rightParentId" },
 				                { "data": "level" }
@@ -273,7 +265,6 @@
 							"id" ,
 							 "serverId" ,
 			                 "groupId",
-			                 "parentId",
 			                "leftParentId" ,
 			                 "rightParentId" ,
 			                 "level" 
