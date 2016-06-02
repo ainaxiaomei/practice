@@ -265,7 +265,7 @@
             } 
             //新增
            function addGroupAudioServer(){
-        	   var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd","","dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd","","dialogWidth=1000px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#groupMcuServerTable').DataTable(); 
@@ -298,7 +298,7 @@
  				  object[columns[i]]=cells[i].innerText;
  			      
  			  }
-        	   var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#groupMcuServerTable').DataTable(); 

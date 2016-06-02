@@ -268,7 +268,7 @@
             	table.ajax.reload();
             } 
            function addAudio(){
-         	   window.showModalDialog("<%=path%>/audioServerAdd","","dialogWidth=800px;dialogHeight=600px");
+         	   window.showModalDialog("<%=path%>/audioServerAdd","","dialogWidth=1000px;dialogHeight=600px");
 	         	  if(returnVal="success"){
 	       		   //刷新表格
 	       		   var table=$('#audioServer').DataTable(); 
@@ -298,7 +298,7 @@
  				  object[columns[i]]=cells[i].innerText;
  			      
  			  }
-        	   var returnVal=window.showModalDialog("<%=path%>/audioServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/audioServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#audioServer').DataTable(); 

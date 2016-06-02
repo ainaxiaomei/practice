@@ -247,7 +247,7 @@
             	table.ajax.reload();
             }  
             function addAppRes(){
-         	   var returnVal=window.showModalDialog("<%=path%>/appResAdd","","dialogWidth=800px;dialogHeight=600px");
+         	   var returnVal=window.showModalDialog("<%=path%>/appResAdd","","dialogWidth=1000px;dialogHeight=600px");
 	         	  if(returnVal="success"){
 	       		   //刷新表格
 	       		   var table=$('#appRresource').DataTable(); 
@@ -278,7 +278,7 @@
    				  object[columns[i]]=cells[i].innerText;
    			      
    			  }
-          	   var returnVal=window.showModalDialog("<%=path%>/appResAdd",object,"dialogWidth=800px;dialogHeight=600px");
+          	   var returnVal=window.showModalDialog("<%=path%>/appResAdd",object,"dialogWidth=1000px;dialogHeight=600px");
           	   if(returnVal="success"){
           		   //刷新表格
           		   var table=$('#appRresource').DataTable(); 

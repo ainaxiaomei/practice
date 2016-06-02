@@ -242,7 +242,7 @@
             } 
             //新增
            function addGroupMcuServer(){
-        	   var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd","","dialogWidth=1000px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#groupMcuServerTable').DataTable(); 
@@ -274,7 +274,7 @@
  				  object[columns[i]]=cells[i].innerText;
  			      
  			  }
-        	   var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#groupMcuServerTable').DataTable(); 
