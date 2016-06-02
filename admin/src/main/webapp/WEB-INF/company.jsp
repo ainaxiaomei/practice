@@ -160,7 +160,7 @@
 					                     <button type="button" onclick="addCompany()"  id="addButton" class="btn btn-primary">Add</button>
 					                     <button type="button" onclick="modifyCompany()" id="modifyButton" class="btn btn-primary">Modify</button>
 					                     <button type="button" onclick="deleteCompany()" id="deleteButton" class="btn btn-primary">Delete</button>
-					                     <button type="button" onclick="deleteCompany()" id="selectButton" class="btn btn-primary">Select</button>
+					                     <button type="button" onclick="selectCompany()" id="selectButton" class="btn btn-primary">Select</button>
                                     </div>
                             </div>
                         </div>
@@ -227,8 +227,8 @@
     	        	}
 
             });
-            //选择mcuServer
-            function deleteCompany(){
+            //选择
+            function selectCompany(){
             	//获取serverId
            	  var table = $('#companyTable').DataTable();
            	  var Tnode=table.row(curSelectIndex).node();
@@ -265,7 +265,7 @@
         	   var Tnode=table.row(curSelectIndex).node();
         	   var cells=Tnode.cells;
         	   var columns= [
-							"serverId" ,
+							"companyId" ,
 							 "serverName" ,
 			                 "dspnum",
 			                "svcUrl" ,
@@ -301,7 +301,7 @@
          	 $.ajax(
               		{ type:"POST",
               		  url:"<%=path%>/mcuServerDelete",
-              		  data:"serverId="+id,
+              		  data:"companyId="+id,
               		  success:function(){
               		  alert("Delete Success");
               		  var table=$('#companyTable').DataTable(); 

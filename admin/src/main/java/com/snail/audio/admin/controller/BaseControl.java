@@ -13,8 +13,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
@@ -40,6 +42,12 @@ public class BaseControl {
 	public String mcuServerAdd(Model model,HttpServletRequest request){
 		
 		return "mcuServerAdd";
+		
+	}
+	@RequestMapping("/appAdd")
+	public String appAdd(Model model,HttpServletRequest request){
+		
+		return "appAdd";
 		
 	}
 	@RequestMapping("/gateServerAdd")
@@ -304,25 +312,13 @@ public class BaseControl {
 		return "appDetail";
     	
     }
-	@RequestMapping("/modifyApp")
-	public String modifyApp(App app,HttpServletRequest request){
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.ModifyApplication(app);
-		return "appDetail";
-		
-	}
+	@ResponseBody
 	@RequestMapping("/deleteApp")
 	public String deleteApp(HttpServletRequest request,@RequestParam("appId")int appId){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.deleteApplication(appId);
-		return "appDetail";
+		return "success";
 		
 	}
-	@RequestMapping("/saveApp")
-	public String saveApp(App app,HttpServletRequest request){
-		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.addApplication(app);
-		return "appDetail";
-		
-	}
+	
 }

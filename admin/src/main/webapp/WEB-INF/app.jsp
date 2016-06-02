@@ -223,11 +223,11 @@
 					"columns": [
 								{ "data": "appid" },
 								{ "data": "companyId" },
-				                { "data": "contacts" },
-				                { "data": "description" },
 				                { "data": "beginUid" },
 				                { "data": "endUid" },
-				                { "data": "curUid" }
+				                { "data": "curUid" },
+				                { "data": "contacts" },
+				                { "data": "description" }
 				                
 				            ],
 					"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
@@ -272,7 +272,7 @@
             } 
             //新增
            function addApp(){
-        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/appAdd","","dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#appTable').DataTable(); 
@@ -292,19 +292,20 @@
         	   var Tnode=table.row(curSelectIndex).node();
         	   var cells=Tnode.cells;
         	   var columns= [
-							"serverId" ,
-							 "serverName" ,
-			                 "dspnum",
-			                "svcUrl" ,
-			                 "httpUrl" ,
-			                 "comUrl" 
+							"appid" ,
+							 "companyId" ,
+			                 "contacts",
+			                "description" ,
+			                 "beginUid" ,
+			                 "endUid" ,
+			                 "curUid"
 			                
 			            ];
  			   for(var i=0;i<cells.length;i++){
  				  object[columns[i]]=cells[i].innerText;
  			      
  			  }
-        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd",object,"dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/appAdd",object,"dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#appTable').DataTable(); 

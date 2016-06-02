@@ -23,11 +23,11 @@
     delete from app
     where appid = #{appid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.snail.audio.admin.entity.App" useGeneratedKeys="true" keyProperty="appid">
-    insert into app ( company_id, contacts, 
+  <insert id="insert" parameterType="com.snail.audio.admin.entity.App" >
+    insert into app ( appid,company_id, contacts, 
       description, begin_uid, cur_uid, 
       end_uid)
-    values ( #{company.companyId}, #{contacts,jdbcType=VARCHAR}, 
+    values (#{appid}, #{companyId}, #{contacts,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{beginUid,jdbcType=INTEGER}, #{curUid,jdbcType=INTEGER}, 
       #{endUid,jdbcType=INTEGER})
   </insert>
