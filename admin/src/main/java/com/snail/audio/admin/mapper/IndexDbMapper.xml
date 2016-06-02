@@ -38,6 +38,9 @@
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.IndexDb" >
     insert into index_db
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serverId != null" >
+        server_id,
+      </if>
       <if test="svcUrl != null" >
         svc_url,
       </if>
@@ -64,6 +67,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serverId != null" >
+        #{serverId,jdbcType=VARCHAR},
+      </if>
       <if test="svcUrl != null" >
         #{svcUrl,jdbcType=VARCHAR},
       </if>

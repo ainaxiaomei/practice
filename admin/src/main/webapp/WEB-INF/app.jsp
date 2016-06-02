@@ -256,11 +256,16 @@
             });
             //选择mcuServer
             function selectApp(){
-            	//获取serverId
-           	  var table = $('#appTable').DataTable();
-           	  var Tnode=table.row(curSelectIndex).node();
-           	  var id= Tnode.cells[0].firstChild.nodeValue;
-           	  //返回serverId
+              var id="";
+              var rows=$("#appTable .selected");
+           	  for(var a=0;a<rows.length;a++){
+           		  if(id!=""){
+           			id=id+","+rows[a].cells[0].firstChild.nodeValue; 
+           		  }else{
+           			  id=rows[a].cells[0].firstChild.nodeValue;
+           		  }
+           		 
+           	  }
              window.returnValue = id;  //返回值
    		     window.close();
             }
@@ -279,15 +284,15 @@
               		  url:"<%=path%>/maxEndUid",
               		  data:"",
               		  success:function(data){
-              			        var maxEndUid=Number(data)
-              			        if(maxEndUid){
-              			        	beginUid+=maxEndUid;
-              			        }else{
-              			        	alert("Get Max Begin Uid Error!");
-              			        }
+		              			var maxEndUid=Number(data)
+		      			        if(maxEndUid){
+		      			        	beginUid+=maxEndUid;
+		      			        }else{
+		      			        	alert("Get Begin Uid Error!");
+		      			        }
 		              			var object=new Object();
 		                        object.beginUid=beginUid;
-		                 	    var returnVal=window.showModalDialog("<%=path%>/appAdd",object,"dialogWidth=800px;dialogHeight=600px");
+		                 	    var returnVal=window.showModalDialog("<%=path%>/appAdd",object,"dialogWidth=1000px;dialogHeight=600px");
 		                 	    if(returnVal="success"){
 		                 		   //刷新表格
 		                 		   var table=$('#appTable').DataTable(); 
@@ -295,7 +300,7 @@
 		                 	   }
               			  },
               		  error:function(msg){
-              			  alert("Get Max Begin Uid Error!"+msg);
+              			  alert("Get  Begin Uid Error!"+msg);
               			  return;
               		  	}
               		 }

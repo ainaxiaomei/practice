@@ -74,18 +74,17 @@
                                     <form class="form-horizontal" role="form" id="indexDbForm">
 					                    <fieldset>
 					                       <div class="form-group">
-					                          <input class="form-control" id="serverId" name="serverId" type="text" style="display:none"/>
+					                          <label class="col-sm-1 control-label" >Server Id</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" id="serverId" name="serverId" type="text" />
+					                          </div>
 					                          <label class="col-sm-1 control-label" >Appids</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="appids" name="appids" type="text"/>
+					                             <input class="form-control"  id="appids" name="appids" type="text" readonly="true"/><a href="#" onclick="selectAppids()">select</a>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Server Name</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" id="serverName" name="serverName" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Dsp Number</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" id="dspnum" name="dspnum" type="text"/>
 					                          </div>
 					                       </div>
 					                       <div class="form-group">
@@ -111,7 +110,10 @@
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="roomidMax" name="roomidMax" type="text"/>
 					                          </div>
-					                          
+					                          <label class="col-sm-1 control-label" >Dsp Number</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" id="dspnum" name="dspnum" type="text"/>
+					                          </div>
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
@@ -199,6 +201,15 @@
                  		  
                  		  
                  	  );
+           }
+           function selectAppids(){
+        	 //传参
+	        	var object=new Object();
+	        	object.action="SELECT";
+	        	var returnVal=window.showModalDialog("<%=path%>/app",object,"dialogWidth=1200px;dialogHeight=800px");
+	        	//将返回值填到表单
+	        	$("#appids").val(returnVal);
+	        
            }
         </script>
     </body>
