@@ -140,7 +140,7 @@
                                     <div class="text-muted bootstrap-admin-box-title">Ftp Server</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table table-striped table-bordered" id="ftpTable">
+                                    <table class="table  table-bordered" id="ftpTable">
                                         <thead>
                                             <tr>
                                                 <th>Server Id</th>
@@ -164,9 +164,9 @@
 										   </c:forEach>
                                         </tbody>
                                     </table>
-                                    <button type="button" onclick="addMcu()" class="btn btn-primary">Add</button>
-					                 <button type="button" onclick="modifyMcu()" class="btn btn-primary">Modify</button>
-					                 <button type="button" onclick="deleteMcu()" class="btn btn-primary">Delete</button>
+                                    <button type="button" onclick="addFtp()" class="btn btn-primary">Add</button>
+					                 <button type="button" onclick="modifyFtp()" class="btn btn-primary">Modify</button>
+					                 <button type="button" onclick="deleteFtp()" class="btn btn-primary">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -221,14 +221,14 @@
             	var table=$('#ftpTable').DataTable(); 
             	table.ajax.reload();
             }  
-            function addMcu(){
+            function addFtp(){
          	   window.showModalDialog("<%=path%>/ftpServerAdd","","dialogWidth=800px;dialogHeight=600px");
 
             }
-            function modifyMcu(){
+            function modifyFtp(){
          	   
             }
-            function deleteMcu(){}
+            function deleteFtp(){}
         </script>
     </body>
 </html>

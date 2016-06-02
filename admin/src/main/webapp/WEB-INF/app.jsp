@@ -272,12 +272,37 @@
             } 
             //新增
            function addApp(){
-        	   var returnVal=window.showModalDialog("<%=path%>/appAdd","","dialogWidth=800px;dialogHeight=600px");
-        	   if(returnVal="success"){
-        		   //刷新表格
-        		   var table=$('#appTable').DataTable(); 
-             	  table.ajax.reload();
-        	   }
+            	var beginUid=100000;
+            	//查询最大的beginUid
+            	 $.ajax(
+              		{ type:"POST",
+              		  url:"<%=path%>/maxEndUid",
+              		  data:"",
+              		  success:function(data){
+              			        var maxEndUid=Number(data)
+              			        if(maxEndUid){
+              			        	beginUid+=maxEndUid;
+              			        }else{
+              			        	alert("Get Max Begin Uid Error!");
+              			        }
+		              			var object=new Object();
+		                        object.beginUid=beginUid;
+		                 	    var returnVal=window.showModalDialog("<%=path%>/appAdd",object,"dialogWidth=800px;dialogHeight=600px");
+		                 	    if(returnVal="success"){
+		                 		   //刷新表格
+		                 		   var table=$('#appTable').DataTable(); 
+		                      	   table.ajax.reload();
+		                 	   }
+              			  },
+              		  error:function(msg){
+              			  alert("Get Max Begin Uid Error!"+msg);
+              			  return;
+              		  	}
+              		 }
+              		  
+              		  
+              	  );
+               
 
            }
            //修改

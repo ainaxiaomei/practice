@@ -320,5 +320,13 @@ public class BaseControl {
 		return "success";
 		
 	}
+	@ResponseBody
+	@RequestMapping("/maxEndUid")
+	public String getMaxEndUid(HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		String id=service.getMaxEndUid();
+		return id;
+		
+	}
 	
 }

@@ -28,5 +28,9 @@ public class ApplicaitonDAO implements IApplicationDao{
 	public int addApplication(App app) {
 		return appMapperExt.insert(app);
 	}
+	@Override
+	public String getMaxEndUid() {
+		return appMapperExt.selectMaxEndUid();
+	}
 	
 }

@@ -249,5 +249,9 @@ public class ApplicationService implements IApplicationService {
 	public int deleteCompany(int CompanyId) {
 		return companyDao.deleteCompany(CompanyId);
 	}
+	@Override
+	public String getMaxEndUid() {
+		return appDao.getMaxEndUid();
+	}
 
 }

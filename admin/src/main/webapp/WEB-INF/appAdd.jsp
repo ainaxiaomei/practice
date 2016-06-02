@@ -158,6 +158,8 @@
 	        		//是新增页面
 	        		//改变单击事件
 	        		$("#saveButton").click(saveApp);
+	        		var param=window.dialogArguments;
+	        		$("#beginUid").val(param.beginUid);
 	        	}
 	        })
 	        function selectCompany(){
@@ -177,7 +179,7 @@
                  		  alert("Modify Success");
                  		  window.returnValue = "success";  //返回值
                  		  window.close();
-                 			  },
+                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
                  			 window.returnValue = "error";  //返回值

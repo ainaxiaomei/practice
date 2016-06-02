@@ -113,6 +113,8 @@ public interface IApplicationService {
      public int ModifyCompany(Company company);
      //删除company 
      public int deleteCompany(int CompanyId);
+     //查询最大endUid
+     public String getMaxEndUid();
 
      
 

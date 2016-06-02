@@ -13,4 +13,5 @@ public interface IApplicationDao {
     public int ModityApplication(App app);
     public int deleteApplication(int appId);
     public int addApplication(App app);
+    public String getMaxEndUid();
 }

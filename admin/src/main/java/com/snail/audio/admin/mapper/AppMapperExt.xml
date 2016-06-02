@@ -54,4 +54,8 @@
         limit #{start},#{end}
       </if>
   </select>
+  <select id="selectMaxEndUid"   resultType="String">
+    SELECT MAX(end_uid) FROM snail.app;
+  </select>
+  
 </mapper>

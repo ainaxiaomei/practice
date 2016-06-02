@@ -15,4 +15,6 @@ public interface AppMapperExt extends AppMapper {
 	public List<App> selectByCondition(@Param("app")App app,@Param("start")int start,@Param("end")int pageSize);
 	//更新app表
 	public int updateByPrimaryKeySelective(App app);
+	//查询最大beginUid
+	public String selectMaxEndUid();
 }
