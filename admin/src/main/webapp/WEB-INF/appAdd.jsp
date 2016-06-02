@@ -133,6 +133,9 @@
 	    	    $("#appForm").validate({
 				    rules: {
 				    	appid: "required",
+				    	beginUid: "required",
+				    	endUid: "required",
+				    	companyId: "required",
 				      },
 	    	    });
 	        	var param=window.dialogArguments;
