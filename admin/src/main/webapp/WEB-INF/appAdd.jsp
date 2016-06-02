@@ -110,7 +110,7 @@
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
-					                     <button type="button" id="saveButton"  class="btn btn-primary">Save</button>
+					                     <button type="submit" id="saveButton"  class="btn btn-primary">Save</button>
 					                    </div>
 					                </form>
                                 </div>
@@ -129,6 +129,12 @@
 
         <script type="text/javascript">
 	        $(function() {
+	        	//校验规则
+	    	    $("#appForm").validate({
+				    rules: {
+				    	appid: "required",
+				      },
+	    	    });
 	        	var param=window.dialogArguments;
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
@@ -190,23 +196,26 @@
                  	  );
 	        }
            function saveApp(){
-        	   $.ajax(
-                 		{ type:"POST",
-                 		  url:"<%=path%>/saveApp",
-                 		  data:$("#appForm").serialize(),
-                 		  success:function(){
-                 		  alert("Add Success");
-                 		 window.returnValue = "success";  //返回值
-                 		  window.close();
-                 			  },
-                 		  error:function(msg){
-                 		 window.returnValue = "error";  //返回值
-                 			  alert("error!"+msg);
-                 		  	}
-                 		 }
-                 		  
-                 		  
-                 	  );
+        	 if($("#appForm").valid()){
+        		 $.ajax(
+                  		{ type:"POST",
+                  		  url:"<%=path%>/saveApp",
+                  		  data:$("#appForm").serialize(),
+                  		  success:function(){
+                  		  alert("Add Success");
+                  		 window.returnValue = "success";  //返回值
+                  		  window.close();
+                  			  },
+                  		  error:function(msg){
+                  		 window.returnValue = "error";  //返回值
+                  			  alert("error!"+msg);
+                  		  	}
+                  		 }
+                  		  
+                  		  
+                  	  );
+        	 }
+        	   
            }
         </script>
     </body>
