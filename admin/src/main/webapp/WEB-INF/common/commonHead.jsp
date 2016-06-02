@@ -71,4 +71,5 @@
         <script type="text/javascript" src="<%=path%>/vendors/twitter-bootstrap-wizard/jquery.bootstrap.wizard-for.bootstrap3.js"></script>
         <script type="text/javascript" src="<%=path%>/vendors/boostrap3-typeahead/bootstrap3-typeahead.min.js"></script>
         <script type="text/javascript" charset="utf8" src="<%=path%>/vendors/datatables/extensions/Select/js/dataTables.select.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="<%=path%>/vendors/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
         

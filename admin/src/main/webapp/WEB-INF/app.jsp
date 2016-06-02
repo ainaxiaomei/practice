@@ -116,7 +116,7 @@
 					                       <div class="form-group">
 					                          <label class="col-sm-1 control-label" >App Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" name="appid" type="text" />
+					                             <input class="form-control" id="appid" name="appid" type="text" />
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Company Id</label>
 					                          <div class="col-sm-3">
@@ -149,7 +149,7 @@
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
-					                     <button type="button" onclick="serachMcu()" class="btn btn-primary">Search</button>
+					                     <button type="submit" onclick="serachMcu()" class="btn btn-primary">Search</button>
 					                    </div>
 					                </form>
                                 </div>

@@ -32,7 +32,7 @@
       <if test="app.appid != null" >
         and appid=#{app.appid,jdbcType=INTEGER}
       </if>
-      <if test="app.companyId != null and app.serverName!='' " >
+      <if test="app.companyId != null and app.companyId!='' " >
         and company_id=#{app.companyId,jdbcType=VARCHAR}
       </if>
       <if test="app.beginUid != null" >
