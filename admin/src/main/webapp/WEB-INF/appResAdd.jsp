@@ -90,6 +90,7 @@
 											      <option value="1">Audio Group</option> 
 											      </select>
 					                          </div>
+					                          
 					                       </div>
 					                       <div class="form-group">
 					                          <label class="col-sm-1 control-label" >Group Left Id</label>
@@ -173,7 +174,7 @@
         	 //传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/appList?action=SELECT",object,"dialogWidth=1500px;dialogHeight=600px");
+	        	var returnVal=window.showModalDialog("<%=path%>/app?action=SELECT",object,"dialogWidth=1500px;dialogHeight=600px");
 	        	//将返回值填到表单
 	        	$("#appid").val(returnVal);
            }
