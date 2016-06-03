@@ -98,7 +98,10 @@
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Valid</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="valid" name="valid" type="text"/>
+					                             <select class="form-control" id="valid" name="valid"> 
+											      <option value="0">false</option> 
+											      <option value="1">true</option> 
+											      </select>
 					                          </div>
 					                       </div>
 					                       <div class="form-group">
@@ -112,7 +115,12 @@
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Dsp Number</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="dspnum" name="dspnum" type="text"/>
+					                              <select class="form-control" id="dspnum" name="dspnum"> 
+											      <option value="1">1</option> 
+											      <option value="2">2</option> 
+											      <option value="3">3</option> 
+											      <option value="4">4</option> 
+											      </select>
 					                          </div>
 					                       </div>
 					                    </fieldset> 
@@ -139,6 +147,8 @@
 	        	var param=window.dialogArguments;
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
+	        		$("#roomidMin").attr("readonly",true);
+	        		$("#roomidMax").attr("readonly",true);
 	        		//改变单击事件
 	        		$("#saveButton").click(modifyIndexDb);
 	        		//填充表单
