@@ -149,7 +149,7 @@
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
-					                     <button type="submit" onclick="serachMcu()" class="btn btn-primary">Search</button>
+					                     <button type="button" onclick="serachMcu()" class="btn btn-primary">Search</button>
 					                    </div>
 					                </form>
                                 </div>

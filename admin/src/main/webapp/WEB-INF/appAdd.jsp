@@ -7,6 +7,11 @@
         <title>MCU Server Config</title>
         <jsp:include page="common/commonHead.jsp"></jsp:include>
          <%String path=getServletContext().getContextPath();%>
+         <style>
+			.error{
+				color:red;
+			}
+		</style>
     </head>
     <body class="bootstrap-admin-with-small-navbar">
         <!-- small navbar -->
@@ -110,7 +115,7 @@
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
-					                     <button type="submit" id="saveButton"  class="btn btn-primary">Save</button>
+					                     <button type="button" id="saveButton"  class="btn btn-primary">Save</button>
 					                    </div>
 					                </form>
                                 </div>
@@ -132,9 +137,19 @@
 	        	//校验规则
 	    	    $("#appForm").validate({
 				    rules: {
-				    	appid: "required",
-				    	beginUid: "required",
-				    	endUid: "required",
+				    	appid: {
+				    		"required":true,
+				    		"number":true
+				    	},
+				    	beginUid: {
+				    		"required":true,
+				    		"number":true,
+				    		"beginUid":true
+				    	},
+				    	endUid: {
+				    		"required":true,
+				    		"number":true
+				    	},
 				    	companyId: "required",
 				      },
 	    	    });
@@ -169,6 +184,10 @@
 	        		$("#saveButton").click(saveApp);
 	        		var param=window.dialogArguments;
 	        		$("#beginUid").val(param.beginUid);
+	        		//增加校验
+	        		jQuery.validator.addMethod("beginUid", function(value, element) {
+		    	    	  return this.optional(element) || value>=param.beginUid;
+		    	    	}, "BeginUid Can Not Smaller Than "+param.beginUid);
 	        	}
 	        })
 	        function selectCompany(){
