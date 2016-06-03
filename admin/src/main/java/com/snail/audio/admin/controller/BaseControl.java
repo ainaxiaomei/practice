@@ -165,6 +165,12 @@ public class BaseControl {
 		return "groupMcu";
 		
 	}
+	@RequestMapping("/companyAdd")
+	public String toCompanyAdd(Model model,HttpServletRequest request){
+		
+		return "companyAdd";
+		
+	}
 	@RequestMapping("/groupMcuAdd")
 	public String toGroupMcuAdd(Model model,HttpServletRequest request){
 		

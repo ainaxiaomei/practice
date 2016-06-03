@@ -149,7 +149,7 @@
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1000px;dialogHeight=900px");
+	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#serverId").val(returnVal);
 	        }
@@ -157,7 +157,7 @@
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/groupAudio",object,"dialogWidth=1000px;dialogHeight=900px");
+	        	var returnVal=window.showModalDialog("<%=path%>/groupAudio",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#groupId").val(returnVal);
 	        }
@@ -165,7 +165,7 @@
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1000px;dialogHeight=900px");
+	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#parentId").val(returnVal);
 	        }
@@ -173,7 +173,7 @@
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1000px;dialogHeight=900px");
+	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#leftParentId").val(returnVal);
 	        }
@@ -181,7 +181,7 @@
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1000px;dialogHeight=900px");
+	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#rightParentId").val(returnVal);
 	        }

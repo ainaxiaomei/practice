@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Group MCU Server Config</title>
+        <title>Company Config</title>
         <jsp:include page="common/commonHead.jsp"></jsp:include>
          <%String path=getServletContext().getContextPath();%>
     </head>
@@ -59,7 +59,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header">
-                                <h1>Group MCU Server</h1>
+                                <h1>Company</h1>
                             </div>
                         </div>
                     </div>
@@ -68,37 +68,26 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">Group MCU Server Information</div>
+                                    <div class="text-muted bootstrap-admin-box-title">MCU Server Information</div>
                                 </div>
                                 <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                    <form class="form-horizontal" role="form" id="groupMcuServer">
-					                     <fieldset>
+                                    <form class="form-horizontal" role="form" id="companyFrom">
+					                    <fieldset>
 					                       <div class="form-group">
-					                          <input class="form-control" id="id" name="id" type="text" style="display:none"/>
-					                          <label class="col-sm-1 control-label" >Server Id</label>
+					                          <label class="col-sm-1 control-label" >Company Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="serverId" name="serverId" type="text" readOnly="true"/><a href="#" onclick="selectServerId()">select</a>
+					                             <input class="form-control" name="companyId" type="text" readonly="true"/>
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Group Id</label>
+					                          <label class="col-sm-1 control-label" >Company Name</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="groupId" name="groupId" type="text" readOnly="true"/><a href="#" onclick="selectGroupId()">select</a>
+					                             <input class="form-control" name="companyName" type="text"/>
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Level</label>
+					                          <label class="col-sm-1 control-label" >Contacts</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="level" name="level" type="text" />
+					                             <input class="form-control" name="contacts" type="text"/>
 					                          </div>
 					                       </div>
-					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >Left Parent Id</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="leftParentId" name="leftParentId" type="text" readOnly="true"/><a href="#" onclick="selectLeftParent()">select</a>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Right Parent Id</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="rightParentId" name="rightParentId" type="text" readOnly="true"/><a href="#" onclick="selectRightParent()">select</a>
-					                          </div>
-					                       </div>
-					                    </fieldset>  
+					                    </fieldset> 
 					                    <div >   
 					                     <button type="button" id="saveButton"  class="btn btn-primary">Save</button>
 					                    </div>
@@ -123,17 +112,17 @@
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
 	        		//改变单击事件
-	        		$("#saveButton").click(modifyGroupMcuServer);
+	        		$("#saveButton").click(modifyCompany);
 	        		//填充表单
 	        		 var columns= [
-							"id" ,
-							 "serverId" ,
-			                 "groupId",
-			                "leftParentId" ,
-			                 "rightParentId" ,
-			                 "level" 
-			                
-			            ];
+	   							"serverId" ,
+	   							 "serverName" ,
+	   			                 "dspnum",
+	   			                "svcUrl" ,
+	   			                 "httpUrl" ,
+	   			                 "comUrl" 
+	   			                
+	   			            ];
 	        		for(var i=0;i<columns.length;i++){
 	        			var a=$("#"+columns[i]);
 	        			a.val(param[columns[i]]);
@@ -141,55 +130,14 @@
 	        	}else{
 	        		//是新增页面
 	        		//改变单击事件
-	        		$("#saveButton").click(saveMcuGroupServer);
+	        		$("#saveButton").click(saveCompany);
 	        	}
-	        });
-	        
-	       function selectServerId(e){
-	        	//传参
-	        	var object=new Object();
-	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
-	        	//将返回值填到表单
-	        	$("#serverId").val(returnVal);
-	        }
-	       function selectGroupId(e){
-	        	//传参
-	        	var object=new Object();
-	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/groupMcu",object,"dialogWidth=1200px;dialogHeight=900px");
-	        	//将返回值填到表单
-	        	$("#groupId").val(returnVal);
-	        }
-	       function selectParent(e){
-	        	//传参
-	        	var object=new Object();
-	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
-	        	//将返回值填到表单
-	        	$("#parentId").val(returnVal);
-	        }
-	       function selectLeftParent(e){
-	        	//传参
-	        	var object=new Object();
-	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
-	        	//将返回值填到表单
-	        	$("#leftParentId").val(returnVal);
-	        }
-	       function selectRightParent(e){
-	        	//传参
-	        	var object=new Object();
-	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
-	        	//将返回值填到表单
-	        	$("#rightParentId").val(returnVal);
-	        }
-	       function modifyGroupMcuServer(){
+	        })
+	       function modifyCompany(){
 	        	$.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/groupMcuServerModify",
-                 		  data:$("#groupMcuServer").serialize(),
+                 		  url:"<%=path%>/mcuServerModify",
+                 		  data:$("#companyFrom").serialize(),
                  		  success:function(){
                  		  alert("Modify Success");
                  		  window.returnValue = "success";  //返回值
@@ -204,11 +152,11 @@
                  		  
                  	  );
 	        }
-           function saveMcuGroupServer(){
+           function saveCompany(){
         	   $.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/saveGroupMcuServer",
-                 		  data:$("#groupMcuServer").serialize(),
+                 		  url:"<%=path%>/companySave",
+                 		  data:$("#companyFrom").serialize(),
                  		  success:function(){
                  		  alert("Add Success");
                  		 window.returnValue = "success";  //返回值

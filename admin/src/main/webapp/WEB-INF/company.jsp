@@ -245,7 +245,7 @@
             } 
             //新增
            function addCompany(){
-        	   var returnVal=window.showModalDialog("<%=path%>/mcuServerAdd","","dialogWidth=800px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/companyAdd","","dialogWidth=800px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#companyTable').DataTable(); 
