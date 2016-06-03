@@ -191,7 +191,7 @@
 		    	    	}, "BeginUid Can Not Smaller Than "+param.beginUid);
 	        		//增加校验
 	        		jQuery.validator.addMethod("endUid", function(value, element) {
-		    	    	  return this.optional(element) || value>=$("#beginUid").val();
+		    	    	  return this.optional(element) || Number(value)>=Number($("#beginUid").val());
 		    	    	}, "EndUid Must Larger Than "+$("#beginUid").val());
 	        	}
 	        })
