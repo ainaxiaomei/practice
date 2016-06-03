@@ -147,6 +147,7 @@
 				    		"beginUid":true
 				    	},
 				    	endUid: {
+				    		"endUid":true,
 				    		"required":true,
 				    		"number":true
 				    	},
@@ -188,6 +189,10 @@
 	        		jQuery.validator.addMethod("beginUid", function(value, element) {
 		    	    	  return this.optional(element) || value>=param.beginUid;
 		    	    	}, "BeginUid Can Not Smaller Than "+param.beginUid);
+	        		//增加校验
+	        		jQuery.validator.addMethod("endUid", function(value, element) {
+		    	    	  return this.optional(element) || value>=$("#beginUid").val();
+		    	    	}, "EndUid Must Larger Than "+$("#beginUid").val());
 	        	}
 	        })
 	        function selectCompany(){
