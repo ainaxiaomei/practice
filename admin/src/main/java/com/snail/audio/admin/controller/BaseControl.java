@@ -24,6 +24,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.Company;
+import com.snail.audio.admin.entity.Device;
 import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
@@ -202,6 +203,12 @@ public class BaseControl {
 		return "groupMcuServer";
 		
 	}
+	@RequestMapping("/device")
+	public String toDevice(Model model,HttpServletRequest request){
+		
+		return "device";
+		
+	}
 	
 	
 	@RequestMapping("/audioServerSearch")
@@ -211,6 +218,16 @@ public class BaseControl {
 		//将list转换为json字符创
 	    String result =JSONArray.fromObject(list).toString();
 	    response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/deviceSearch")
+	public void deviceSearch(HttpServletRequest request,HttpServletResponse response,Device device) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<Device> list=service.getDevice(device, -1, -1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().printf(result);
 		
 	}

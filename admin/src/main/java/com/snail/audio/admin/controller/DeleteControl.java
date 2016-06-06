@@ -113,4 +113,13 @@ public class DeleteControl {
 		
 		
 	}
+	@RequestMapping("/deviceDelete")
+	@ResponseBody
+	public String deviceDelete(HttpServletRequest request ,@RequestParam("type") String type) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.deleteDevice(type);
+		return "success";
+		
+		
+	}
 }
