@@ -13,6 +13,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
+import com.snail.audio.admin.entity.Device;
 import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
@@ -109,6 +110,14 @@ public class ModifyControl {
 	public String dictionaryModify(Dictionary dict,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.modifyDictionary(dict);
+		return "success";
+		
+	}
+	@ResponseBody
+	@RequestMapping("/deviceModify")
+	public String deviceModify(Device device,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.modifyDevice(device);
 		return "success";
 		
 	}

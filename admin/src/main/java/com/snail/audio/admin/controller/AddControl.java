@@ -12,6 +12,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.Company;
+import com.snail.audio.admin.entity.Device;
 import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
@@ -126,6 +127,14 @@ public class AddControl {
 	public String saveDictionary(Dictionary dict,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.saveDictionary(dict);
+		return "success";
+		
+	}
+	@ResponseBody
+	@RequestMapping("/saveDevice")
+	public String saveDevice(Device device,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.saveDevice(device);
 		return "success";
 		
 	}

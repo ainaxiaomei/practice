@@ -46,6 +46,12 @@ public class BaseControl {
 		return "mcuServerAdd";
 		
 	}
+	@RequestMapping("/deviceAdd")
+	public String deviceAdd(Model model,HttpServletRequest request){
+		
+		return "deviceAdd";
+		
+	}
 	@RequestMapping("/appAdd")
 	public String appAdd(Model model,HttpServletRequest request){
 		
