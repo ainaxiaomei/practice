@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.DictionaryMapperExt" >
+  <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.Dictionary" >
+    <id column="key" property="key" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    `key`, `value`, `description`, `type`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dictionary
+    where key = #{key,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dictionary
+    where `key` = #{key,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.snail.audio.admin.entity.Dictionary" >
+    insert into dictionary (key, value, description, 
+      type)
+    values (#{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.Dictionary" >
+    insert into dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        `key`,
+      </if>
+      <if test="value != null" >
+        `value`,
+      </if>
+      <if test="description != null" >
+        `description`,
+      </if>
+      <if test="type != null" >
+       `type`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.snail.audio.admin.entity.Dictionary" >
+    update dictionary
+    <set >
+      <if test="value != null" >
+        `value` = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        `description` = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where `key` = #{key,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.snail.audio.admin.entity.Dictionary" >
+    update dictionary
+    set value = #{value,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER}
+    where key = #{key,jdbcType=VARCHAR}
+  </update>
+</mapper>

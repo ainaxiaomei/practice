@@ -24,6 +24,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.Company;
+import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
@@ -157,6 +158,12 @@ public class BaseControl {
 	public String toFtpServer(Model model,HttpServletRequest request){
 		
 		return "ftpServer";
+		
+	}
+	@RequestMapping("/dictionary")
+	public String toDictionary(Model model,HttpServletRequest request){
+		
+		return "dictionary";
 		
 	}
 	@RequestMapping("/groupMcu")
@@ -305,6 +312,16 @@ public class BaseControl {
 	public void groupAudioSearch(HttpServletRequest request,HttpServletResponse response,GroupAudio groupAudio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<GroupAudio> list=service.getGroupAudio(groupAudio, -1, -1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/dictionarySearch")
+	public void dictionarySearch(HttpServletRequest request,HttpServletResponse response,Dictionary dict) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<Dictionary> list=service.getDictionary(dict, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
 		response.setCharacterEncoding("utf-8");

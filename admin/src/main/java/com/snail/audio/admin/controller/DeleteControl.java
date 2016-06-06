@@ -104,4 +104,13 @@ public class DeleteControl {
 		
 		
 	}
+	@RequestMapping("/dictionaryDelete")
+	@ResponseBody
+	public String dictionaryDelete(HttpServletRequest request ,@RequestParam("key") String key) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.deleteDictionary(key);
+		return "success";
+		
+		
+	}
 }

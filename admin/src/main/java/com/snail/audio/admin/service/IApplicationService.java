@@ -9,6 +9,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.Company;
+import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
@@ -117,6 +118,16 @@ public interface IApplicationService {
      public int deleteCompany(int CompanyId);
      //查询最大endUid
      public String getMaxEndUid();
+     //新增dictionary
+     public int saveDictionary(Dictionary dict);
+     //修改dictionary
+     public int modifyDictionary(Dictionary dict);
+     //删除dictionary 
+     public int deleteDictionary(String key);
+     //查询dictionary
+     public List<Dictionary> getDictionary(Dictionary dict,int start,int pagSize);
+     
+     
 
      
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.Device" >
+    <id column="devtype" property="devtype" jdbcType="VARCHAR" />
+    <result column="audio_params" property="audioParams" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    devtype, audio_params
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where devtype = #{devtype,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from device
+    where devtype = #{devtype,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.snail.audio.admin.entity.Device" >
+    insert into device (devtype, audio_params)
+    values (#{devtype,jdbcType=VARCHAR}, #{audioParams,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.Device" >
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="devtype != null" >
+        devtype,
+      </if>
+      <if test="audioParams != null" >
+        audio_params,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="devtype != null" >
+        #{devtype,jdbcType=VARCHAR},
+      </if>
+      <if test="audioParams != null" >
+        #{audioParams,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.snail.audio.admin.entity.Device" >
+    update device
+    <set >
+      <if test="audioParams != null" >
+        audio_params = #{audioParams,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where devtype = #{devtype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.snail.audio.admin.entity.Device" >
+    update device
+    set audio_params = #{audioParams,jdbcType=VARCHAR}
+    where devtype = #{devtype,jdbcType=VARCHAR}
+  </update>
+</mapper>

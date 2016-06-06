@@ -85,7 +85,7 @@
                selectByExampleQueryId="false">
            
         </table>
-         -->
+        
          <table tableName="group_mcu" domainObjectName="GroupMcu"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -105,6 +105,19 @@
            
         </table>
         <table tableName="group_audio_servers" domainObjectName="GroupAudioServers"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+           
+        </table>
+         -->
+         <table tableName="dictionary" domainObjectName="Dictionary"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+           
+        </table>
+        <table tableName="device" domainObjectName="Device"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

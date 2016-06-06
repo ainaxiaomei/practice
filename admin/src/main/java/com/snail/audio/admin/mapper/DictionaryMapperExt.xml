@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.DictionaryMapperExt" >
+  <select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dictionary
+    where 1=1
+      <if test="dict.key != null and dict.key!=''" >
+        and key=#{dict.key}
+      </if>
+      <if test="dict.value != null and dict.value!='' " >
+        and value=#{dict.value}
+      </if>
+      <if test="dict.description != null and dict.description!=''" >
+        and description=#{dict.description}
+      </if>
+      <if test="dict.type != null and dict.type!='' " >
+        and type=#{dict.type}
+      </if>
+  </select>
+</mapper>
