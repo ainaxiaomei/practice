@@ -57,6 +57,8 @@ public interface IApplicationService {
      public int saveFtp(FTPServer ftp);
      //修改ftp
      public int modifyFtp(FTPServer ftp);
+     //删除ftp
+     public int deleteFtp(int serverId);
      //删除gate
      public int deleteGateServer(int serverId);
      //新增gate

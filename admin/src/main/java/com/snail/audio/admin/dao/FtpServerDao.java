@@ -31,6 +31,11 @@ public class FtpServerDao implements IFtpServerDao{
 		return ftpServerMapperExt.updateByPrimaryKey(ftp);
 	}
 
+	@Override
+	public int deleteFtp(int serverId) {
+		return ftpServerMapperExt.deleteByPrimaryKey(serverId);
+	}
+
 	
 	
 	

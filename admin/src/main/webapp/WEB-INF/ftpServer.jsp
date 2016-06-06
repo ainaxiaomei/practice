@@ -149,19 +149,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           <c:forEach var="app"  items="${requestScope.apps}">
-                                                <tr class="odd gradeX">
-	                                                <td><input type="text" name="appid" style="width:100px" value=${app.appid} readonly="true" /></td>
-	                                                <td><input type="text" name="company.companyId" style="width:100px" readonly="true" value=${app.company.companyId}></td>
-	                                                <td><input type="text" name="company.companyName" style="width:100px" value=${app.company.companyName}></td>
-	                                                <td><input type="text" name="company.contacts" style="width:100px" value=${app.company.contacts}></td>
-	                                                <td><input type="text" name="curUid" style="width:100px" value=${app.curUid}></td>
-	                                                <td><input type="text" name="endUid" style="width:100px" value=${app.endUid}></td>
-	                                                <td><input type="text" name="contacts" style="width:100px" value=${app.contacts}></td>
-	                                                <td><input type="text" name="description" style="width:100px" value=${app.description}></td>
-	                                                <td><a href="javascript:saveApp()">save</a>&nbsp<a href="javascript:deleteApp()">delete</a></td>
-                                            	</tr>
-										   </c:forEach>
+                                           
                                         </tbody>
                                     </table>
                                     <button type="button" onclick="addFtp()" class="btn btn-primary">Add</button>
@@ -180,6 +168,7 @@
        
 
         <script type="text/javascript">
+            var curSelectIndex=-1;
             var ftpTable;
             /**
               	将查询条件转化为字符串发送到服务端
@@ -214,7 +203,13 @@
 						"sLengthMenu": "_MENU_ records per page"
 					}
 				} );
-
+            	    //表格选择
+            	    var table = $('#ftpTable').DataTable();
+                	table.on( 'select', function ( e, dt, type, indexes ) {
+                	    if ( type === 'row' ) {
+                	    	curSelectIndex=indexes;
+                	    }
+                	} );
 
             })
            function serachMcu(){
@@ -222,13 +217,70 @@
             	table.ajax.reload();
             }  
             function addFtp(){
-         	   window.showModalDialog("<%=path%>/ftpServerAdd","","dialogWidth=800px;dialogHeight=600px");
+         	   var returnVal=window.showModalDialog("<%=path%>/ftpServerAdd","","dialogWidth=800px;dialogHeight=600px");
+	         	  if(returnVal="success"){
+	       		   //刷新表格
+	       		   var table=$('#ftpTable').DataTable(); 
+	            	  table.ajax.reload();
+	       	   }
 
             }
             function modifyFtp(){
-         	   
+            	 if(curSelectIndex<0){
+          		   alert("Please Select A Row !");
+          		   return;
+          	   }
+          	   var object=new Object();
+          	   object.action="MODIFY";
+          	   var table = $('#ftpTable').DataTable();
+          	   var Tnode=table.row(curSelectIndex).node();
+          	   var cells=Tnode.cells;
+          	   var columns= [
+  							"serverId" ,
+  							 "serverName" ,
+  			                "svcUrl" 
+  			            ];
+   			   for(var i=0;i<cells.length;i++){
+   				  object[columns[i]]=cells[i].innerText;
+   			      
+   			  }
+          	   var returnVal=window.showModalDialog("<%=path%>/ftpServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
+          	   if(returnVal="success"){
+          		   //刷新表格
+          		   var table=$('#ftpTable').DataTable(); 
+               	  table.ajax.reload();
+          	   }
             }
-            function deleteFtp(){}
+            function deleteFtp(){
+            	if(curSelectIndex<0){
+         		   alert("Please Select A Row !");
+         		   return;
+         	   }
+         	   if(!confirm("Are You Sure To Delete ?")){
+          		  return;
+          	  }
+         	   
+         	 //获取table对象
+          	  var table = $('#ftpTable').DataTable();
+          	  var Tnode=table.row(curSelectIndex).node();
+          	  var id= Tnode.cells[0].firstChild.nodeValue;
+          	 $.ajax(
+               		{ type:"POST",
+               		  url:"<%=path%>/ftpServerDelete",
+               		  data:"serverId="+id,
+               		  success:function(){
+               		  alert("Delete Success");
+               		  var table=$('#ftpTable').DataTable(); 
+                 	  table.ajax.reload();
+               			  },
+               		  error:function(msg){
+               			  alert("error!"+msg);
+               		  	}
+               		 }
+               		  
+               		  
+               	  );
+            }
         </script>
     </body>
 </html>

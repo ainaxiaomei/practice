@@ -95,4 +95,13 @@ public class DeleteControl {
 		
 		
 	}
+	@RequestMapping("/ftpServerDelete")
+	@ResponseBody
+	public String ftpServerDelete(HttpServletRequest request ,@RequestParam("serverId") int id) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.deleteFtp(id);
+		return "success";
+		
+		
+	}
 }

@@ -13,4 +13,5 @@ public interface IFtpServerDao {
 	public List<FTPServer> getFtp(FTPServer ftp,int start,int end);
 	public int saveFtp(FTPServer ftp);
 	public int modifyFtp(FTPServer ftp);
+	public int deleteFtp(int serverId);
 }

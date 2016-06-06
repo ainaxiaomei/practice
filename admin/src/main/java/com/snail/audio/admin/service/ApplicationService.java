@@ -253,5 +253,9 @@ public class ApplicationService implements IApplicationService {
 	public String getMaxEndUid() {
 		return appDao.getMaxEndUid();
 	}
+	@Override
+	public int deleteFtp(int serverId) {
+		return ftpDao.deleteFtp(serverId);
+	}
 
 }

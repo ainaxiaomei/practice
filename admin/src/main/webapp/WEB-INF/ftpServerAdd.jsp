@@ -74,18 +74,22 @@
                                     <form class="form-horizontal" role="form" id="ftpForm">
 					                    <fieldset>
 					                       <div class="form-group">
+					                          <label class="col-sm-1 control-label" >Server Id</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" id="serverId" name="serverId" type="text"/>
+					                          </div>
 					                          <label class="col-sm-1 control-label" >Server Name</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" name="serverName" type="text"/>
+					                             <input class="form-control" id="serverName" name="serverName" type="text"/>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >SVC Url</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="svcUrl" type="text" />
+					                             <input class="form-control"  id="svcUrl" name="svcUrl" type="text" />
 					                          </div>
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
-					                     <button type="button" onclick="saveFtp()" class="btn btn-primary">Save</button>
+					                     <button type="Button"  id="saveButton" class="btn btn-primary">Save</button>
 					                    </div>
 					                </form>
                                 </div>
@@ -103,6 +107,33 @@
        
 
         <script type="text/javascript">
+        $(function() {
+        	var param=window.dialogArguments;
+        	if(param.action=="MODIFY"){
+        		//是修改界面
+        		//改变单击事件
+        		$("#saveButton").click(modifyFtp);
+        		//填充表单
+        		 var columns= [
+   							"serverId" ,
+   							 "serverName" ,
+   			                 "dspnum",
+   			                "svcUrl" ,
+   			                 "httpUrl" ,
+   			                 "comUrl" 
+   			                
+   			            ];
+        		for(var i=0;i<columns.length;i++){
+        			var a=$("#"+columns[i]);
+        			a.val(param[columns[i]]);
+        		}
+        		$("#serverId").attr("readonly",true);
+        	}else{
+        		//是新增页面
+        		//改变单击事件
+        		$("#saveButton").click(saveFtp);
+        	}
+        });
            function saveFtp(){
         	   $.ajax(
                  		{ type:"POST",
@@ -110,6 +141,7 @@
                  		  data:$("#ftpForm").serialize(),
                  		  success:function(){
                  		  alert("Add Success");
+                 		  window.returnValue="success"
                  		  window.close();
                  			  },
                  		  error:function(msg){
@@ -120,6 +152,25 @@
                  		  
                  	  );
            }
+           function modifyFtp(){
+	        	$.ajax(
+                		{ type:"POST",
+                		  url:"<%=path%>/frpServerModify",
+                		  data:$("#ftpForm").serialize(),
+                		  success:function(){
+                		  alert("Modify Success");
+                		  window.returnValue = "success";  //返回值
+                		  window.close();
+                			  },
+                		  error:function(msg){
+                			  alert("error!"+msg);
+                			 window.returnValue = "error";  //返回值
+                		  	}
+                		 }
+                		  
+                		  
+                	  );
+	        }
         </script>
     </body>
 </html>
