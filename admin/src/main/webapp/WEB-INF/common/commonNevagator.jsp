@@ -26,6 +26,12 @@
                             <a href="<%=path %>/ftpServer"><i class="glyphicon glyphicon-chevron-right"></i> Ftp Server</a>
                         </li>
                         <li>
+                            <a href="<%=path %>/dictionary"><i class="glyphicon glyphicon-chevron-right"></i> Dictionary</a>
+                        </li>
+                        <li>
+                            <a href="<%=path %>/device"><i class="glyphicon glyphicon-chevron-right"></i> Device</a>
+                        </li>
+                        <li>
                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i> Mcu Config</a>
                             <ul class="nav navbar-collapse bootstrap-admin-navbar-side">
                                  <li><a href="<%=path %>/mcuServer"><i class="glyphicon glyphicon-chevron-right"></i> Mcu Server</a></li>

@@ -13,6 +13,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
+import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
@@ -100,6 +101,14 @@ public class ModifyControl {
 	public String frpServerModify(FTPServer ftp,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.modifyFtp(ftp);
+		return "success";
+		
+	}
+	@ResponseBody
+	@RequestMapping("/dictionaryModify")
+	public String dictionaryModify(Dictionary dict,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.modifyDictionary(dict);
 		return "success";
 		
 	}

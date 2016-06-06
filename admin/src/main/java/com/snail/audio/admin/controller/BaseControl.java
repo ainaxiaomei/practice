@@ -106,6 +106,12 @@ public class BaseControl {
 		return "mcuServer";
 		
 	}
+	@RequestMapping("/dictionaryAdd")
+	public String toDictionaryAdd(Model model,HttpServletRequest request){
+		
+		return "dictionaryAdd";
+		
+	}
 	@RequestMapping("/company")
 	public String toCompany(Model model,HttpServletRequest request){
 		
