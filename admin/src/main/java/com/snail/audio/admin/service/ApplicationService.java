@@ -9,6 +9,7 @@ import com.snail.audio.admin.dao.IAppResourceDao;
 import com.snail.audio.admin.dao.IApplicationDao;
 import com.snail.audio.admin.dao.IAudioDao;
 import com.snail.audio.admin.dao.ICompanyDao;
+import com.snail.audio.admin.dao.IDeviceDao;
 import com.snail.audio.admin.dao.IDictionaryDao;
 import com.snail.audio.admin.dao.IFtpServerDao;
 import com.snail.audio.admin.dao.IGateDao;
@@ -22,6 +23,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.Company;
+import com.snail.audio.admin.entity.Device;
 import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
@@ -59,6 +61,8 @@ public class ApplicationService implements IApplicationService {
 	private IGroupAudioDao groupAudioDao;
 	@Autowired
 	private IDictionaryDao dictionaryDao;
+	@Autowired
+	private IDeviceDao deviceDao;
 	
 	public List<App> getApplication(App app,int start, int pageSize) {
 		return appDao.getApplicationt(app, start,  pageSize);
@@ -277,6 +281,22 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public List<Dictionary> getDictionary(Dictionary dict, int start, int pagSize) {
 		return dictionaryDao.getDictionary(dict, start, pagSize);
+	}
+	@Override
+	public int saveDevice(Device device) {
+		return deviceDao.addDevice(device);
+	}
+	@Override
+	public int modifyDevice(Device device) {
+		return deviceDao.modifyDevice(device);
+	}
+	@Override
+	public int deleteDevice(String key) {
+		return deviceDao.deleteDevice(key);
+	}
+	@Override
+	public List<Device> getDevice(Device device, int start, int pagSize) {
+		return deviceDao.getDevice(device, start, pagSize);
 	}
 
 }

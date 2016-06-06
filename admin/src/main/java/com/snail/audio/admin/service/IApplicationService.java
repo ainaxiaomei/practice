@@ -9,6 +9,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.Company;
+import com.snail.audio.admin.entity.Device;
 import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
 import com.snail.audio.admin.entity.GroupAudio;
@@ -126,6 +127,14 @@ public interface IApplicationService {
      public int deleteDictionary(String key);
      //查询dictionary
      public List<Dictionary> getDictionary(Dictionary dict,int start,int pagSize);
+     //新增device
+     public int saveDevice(Device device);
+     //修改device
+     public int modifyDevice(Device device);
+     //删除device 
+     public int deleteDevice(String key);
+     //查询device
+     public List<Device> getDevice(Device device,int start,int pagSize);
      
      
 

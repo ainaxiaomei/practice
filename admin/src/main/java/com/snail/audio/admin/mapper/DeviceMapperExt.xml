@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.DeviceMapperExt" >
+  <select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where 1=1
+      <if test="device.devtype != null and device.devtype!=''" >
+        and devtype=#{device.serverId}
+      </if>
+      <if test="device.audioParams != null and device.audioParams!='' " >
+        and audio_params=#{device.audioParams}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
+  </select>
+</mapper>
