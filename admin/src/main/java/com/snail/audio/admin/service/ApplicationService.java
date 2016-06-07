@@ -2,7 +2,12 @@ package com.snail.audio.admin.service;
 
 import java.util.List;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
 import com.snail.audio.admin.dao.IAppResourceDao;
@@ -272,7 +277,18 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int modifyDictionary(Dictionary dict) {
-		return dictionaryDao.modifyDictionary(dict);
+		 dictionaryDao.modifyDictionary(dict);
+		 //通知服务器更新配置
+		 Client client =ClientBuilder.newClient();
+		 //查寻所有的indexGate中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 for(IndexDb db :list){
+			 String url=db.getHttpUrl();
+			 WebTarget webTarget=client.target(url);
+			 webTarget.queryParam("cmd", "reload_dics");
+			 webTarget.request("MediaType.TEXT_PLAIN_TYPE").get();
+		 }
+		 return 0;
 	}
 	@Override
 	public int deleteDictionary(String key) {
