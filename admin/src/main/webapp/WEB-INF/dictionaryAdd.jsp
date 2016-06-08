@@ -107,7 +107,12 @@
                 </div>
             </div>
         </div>
-
+        <div id="dialog" title="Sending Message To HttpServer" style="display:none">
+            <div id="progressbar"></div><span id="min">0<span>/<id="max" span>0</span>
+            <div id="pragessMsg">
+             
+            </div>
+        </div>
        <jsp:include page="common/commonFooter.jsp"></jsp:include>
 
        
@@ -144,10 +149,12 @@
                  		{ type:"POST",
                  		  url:"<%=path%>/dictionaryModify",
                  		  data:$("#dictForm").serialize(),
-                 		  success:function(){
-                 		  alert("Modify Success");
-                 		  window.returnValue = "success";  //返回值
-                 		  window.close();
+                 		  success:function(data){
+                 			 var dataArray=$.parseJSON( data ); 
+                 			 sendHttpMsg(dataArray);
+                 		 // alert("Modify Success");
+                 		 // window.returnValue = "success";  //返回值
+                 		 // window.close();
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
@@ -157,6 +164,49 @@
                  		  
                  		  
                  	  );
+	        }
+	        function sendHttpMsg(dataArray){
+	        	var progressbar = $( "#progressbar" ).progressbar({
+	        		 max: dataArray.length
+	        	    });
+	        	$( "#dialog" ).dialog();
+	        	var a=0;
+	        	
+	        	setTimeout(function (){
+	        		process(a,dataArray);
+	        	},80);
+        		
+	        	
+	        }
+	        function process(a,dataArray){
+        		var httpurl=dataArray[a].httpUrl;
+        		$.ajax(
+                 		{ type:"POST",
+                 		  url:httpurl,
+                 		  data:"cmd=reload_dics",
+                 		   async :false,
+                 		  success:function(){
+          	        		setProgress(httpurl,"success");
+                 			  },
+                 		  error:function(msg){
+                 		     //发送服务器失败网路问题
+                 			setProgress(httpurl,"error");
+                 		  	}
+                 		 }
+                 		  
+                 		  
+                 	  );
+        		if(a<dataArray.length){
+        			setTimeout(function(){
+        				process(++a,dataArray)
+        			},80);
+        		}
+        	}
+	        function setProgress(url,status){
+	        	var progressbar = $( "#progressbar" );
+	        	 var val = progressbar.progressbar( "value" ) || 0;
+    		      progressbar.progressbar( "value", val + 1 );
+    		     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
 	        }
            function saveMcu(){
         	   $.ajax(

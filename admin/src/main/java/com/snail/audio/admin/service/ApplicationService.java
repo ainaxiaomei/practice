@@ -38,6 +38,8 @@ import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
+
+import net.sf.json.JSONArray;
 @Service
 public class ApplicationService implements IApplicationService {
 	@Autowired
@@ -276,19 +278,13 @@ public class ApplicationService implements IApplicationService {
 		return dictionaryDao.addDictionary(dict);
 	}
 	@Override
-	public int modifyDictionary(Dictionary dict) {
+	public String modifyDictionary(Dictionary dict) {
 		 dictionaryDao.modifyDictionary(dict);
 		 //通知服务器更新配置
 		 Client client =ClientBuilder.newClient();
 		 //查寻所有的indexGate中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 for(IndexDb db :list){
-			 String url=db.getHttpUrl();
-			 WebTarget webTarget=client.target(url);
-			 webTarget.queryParam("cmd", "reload_dics");
-			 webTarget.request("MediaType.TEXT_PLAIN_TYPE").get();
-		 }
-		 return 0;
+		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public int deleteDictionary(String key) {

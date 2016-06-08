@@ -109,8 +109,8 @@ public class ModifyControl {
 	@RequestMapping("/dictionaryModify")
 	public String dictionaryModify(Dictionary dict,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyDictionary(dict);
-		return "success";
+		String gateInfo=service.modifyDictionary(dict);
+		return gateInfo;
 		
 	}
 	@ResponseBody

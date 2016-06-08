@@ -122,7 +122,7 @@ public interface IApplicationService {
      //新增dictionary
      public int saveDictionary(Dictionary dict);
      //修改dictionary
-     public int modifyDictionary(Dictionary dict);
+     public String modifyDictionary(Dictionary dict);
      //删除dictionary 
      public int deleteDictionary(String key);
      //查询dictionary

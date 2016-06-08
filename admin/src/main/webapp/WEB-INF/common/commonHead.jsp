@@ -12,6 +12,7 @@
         <link rel="stylesheet" media="screen" href="<%=path%>/css/bootstrap-admin-theme.css">
         <link rel="stylesheet" media="screen" href="<%=path%>/css/bootstrap-admin-theme-change-size.css">
 		 <!-- Vendors -->
+        <link rel="stylesheet" media="screen" href="vendors/jquery-ui-1.12.0-rc.2/jquery-ui.css">
         <link rel="stylesheet" media="screen" href="vendors/bootstrap-datepicker/css/datepicker.css">
         <link rel="stylesheet" media="screen" href="css/datepicker.fixes.css">
         <link rel="stylesheet" media="screen" href="vendors/uniform/themes/default/css/uniform.default.min.css">
@@ -56,6 +57,7 @@
            <script type="text/javascript" src="js/respond.min.js"></script>
         <![endif]-->
          <script type="text/javascript" src="<%=path%>/vendors/datatables/js/jquery-2.2.3.min.js"></script>
+         <script type="text/javascript" src="<%=path%>/vendors/jquery-ui-1.12.0-rc.2/jquery-ui.js"></script>
         <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<%=path%>/js/twitter-bootstrap-hover-dropdown.min.js"></script>
         <script type="text/javascript" src="<%=path%>/js/bootstrap-admin-theme-change-size.js"></script>
