@@ -18,7 +18,8 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<%=path%>/common/dist/css/skins/_all-skins.min.css">
-
+  <!-- jquery Ui -->
+  <link rel="stylesheet" media="screen" href="vendors/jquery-ui-1.12.0-rc.2/jquery-ui.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -43,6 +44,10 @@
 <script src="<%=path%>/common/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=path%>/common/dist/js/demo.js"></script>
+ <!-- jquery Ui validate -->
+<script type="text/javascript" charset="utf8" src="<%=path%>/vendors/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
+<!-- jquery Ui -->
+<script type="text/javascript" src="<%=path%>/vendors/jquery-ui-1.12.0-rc.2/jquery-ui.js"></script>
 <style>
  
   table.dataTable tbody tr.selected {

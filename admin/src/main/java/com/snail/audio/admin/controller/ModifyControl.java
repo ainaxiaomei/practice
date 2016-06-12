@@ -51,8 +51,8 @@ public class ModifyControl {
 	@ResponseBody
 	public String indexDbServerModify(HttpServletRequest request,IndexDb indexdb) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyIndexDbServer(indexdb);
-		return "success";
+		String gateInfo=service.modifyIndexDbServer(indexdb);
+		return gateInfo;
 	}
 	@RequestMapping("/groupMcuServerModify")
 	@ResponseBody
@@ -117,8 +117,8 @@ public class ModifyControl {
 	@RequestMapping("/deviceModify")
 	public String deviceModify(Device device,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyDevice(device);
-		return "success";
+		String gateInfo =service.modifyDevice(device);
+		return gateInfo;
 		
 	}
 }

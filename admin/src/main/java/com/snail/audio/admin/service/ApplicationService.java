@@ -172,8 +172,11 @@ public class ApplicationService implements IApplicationService {
 		return indeDbDao.addIndexDb(indexdb);
 	}
 	@Override
-	public int modifyIndexDbServer(IndexDb indexdb) {
-		return indeDbDao.modifyIndexDb(indexdb);
+	public String modifyIndexDbServer(IndexDb indexdb) {
+		 indeDbDao.modifyIndexDb(indexdb);
+		//查寻所有的indexGate中的httpurl
+		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public int deleteIndexDbServer(int serverId) {
@@ -280,8 +283,6 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public String modifyDictionary(Dictionary dict) {
 		 dictionaryDao.modifyDictionary(dict);
-		 //通知服务器更新配置
-		 Client client =ClientBuilder.newClient();
 		 //查寻所有的indexGate中的httpurl
 		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
 		 return JSONArray.fromObject(list).toString();
@@ -299,8 +300,11 @@ public class ApplicationService implements IApplicationService {
 		return deviceDao.addDevice(device);
 	}
 	@Override
-	public int modifyDevice(Device device) {
-		return deviceDao.modifyDevice(device);
+	public String modifyDevice(Device device) {
+		  deviceDao.modifyDevice(device);
+		 //查寻所有的indexGate中的httpurl
+		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public int deleteDevice(String key) {

@@ -74,7 +74,7 @@ public interface IApplicationService {
      //新增indexDb
      public int saveIndexDbServer(IndexDb indexdb);
      //修改indexDb
-     public int modifyIndexDbServer(IndexDb indexdb);
+     public String modifyIndexDbServer(IndexDb indexdb);
      //删除indexDb
      public int deleteIndexDbServer(int serverId);
      //新增groupMcu
@@ -130,7 +130,7 @@ public interface IApplicationService {
      //新增device
      public int saveDevice(Device device);
      //修改device
-     public int modifyDevice(Device device);
+     public String modifyDevice(Device device);
      //删除device 
      public int deleteDevice(String key);
      //查询device
