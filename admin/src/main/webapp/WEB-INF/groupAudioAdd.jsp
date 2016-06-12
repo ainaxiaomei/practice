@@ -119,7 +119,7 @@
                  		  data:$("#audioForm").serialize(),
                  		  success:function(data){
                  	      var dataArray=$.parseJSON(data); 
-                 	      sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=1");
+                 	      sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId")+"&act=1");
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
@@ -185,7 +185,7 @@
                  		  data:$("#audioForm").serialize(),
                  		  success:function(data){
                  		  var dataArray=$.parseJSON(data); 
-                    	  sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=2");
+                    	  sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId")+"&act=2");
                  			  },
                  		  error:function(msg){
                  		 window.returnValue = "error";  //返回值

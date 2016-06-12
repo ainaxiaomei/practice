@@ -201,8 +201,11 @@ public class ApplicationService implements IApplicationService {
 		return groupMcuDao.getGroupMCU(groupMcu, start, pageSize);
 	}
 	@Override
-	public int saveGroupMcuServer(GroupMcuServers groupMcuServer) {
-		return groupMcuServerDao.addGroupMcuServer(groupMcuServer);
+	public String saveGroupMcuServer(GroupMcuServers groupMcuServer) {
+		 groupMcuServerDao.addGroupMcuServer(groupMcuServer);
+		 //查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public int modifyGroupMcuServer(GroupMcuServers groupMcu) {
@@ -242,16 +245,26 @@ public class ApplicationService implements IApplicationService {
 		return groupAudioDao.getGroupAudio(groupAudio, start, pageSize);
 	}
 	@Override
-	public int saveGroupAudioServer(GroupAudioServers groupAudio) {
-		return groupAudioServerDao.addGroupAudioServer(groupAudio);
+	public String saveGroupAudioServer(GroupAudioServers groupAudio) {
+		 groupAudioServerDao.addGroupAudioServer(groupAudio);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int modifyGroupAudioServer(GroupAudioServers groupAudio) {
-		return groupAudioServerDao.modifyGroupAudioServer(groupAudio);
+	public String modifyGroupAudioServer(GroupAudioServers groupAudio) {
+		 groupAudioServerDao.modifyGroupAudioServer(groupAudio);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
+		
 	}
 	@Override
-	public int deleteGroupAudioServer(int groupId) {
-		return groupAudioServerDao.deleteGroupAudioServer(groupId);
+	public String deleteGroupAudioServer(int groupId) {
+		 groupAudioServerDao.deleteGroupAudioServer(groupId);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public List<GroupAudioServers> getGroupAudioServer(GroupAudioServers groupAudio, int start, int pageSize) {

@@ -94,7 +94,7 @@ public interface IApplicationService {
      //查询groupMcu
      public List<GroupAudio>getGroupAudio(GroupAudio groupAudio,int start,int pageSize);
      //新增groupMcuserver
-     public int saveGroupMcuServer(GroupMcuServers groupMcu);
+     public String saveGroupMcuServer(GroupMcuServers groupMcu);
      //修改groupMcuserver
      public int modifyGroupMcuServer(GroupMcuServers groupMcu);
      //删除groupMcuserver
@@ -102,11 +102,11 @@ public interface IApplicationService {
      //查询groupMcuserver
      public List<GroupMcuServers>getGroupMcuServer(GroupMcuServers groupMcu,int start,int pageSize);
      //新增groupAudioserver
-     public int saveGroupAudioServer(GroupAudioServers groupMcu);
+     public String saveGroupAudioServer(GroupAudioServers groupMcu);
      //修改groupAudioserver
-     public int modifyGroupAudioServer(GroupAudioServers groupMcu);
+     public String modifyGroupAudioServer(GroupAudioServers groupMcu);
      //删除groupAudioserver
-     public int deleteGroupAudioServer(int groupId);
+     public String deleteGroupAudioServer(int groupId);
      //查询groupAudioserver
      public List<GroupAudioServers>getGroupAudioServer(GroupAudioServers groupMcu,int start,int pageSize);
      //查询company

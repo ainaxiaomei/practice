@@ -235,6 +235,8 @@
 	                	  table.ajax.reload();
 	                	  //清空消息
 	                	  $("#pragessMsg").text("");
+	                	  //清空进度条
+	                	  $( "#progressbar" ).progressbar( "value", 0 );
 	        		}
 	        	});
 	        	var a=0;
@@ -296,7 +298,7 @@
               		  success:function(data){
               		 // alert("Delete Success");
               		  var dataArray=$.parseJSON(data); 
-                    	  sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=0");
+                    	  sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId").val()+"&act=0");
               		 
               			  },
               		  error:function(msg){
