@@ -24,6 +24,7 @@ import com.snail.audio.admin.dao.IGroupMCUDao;
 import com.snail.audio.admin.dao.IGroupMcuServerDao;
 import com.snail.audio.admin.dao.IIndexDbDao;
 import com.snail.audio.admin.dao.IMCUDao;
+import com.snail.audio.admin.dao.IndexDbDao;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
@@ -216,17 +217,25 @@ public class ApplicationService implements IApplicationService {
 		return groupMcuServerDao.getMCU(groupMcu, start, pageSize);
 	}
 	@Override
-	public int saveGroupAudio(GroupAudio groupAudio) {
-		return groupAudioDao.addGroupAudio(groupAudio);
+	public String saveGroupAudio(GroupAudio groupAudio) {
+		 groupAudioDao.addGroupAudio(groupAudio);
+		 //查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int modifyGroupAudio(GroupAudio groupAudio) {
-		return groupAudioDao.modifyGroupAudio(groupAudio);
+	public String modifyGroupAudio(GroupAudio groupAudio) {
+		 groupAudioDao.modifyGroupAudio(groupAudio);
+		 //查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int deleteGroupAudio(int groupId) {
+	public String deleteGroupAudio(int groupId) {
 		 groupAudioDao.deleteGroupAudio(groupId);
-		 return groupAudioServerDao.deleteByGroupId(groupId);
+		 //查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public List<GroupAudio> getGroupAudio(GroupAudio groupAudio, int start, int pageSize) {

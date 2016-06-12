@@ -63,8 +63,8 @@ public class DeleteControl {
 	@ResponseBody
 	public String groupAudioDelete(HttpServletRequest request ,@RequestParam("groupId") int groupId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.deleteGroupAudio(Integer.valueOf(groupId));
-		return "success";
+		String indexDb=service.deleteGroupAudio(Integer.valueOf(groupId));
+		return indexDb;
 		
 		
 	}

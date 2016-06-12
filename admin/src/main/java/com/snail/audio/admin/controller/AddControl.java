@@ -102,8 +102,8 @@ public class AddControl {
 	@ResponseBody
 	public String saveGroupAudio(GroupAudio groupAudio,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.saveGroupAudio(groupAudio);
-		return "success";
+		String indexDb=service.saveGroupAudio(groupAudio);
+		return indexDb;
 		
 	}
 	@ResponseBody

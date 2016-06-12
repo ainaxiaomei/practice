@@ -86,11 +86,11 @@ public interface IApplicationService {
      //查询groupMcu
      public List<GroupMcu>getGroupMcu(GroupMcu groupMcu,int start,int pageSize);
      //新增groupAudio
-     public int saveGroupAudio(GroupAudio groupAudio);
+     public String saveGroupAudio(GroupAudio groupAudio);
      //修改groupAudio
-     public int modifyGroupAudio(GroupAudio groupAudio);
+     public String modifyGroupAudio(GroupAudio groupAudio);
      //删除groupAudio
-     public int deleteGroupAudio(int groupId);
+     public String deleteGroupAudio(int groupId);
      //查询groupMcu
      public List<GroupAudio>getGroupAudio(GroupAudio groupAudio,int start,int pageSize);
      //新增groupMcuserver

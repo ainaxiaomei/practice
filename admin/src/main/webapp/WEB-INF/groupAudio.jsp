@@ -120,6 +120,12 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+ <div id="dialog" title="Sending Message To HttpServer" style="display:none">
+   <div id="progressbar"></div><span id="min">0<span>/<id="max" span>0</span>
+     <div id="pragessMsg">
+             
+     </div>
+ </div>
 <!-- page script -->
         <script type="text/javascript">
             var curSelectIndex=-1;
@@ -219,6 +225,56 @@
              	  table.ajax.reload();
         	   }
            }
+           function sendHttpMsg(dataArray,msg){
+	        	var progressbar = $( "#progressbar" ).progressbar({
+	        		 max: dataArray.length
+	        	    });
+	        	$( "#dialog" ).dialog({
+	        		close: function( event, ui ) {
+	        			 var table=$('#groupAudioTable').DataTable(); 
+	                	  table.ajax.reload();
+	                	  //清空消息
+	                	  $("#pragessMsg").text("");
+	        		}
+	        	});
+	        	var a=0;
+	        	
+	        	setTimeout(function (){
+	        		process(a,dataArray,msg);
+	        	},80);
+       		
+	        	
+	        }
+	        function process(a,dataArray,msg){
+       		var httpurl=dataArray[a].httpUrl;
+       		$.ajax(
+                		{ type:"POST",
+                		  url:httpurl,
+                		  data:msg,
+                		   async :false,
+                		  success:function(){
+         	        		setProgress(httpurl,"success");
+                			  },
+                		  error:function(msg){
+                		     //发送服务器失败网路问题
+                			setProgress(httpurl,"error");
+                		  	}
+                		 }
+                		  
+                		  
+                	  );
+       		if(a<dataArray.length){
+       			setTimeout(function(){
+       				process(++a,dataArray,msg)
+       			},80);
+       		}
+       	}
+	        function setProgress(url,status){
+	        	var progressbar = $( "#progressbar" );
+	        	 var val = progressbar.progressbar( "value" ) || 0;
+   		      progressbar.progressbar( "value", val + 1 );
+   		     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
+	        }
            //删除
            function deelteGroupAudio(){
         	   if(curSelectIndex<0){
@@ -237,10 +293,11 @@
               		{ type:"POST",
               		  url:"<%=path%>/groupAudioDelete",
               		  data:"groupId="+id,
-              		  success:function(){
-              		  alert("Delete Success");
-              		  var table=$('#groupAudioTable').DataTable(); 
-                	  table.ajax.reload();
+              		  success:function(data){
+              		 // alert("Delete Success");
+              		  var dataArray=$.parseJSON(data); 
+                    	  sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=0");
+              		 
               			  },
               		  error:function(msg){
               			  alert("error!"+msg);

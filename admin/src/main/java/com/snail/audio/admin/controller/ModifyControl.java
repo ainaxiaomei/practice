@@ -79,8 +79,8 @@ public class ModifyControl {
 	@ResponseBody
 	public String audioGroupModify(HttpServletRequest request,GroupAudio groupAudio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyGroupAudio(groupAudio);
-		return "success";
+		String indexDb=service.modifyGroupAudio(groupAudio);
+		return indexDb;
 	}
 	@RequestMapping("/appResModify")
 	@ResponseBody
