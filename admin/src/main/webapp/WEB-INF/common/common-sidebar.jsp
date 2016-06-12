@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8" isELIgnored="false" %>
+    <%String path=getServletContext().getContextPath();%>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -42,8 +43,29 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li class="active"><a href="data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+            <li><a href="<%=path %>/app"><i class="fa fa-circle-o"></i> App Table</a></li>
+            <li class="active"><a href="<%=path %>/appResource"><i class="fa fa-circle-o"></i> AppResource Table</a></li>
+            <li ><a href="<%=path %>/gateServer"><i class="fa fa-circle-o"></i> Gate Table</a></li>
+            <li ><a href="<%=path %>/indexDbServer"><i class="fa fa-circle-o"></i> MemDb Table</a></li>
+            <li><a href="<%=path %>/ftpServer"><i class="fa fa-circle-o"></i> Ftp Table</a></li>
+            <li><a href="<%=path %>/device"><i class="fa fa-circle-o"></i> Device Table</a></li>
+            <li><a href="<%=path %>/dictionary"><i class="fa fa-circle-o"></i> Dictionary Table</a></li>
+            <li>
+              <a href="#"><i class="fa fa-circle-o"></i> Mcu Config Table <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="<%=path %>/mcuServer"><i class="fa fa-circle-o"></i> Mcu Table</a></li>
+                <li><a href="<%=path %>/groupMcu"><i class="fa fa-circle-o"></i> GroupMcu Table</a></li>
+                <li><a href="<%=path %>/groupMcuServer"><i class="fa fa-circle-o"></i> GroupMcuServer Table</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-circle-o"></i> Audio Config Table <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="<%=path %>/audioServer"><i class="fa fa-circle-o"></i> Audio Table</a></li>
+                <li><a href="<%=path %>/groupAudio"><i class="fa fa-circle-o"></i> GroupAudio Table</a></li>
+                <li><a href="<%=path %>/groupAudioServer"><i class="fa fa-circle-o"></i> GroupAudioServer Table</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li class="treeview">
