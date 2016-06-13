@@ -48,11 +48,11 @@ public interface IApplicationService {
      //查询appResource
      public List<AppResource>getAppResource(AppResource appResource,int start,int pageSize);
      //新增appResource
-     public int saveAppRes(AppResource appRes);
+     public String saveAppRes(AppResource appRes);
      //修改appResource
-     public int modifyAppRes(AppResource appRes);
+     public String modifyAppRes(AppResource appRes);
      //删除appResource
-     public int deleteAppRes(int id);
+     public String deleteAppRes(int id);
      //查询ftp
      public List<FTPServer>getFtpServer(FTPServer ftp,int start,int pageSize);
      //新增ftp
@@ -76,13 +76,13 @@ public interface IApplicationService {
      //修改indexDb
      public String modifyIndexDbServer(IndexDb indexdb);
      //删除indexDb
-     public int deleteIndexDbServer(int serverId);
+     public String deleteIndexDbServer(int serverId);
      //新增groupMcu
-     public int saveGroupMcu(GroupMcu groupMcu);
+     public String saveGroupMcu(GroupMcu groupMcu);
      //修改groupMcu
-     public int modifyGroupMcu(GroupMcu groupMcu);
+     public String modifyGroupMcu(GroupMcu groupMcu);
      //删除groupMcu
-     public int deleteGroupMcu(int groupId);
+     public String deleteGroupMcu(int groupId);
      //查询groupMcu
      public List<GroupMcu>getGroupMcu(GroupMcu groupMcu,int start,int pageSize);
      //新增groupAudio
@@ -96,9 +96,9 @@ public interface IApplicationService {
      //新增groupMcuserver
      public String saveGroupMcuServer(GroupMcuServers groupMcu);
      //修改groupMcuserver
-     public int modifyGroupMcuServer(GroupMcuServers groupMcu);
+     public String modifyGroupMcuServer(GroupMcuServers groupMcu);
      //删除groupMcuserver
-     public int deleteGroupMcuServer(int groupId);
+     public String deleteGroupMcuServer(int groupId);
      //查询groupMcuserver
      public List<GroupMcuServers>getGroupMcuServer(GroupMcuServers groupMcu,int start,int pageSize);
      //新增groupAudioserver

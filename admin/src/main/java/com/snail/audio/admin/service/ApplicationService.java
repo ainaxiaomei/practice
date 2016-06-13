@@ -131,12 +131,18 @@ public class ApplicationService implements IApplicationService {
 		return audioDao.modifyAudioServer(audio);
 	}
 	@Override
-	public int saveAppRes(AppResource appRes) {
-		return appResourceDao.saveAppRes(appRes);
+	public String saveAppRes(AppResource appRes) {
+		 appResourceDao.saveAppRes(appRes);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int modifyAppRes(AppResource appRes) {
-		return appResourceDao.modifyAppRes(appRes);
+	public String modifyAppRes(AppResource appRes) {
+		 appResourceDao.modifyAppRes(appRes);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public int deleteMcu(int id) {
@@ -180,21 +186,33 @@ public class ApplicationService implements IApplicationService {
 		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int deleteIndexDbServer(int serverId) {
-		return indeDbDao.deleteIndexDb(serverId);
+	public String deleteIndexDbServer(int serverId) {
+	      indeDbDao.deleteIndexDb(serverId);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int saveGroupMcu(GroupMcu groupMcu) {
-		return groupMcuDao.addGroupMCU(groupMcu);
+	public String  saveGroupMcu(GroupMcu groupMcu) {
+		groupMcuDao.addGroupMCU(groupMcu);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int modifyGroupMcu(GroupMcu groupMcu) {
-		return groupMcuDao.modifyGroupMCU(groupMcu);
+	public String modifyGroupMcu(GroupMcu groupMcu) {
+		 groupMcuDao.modifyGroupMCU(groupMcu);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int deleteGroupMcu(int groupId) {
+	public String deleteGroupMcu(int groupId) {
 		 groupMcuDao.deleteGroupMCU(groupId);
-		 return groupMcuServerDao.deleteGroupMCUByGroupId(groupId);
+		 groupMcuServerDao.deleteGroupMCUByGroupId(groupId);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public List<GroupMcu> getGroupMcu(GroupMcu groupMcu, int start, int pageSize) {
@@ -208,12 +226,18 @@ public class ApplicationService implements IApplicationService {
 		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int modifyGroupMcuServer(GroupMcuServers groupMcu) {
-		return groupMcuServerDao.modifyGroupMcuServer(groupMcu);
+	public String modifyGroupMcuServer(GroupMcuServers groupMcu) {
+		 groupMcuServerDao.modifyGroupMcuServer(groupMcu);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int deleteGroupMcuServer(int id) {
-		return groupMcuServerDao.deleteGroupMcuServer(id);
+	public String deleteGroupMcuServer(int id) {
+		 groupMcuServerDao.deleteGroupMcuServer(id);
+		 //查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public List<GroupMcuServers> getGroupMcuServer(GroupMcuServers groupMcu, int start, int pageSize) {
@@ -271,8 +295,11 @@ public class ApplicationService implements IApplicationService {
 		return groupAudioServerDao.getAudio(groupAudio, start, pageSize);
 	}
 	@Override
-	public int deleteAppRes(int id) {
-		return appResourceDao.deleteAppRes(id);
+	public String deleteAppRes(int id) {
+		 appResourceDao.deleteAppRes(id);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public List<Company> getCompany(Company company, int start, int pagSize) {

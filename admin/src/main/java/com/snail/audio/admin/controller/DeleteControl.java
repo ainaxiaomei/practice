@@ -54,8 +54,8 @@ public class DeleteControl {
 	@ResponseBody
 	public String groupServerDelete(HttpServletRequest request ,@RequestParam("groupId") int groupId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.deleteGroupMcu(Integer.valueOf(groupId));
-		return "success";
+		String indexDb=service.deleteGroupMcu(Integer.valueOf(groupId));
+		return indexDb;
 		
 		
 	}
@@ -72,8 +72,8 @@ public class DeleteControl {
 	@ResponseBody
 	public String groupMcuServerDelete(HttpServletRequest request ,@RequestParam("Id") int Id) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.deleteGroupMcuServer(Integer.valueOf(Id));
-		return "success";
+		String indexDb=service.deleteGroupMcuServer(Integer.valueOf(Id));
+		return indexDb;
 		
 		
 	}
@@ -90,8 +90,8 @@ public class DeleteControl {
 	@ResponseBody
 	public String appResDelete(HttpServletRequest request ,@RequestParam("Id") int id) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.deleteAppRes(id);
-		return "success";
+		String indexDb=service.deleteAppRes(id);
+		return indexDb;
 		
 		
 	}

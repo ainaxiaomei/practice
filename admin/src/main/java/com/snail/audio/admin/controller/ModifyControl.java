@@ -58,8 +58,8 @@ public class ModifyControl {
 	@ResponseBody
 	public String groupMcuServerModify(HttpServletRequest request,GroupMcuServers groupMcuServer) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyGroupMcuServer(groupMcuServer);
-		return "success";
+		String indexDb=service.modifyGroupMcuServer(groupMcuServer);
+		return indexDb;
 	}
 	@RequestMapping("/groupAudioServerModify")
 	@ResponseBody
@@ -72,8 +72,8 @@ public class ModifyControl {
 	@ResponseBody
 	public String mcuGroupModify(HttpServletRequest request,GroupMcu groupMcu) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyGroupMcu(groupMcu);
-		return "success";
+		String indexDb=service.modifyGroupMcu(groupMcu);
+		return indexDb;
 	}
 	@RequestMapping("/audioGroupModify")
 	@ResponseBody
@@ -86,8 +86,8 @@ public class ModifyControl {
 	@ResponseBody
 	public String appResModify(HttpServletRequest request,AppResource appRes) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyAppRes(appRes);
-		return "success";
+		String indexDB=service.modifyAppRes(appRes);
+		return indexDB;
 	}
 	@ResponseBody
 	@RequestMapping("/appModify")

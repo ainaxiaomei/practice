@@ -70,8 +70,8 @@ public class AddControl {
 	@ResponseBody
 	public String saveAppRes(AppResource appRes,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.saveAppRes(appRes);
-		return "success";
+		String indexDB=service.saveAppRes(appRes);
+		return indexDB;
 		
 	}
 	@RequestMapping("/saveGroupMcuServer")
@@ -94,8 +94,8 @@ public class AddControl {
 	@ResponseBody
 	public String saveGroupMcu(GroupMcu groupMcu,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.saveGroupMcu(groupMcu);
-		return "success";
+		String indexDb=service.saveGroupMcu(groupMcu);
+		return indexDb;
 		
 	}
 	@RequestMapping("/saveGroupAudio")
