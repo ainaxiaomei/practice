@@ -245,7 +245,7 @@
                  			  },
                  		  error:function(msg){
                  		 window.returnValue = "error";  //返回值
-                 			  alert(msg);
+                 			  alert("error");
                  		  	}
                  		 }
                  		  
