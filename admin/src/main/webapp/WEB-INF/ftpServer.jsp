@@ -165,7 +165,7 @@
             	table.ajax.reload();
             }  
             function addFtp(){
-         	   var returnVal=window.showModalDialog("<%=path%>/ftpServerAdd","","dialogWidth=800px;dialogHeight=600px");
+         	   var returnVal=window.showModalDialog("<%=path%>/ftpServerAdd","","dialogWidth=1000px;dialogHeight=600px");
 	         	  if(returnVal="success"){
 	       		   //刷新表格
 	       		   var table=$('#ftpTable').DataTable(); 
