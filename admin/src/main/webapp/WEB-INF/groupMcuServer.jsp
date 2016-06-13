@@ -155,7 +155,7 @@
             }
             $(function() {
             	$("#tables #mcuConfig").attr("class","active");
-            	$("#tables #groupMcuServer").attr("class","active");
+            	$("#tables #groupMcuServers").attr("class","active");
             	//初始化表格
             	    groupMcuServerTable=$('#groupMcuServerTable').dataTable( {
 					select:true,

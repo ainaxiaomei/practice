@@ -150,7 +150,7 @@
             }
             $(function() {
             	$("#tables #mcuConfig").attr("class","active");
-            	$("#tables #mcuServer").attr("class","active");
+            	$("#tables #mcuServers").attr("class","active");
             	//初始化表格
             	 $('#mcuTable').dataTable( {
 					select:true,

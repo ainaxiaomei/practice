@@ -53,9 +53,9 @@
             <li id="mcuConfig">
               <a href="#"><i class="fa fa-circle-o"></i> Mcu Config Table <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-                <li id="mcuServer"><a href="<%=path %>/mcuServer"><i class="fa fa-circle-o"></i> Mcu Table</a></li>
-                <li id="groupMcu" ><a href="<%=path %>/groupMcu"><i class="fa fa-circle-o"></i> GroupMcu Table</a></li>
-                <li id="groupMcuServer"><a href="<%=path %>/groupMcuServer"><i class="fa fa-circle-o"></i> GroupMcuServer Table</a></li>
+                <li id="mcuServers"><a href="<%=path %>/mcuServer"><i class="fa fa-circle-o"></i> Mcu Table</a></li>
+                <li id="groupMcus" ><a href="<%=path %>/groupMcu"><i class="fa fa-circle-o"></i> GroupMcu Table</a></li>
+                <li id="groupMcuServers"><a href="<%=path %>/groupMcuServer"><i class="fa fa-circle-o"></i> GroupMcuServer Table</a></li>
               </ul>
             </li>
             <li id="audioConfig">

@@ -94,7 +94,7 @@ public interface IApplicationService {
      //查询groupMcu
      public List<GroupAudio>getGroupAudio(GroupAudio groupAudio,int start,int pageSize);
      //新增groupMcuserver
-     public String saveGroupMcuServer(GroupMcuServers groupMcu);
+     public String saveGroupMcuServer(GroupMcuServers groupMcu) throws Exception;
      //修改groupMcuserver
      public String modifyGroupMcuServer(GroupMcuServers groupMcu);
      //删除groupMcuserver

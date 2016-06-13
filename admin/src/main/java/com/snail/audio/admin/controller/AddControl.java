@@ -76,7 +76,7 @@ public class AddControl {
 	}
 	@RequestMapping("/saveGroupMcuServer")
 	@ResponseBody
-	public String saveGroupMcuServer(GroupMcuServers groupMcuSercers,HttpServletRequest request){
+	public String saveGroupMcuServer(GroupMcuServers groupMcuSercers,HttpServletRequest request) throws Exception{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		String indexDb=service.saveGroupMcuServer(groupMcuSercers);
 		return indexDb;

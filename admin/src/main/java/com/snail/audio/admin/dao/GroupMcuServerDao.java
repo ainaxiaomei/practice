@@ -46,6 +46,12 @@ public class GroupMcuServerDao implements IGroupMcuServerDao{
 		return groupMcuServerMapperExt.deleteByServerId(serverId);
 	}
 
+	@Override
+	public List<GroupMcuServers> getServerId(int serverId) {
+		return groupMcuServerMapperExt.getServerId(serverId);
+		
+	}
+
 	
 	
 	

@@ -219,7 +219,16 @@ public class ApplicationService implements IApplicationService {
 		return groupMcuDao.getGroupMCU(groupMcu, start, pageSize);
 	}
 	@Override
-	public String saveGroupMcuServer(GroupMcuServers groupMcuServer) {
+	public String saveGroupMcuServer(GroupMcuServers groupMcuServer) throws Exception {
+		//检查serverId是否被占用
+		int serverId=groupMcuServer.getServerId();
+		if(serverId<0){
+			throw new Exception("server id can not be null");
+		}
+		List<GroupMcuServers> serverList=groupMcuServerDao.getServerId(serverId);
+		if(null!=serverList&&!serverList.isEmpty()){
+			throw new Exception("server id is occupied! ");
+		}
 		 groupMcuServerDao.addGroupMcuServer(groupMcuServer);
 		 //查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
