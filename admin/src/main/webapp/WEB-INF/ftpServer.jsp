@@ -132,6 +132,7 @@
             	return data;
             }
             $(function() {
+            	var b=$("#tables #ftpServers").attr("class","active");
             	//初始化表格
             	    ftpTable=$('#ftpTable').dataTable( {
 					select:true,

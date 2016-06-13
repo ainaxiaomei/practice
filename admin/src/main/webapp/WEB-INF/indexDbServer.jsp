@@ -165,6 +165,8 @@
             	return data;
             }
             $(function() {
+            	//设置sidebar
+            	var b=$("#tables #indexDbServers").attr("class","active");
             	//初始化表格
             	    indexDbTable=$('#indexDbTable').dataTable( {
 					select:true,

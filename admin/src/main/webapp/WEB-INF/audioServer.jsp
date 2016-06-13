@@ -148,6 +148,9 @@
             	return data;
             }
             $(function() {
+            	//设置sidebar
+            	$("#tables #audioConfig").attr("class","active");
+            	$("#tables #audio").attr("class","active");
             	//初始化表格
             	    audioServer=$('#audioServer').dataTable( {
 					select:true,

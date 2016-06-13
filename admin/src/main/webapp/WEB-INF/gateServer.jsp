@@ -143,6 +143,8 @@
             	return data;
             }
             $(function() {
+            	//设置sidebar
+            	var b=$("#tables #gateServers").attr("class","active");
             	//初始化表格
             	    gateTable=$('#gateTable').dataTable( {
 					select:true,

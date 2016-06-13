@@ -138,6 +138,8 @@
             	return data;
             }
             $(function() {
+            	$("#tables #audioConfig").attr("class","active");
+            	$("#tables #groupAudios").attr("class","active");
             	//初始化表格
             	    groupAudioTable=$('#groupAudioTable').dataTable( {
 					select:true,

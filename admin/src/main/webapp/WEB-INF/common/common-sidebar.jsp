@@ -37,33 +37,33 @@
             <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
-        <li class="treeview active">
+        <li id="tables" class="treeview active">
           <a href="#">
             <i class="fa fa-table"></i> <span>Tables</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=path %>/app"><i class="fa fa-circle-o"></i> App Table</a></li>
-            <li class="active"><a href="<%=path %>/appResource"><i class="fa fa-circle-o"></i> AppResource Table</a></li>
-            <li ><a href="<%=path %>/gateServer"><i class="fa fa-circle-o"></i> Gate Table</a></li>
-            <li ><a href="<%=path %>/indexDbServer"><i class="fa fa-circle-o"></i> MemDb Table</a></li>
-            <li><a href="<%=path %>/ftpServer"><i class="fa fa-circle-o"></i> Ftp Table</a></li>
-            <li><a href="<%=path %>/device"><i class="fa fa-circle-o"></i> Device Table</a></li>
-            <li><a href="<%=path %>/dictionary"><i class="fa fa-circle-o"></i> Dictionary Table</a></li>
-            <li>
+            <li id="app"><a href="<%=path %>/app"><i class="fa fa-circle-o"></i> App Table</a></li>
+            <li id="appResources"><a href="<%=path %>/appResource"><i class="fa fa-circle-o"></i> AppResource Table</a></li>
+            <li id="gateServers" ><a href="<%=path %>/gateServer"><i class="fa fa-circle-o"></i> Gate Table</a></li>
+            <li id="indexDbServers" ><a href="<%=path %>/indexDbServer"><i class="fa fa-circle-o"></i> MemDb Table</a></li>
+            <li id="ftpServers"><a href="<%=path %>/ftpServer"><i class="fa fa-circle-o"></i> Ftp Table</a></li>
+            <li id="devices" ><a href="<%=path %>/device"><i class="fa fa-circle-o"></i> Device Table</a></li>
+            <li id="dictionarys"><a href="<%=path %>/dictionary"><i class="fa fa-circle-o"></i> Dictionary Table</a></li>
+            <li id="mcuConfig">
               <a href="#"><i class="fa fa-circle-o"></i> Mcu Config Table <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-                <li><a href="<%=path %>/mcuServer"><i class="fa fa-circle-o"></i> Mcu Table</a></li>
-                <li><a href="<%=path %>/groupMcu"><i class="fa fa-circle-o"></i> GroupMcu Table</a></li>
-                <li><a href="<%=path %>/groupMcuServer"><i class="fa fa-circle-o"></i> GroupMcuServer Table</a></li>
+                <li id="mcuServer"><a href="<%=path %>/mcuServer"><i class="fa fa-circle-o"></i> Mcu Table</a></li>
+                <li id="groupMcu" ><a href="<%=path %>/groupMcu"><i class="fa fa-circle-o"></i> GroupMcu Table</a></li>
+                <li id="groupMcuServer"><a href="<%=path %>/groupMcuServer"><i class="fa fa-circle-o"></i> GroupMcuServer Table</a></li>
               </ul>
             </li>
-            <li>
+            <li id="audioConfig">
               <a href="#"><i class="fa fa-circle-o"></i> Audio Config Table <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-                <li><a href="<%=path %>/audioServer"><i class="fa fa-circle-o"></i> Audio Table</a></li>
-                <li><a href="<%=path %>/groupAudio"><i class="fa fa-circle-o"></i> GroupAudio Table</a></li>
-                <li><a href="<%=path %>/groupAudioServer"><i class="fa fa-circle-o"></i> GroupAudioServer Table</a></li>
+                <li id="audio"><a href="<%=path %>/audioServer"><i class="fa fa-circle-o"></i> Audio Table</a></li>
+                <li id="groupAudios"><a href="<%=path %>/groupAudio"><i class="fa fa-circle-o"></i> GroupAudio Table</a></li>
+                <li id="groupAudioServers"><a href="<%=path %>/groupAudioServer"><i class="fa fa-circle-o"></i> GroupAudioServer Table</a></li>
               </ul>
             </li>
           </ul>

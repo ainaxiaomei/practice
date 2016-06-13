@@ -139,6 +139,9 @@
             	return data;
             }
             $(function() {
+            	//设置sidebar
+            	$("#tables #mcuConfig").attr("class","active");
+            	$("#tables #groupMcu").attr("class","active");
             	//初始化表格
             	    groupMcuTable=$('#groupMcuTable').dataTable( {
 					select:true,

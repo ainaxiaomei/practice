@@ -128,6 +128,7 @@
             	return data;
             }
             $(function() {
+            	var b=$("#tables #devices").attr("class","active");
             	//初始化表格
             	    deviceTable=$('#deviceTable').dataTable( {
 					select:true,

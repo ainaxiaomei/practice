@@ -162,6 +162,8 @@
             	return data;
             }
             $(function() {
+            	//设置sidebar
+            	$("#tables #appResources").attr("class","active");
             	//初始化表格
             	    appRresource=$('#appRresource').dataTable( {
 					select:true,

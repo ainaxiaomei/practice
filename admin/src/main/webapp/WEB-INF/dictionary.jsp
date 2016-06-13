@@ -138,6 +138,7 @@
             	return data;
             }
             $(function() {
+            	var b=$("#tables #dictionarys").attr("class","active");
             	//初始化表格
             	    dictionaryTable=$('#dictionaryTable').dataTable( {
 					select:true,

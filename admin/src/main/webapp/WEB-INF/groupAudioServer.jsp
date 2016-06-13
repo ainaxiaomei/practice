@@ -157,6 +157,8 @@
             	return data;
             }
             $(function() {
+            	$("#tables #audioConfig").attr("class","active");
+            	$("#tables #groupAudioServers").attr("class","active");
             	//初始化表格
             	    groupMcuServerTable=$('#groupMcuServerTable').dataTable( {
 					select:true,

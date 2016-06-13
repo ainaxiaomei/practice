@@ -156,6 +156,8 @@
             	return data;
             }
             $(function() {
+            	//设置sidebar
+            	var b=$("#tables #app").attr("class","active");
             	//初始化表格
             	    appTable=$('#appTable').dataTable( {
 					select:true,
