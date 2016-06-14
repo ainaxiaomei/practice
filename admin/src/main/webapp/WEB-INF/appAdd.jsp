@@ -182,7 +182,7 @@
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/company",object,"dialogWidth=1200px;dialogHeight=900px");
+	        	var returnVal=window.showModalDialog("<%=path%>/company",object,"dialogWidth=1000px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#companyId").val(returnVal);
 	        }

@@ -1,117 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Company</title>
-        <jsp:include page="common/commonHead.jsp"></jsp:include>
-         <%String path=getServletContext().getContextPath();%>
-    </head>
-    <body class="bootstrap-admin-with-small-navbar">
-        <!-- small navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top bootstrap-admin-navbar-sm" role="navigation">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-left bootstrap-admin-theme-change-size">
-                                <li class="text">Change size:</li>
-                                <li><a class="size-changer small">Small</a></li>
-                                <li><a class="size-changer large active">Large</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#">Link</a></li>
-                                <li>
-                                    <a href="#">Reminders <i class="glyphicon glyphicon-bell"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#">Settings <i class="glyphicon glyphicon-cog"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#">Go to frontend <i class="glyphicon glyphicon-share-alt"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> Username <i class="caret"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="presentation" class="divider"></li>
-                                        <li><a href="index.html">Logout</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+<head>
+  <title>Company Config</title>
+  <%String path=getServletContext().getContextPath();%>
+  <jsp:include page="common/common-head.jsp"></jsp:include>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+<jsp:include page="common/common-menu.jsp"></jsp:include>
+    <!-- Left side column. contains the logo and sidebar -->
+  
+<jsp:include page="common/common-sidebar.jsp"></jsp:include>
 
-        <!-- main / large navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top bootstrap-admin-navbar bootstrap-admin-navbar-under-small" role="navigation">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="about.html">Admin Panel</a>
-                        </div>
-                        <div class="collapse navbar-collapse main-navbar-collapse">
-                            <ul class="nav navbar-nav">
-                                <li class="active"><a href="#">Link</a></li>
-                                <li><a href="#">Link</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-hover="dropdown">Dropdown <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li role="presentation" class="dropdown-header">Dropdown header</li>
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="presentation" class="divider"></li>
-                                        <li role="presentation" class="dropdown-header">Dropdown header</li>
-                                        <li><a href="#">Separated link</a></li>
-                                        <li><a href="#">One more separated link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div><!-- /.navbar-collapse -->
-                    </div>
-                </div>
-            </div><!-- /.container -->
-        </nav>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Company Configuration
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Data tables</li>
+      </ol>
+    </section>
 
-        <div class="container">
-            <!-- left, vertical navbar & content -->
-            <div class="row">
-                <!-- left, vertical navbar -->
-               <jsp:include page="common/commonNevagator.jsp"></jsp:include>                
+    <!-- Main content -->
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title">Search Condtion</h3>
 
-
-                <!-- content -->
-                <div class="col-md-10">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="page-header">
-                                <h1>Company</h1>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default bootstrap-admin-no-table-panel">
-                                <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">Search Condition</div>
-                                </div>
-                                <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                    <form class="form-horizontal" role="form" id="searchForm">
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+					<div class="box-body">
+						<form class="form-horizontal" role="form" id="searchForm">
 					                    <fieldset>
 					                       <div class="form-group">
 					                          <label class="col-sm-1 control-label" >Company Id</label>
@@ -131,49 +61,65 @@
 					                    <div >   
 					                     <button type="button" onclick="searchCompany()" class="btn btn-primary">Search</button>
 					                    </div>
-					                </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">Company</div>
-                                </div>
-                                <div class="bootstrap-admin-panel-content" style="width:auto">
-                                    <table class="table  table-bordered" id="companyTable">
-                                        <thead>
+					      </form>
+					</div>
+					<!-- /.box-body -->
+        <div class="box-footer">
+        </div>
+      </div>
+      <!-- /.box -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Company Table</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="companyTable" class="table table-bordered table-hover">
+                 <thead>
                                             <tr>
                                                 <th>Company Id</th>
                                                 <th>Company Name</th>
                                                 <th>Contacts</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
+                 </thead>
+                <tbody>
                                            
-                                        </tbody>
-                                    </table>
-                                    <div >   
-					                 </div>
-					                     <button type="button" onclick="addCompany()"  id="addButton" class="btn btn-primary">Add</button>
-					                     <button type="button" onclick="modifyCompany()" id="modifyButton" class="btn btn-primary">Modify</button>
-					                     <button type="button" onclick="deleteCompany()" id="deleteButton" class="btn btn-primary">Delete</button>
-					                     <button type="button" onclick="selectCompany()" id="selectButton" class="btn btn-primary">Select</button>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </tbody>
+                <tfoot>
+                
+                </tfoot>
+              </table>
+                 <button type="button" onclick="addCompany()"  id="addButton" class="btn btn-primary">Add</button>
+				 <button type="button" onclick="modifyCompany()" id="modifyButton" class="btn btn-primary">Modify</button>
+			     <button type="button" onclick="deleteCompany()" id="deleteButton" class="btn btn-primary">Delete</button>
+			     <button type="button" onclick="selectCompany()" id="selectButton" class="btn btn-primary">Select</button>            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+ 
+		 
         </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+   <jsp:include page="common/common-footer.jsp"></jsp:include>
 
-       <jsp:include page="common/commonFooter.jsp"></jsp:include>
-
-       
-
-        <script type="text/javascript">
+  <!-- Control Sidebar -->
+     <jsp:include page="common/common-control.jsp"></jsp:include>
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<!-- page script -->
+       <script type="text/javascript">
             var curSelectIndex=-1;
             /**
               	将查询条件转化为字符串发送到服务端
@@ -202,12 +148,7 @@
 				                { "data": "contacts" }
 				               
 				                
-				            ],
-					"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
-					"sPaginationType": "bootstrap",
-					"oLanguage": {
-						"sLengthMenu": "_MENU_ records per page"
-					}
+				            ]
 				} );
             	    //表格选择
             	    var table = $('#companyTable').DataTable();
@@ -316,5 +257,5 @@
               	  );
            }
         </script>
-    </body>
+</body>
 </html>
