@@ -178,7 +178,7 @@
                     	      sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId")+"&act=1");
                  			  },
                  		  error:function(msg){
-                 			  alert("error!"+msg);
+                 			  alert("error!"+msg.responseText);
                  			 window.returnValue = "error";  //返回值
                  		  	}
                  		 }
@@ -245,7 +245,7 @@
                  			  },
                  		  error:function(msg){
                  		 window.returnValue = "error";  //返回值
-                 			  alert("error!"+msg);
+                 			  alert("error!"+msg.responseText);
                  		  	}
                  		 }
                  		  

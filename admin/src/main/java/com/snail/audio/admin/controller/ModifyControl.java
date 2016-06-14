@@ -56,14 +56,14 @@ public class ModifyControl {
 	}
 	@RequestMapping("/groupMcuServerModify")
 	@ResponseBody
-	public String groupMcuServerModify(HttpServletRequest request,GroupMcuServers groupMcuServer) throws IOException{
+	public String groupMcuServerModify(HttpServletRequest request,GroupMcuServers groupMcuServer) throws Exception{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		String indexDb=service.modifyGroupMcuServer(groupMcuServer);
 		return indexDb;
 	}
 	@RequestMapping("/groupAudioServerModify")
 	@ResponseBody
-	public String groupAudioServerModify(HttpServletRequest request,GroupAudioServers groupAudioServer) throws IOException{
+	public String groupAudioServerModify(HttpServletRequest request,GroupAudioServers groupAudioServer) throws Exception{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		String indexDb=service.modifyGroupAudioServer(groupAudioServer);
 		return indexDb;

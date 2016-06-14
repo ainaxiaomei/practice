@@ -13,4 +13,5 @@ public interface IGroupAudioServerDao {
 	public List<GroupAudioServers> getAudio(GroupAudioServers GroupAudioServers,int start,int end);
 	public int deleteByGroupId(int groupId);
     public int deleteByServerId(int serverId);
+    public List<GroupAudioServers> getAudioServerId(int serverId);
 }

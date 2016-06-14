@@ -41,6 +41,7 @@ import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
+import com.snail.audio.admin.exception.JSonException;
 
 import net.sf.json.JSONArray;
 @Service
@@ -109,23 +110,6 @@ public class ApplicationService implements IApplicationService {
 					indeDbDao.modifyIndexDb(indexDb);
 					break;
 				}
-				/**
-				if(appIds.startsWith(appId+",")){
-					String newAppids=appIds.replace(appId+",", "");
-					IndexDb indexDb=new IndexDb();
-					indexDb.setServerId(list.get(i).getServerId());
-					indexDb.setAppids(newAppids);
-					indeDbDao.modifyIndexDb(indexDb);
-					break;
-				}
-				if((appIds.indexOf(","+appId))>0){
-					String newAppids=appIds.replace(","+appId, "");
-					IndexDb indexDb=new IndexDb();
-					indexDb.setServerId(list.get(i).getServerId());
-					indexDb.setAppids(newAppids);
-					indeDbDao.modifyIndexDb(indexDb);
-					break;
-				}**/
 			}
 		}
 		//关联删除appResource中的appid
@@ -267,22 +251,26 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String saveGroupMcuServer(GroupMcuServers groupMcuServer) throws Exception {
-		//检查serverId是否被占用
-		int serverId=groupMcuServer.getServerId();
-		if(serverId<0){
-			throw new Exception("server id can not be null");
-		}
-		List<GroupMcuServers> serverList=groupMcuServerDao.getServerId(serverId);
-		if(null!=serverList&&!serverList.isEmpty()){
-			throw new Exception("server id is occupied! ");
-		}
+		mcuCheck(groupMcuServer);
 		 groupMcuServerDao.addGroupMcuServer(groupMcuServer);
 		 //查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
 		 return JSONArray.fromObject(list).toString();
 	}
+	private void mcuCheck(GroupMcuServers groupMcuServer) throws JSonException {
+		//检查serverId是否被占用
+		int serverId=groupMcuServer.getServerId();
+		if(serverId<0){
+			throw new JSonException("server id can not be null");
+		}
+		List<GroupMcuServers> serverList=groupMcuServerDao.getServerId(serverId);
+		if(null!=serverList&&!serverList.isEmpty()){
+			throw new JSonException("server id is occupied! ");
+		}
+	}
 	@Override
-	public String modifyGroupMcuServer(GroupMcuServers groupMcu) {
+	public String modifyGroupMcuServer(GroupMcuServers groupMcu) throws Exception {
+		 mcuCheck(groupMcu);
 		 groupMcuServerDao.modifyGroupMcuServer(groupMcu);
 		//查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
@@ -324,15 +312,28 @@ public class ApplicationService implements IApplicationService {
 	public List<GroupAudio> getGroupAudio(GroupAudio groupAudio, int start, int pageSize) {
 		return groupAudioDao.getGroupAudio(groupAudio, start, pageSize);
 	}
+	private void audioCheck(GroupAudioServers groupAudioServer) throws JSonException {
+		//检查serverId是否被占用
+		int serverId=groupAudioServer.getServerId();
+		if(serverId<0){
+			throw new JSonException("server id can not be null");
+		}
+		List<GroupAudioServers> serverList=groupAudioServerDao.getAudioServerId(serverId);
+		if(null!=serverList&&!serverList.isEmpty()){
+			throw new JSonException("server id is occupied! ");
+		}
+	}
 	@Override
-	public String saveGroupAudioServer(GroupAudioServers groupAudio) {
+	public String saveGroupAudioServer(GroupAudioServers groupAudio) throws Exception {
+		 audioCheck(groupAudio);
 		 groupAudioServerDao.addGroupAudioServer(groupAudio);
 		//查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
 		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public String modifyGroupAudioServer(GroupAudioServers groupAudio) {
+	public String modifyGroupAudioServer(GroupAudioServers groupAudio) throws Exception {
+		 audioCheck(groupAudio);
 		 groupAudioServerDao.modifyGroupAudioServer(groupAudio);
 		//查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
