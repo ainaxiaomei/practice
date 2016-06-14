@@ -31,4 +31,8 @@
         limit #{start},#{end}
       </if>
   </select>
+  <delete id="deleteByAppId" parameterType="java.lang.Integer" >
+    delete from app_resource
+    where appid = #{appId,jdbcType=INTEGER}
+  </delete>
 </mapper>

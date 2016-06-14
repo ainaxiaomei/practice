@@ -81,9 +81,34 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int deleteApplication(int appId) {
-		
-		
-		return appDao.deleteApplication(appId);
+		//删除app表
+		appDao.deleteApplication(appId);
+		//清除indexDb中的appid字段
+		List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		if(null!=list&&!list.isEmpty()){
+			for(int i=0;i<list.size();i++){
+				String appIds=list.get(i).getAppids();
+				if(appIds.startsWith(String.valueOf(appId))){
+					String newAppids=appIds.replace(appId+",", "");
+					IndexDb indexDb=new IndexDb();
+					indexDb.setServerId(list.get(i).getServerId());
+					indexDb.setAppids(newAppids);
+					indeDbDao.modifyIndexDb(indexDb);
+					break;
+				}
+				if((appIds.indexOf(","+appId))>0){
+					String newAppids=appIds.replace(","+appId, "");
+					IndexDb indexDb=new IndexDb();
+					indexDb.setServerId(list.get(i).getServerId());
+					indexDb.setAppids(newAppids);
+					indeDbDao.modifyIndexDb(indexDb);
+					break;
+				}
+			}
+		}
+		//关联删除appResource中的appid
+		return appResourceDao.deleteByAppId(appId);
+		 
 	}
 	@Override
 	public int addApplication(App app) {

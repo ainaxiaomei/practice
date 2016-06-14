@@ -10,4 +10,5 @@ import com.snail.audio.admin.entity.AppResource;
 @Resource
 public interface AppResourceMapperExt extends AppResourceMapper{
     public List<AppResource> selectByCondition(@Param("appResource")AppResource appResource,@Param("start")int start,@Param("end")int end);
+    public int deleteByAppId(int appId);
 }
