@@ -1,7 +1,5 @@
 package com.snail.audio.admin.mapper;
 
-import javax.annotation.Resource;
-
 import com.snail.audio.admin.entity.App;
 
 public interface AppMapper {

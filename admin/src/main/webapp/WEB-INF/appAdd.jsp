@@ -77,7 +77,12 @@
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="contacts" name="contacts" type="text" />
 					                          </div>
+					                          <label class="col-sm-1 control-label" >Occupied</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" value="false" id="occupied" name="occupied" type="text" />
+					                          </div>
 					                       </div>
+					                       
 					                    </fieldset> 
 					                    <div >   
 					                     <button type="button" id="saveButton"  class="btn btn-primary">Save</button>

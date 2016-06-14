@@ -76,6 +76,14 @@
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  name="contacts" type="text" />
 					                          </div>
+					                          <label class="col-sm-1 control-label" >Occupied</label>
+					                          <div class="col-sm-3">
+					                             <select class="form-control" id="occupied" name="occupied"> 
+											      <option value=""></option> 
+											      <option value="0">false</option> 
+											      <option value="1">true</option> 
+											      </select>
+					                          </div>
 					                       </div>
 					             </fieldset> 
 							<div>
@@ -194,6 +202,9 @@
     	        		//选择页面
     	        		$("#modifyButton").hide();
     	        		$("#deleteButton").hide();
+    	        		//只能选未被占用的
+    	        		$("#occupied").val(0);
+    	        		$("#occupied").attr("disabled","disabled");
     	        	}else{
     	        		$("#selectButton").hide();
     	        	}
@@ -233,7 +244,7 @@
 		      			        if(maxEndUid){
 		      			        	beginUid+=maxEndUid;
 		      			        }else{
-		      			        	alert("Get Begin Uid Error!");
+		      			        	//alert("Get Begin Uid Error!");
 		      			        }
 		              			var object=new Object();
 		                        object.beginUid=beginUid;

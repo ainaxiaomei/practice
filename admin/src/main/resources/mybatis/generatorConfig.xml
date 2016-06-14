@@ -33,13 +33,14 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--  
+         
         <table tableName="app" domainObjectName="App"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             
         </table>
+        <!--  
         <table tableName="companys" domainObjectName="Company"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -110,7 +111,7 @@
                selectByExampleQueryId="false">
            
         </table>
-         -->
+         
          <table tableName="dictionary" domainObjectName="Dictionary"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -123,5 +124,6 @@
                selectByExampleQueryId="false">
            
         </table>
+        -->
     </context>
 </generatorConfiguration>

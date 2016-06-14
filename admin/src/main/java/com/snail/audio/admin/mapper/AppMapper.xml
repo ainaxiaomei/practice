@@ -9,9 +9,10 @@
     <result column="begin_uid" property="beginUid" jdbcType="INTEGER" />
     <result column="cur_uid" property="curUid" jdbcType="INTEGER" />
     <result column="end_uid" property="endUid" jdbcType="INTEGER" />
+    <result column="occupied" property="occupied" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    appid,company_id, app.contacts, description, begin_uid, cur_uid, end_uid
+    appid, company_id, contacts, description, begin_uid, cur_uid, end_uid, occupied
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,12 +25,12 @@
     where appid = #{appid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.snail.audio.admin.entity.App" >
-    insert into app ( appid,company_id, contacts, 
+    insert into app (appid, company_id, contacts, 
       description, begin_uid, cur_uid, 
-      end_uid)
-    values (#{appid}, #{companyId}, #{contacts,jdbcType=VARCHAR}, 
+      end_uid, occupied)
+    values (#{appid,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{contacts,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{beginUid,jdbcType=INTEGER}, #{curUid,jdbcType=INTEGER}, 
-      #{endUid,jdbcType=INTEGER})
+      #{endUid,jdbcType=INTEGER}, #{occupied,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.App" >
     insert into app
@@ -55,6 +56,9 @@
       <if test="endUid != null" >
         end_uid,
       </if>
+      <if test="occupied != null" >
+        occupied,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="appid != null" >
@@ -78,11 +82,17 @@
       <if test="endUid != null" >
         #{endUid,jdbcType=INTEGER},
       </if>
+      <if test="occupied != null" >
+        #{occupied,jdbcType=BIT},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.snail.audio.admin.entity.App" >
     update app
     <set >
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
       <if test="contacts != null" >
         contacts = #{contacts,jdbcType=VARCHAR},
       </if>
@@ -98,6 +108,9 @@
       <if test="endUid != null" >
         end_uid = #{endUid,jdbcType=INTEGER},
       </if>
+      <if test="occupied != null" >
+        occupied = #{occupied,jdbcType=BIT},
+      </if>
     </set>
     where appid = #{appid,jdbcType=INTEGER}
   </update>
@@ -108,7 +121,8 @@
       description = #{description,jdbcType=VARCHAR},
       begin_uid = #{beginUid,jdbcType=INTEGER},
       cur_uid = #{curUid,jdbcType=INTEGER},
-      end_uid = #{endUid,jdbcType=INTEGER}
+      end_uid = #{endUid,jdbcType=INTEGER},
+      occupied = #{occupied,jdbcType=BIT}
     where appid = #{appid,jdbcType=INTEGER}
   </update>
 </mapper>

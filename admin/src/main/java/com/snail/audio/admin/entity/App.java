@@ -1,7 +1,5 @@
 package com.snail.audio.admin.entity;
 
-import java.util.List;
-
 public class App {
     private Integer appid;
 
@@ -17,6 +15,8 @@ public class App {
 
     private Integer endUid;
 
+    private Boolean occupied;
+
     public Integer getAppid() {
         return appid;
     }
@@ -24,17 +24,16 @@ public class App {
     public void setAppid(Integer appid) {
         this.appid = appid;
     }
-	
 
-	public Integer getCompanyId() {
-		return companyId;
-	}
+    public Integer getCompanyId() {
+        return companyId;
+    }
 
-	public void setCompanyId(Integer companyId) {
-		this.companyId = companyId;
-	}
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
 
-	public String getContacts() {
+    public String getContacts() {
         return contacts;
     }
 
@@ -72,5 +71,13 @@ public class App {
 
     public void setEndUid(Integer endUid) {
         this.endUid = endUid;
+    }
+
+    public Boolean getOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(Boolean occupied) {
+        this.occupied = occupied;
     }
 }
