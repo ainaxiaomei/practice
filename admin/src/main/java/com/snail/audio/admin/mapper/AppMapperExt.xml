@@ -63,6 +63,6 @@
   <update id="setAppOccupied"  >
     update app
     set occupied = #{state}
-    where appid  in (CONCAT(#{appids,jdbcType=VARCHAR}))
+     appid  in (CONCAT(#{appids,jdbcType=VARCHAR}))
   </update>
 </mapper>
