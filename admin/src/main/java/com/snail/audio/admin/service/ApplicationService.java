@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
+import com.snail.audio.admin.dao.ApplicaitonDAO;
 import com.snail.audio.admin.dao.IAppResourceDao;
 import com.snail.audio.admin.dao.IApplicationDao;
 import com.snail.audio.admin.dao.IAudioDao;
@@ -213,6 +214,13 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String modifyIndexDbServer(IndexDb indexdb) {
+		//将indexdb中的appis设为可用状态
+		  IndexDb db=new IndexDb();
+		  db.setServerId(indexdb.getServerId());
+		  List<IndexDb> ls=indeDbDao.getIndexDb(db, -1, -1);
+	      appDao.setAppOccupied(ls.get(0).getAppids(), false);
+		//将indexdb中的appids都设为占用状态
+	    appDao.setAppOccupied(indexdb.getAppids(), true);
 		 indeDbDao.modifyIndexDb(indexdb);
 		//查寻所有的indexGate中的httpurl
 		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
@@ -220,6 +228,11 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String deleteIndexDbServer(int serverId) {
+		 //将indexdb中的appis设为可用状态
+		  IndexDb db=new IndexDb();
+		  db.setServerId(serverId);
+		  List<IndexDb> ls=indeDbDao.getIndexDb(db, -1, -1);
+	      appDao.setAppOccupied(ls.get(0).getAppids(), false);
 	      indeDbDao.deleteIndexDb(serverId);
 		//查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);

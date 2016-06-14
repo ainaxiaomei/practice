@@ -63,6 +63,9 @@
   <update id="setAppOccupied"  >
     update app
     set occupied = #{state}
-     where appid  in (#{appids,jdbcType=VARCHAR})
+     where appid  in 
+     <foreach item="item" index="index" collection="appids"  open="(" separator="," close=")">  
+        #{item}  
+    </foreach>  
   </update>
 </mapper>

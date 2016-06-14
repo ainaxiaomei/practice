@@ -115,6 +115,7 @@
                      <th>Current Uid</th>
                      <th>Contacts</th>
                      <th>Description</th>
+                     <th>Occupied</th>
                    </tr>
                  </thead>
                 <tbody>
@@ -199,7 +200,8 @@
 				                { "data": "endUid" },
 				                { "data": "curUid" },
 				                { "data": "contacts" },
-				                { "data": "description" }
+				                { "data": "description" },
+				                { "data": "occupied" },
 				                
 				            ],
 				} );

@@ -35,24 +35,7 @@ public class ApplicaitonDAO implements IApplicationDao{
 	@Override
 	public int setAppOccupied(String appids, boolean state) {
 		String array[]=appids.split(",");
-		StringBuilder newAppids =new StringBuilder();
-		if(null!=array&&array.length>0){
-			for(int a=0;a<array.length;a++){
-				if(a==0){
-					newAppids.append("\'");
-					newAppids.append(array[a]);
-					newAppids.append("\'");
-				}else{
-					
-					newAppids.append(",")
-					.append("\'")
-					.append(array[a])
-				    .append("\'");
-				}
-			}
-		}
-		
-		return appMapperExt.setAppOccupied(state, newAppids.toString());
+		return appMapperExt.setAppOccupied(state, array);
 	}
 	
 }

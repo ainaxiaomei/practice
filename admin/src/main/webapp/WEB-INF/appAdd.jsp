@@ -19,7 +19,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        GroupMcu  Configuration
+        App  Configuration
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -32,7 +32,7 @@
     <section class="content">
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">GroupMcu Information</h3>
+          <h3 class="box-title">App Information</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -77,8 +77,8 @@
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="contacts" name="contacts" type="text" />
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Occupied</label>
-					                          <div class="col-sm-3">
+					                          <label class="col-sm-1 control-label" style="display:none">Occupied</label>
+					                          <div class="col-sm-3" style="display:none">>
 					                             <input class="form-control" value="false" id="occupied" name="occupied" type="text" />
 					                          </div>
 					                       </div>
