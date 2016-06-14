@@ -17,4 +17,6 @@ public interface AppMapperExt extends AppMapper {
 	public int updateByPrimaryKeySelective(App app);
 	//查询最大beginUid
 	public String selectMaxEndUid();
+	//跟新appids的状态
+	public int setAppOccupied(@Param("state")boolean state,@Param("appids")String appids);
 }

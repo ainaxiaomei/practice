@@ -32,5 +32,9 @@ public class ApplicaitonDAO implements IApplicationDao{
 	public String getMaxEndUid() {
 		return appMapperExt.selectMaxEndUid();
 	}
+	@Override
+	public int setAppOccupied(String appids, boolean state) {
+		return appMapperExt.setAppOccupied(state, appids);
+	}
 	
 }

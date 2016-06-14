@@ -14,4 +14,5 @@ public interface IApplicationDao {
     public int deleteApplication(int appId);
     public int addApplication(App app);
     public String getMaxEndUid();
+    public int setAppOccupied(String ids,boolean state);
 }

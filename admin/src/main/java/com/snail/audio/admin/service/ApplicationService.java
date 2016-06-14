@@ -207,6 +207,8 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int saveIndexDbServer(IndexDb indexdb) {
+		//将indexdb中的appids都设为占用状态
+		appDao.setAppOccupied(indexdb.getAppids(), true);
 		return indeDbDao.addIndexDb(indexdb);
 	}
 	@Override

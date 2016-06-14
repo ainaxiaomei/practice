@@ -77,7 +77,7 @@
 					                             <input class="form-control"  name="contacts" type="text" />
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Occupied</label>
-					                          <div class="col-sm-3">
+					                          <div class="col-sm-3" id="occupyDiv">
 					                             <select class="form-control" id="occupied" name="occupied"> 
 											      <option value=""></option> 
 											      <option value="0">false</option> 
@@ -159,6 +159,7 @@
               	将查询条件转化为字符串发送到服务端
             **/
             function condition2Json(){
+            	
             	//获取查询条件
             	var data=$("#searchForm").serialize();
             	return data;
@@ -166,7 +167,20 @@
             $(function() {
             	//设置sidebar
             	var b=$("#tables #app").attr("class","active");
-            	//初始化表格
+                	//样式处理
+                	var param=window.dialogArguments;
+    	        	if(param&&param.action=="SELECT"){
+    	        		//选择页面
+    	        		$("#modifyButton").hide();
+    	        		$("#deleteButton").hide();
+    	        		//只能选未被占用的
+    	        		//$("#occupied").val(0);
+    	        		//$("#occupied").attr("disabled","disabled");
+    	        		$("#occupyDiv").html("<input class='form-control'  name='occupied' value='false' readonly='true' type='text' />");
+    	        	}else{
+    	        		$("#selectButton").hide();
+    	        	}
+    	        	//初始化表格
             	    appTable=$('#appTable').dataTable( {
 					select:true,
 					searching:false,
@@ -189,26 +203,13 @@
 				                
 				            ],
 				} );
-            	    //表格选择
+            	  //表格选择
             	    var table = $('#appTable').DataTable();
                 	table.on( 'select', function ( e, dt, type, indexes ) {
                 	    if ( type === 'row' ) {
                 	    	curSelectIndex=indexes;
                 	    }
                 	} );
-                	//样式处理
-                	var param=window.dialogArguments;
-    	        	if(param&&param.action=="SELECT"){
-    	        		//选择页面
-    	        		$("#modifyButton").hide();
-    	        		$("#deleteButton").hide();
-    	        		//只能选未被占用的
-    	        		$("#occupied").val(0);
-    	        		$("#occupied").attr("disabled","disabled");
-    	        	}else{
-    	        		$("#selectButton").hide();
-    	        	}
-
             });
             //选择mcuServer
             function selectApp(){
