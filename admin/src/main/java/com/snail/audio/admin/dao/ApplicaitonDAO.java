@@ -52,7 +52,7 @@ public class ApplicaitonDAO implements IApplicationDao{
 			}
 		}
 		
-		return appMapperExt.setAppOccupied(state, "`123,456`");
+		return appMapperExt.setAppOccupied(state, newAppids.toString());
 	}
 	
 }
