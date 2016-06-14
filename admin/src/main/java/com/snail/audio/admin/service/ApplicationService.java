@@ -1,5 +1,7 @@
 package com.snail.audio.admin.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -88,7 +90,27 @@ public class ApplicationService implements IApplicationService {
 		if(null!=list&&!list.isEmpty()){
 			for(int i=0;i<list.size();i++){
 				String appIds=list.get(i).getAppids();
-				if(appIds.startsWith(String.valueOf(appId))){
+				String [] appids=appIds.split(",");
+				List<String> appidsList=new ArrayList<String>();
+				appidsList.addAll(Arrays.asList(appids));
+				if(appidsList.contains(String.valueOf(appId))){
+					appidsList.remove(String.valueOf(appId));
+					StringBuilder newAppids=new StringBuilder();
+					for(int a=0;a<appidsList.size();a++){
+						if(a!=0){
+							newAppids.append(",").append(appidsList.get(a));
+						}else{
+							newAppids.append(appidsList.get(a));
+						}
+					}
+					IndexDb indexDb=new IndexDb();
+					indexDb.setServerId(list.get(i).getServerId());
+					indexDb.setAppids(newAppids.toString());
+					indeDbDao.modifyIndexDb(indexDb);
+					break;
+				}
+				/**
+				if(appIds.startsWith(appId+",")){
 					String newAppids=appIds.replace(appId+",", "");
 					IndexDb indexDb=new IndexDb();
 					indexDb.setServerId(list.get(i).getServerId());
@@ -103,7 +125,7 @@ public class ApplicationService implements IApplicationService {
 					indexDb.setAppids(newAppids);
 					indeDbDao.modifyIndexDb(indexDb);
 					break;
-				}
+				}**/
 			}
 		}
 		//关联删除appResource中的appid
