@@ -68,7 +68,7 @@
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Level</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="level" type="text" />
+					                             <input class="form-control"  id="level" name="level" type="text" />
 					                          </div>
 					                       </div>
 					          </fieldset> 
@@ -109,9 +109,10 @@
                 
                 </tfoot>
               </table>
-		         <button type="button" onclick="addGroupMcuServer()" class="btn btn-primary">Add</button>
-			     <button type="button" onclick="modifyGroupMcuServer()" class="btn btn-primary">Modify</button>
-			     <button type="button" onclick="deleteGroupMcuServer()" class="btn btn-primary">Delete</button>
+		         <button type="button" id="addButton" onclick="addGroupMcuServer()" class="btn btn-primary">Add</button>
+			     <button type="button" id="modifyButton" onclick="modifyGroupMcuServer()" class="btn btn-primary">Modify</button>
+			     <button type="button" id="deleteButton" onclick="deleteGroupMcuServer()" class="btn btn-primary">Delete</button>
+			     <button type="button" id="selectButton" onclick="selectGroupMcuServer()" class="btn btn-primary">Select</button>
             </div>
             <!-- /.box-body -->
           </div>
@@ -156,6 +157,19 @@
             $(function() {
             	$("#tables #mcuConfig").attr("class","active");
             	$("#tables #groupMcuServers").attr("class","active");
+            	//样式处理
+            	var param=window.dialogArguments;
+	        	if(param&&param.action=="SELECT"){
+	        		//选择页面
+	        		$("#modifyButton").hide();
+	        		$("#deleteButton").hide();
+	        		//level不可编辑
+	        		$("#level").attr("readonly",true);
+	        		//设置level为当前的上一级
+	        		$("#level").val(Number(param.level)-1);
+	        	}else{
+	        		$("#selectButton").hide();
+	        	}
             	//初始化表格
             	    groupMcuServerTable=$('#groupMcuServerTable').dataTable( {
 					select:true,
@@ -316,6 +330,16 @@
               		  
               	  );
            }
+           //select
+           function selectGroupMcuServer(){
+            	//获取serverId
+           	  var table = $('#groupMcuServerTable').DataTable();
+           	  var Tnode=table.row(curSelectIndex).node();
+           	  var id= Tnode.cells[1].firstChild.nodeValue;
+           	  //返回serverId
+             window.returnValue = id;  //返回值
+   		     window.close();
+            }
         </script>
 </body>
 </html>

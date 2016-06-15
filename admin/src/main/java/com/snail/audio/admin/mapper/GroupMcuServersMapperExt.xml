@@ -24,7 +24,7 @@
       <if test="groupMcuServer.rightParentId != null and groupMcuServer.rightParentId>0 " >
         and right_parent_id=#{groupMcuServer.comUrl}
       </if>
-      <if test="groupMcuServer.level != null and groupMcuServer.level!='' " >
+      <if test="groupMcuServer.level != null" >
         and level=#{groupMcuServer.level}
       </if>
       <if test="start>0 and end>0 " >

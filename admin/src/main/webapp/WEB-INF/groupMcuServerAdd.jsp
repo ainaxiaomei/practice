@@ -102,6 +102,33 @@
 <!-- page script -->
            <script type="text/javascript">
 	        $(function() {
+	        	//校验规则
+	    	    $("#groupMcuServer").validate({
+				    rules: {
+				    	serverId: {
+				    		"required":true,
+				    		"number":true
+				    	},
+				    	groupId: {
+				    		"required":true,
+				    		"number":true
+				    	},
+				    	level: {
+				    		"required":true,
+				    		"number":true
+				    	},
+				    	leftParentId:{
+				    		"NotSame":true
+				    	},
+				    	rightParentId:{
+				    		"NotSame":true
+				    	}
+				    }	
+	    	    });
+	    	   //增加校验,左父亲右父亲不能相同
+        		jQuery.validator.addMethod("NotSame", function(value, element) {
+	    	    	  return this.optional(element) || $("#leftParentId").val()!=$("#rightParentId").val();
+	    	    	}, "left and right parent can't be same");
 	        	var param=window.dialogArguments;
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
@@ -159,18 +186,30 @@
 	        	$("#parentId").val(returnVal);
 	        }
 	       function selectLeftParent(e){
+	    	    //判断是否填写level
+	    	    if($("#level").val()==""){
+	    	    	alert("Please Input Level First !");
+	    	    	return;
+	    	    }
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
+	        	object.level=$("#level").val();
+	        	var returnVal=window.showModalDialog("<%=path%>/groupMcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#leftParentId").val(returnVal);
 	        }
 	       function selectRightParent(e){
+	    	    //判断是否填写level
+	    	    if($("#level").val()==""){
+	    	    	alert("Please Input Level First !");
+	    	    	return;
+	    	    }
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
+	        	object.level=$("#level").val();
+	        	var returnVal=window.showModalDialog("<%=path%>/groupMcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#rightParentId").val(returnVal);
 	        }
@@ -241,22 +280,25 @@
                  	  );
 	        }
            function saveMcuGroupServer(){
-        	   $.ajax(
-                 		{ type:"POST",
-                 		  url:"<%=path%>/saveGroupMcuServer",
-                 		  data:$("#groupMcuServer").serialize(),
-                 		  success:function(data){
-                 			 var dataArray=$.parseJSON(data); 
-                   	      sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=2");
-                 			  },
-                 		  error:function(msg){
-                 		 window.returnValue = "error";  //返回值
-                 			  alert("error!"+msg.responseText);
-                 		  	}
-                 		 }
-                 		  
-                 		  
-                 	  );
+        	   if($("#groupMcuServer").valid()){
+        		   $.ajax(
+                    		{ type:"POST",
+                    		  url:"<%=path%>/saveGroupMcuServer",
+                    		  data:$("#groupMcuServer").serialize(),
+                    		  success:function(data){
+                    			 var dataArray=$.parseJSON(data); 
+                      	      sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=2");
+                    			  },
+                    		  error:function(msg){
+                    		 window.returnValue = "error";  //返回值
+                    			  alert("error!"+msg.responseText);
+                    		  	}
+                    		 }
+                    		  
+                    		  
+                    	  );
+        	   }
+        	  
            }
         </script>
 </body>
