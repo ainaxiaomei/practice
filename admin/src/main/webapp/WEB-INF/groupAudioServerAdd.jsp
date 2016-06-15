@@ -159,6 +159,8 @@
 	    	   var level=$("#level").val();
 	    	   if(level==0||level=="0"){
 	    		   $("#parentsDiv").hide();
+	    		   $("#leftParentId").val("");
+	    		   $("#rightParentId").val("");
 	    	   }else{
 	    		   $("#parentsDiv").show();
 	    	   }
