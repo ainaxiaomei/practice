@@ -285,7 +285,7 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String modifyGroupMcuServer(GroupMcuServers groupMcu) throws Exception {
-		 mcuCheck(groupMcu);
+		 //mcuCheck(groupMcu);
 		 groupMcuServerDao.modifyGroupMcuServer(groupMcu);
 		//查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
@@ -348,7 +348,7 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String modifyGroupAudioServer(GroupAudioServers groupAudio) throws Exception {
-		 audioCheck(groupAudio);
+		// audioCheck(groupAudio);
 		 groupAudioServerDao.modifyGroupAudioServer(groupAudio);
 		//查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);

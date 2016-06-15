@@ -47,11 +47,11 @@
 					                          <input class="form-control" id="id" name="id" type="text" style="display:none"/>
 					                          <label class="col-sm-1 control-label" >Server Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="serverId" name="serverId" type="text" readOnly="true" /><a href="#" onclick="selectServerId()">select</a>
+					                             <input class="form-control" id="serverId" name="serverId" type="text" readOnly="true" /><a href="#" id="serveridSelect" onclick="selectServerId()">select</a>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Group Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="groupId" name="groupId" type="text" readOnly="true" /><a href="#" onclick="selectGroupId()">select</a>
+					                             <input class="form-control" id="groupId" name="groupId" type="text" readOnly="true" /><a href="#" id="groupIdSelect" onclick="selectGroupId()">select</a>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Level</label>
 					                          <div class="col-sm-3">
@@ -148,6 +148,13 @@
 	        			var a=$("#"+columns[i]);
 	        			a.val(param[columns[i]]);
 	        		}
+	        		//serverId不修改
+	        		$("#serveridSelect").hide();
+	        		//层级不可修改
+	        		$("#level").attr("readonly",true);
+	        		//groupId不可修改
+	        		
+	        		$("#groupIdSelect").hide();
 	        	}else{
 	        		//是新增页面
 	        		//改变单击事件
