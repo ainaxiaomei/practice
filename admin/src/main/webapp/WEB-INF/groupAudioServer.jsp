@@ -69,7 +69,7 @@
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Level</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  name="level" type="text" />
+					                             <input class="form-control"  id="level" name="level" type="text" />
 					                          </div>
 					                       </div>
 					                      
@@ -93,7 +93,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="groupMcuServerTable" class="table table-bordered table-hover">
+              <table id="groupAudioServerTable" class="table table-bordered table-hover">
                 <thead>
                   <tr>
                      <th>Id</th>
@@ -159,8 +159,21 @@
             $(function() {
             	$("#tables #audioConfig").attr("class","active");
             	$("#tables #groupAudioServers").attr("class","active");
-            	//初始化表格
-            	    groupMcuServerTable=$('#groupMcuServerTable').dataTable( {
+                	//样式处理
+                	var param=window.dialogArguments;
+    	        	if(param&&param.action=="SELECT"){
+    	        		//选择页面
+    	        		$("#modifyButton").hide();
+    	        		$("#deleteButton").hide();
+    	        		//level不可编辑
+    	        		$("#level").attr("readonly",true);
+    	        		//设置level为当前的上一级
+    	        		$("#level").val(Number(param.level)-1);
+    	        	}else{
+    	        		$("#selectButton").hide();
+    	        	}
+    	        	//初始化表格
+            	    groupAudioServerTable=$('#groupAudioServerTable').dataTable( {
 					select:true,
 					searching:false,
 					paging: true,
@@ -182,35 +195,26 @@
 				                
 				            ]
 				} );
-            	    var table = $('#groupMcuServerTable').DataTable();
+            	    var table = $('#groupAudioServerTable').DataTable();
                 	table.on( 'select', function ( e, dt, type, indexes ) {
                 	    if ( type === 'row' ) {
                 	    	curSelectIndex=indexes;
                 	    }
                 	} );
-                	//样式处理
-                	var param=window.dialogArguments;
-    	        	if(param&&param.action=="SELECT"){
-    	        		//选择页面
-    	        		$("#modifyButton").hide();
-    	        		$("#deleteButton").hide();
-    	        	}else{
-    	        		$("#selectButton").hide();
-    	        	}
 
             });
             function selectGroupAudioServer(){
             	//获取serverId
-           	  var table = $('#groupMcuTable').DataTable();
+           	  var table = $('#groupAudioServerTable').DataTable();
            	  var Tnode=table.row(curSelectIndex).node();
-           	  var id= Tnode.cells[0].firstChild.nodeValue;
+           	  var id= Tnode.cells[1].firstChild.nodeValue;
            	  //返回serverId
              window.returnValue = id;  //返回值
    		     window.close();
             }
             //查询
            function serachMcu(){
-            	var table=$('#groupMcuServerTable').DataTable(); 
+            	var table=$('#groupAudioServerTable').DataTable(); 
             	table.ajax.reload();
             } 
             //新增
@@ -218,7 +222,7 @@
         	   var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd","","dialogWidth=1000px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
-        		   var table=$('#groupMcuServerTable').DataTable(); 
+        		   var table=$('#groupAudioServerTable').DataTable(); 
              	  table.ajax.reload();
         	   }
 
@@ -231,7 +235,7 @@
         	   }
         	   var object=new Object();
         	   object.action="MODIFY";
-        	   var table = $('#groupMcuServerTable').DataTable();
+        	   var table = $('#groupAudioServerTable').DataTable();
         	   var Tnode=table.row(curSelectIndex).node();
         	   var cells=Tnode.cells;
         	   var columns= [
@@ -251,7 +255,7 @@
         	   var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
-        		   var table=$('#groupMcuServerTable').DataTable(); 
+        		   var table=$('#groupAudioServerTable').DataTable(); 
              	  table.ajax.reload();
         	   }
            }
@@ -261,7 +265,7 @@
 	        	    });
 	        	$( "#dialog" ).dialog({
 	        		close: function( event, ui ) {
-	        			 var table=$('#groupMcuServerTable').DataTable(); 
+	        			 var table=$('#groupAudioServerTable').DataTable(); 
 	                	  table.ajax.reload();
 	                	  //清空消息
 	                	  $("#pragessMsg").text("");
@@ -318,7 +322,7 @@
          	  }
         	   
         	 //获取table对象
-         	  var table = $('#groupMcuServerTable').DataTable();
+         	  var table = $('#groupAudioServerTable').DataTable();
          	  var Tnode=table.row(curSelectIndex).node();
          	  var id= Tnode.cells[0].firstChild.nodeValue;
          	 $.ajax(

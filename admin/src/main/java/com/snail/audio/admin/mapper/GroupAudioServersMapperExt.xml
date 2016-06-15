@@ -24,7 +24,7 @@
       <if test="groupAudioServer.rightParentId != null and groupAudioServer.rightParentId>0 " >
         and right_parent_id=#{groupAudioServer.comUrl}
       </if>
-      <if test="groupAudioServer.level != null and groupAudioServer.level!='' " >
+      <if test="groupAudioServer.level != null " >
         and level=#{groupAudioServer.level}
       </if>
       <if test="start>0 and end>0 " >

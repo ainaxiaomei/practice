@@ -52,7 +52,13 @@
  
   table.dataTable tbody tr.selected {
   background-color: #B0BED9;
+  
 }
+</style>
+<style>
+			.error{
+				color:red;
+			}
 </style>
 
         

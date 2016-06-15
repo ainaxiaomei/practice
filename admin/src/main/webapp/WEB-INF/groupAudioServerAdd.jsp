@@ -55,10 +55,10 @@
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Level</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="level" name="level" type="text" />
+					                             <input class="form-control"  id="level" name="level" type="text" onblur="setLevel()"/>
 					                          </div>
 					                       </div>
-					                       <div class="form-group">
+					                       <div class="form-group" id="parentsDiv">
 					                          <label class="col-sm-1 control-label" >Left Parent Id</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="leftParentId" name="leftParentId" type="text" readOnly="true" /><a href="#" onclick="selectLeftParent()">select</a>
@@ -102,6 +102,33 @@
 <!-- page script -->
           <script type="text/javascript">
 	        $(function() {
+	        	//校验规则
+	    	    $("#groupAudioServer").validate({
+				    rules: {
+				    	serverId: {
+				    		"required":true,
+				    		"number":true
+				    	},
+				    	groupId: {
+				    		"required":true,
+				    		"number":true
+				    	},
+				    	level: {
+				    		"required":true,
+				    		"number":true
+				    	},
+				    	leftParentId:{
+				    		"NotSame":true
+				    	},
+				    	rightParentId:{
+				    		"NotSame":true
+				    	}
+				    }	
+	    	    });
+	    	   //增加校验,左父亲右父亲不能相同
+        		jQuery.validator.addMethod("NotSame", function(value, element) {
+	    	    	  return this.optional(element) || $("#leftParentId").val()!=$("#rightParentId").val();
+	    	    	}, "left and right parent can't be same");
 	        	var param=window.dialogArguments;
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
@@ -127,7 +154,15 @@
 	        		$("#saveButton").click(saveAudioGroupServer);
 	        	}
 	        });
-	        
+	       function setLevel(){
+	    	   //如果是level不能选层级
+	    	   var level=$("#level").val();
+	    	   if(level==0||level=="0"){
+	    		   $("#parentsDiv").hide();
+	    	   }else{
+	    		   $("#parentsDiv").show();
+	    	   }
+	       }
 	       function selectServerId(e){
 	        	//传参
 	        	var object=new Object();
@@ -153,18 +188,31 @@
 	        	$("#parentId").val(returnVal);
 	        }
 	       function selectLeftParent(e){
+	    	    //判断是否填写level
+	    	    if($("#level").val()==""){
+	    	    	alert("Please Input Level First !");
+	    	    	return;
+	    	    }
+	    	    
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1200px;dialogHeight=900px");
+	        	object.level=$("#level").val();
+	        	var returnVal=window.showModalDialog("<%=path%>/groupAudioServer",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#leftParentId").val(returnVal);
 	        }
 	       function selectRightParent(e){
+	    	    //判断是否填写level
+	    	    if($("#level").val()==""){
+	    	    	alert("Please Input Level First !");
+	    	    	return;
+	    	    }
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/audioServer",object,"dialogWidth=1200px;dialogHeight=900px");
+	        	object.level=$("#level").val();
+	        	var returnVal=window.showModalDialog("<%=path%>/groupAudioServer",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#rightParentId").val(returnVal);
 	        }
@@ -235,22 +283,25 @@
    		     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
 	        }
            function saveAudioGroupServer(){
-        	   $.ajax(
-                 		{ type:"POST",
-                 		  url:"<%=path%>/saveGroupAudioServer",
-                 		  data:$("#groupAudioServer").serialize(),
-                 		  success:function(data){
-                 			 var dataArray=$.parseJSON(data); 
-                       	  sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId")+"&act=2");
-                 			  },
-                 		  error:function(msg){
-                 		 window.returnValue = "error";  //返回值
-                 			  alert("error!"+msg.responseText);
-                 		  	}
-                 		 }
-                 		  
-                 		  
-                 	  );
+        	   if($("#groupAudioServer").valid()){
+        		   $.ajax(
+                    		{ type:"POST",
+                    		  url:"<%=path%>/saveGroupAudioServer",
+                    		  data:$("#groupAudioServer").serialize(),
+                    		  success:function(data){
+                    			 var dataArray=$.parseJSON(data); 
+                          	  sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId")+"&act=2");
+                    			  },
+                    		  error:function(msg){
+                    		 window.returnValue = "error";  //返回值
+                    			  alert("error!"+msg.responseText);
+                    		  	}
+                    		 }
+                    		  
+                    		  
+                    	  );
+        	   }
+        	  
            }
         </script>
 </body>

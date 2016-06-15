@@ -251,7 +251,7 @@
 		      			        }
 		              			var object=new Object();
 		                        object.beginUid=beginUid;
-		                 	    var returnVal=window.showModalDialog("<%=path%>/appAdd",object,"dialogWidth=1000px;dialogHeight=600px");
+		                 	    var returnVal=window.showModalDialog("<%=path%>/appAdd",object,"dialogWidth=1200px;dialogHeight=600px");
 		                 	    if(returnVal="success"){
 		                 		   //刷新表格
 		                 		   var table=$('#appTable').DataTable(); 
@@ -294,7 +294,7 @@
  				  object[columns[i]]=cells[i].innerText;
  			      
  			  }
-        	   var returnVal=window.showModalDialog("<%=path%>/appAdd",object,"dialogWidth=1000px;dialogHeight=600px");
+        	   var returnVal=window.showModalDialog("<%=path%>/appAdd",object,"dialogWidth=1200px;dialogHeight=600px");
         	   if(returnVal="success"){
         		   //刷新表格
         		   var table=$('#appTable').DataTable(); 
