@@ -184,8 +184,6 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public int deleteAudioServer(int serverId) {
 		 audioDao.deleteAudio(serverId);
-		 String a=null;
-		 a.length();
 		 return groupAudioServerDao.deleteByServerId(serverId);
 	}
 	@Override
