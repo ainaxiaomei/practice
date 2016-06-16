@@ -91,7 +91,7 @@ public class BaseControl {
 	@RequestMapping("/groupMcuServerAdd")
 	public String toGroupMcuServerAdd(Model model,HttpServletRequest request){
 		
-		return "groupMcuServerAdd";
+		return "groupMcuServerTree";
 		
 	}
 	@RequestMapping("/groupAudioServer")
@@ -224,6 +224,18 @@ public class BaseControl {
 		//将list转换为json字符创
 	    String result =JSONArray.fromObject(list).toString();
 	    response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/GroupMcuServerTree")
+	public void getGroupMcuServerTree(HttpServletRequest request,HttpServletResponse response,AudioServer audio) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<AudioServer> list=service.getAudioServer(audio,-1,-1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json;charset=utf-8");
+		String tree="{'id':'demo_root_2','text':'Root2','type':'root'}";
 		response.getWriter().printf(result);
 		
 	}

@@ -43,7 +43,7 @@
 	<button id="evts_button">select node with id 1</button> <em>either click the button or a node in the tree</em>
 	<div id="evts" class="demo"></div>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="http://127.0.0.1:8080/admin/vendors/jquery-1.9.1.js"></script>
 	<script src="./../../dist/jstree.min.js"></script>
 	
 	<script>
@@ -87,12 +87,11 @@
 		'core' : {
 			'data' : {
 				"url" : "./root.json",
-				"dataType" : "json" // needed only if you do not supply JSON headers
 			}
 		}
 	});
 
-	// lazy demo
+	/* lazy demo
 	$('#lazy').jstree({
 		'core' : {
 			'data' : {
@@ -102,7 +101,7 @@
 				}
 			}
 		}
-	});
+	});*/
 
 	// data from callback
 	$('#clbk').jstree({

@@ -51,7 +51,7 @@
 <!-- jquery Ui -->
 <script type="text/javascript" src="<%=path%>/vendors/jquery-ui-1.12.0-rc.2/jquery-ui.js"></script>
 <!-- js tree -->
-<script type="text/javascript" src="<%=path%>/common/plugins/jstree/vakata-jstree-7a976d1/dist/jstree.min.js"></script>
+<script type="text/javascript" src="<%=path%>/common/plugins/jstree/vakata-jstree-7a976d1/dist/jstree.js"></script>
 <style>
  
   table.dataTable tbody tr.selected {
