@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="<%=path%>/common/dist/css/skins/_all-skins.min.css">
   <!-- jquery Ui -->
   <link rel="stylesheet" media="screen" href="vendors/jquery-ui-1.12.0-rc.2/jquery-ui.css">
+  <!-- js tree -->
+  <link rel="stylesheet" media="screen" href="<%=path%>/common/plugins/jstree/vakata-jstree-7a976d1/dist/themes/default/style.min.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -48,6 +50,8 @@
 <script type="text/javascript" charset="utf8" src="<%=path%>/vendors/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
 <!-- jquery Ui -->
 <script type="text/javascript" src="<%=path%>/vendors/jquery-ui-1.12.0-rc.2/jquery-ui.js"></script>
+<!-- js tree -->
+<script type="text/javascript" src="<%=path%>/common/plugins/jstree/vakata-jstree-7a976d1/dist/jstree.min.js"></script>
 <style>
  
   table.dataTable tbody tr.selected {
