@@ -1,6 +1,7 @@
 package com.snail.audio.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -34,6 +35,8 @@ import com.snail.audio.admin.entity.GroupMcuServers;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
+import com.snail.audio.admin.json.jsonObject.JsonTree;
+import com.snail.audio.admin.json.jsonObject.JsonTreeLiAttr;
 import com.snail.audio.admin.service.IApplicationService;
 
 import net.sf.json.JSONArray;
@@ -228,14 +231,29 @@ public class BaseControl {
 		
 	}
 	@RequestMapping("/GroupMcuServerTree")
-	public void getGroupMcuServerTree(HttpServletRequest request,HttpServletResponse response,AudioServer audio) throws IOException{
+	public void getGroupMcuServerTree(HttpServletRequest request,HttpServletResponse response,GroupMcuServers groupMcuServer) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		List<AudioServer> list=service.getAudioServer(audio,-1,-1);
-		//将list转换为json字符创
-		String result =JSONArray.fromObject(list).toString();
+		List<GroupMcuServers> list=service.getGroupMcuServer(groupMcuServer,-1,-1);
+		List<JsonTree> treeList=new ArrayList<JsonTree>();
+		for(int i=0;i<list.size();i++){
+			JsonTree jsonTree=new JsonTree();
+			if(list.get(i).getLevel()==0){
+				//根层级
+				jsonTree.setParent("#");
+			}else{
+				jsonTree.setParent(String.valueOf(list.get(i).getLeftParentId()));
+			}
+			jsonTree.setId(String.valueOf(list.get(i).getServerId()));
+			jsonTree.setText(String.valueOf(list.get(i).getServerId()));
+			JsonTreeLiAttr liAttr=new JsonTreeLiAttr();
+			liAttr.setGroup(String.valueOf(list.get(i).getGroupId()));
+			liAttr.setLevel(String.valueOf(list.get(i).getLevel()));
+			jsonTree.setLi_attr(liAttr);
+			treeList.add(jsonTree);
+		}
+		String result =JSONArray.fromObject(treeList).toString();
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=utf-8");
-		String tree="{'id':'demo_root_2','text':'Root2','type':'root'}";
 		response.getWriter().printf(result);
 		
 	}

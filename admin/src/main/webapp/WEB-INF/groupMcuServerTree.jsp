@@ -64,19 +64,53 @@
 <!-- page script -->
  <script type="text/javascript">
    $(function () { 
+	  $("#tables #mcuConfig").attr("class","active");
+   	  $("#tables #groupMcuServers").attr("class","active");
       $('#mcuTree').jstree({
-    	  'core' : {
-  			'data' : {
-  				'url' : function (node) {
-  			      return node.id === '#' ?
-  			        '<%=path%>/GroupMcuServerTree' :
-  			        '<%=path%>/GroupMcuServerTree';
-  			    },
-  			    'data' : function (node) {
-  			      return { 'id' : node.id };
+    	  "core" : {
+    		"check_callback" : true,
+    		"data" : {
+  				"url" : "<%=path%>/GroupMcuServerTree",
+  			}
+  		},
+  		"contextmenu":{
+  			items : function (o, cb) { // Could be an object directly
+  				return {
+  					"create" : {
+  						"separator_before"	: false,
+  						"separator_after"	: true,
+  						"_disabled"			: false, //(this.check("create_node", data.reference, {}, "last")),
+  						"label"				: "Create",
+  						"action"			: function (data) {
+  							var inst = $.jstree.reference(data.reference),
+  								obj = inst.get_node(data.reference);
+  							inst.create_node(obj, {}, "last", function (new_node) {
+  								setTimeout(function () { inst.edit(new_node); },0);
+  							});
+  						}
+  					},//end create
+  					"remove" : {
+  						"separator_before"	: false,
+  						"icon"				: false,
+  						"separator_after"	: false,
+  						"_disabled"			: false, //(this.check("delete_node", data.reference, this.get_parent(data.reference), "")),
+  						"label"				: "Delete",
+  						"action"			: function (data) {
+  							var inst = $.jstree.reference(data.reference),
+  								obj = inst.get_node(data.reference);
+  							if(inst.is_selected(obj)) {
+  								inst.delete_node(inst.get_selected());
+  							}
+  							else {
+  								inst.delete_node(obj);
+  							}
+  						}
+  					}//end remove
   			    }
   			}
-  		}
+  		},
+  		 "plugins" : [ "contextmenu" ]
+      
       }); 
         	});
   </script>
