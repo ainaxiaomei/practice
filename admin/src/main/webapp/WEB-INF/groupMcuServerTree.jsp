@@ -61,6 +61,12 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<div id="dialog" title="Sending Message To HttpServer" style="display:none">
+   <div id="progressbar"></div><span id="min">0<span>/<id="max" span>0</span>
+     <div id="pragessMsg">
+             
+     </div>
+ </div>
 <!-- page script -->
  <script type="text/javascript">
    $(function () { 
@@ -117,12 +123,14 @@
   						"action"			: function (data) {
   							var inst = $.jstree.reference(data.reference),
   								obj = inst.get_node(data.reference);
+  							deleteGroupMcuServer(obj);
+  							/*
   							if(inst.is_selected(obj)) {
   								inst.delete_node(inst.get_selected());
   							}
   							else {
   								inst.delete_node(obj);
-  							}
+  							}*/
   						}
   					}//end remove
   			    }
@@ -132,6 +140,87 @@
       
       }); 
         	});
+   function sendHttpMsg(dataArray,msg){
+   	var progressbar = $( "#progressbar" ).progressbar({
+   		 max: dataArray.length
+   	    });
+   	$( "#dialog" ).dialog({
+   		close: function( event, ui ) {
+           	  //清空消息
+           	  $("#pragessMsg").text("");
+           	  //清空进度条
+           	  $( "#progressbar" ).progressbar( "value", 0 );
+           	  //刷新
+           	$.jstree.reference($('#mcuTree')).refresh();
+           	 
+   		}
+   	});
+   	var a=0;
+   	
+   	setTimeout(function (){
+   		process(a,dataArray,msg);
+   	},80);
+	
+   	
+   }
+   function process(a,dataArray,msg){
+	var httpurl=dataArray[a].httpUrl;
+	$.ajax(
+     		{ type:"POST",
+     		  url:httpurl,
+     		  data:msg,
+     		   async :false,
+     		  success:function(){
+	        		setProgress(httpurl,"success");
+     			  },
+     		  error:function(msg){
+     		     //发送服务器失败网路问题
+     			setProgress(httpurl,"error");
+     		  	}
+     		 }
+     		  
+     		  
+     	  );
+	if(a<dataArray.length){
+		setTimeout(function(){
+			process(++a,dataArray,msg)
+		},80);
+	}
+}
+   function setProgress(url,status){
+   	var progressbar = $( "#progressbar" );
+   	 var val = progressbar.progressbar( "value" ) || 0;
+      progressbar.progressbar( "value", val + 1 );
+     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
+   }
+   //删除
+   function deleteGroupMcuServer(object){
+	   if(!confirm("Are You Sure To Delete ?")){
+ 		  return;
+ 	  }
+	 //获取groupServerId
+	 var groupMcuServerId=object.li_attr.groupMucServerId;
+	 //获取groupId
+	 var group=object.li_attr.group;
+	//关闭菜单
+		$.vakata.context.hide();
+ 	 $.ajax(
+      		{ type:"POST",
+      		  url:"<%=path%>/groupMcuServerDelete",
+      		  data:"Id="+groupMcuServerId,
+      		  success:function(data){
+      			  var dataArray=$.parseJSON(data); 
+               	  sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+group+"&act=0");
+      		 
+      			  },
+      		  error:function(msg){
+      			  alert("error!"+msg);
+      		  	}
+      		 }
+      		  
+      		  
+      	  );
+   }
   </script>
 </body>
 </html>

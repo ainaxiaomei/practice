@@ -248,6 +248,7 @@ public class BaseControl {
 			JsonTreeLiAttr liAttr=new JsonTreeLiAttr();
 			liAttr.setGroup(String.valueOf(list.get(i).getGroupId()));
 			liAttr.setLevel(String.valueOf(list.get(i).getLevel()));
+			liAttr.setGroupMucServerId(String.valueOf(list.get(i).getId()));
 			jsonTree.setLi_attr(liAttr);
 			treeList.add(jsonTree);
 		}
@@ -259,6 +260,7 @@ public class BaseControl {
 		JsonTreeLiAttr liAttr=new JsonTreeLiAttr();
 		liAttr.setGroup("-1");
 		liAttr.setLevel("-1");
+		liAttr.setGroupMucServerId("-1");
 		rootTree.setLi_attr(liAttr);
 		treeList.add(rootTree);
 		String result =JSONArray.fromObject(treeList).toString();
