@@ -293,6 +293,7 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String deleteGroupMcuServer(int id) {
+		//如果有子层级先删除子层级
 		 groupMcuServerDao.deleteGroupMcuServer(id);
 		 //查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
