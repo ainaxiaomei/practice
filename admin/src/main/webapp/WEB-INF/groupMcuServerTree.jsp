@@ -84,9 +84,28 @@
   						"action"			: function (data) {
   							var inst = $.jstree.reference(data.reference),
   								obj = inst.get_node(data.reference);
-  							inst.create_node(obj, {}, "last", function (new_node) {
-  								setTimeout(function () { inst.edit(new_node); },0);
-  							});
+  						     //获取当前组id
+  						     var id=obj.id;
+  							//获取当前层级
+  							 var level=obj.li_attr.level;
+  							//获取当前的serverId作为子层级的leftParent
+  							 var group=obj.li_attr.group;
+  							//关闭菜单
+  							$.vakata.context.hide();
+  						    //打开新增的页面
+  						    var object=new Object();
+  						    object.serverId=id;
+  						    object.level=level;
+  						    object.group=group;
+  							var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
+  			        	   if(returnVal=="success"){
+  			        		   //创建成功
+  			        		// inst.create_node(obj, {}, "last", function (new_node) {
+   							//	setTimeout(function () { inst.edit(new_node); },0);
+   							// });
+  			        		inst.refresh(); 
+  			        	   }
+  							
   						}
   					},//end create
   					"remove" : {

@@ -94,7 +94,7 @@ public class BaseControl {
 	@RequestMapping("/groupMcuServerAdd")
 	public String toGroupMcuServerAdd(Model model,HttpServletRequest request){
 		
-		return "groupMcuServerTree";
+		return "groupMcuServerAdd";
 		
 	}
 	@RequestMapping("/groupAudioServer")
@@ -209,7 +209,7 @@ public class BaseControl {
 	@RequestMapping("/groupMcuServer")
 	public String toGroupMcuServer(Model model,HttpServletRequest request){
 		
-		return "groupMcuServer";
+		return "groupMcuServerTree";
 		
 	}
 	@RequestMapping("/device")
@@ -239,7 +239,7 @@ public class BaseControl {
 			JsonTree jsonTree=new JsonTree();
 			if(list.get(i).getLevel()==0){
 				//根层级
-				jsonTree.setParent("#");
+				jsonTree.setParent("root");
 			}else{
 				jsonTree.setParent(String.valueOf(list.get(i).getLeftParentId()));
 			}
@@ -251,6 +251,16 @@ public class BaseControl {
 			jsonTree.setLi_attr(liAttr);
 			treeList.add(jsonTree);
 		}
+		//增加最顶层的根，id为root
+		JsonTree rootTree=new JsonTree();
+		rootTree.setParent("#");
+		rootTree.setId("root");
+		rootTree.setText("root");
+		JsonTreeLiAttr liAttr=new JsonTreeLiAttr();
+		liAttr.setGroup("-1");
+		liAttr.setLevel("-1");
+		rootTree.setLi_attr(liAttr);
+		treeList.add(rootTree);
 		String result =JSONArray.fromObject(treeList).toString();
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=utf-8");

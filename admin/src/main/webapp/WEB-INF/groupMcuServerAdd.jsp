@@ -55,17 +55,13 @@
 					                          </div>
 					                          <label class="col-sm-1 control-label" >Level</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="level" name="level" type="text" />
+					                             <input class="form-control"  id="level" name="level" type="text" readonly="true"/>
 					                          </div>
 					                       </div>
-					                       <div class="form-group">
+					                       <div class="form-group" id="leftParentIdDiv">
 					                          <label class="col-sm-1 control-label" >Left Parent Id</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="leftParentId" name="leftParentId" type="text" readOnly="true"/><a href="#" onclick="selectLeftParent()">select</a>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Right Parent Id</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control"  id="rightParentId" name="rightParentId" type="text" readOnly="true"/><a href="#" onclick="selectRightParent()">select</a>
+					                             <input class="form-control"  id="leftParentId" name="leftParentId" type="text" readOnly="true"/><a href="#" style="display:none" onclick="selectLeftParent()">select</a>
 					                          </div>
 					                       </div>
 					                    </fieldset>  
@@ -117,18 +113,13 @@
 				    		"required":true,
 				    		"number":true
 				    	},
-				    	leftParentId:{
-				    		"NotSame":true
-				    	},
-				    	rightParentId:{
-				    		"NotSame":true
-				    	}
 				    }	
 	    	    });
 	    	   //增加校验,左父亲右父亲不能相同
+	    	   /*
         		jQuery.validator.addMethod("NotSame", function(value, element) {
 	    	    	  return this.optional(element) || $("#leftParentId").val()!=$("#rightParentId").val();
-	    	    	}, "left and right parent can't be same");
+	    	    	}, "left and right parent can't be same");*/
 	        	var param=window.dialogArguments;
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
@@ -158,6 +149,24 @@
 	        		//是新增页面
 	        		//改变单击事件
 	        		$("#saveButton").click(saveMcuGroupServer);
+	        		//传入参数
+	        		var leftParent=param.serverId;
+	        	    var level=Number(param.level)+1;
+	        		var group=param.group;
+	        		$("#level").val(level);
+	        		if(level==0){
+	        			//gruop可以选择
+	        			$("#groupIdSelect").show();
+	        			//没有leftparent
+	        			$("#leftParentIdDiv").hide();
+	        		}else{
+	        			$("#groupIdSelect").hide();
+	        			$("#leftParentId").show();
+	        			$("#leftParentId").val(leftParent);
+	        			$("#groupId").val(group);
+	        			
+	        		}
+	        		
 	        	}
 	        });
 	        

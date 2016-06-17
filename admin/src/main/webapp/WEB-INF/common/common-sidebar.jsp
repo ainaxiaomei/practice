@@ -55,7 +55,7 @@
               <ul class="treeview-menu">
                 <li id="mcuServers"><a href="<%=path %>/mcuServer"><i class="fa fa-circle-o"></i> Mcu Table</a></li>
                 <li id="groupMcus" ><a href="<%=path %>/groupMcu"><i class="fa fa-circle-o"></i> GroupMcu Table</a></li>
-                <li id="groupMcuServers"><a href="<%=path %>/groupMcuServerAdd"><i class="fa fa-circle-o"></i> GroupMcuServer Table</a></li>
+                <li id="groupMcuServers"><a href="<%=path %>/groupMcuServer"><i class="fa fa-circle-o"></i> GroupMcuServer Table</a></li>
               </ul>
             </li>
             <li id="audioConfig">
