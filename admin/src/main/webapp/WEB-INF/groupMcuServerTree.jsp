@@ -199,15 +199,23 @@
  		  return;
  	  }
 	 //获取groupServerId
-	 var groupMcuServerId=object.li_attr.groupMucServerId;
+	 var serverId=object.id;
 	 //获取groupId
 	 var group=object.li_attr.group;
+	 var id=object.id;
+		//获取当前层级
+     var level=object.li_attr.level;
+	 //root不能删除
+	 if(group==-1||id==-1||level==-1){
+		 alert("Root Can Not Delete!");
+		 return;
+	 }
 	//关闭菜单
 		$.vakata.context.hide();
  	 $.ajax(
       		{ type:"POST",
       		  url:"<%=path%>/groupMcuServerDelete",
-      		  data:"Id="+groupMcuServerId,
+      		  data:"Id="+serverId,
       		  success:function(data){
       			  var dataArray=$.parseJSON(data); 
                	  sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+group+"&act=0");

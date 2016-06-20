@@ -13,5 +13,7 @@ public interface GroupMcuServersMapperExt extends  GroupMcuServersMapper{
 	public List<GroupMcuServers> selectByCondition(@Param("groupMcuServer")GroupMcuServers groupMcuServer,@Param("start")int start,@Param("end")int end);
 	public int deleteByGroupId(int groupId);
 	public int deleteByServerId(int serverId);
+	public int deleteByParentServerId(int serverId);
 	public List<GroupMcuServers> getServerId(int serverId);
+	public List<GroupMcuServers> getChildrenByServerId(int serverId);
 }

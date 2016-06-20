@@ -43,6 +43,7 @@ public class GroupMcuServerDao implements IGroupMcuServerDao{
 
 	@Override
 	public int deleteGroupMCUByServerId(int serverId) {
+		//单行删除
 		return groupMcuServerMapperExt.deleteByServerId(serverId);
 	}
 
@@ -50,6 +51,11 @@ public class GroupMcuServerDao implements IGroupMcuServerDao{
 	public List<GroupMcuServers> getServerId(int serverId) {
 		return groupMcuServerMapperExt.getServerId(serverId);
 		
+	}
+
+	@Override
+	public List<GroupMcuServers> getchildren(int serverId) {
+		return groupMcuServerMapperExt.getChildrenByServerId(serverId);
 	}
 
 	

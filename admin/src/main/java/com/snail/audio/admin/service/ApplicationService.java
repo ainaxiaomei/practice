@@ -179,7 +179,8 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public int deleteMcu(int id) {
 		 mcuDao.deleteMCU(id);
-		 return groupMcuServerDao.deleteGroupMCUByServerId(id);
+		 //删除groupmcuserver同时删除子层级
+		 return deleteByParentid(id);
 	}
 	@Override
 	public int deleteAudioServer(int serverId) {
@@ -293,11 +294,27 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String deleteGroupMcuServer(int id) {
-		//如果有子层级先删除子层级
-		 groupMcuServerDao.deleteGroupMcuServer(id);
+		 deleteByParentid(id);
 		 //查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
 		 return JSONArray.fromObject(list).toString();
+	}
+	public int deleteByParentid(int id){
+		//查出该节点的子节点
+		List<GroupMcuServers> list=groupMcuServerDao.getchildren(id);
+		if(list==null||list.isEmpty()){
+		 //没有子节点直接删除
+			groupMcuServerDao.deleteGroupMCUByServerId(id);
+		}else{
+			//先删除父节点
+			groupMcuServerDao.deleteGroupMCUByServerId(id);
+			//递归调用
+			for(int i=0;i<list.size();i++){
+				deleteByParentid(list.get(i).getServerId());
+			}
+		}
+		return 0;
+		
 	}
 	@Override
 	public List<GroupMcuServers> getGroupMcuServer(GroupMcuServers groupMcu, int start, int pageSize) {

@@ -38,6 +38,13 @@
     from group_mcu_servers
     where server_id=#{serverId}
   </select>
+  <!-- 查询直接子节点 -->
+  <select id="getChildrenByServerId"  resultMap="BaseResultMap" parameterType="int">
+    select 
+    <include refid="Base_Column_List" />
+    from group_mcu_servers
+    where left_parent_id=#{serverId}
+  </select>
   <delete id="deleteByGroupId" parameterType="java.lang.Integer" >
     delete from group_mcu_servers
     where group_id = #{group_id,jdbcType=INTEGER}
@@ -45,5 +52,8 @@
   <delete id="deleteByServerId" parameterType="java.lang.Integer" >
     delete from group_mcu_servers
     where server_id = #{server_id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByParentServerId" parameterType="java.lang.Integer" >
+    DELETE FROM  snail.group_mcu_servers WHERE server_id=#{server_id,jdbcType=INTEGER} OR left_parent_id=#{server_id,jdbcType=INTEGER}
   </delete>
 </mapper>
