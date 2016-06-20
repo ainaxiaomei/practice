@@ -7,6 +7,21 @@ public class JsonTree {
     private String icon;
     private JsonTreeState state;
     private JsonTreeLiAttr li_attr     ;
+    public JsonTree(){
+    	
+    }
+    JsonTree(JsonTreeBulider build){
+    	this.id=build.id;
+    	this.parent=build.parent;
+    	this.text=build.text;
+    	this.icon=build.icon;
+    	this.state=build.state;
+    	this.li_attr=build.li_attr;
+    }
+   public  static JsonTreeBulider jsonTreeBuilder(String id,String parent){
+		return new JsonTreeBulider(id, parent) ;
+    	
+    }
 	public JsonTreeLiAttr getLi_attr() {
 		return li_attr;
 	}
@@ -43,5 +58,5 @@ public class JsonTree {
 	public void setState(JsonTreeState state) {
 		this.state = state;
 	}
-    
 }
+

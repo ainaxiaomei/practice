@@ -36,6 +36,7 @@ import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
 import com.snail.audio.admin.json.jsonObject.JsonTree;
+import com.snail.audio.admin.json.jsonObject.JsonTreeBulider;
 import com.snail.audio.admin.json.jsonObject.JsonTreeLiAttr;
 import com.snail.audio.admin.service.IApplicationService;
 
@@ -236,32 +237,25 @@ public class BaseControl {
 		List<GroupMcuServers> list=service.getGroupMcuServer(groupMcuServer,-1,-1);
 		List<JsonTree> treeList=new ArrayList<JsonTree>();
 		for(int i=0;i<list.size();i++){
-			JsonTree jsonTree=new JsonTree();
+			JsonTreeBulider builder=new JsonTreeBulider();
 			if(list.get(i).getLevel()==0){
 				//根层级
-				jsonTree.setParent("root");
+				 builder=JsonTree.jsonTreeBuilder(String.valueOf(list.get(i).getServerId()),"root");
 			}else{
-				jsonTree.setParent(String.valueOf(list.get(i).getLeftParentId()));
+				 builder=JsonTree.jsonTreeBuilder(String.valueOf(list.get(i).getServerId()),String.valueOf(list.get(i).getLeftParentId()));
 			}
-			jsonTree.setId(String.valueOf(list.get(i).getServerId()));
-			jsonTree.setText(String.valueOf(list.get(i).getServerId()));
-			JsonTreeLiAttr liAttr=new JsonTreeLiAttr();
-			liAttr.setGroup(String.valueOf(list.get(i).getGroupId()));
-			liAttr.setLevel(String.valueOf(list.get(i).getLevel()));
-			liAttr.setGroupMucServerId(String.valueOf(list.get(i).getId()));
-			jsonTree.setLi_attr(liAttr);
-			treeList.add(jsonTree);
+			builder.text(String.valueOf(list.get(i).getServerId()))
+			.group(String.valueOf(list.get(i).getGroupId()))
+			.level(String.valueOf(list.get(i).getLevel()))
+			.groupServerId(String.valueOf(list.get(i).getId()));
+			treeList.add(builder.build());
 		}
-		//增加最顶层的根，id为root
-		JsonTree rootTree=new JsonTree();
-		rootTree.setParent("#");
-		rootTree.setId("root");
-		rootTree.setText("root");
-		JsonTreeLiAttr liAttr=new JsonTreeLiAttr();
-		liAttr.setGroup("-1");
-		liAttr.setLevel("-1");
-		liAttr.setGroupMucServerId("-1");
-		rootTree.setLi_attr(liAttr);
+		JsonTree rootTree=JsonTree.jsonTreeBuilder("root","#")
+		.text("root")
+		.group("-1")
+		.level("-1")
+		.groupServerId("-1")
+		.build();
 		treeList.add(rootTree);
 		String result =JSONArray.fromObject(treeList).toString();
 		response.setCharacterEncoding("utf-8");

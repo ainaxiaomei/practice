@@ -206,7 +206,7 @@
 		//获取当前层级
      var level=object.li_attr.level;
 	 //root不能删除
-	 if(group==-1||id==-1||level==-1){
+	 if(group==-1||id=="root"||level==-1){
 		 alert("Root Can Not Delete!");
 		 return;
 	 }
