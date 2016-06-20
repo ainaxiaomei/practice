@@ -182,12 +182,12 @@ public class ApplicationService implements IApplicationService {
 	public int deleteMcu(int id) {
 		 mcuDao.deleteMCU(id);
 		 //删除groupmcuserver同时删除子层级
-		 return deleteByParentid(id);
+		 return deleteMcuByParentid(id);
 	}
 	@Override
 	public int deleteAudioServer(int serverId) {
 		 audioDao.deleteAudio(serverId);
-		 return groupAudioServerDao.deleteByServerId(serverId);
+		 return deleteAudioByParentid(serverId);
 	}
 	@Override
 	public int deleteGateServer(int serverId) {
@@ -296,12 +296,12 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String deleteGroupMcuServer(int id) {
-		 deleteByParentid(id);
+		deleteMcuByParentid(id);
 		 //查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
 		 return JSONArray.fromObject(list).toString();
 	}
-	public int deleteByParentid(int id){
+	public int deleteMcuByParentid(int id){
 		//查出该节点的子节点
 		List<GroupMcuServers> list=groupMcuServerDao.getchildren(id);
 		if(list==null||list.isEmpty()){
@@ -312,7 +312,24 @@ public class ApplicationService implements IApplicationService {
 			groupMcuServerDao.deleteGroupMCUByServerId(id);
 			//递归调用
 			for(int i=0;i<list.size();i++){
-				deleteByParentid(list.get(i).getServerId());
+				deleteMcuByParentid(list.get(i).getServerId());
+			}
+		}
+		return 0;
+		
+	}
+	public int deleteAudioByParentid(int id){
+		//查出该节点的子节点
+		List<GroupAudioServers> list=groupAudioServerDao.getchildren(id);
+		if(list==null||list.isEmpty()){
+			//没有子节点直接删除
+			groupAudioServerDao.deleteByServerId(id);
+		}else{
+			//先删除父节点
+			groupAudioServerDao.deleteByServerId(id);
+			//递归调用
+			for(int i=0;i<list.size();i++){
+				deleteAudioByParentid(list.get(i).getServerId());
 			}
 		}
 		return 0;
@@ -338,7 +355,7 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String deleteGroupAudio(int groupId) {
-		 groupAudioDao.deleteGroupAudio(groupId);
+		groupAudioDao.deleteGroupAudio(groupId);
 		 //查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
 		 return JSONArray.fromObject(list).toString();
@@ -377,7 +394,7 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String deleteGroupAudioServer(int groupId) {
-		 groupAudioServerDao.deleteGroupAudioServer(groupId);
+		deleteAudioByParentid(groupId);
 		//查寻所有的indexDb中的httpurl
 		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
 		 return JSONArray.fromObject(list).toString();
@@ -485,6 +502,44 @@ public class ApplicationService implements IApplicationService {
 		}
 		JsonTree rootTree=JsonTree.jsonTreeBuilder("root","#")
 		.text("Mcu Server Tree")
+		.group("-1")
+		.level("-1")
+		.groupServerId("-1")
+		.build();
+		treeList.add(rootTree);
+		String result =JSONArray.fromObject(treeList).toString();
+		return result;
+	}
+	@Override
+	public String getAudioServerTree(GroupAudioServers groupAudioServer) {
+		List<GroupAudioServers> list=this.getGroupAudioServer(groupAudioServer,-1,-1);
+		List<JsonTree> treeList=new ArrayList<JsonTree>();
+		for(int i=0;i<list.size();i++){
+			JsonTreeBulider builder=new JsonTreeBulider();
+			if(list.get(i).getLevel()==0){
+				//根层级
+				 builder=JsonTree.jsonTreeBuilder(String.valueOf(list.get(i).getServerId()),"root");
+			}else{
+				 builder=JsonTree.jsonTreeBuilder(String.valueOf(list.get(i).getServerId()),String.valueOf(list.get(i).getLeftParentId()));
+			}
+			//查询名称
+			AudioServer audio=new AudioServer();
+			audio.setServerId(list.get(i).getServerId());
+			List<AudioServer> mcuList=audioDao.getAudioServer(audio, -1, -1);
+			if(list!=null&&!list.isEmpty()){
+				builder.text(mcuList.get(0).getServerName());
+			}else{
+				//其实是错误数据
+				builder.text(String.valueOf(list.get(i).getServerId()));
+			}
+			
+			builder.group(String.valueOf(list.get(i).getGroupId()))
+			.level(String.valueOf(list.get(i).getLevel()))
+			.groupServerId(String.valueOf(list.get(i).getId()));
+			treeList.add(builder.build());
+		}
+		JsonTree rootTree=JsonTree.jsonTreeBuilder("root","#")
+		.text("Audio Server Tree")
 		.group("-1")
 		.level("-1")
 		.groupServerId("-1")

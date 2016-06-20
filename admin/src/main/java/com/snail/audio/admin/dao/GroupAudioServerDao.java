@@ -52,6 +52,11 @@ public class GroupAudioServerDao implements IGroupAudioServerDao{
 		return groupAudioServerMapperExt.getAudioServerId(serverId);
 	}
 
+	@Override
+	public List<GroupAudioServers> getchildren(int serverId) {
+		return groupAudioServerMapperExt.getChildrenByServerId(serverId);
+	}
+
 	
 	
 	

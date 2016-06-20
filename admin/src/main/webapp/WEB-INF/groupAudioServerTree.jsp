@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GroupMcuServer  Config</title>
+  <title>GroupAudioServer  Config</title>
   <%String path=getServletContext().getContextPath();%>
   <jsp:include page="common/common-head.jsp"></jsp:include>
 </head>
@@ -19,7 +19,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        GroupMcuServer  Configuration
+        GroupAudioServer  Configuration
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -32,7 +32,7 @@
     <section class="content">
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">GroupMcuServerTree</h3>
+          <h3 class="box-title">GroupAudioServerTree</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -40,7 +40,7 @@
           </div>
         </div>
         <!-- /.box-header -->
-		<div class="box-body" id="mcuTree">
+		<div class="box-body" id="audioTree">
 		</div>
 					<!-- /.box-body -->
         <div class="box-footer">
@@ -70,13 +70,13 @@
 <!-- page script -->
  <script type="text/javascript">
    $(function () { 
-	  $("#tables #mcuConfig").attr("class","active");
-   	  $("#tables #groupMcuServers").attr("class","active");
-      $('#mcuTree').jstree({
+	$("#tables #audioConfig").attr("class","active");
+   	$("#tables #groupAudioServers").attr("class","active");
+      $('#audioTree').jstree({
     	  "core" : {
     		"check_callback" : true,
     		"data" : {
-  				"url" : "<%=path%>/GroupMcuServerTree",
+  				"url" : "<%=path%>/groupAudioServerTree",
   			}
   		},
   		"contextmenu":{
@@ -103,7 +103,7 @@
   						    object.serverId=id;
   						    object.level=level;
   						    object.group=group;
-  							var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
+  							var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
   			        	   if(returnVal=="success"){
   			        		   //创建成功
   			        		// inst.create_node(obj, {}, "last", function (new_node) {
@@ -151,7 +151,7 @@
            	  //清空进度条
            	  $( "#progressbar" ).progressbar( "value", 0 );
            	  //刷新
-           	$.jstree.reference($('#mcuTree')).refresh();
+           	$.jstree.reference($('#audioTree')).refresh();
            	 
    		}
    	});
@@ -214,7 +214,7 @@
 		$.vakata.context.hide();
  	 $.ajax(
       		{ type:"POST",
-      		  url:"<%=path%>/groupMcuServerDelete",
+      		  url:"<%=path%>/groupAudioServerDelete",
       		  data:"Id="+serverId,
       		  success:function(data){
       			  var dataArray=$.parseJSON(data); 

@@ -15,4 +15,5 @@ public interface GroupAudioServersMapperExt extends  GroupAudioServersMapper{
     public int deleteByGroupId(int groupId);
     public int deleteByServerId(int serverId);
     public List<GroupAudioServers> getAudioServerId(int serverId);
+    public List<GroupAudioServers> getChildrenByServerId(int serverId);
 }

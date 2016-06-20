@@ -31,6 +31,13 @@
         limit #{start},#{end}
       </if>
   </select>
+    <!-- 查询直接子节点 -->
+  <select id="getChildrenByServerId"  resultMap="BaseResultMap" parameterType="int">
+    select 
+    <include refid="Base_Column_List" />
+    from group_audio_servers
+    where left_parent_id=#{serverId}
+  </select>
   <select id="getAudioServerId"  resultMap="BaseResultMap" parameterType="int">
     select 
     <include refid="Base_Column_List" />

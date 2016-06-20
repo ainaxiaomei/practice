@@ -137,6 +137,8 @@ public interface IApplicationService {
      public List<Device> getDevice(Device device,int start,int pagSize);
      //查询mucServerTree返回json
      public String getMcuServerTree(GroupMcuServers groupMcuServer);
+     //查询audioServerTree返回json
+     public String getAudioServerTree(GroupAudioServers groupMcuServer);
      
      
 

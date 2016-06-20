@@ -102,7 +102,7 @@ public class BaseControl {
 	@RequestMapping("/groupAudioServer")
 	public String toGroupAudioServer(Model model,HttpServletRequest request){
 		
-		return "groupAudioServer";
+		return "groupAudioServerTree";
 		
 	}
 	@RequestMapping("/groupAudioServerAdd")
@@ -236,6 +236,15 @@ public class BaseControl {
 	public void getGroupMcuServerTree(HttpServletRequest request,HttpServletResponse response,GroupMcuServers groupMcuServer) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		String result=service.getMcuServerTree(groupMcuServer);
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json;charset=utf-8");
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/groupAudioServerTree")
+	public void getGroupAudioServerTree(HttpServletRequest request,HttpServletResponse response,GroupAudioServers groupAudioServer) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		String result=service.getAudioServerTree(groupAudioServer);
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=utf-8");
 		response.getWriter().printf(result);
