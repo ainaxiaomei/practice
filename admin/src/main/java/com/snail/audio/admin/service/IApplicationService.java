@@ -135,6 +135,8 @@ public interface IApplicationService {
      public int deleteDevice(String key);
      //查询device
      public List<Device> getDevice(Device device,int start,int pagSize);
+     //查询mucServerTree返回json
+     public String getMcuServerTree(GroupMcuServers groupMcuServer);
      
      
 

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+import com.snail.audio.admin.dao.MCUDao;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
@@ -234,30 +235,7 @@ public class BaseControl {
 	@RequestMapping("/GroupMcuServerTree")
 	public void getGroupMcuServerTree(HttpServletRequest request,HttpServletResponse response,GroupMcuServers groupMcuServer) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		List<GroupMcuServers> list=service.getGroupMcuServer(groupMcuServer,-1,-1);
-		List<JsonTree> treeList=new ArrayList<JsonTree>();
-		for(int i=0;i<list.size();i++){
-			JsonTreeBulider builder=new JsonTreeBulider();
-			if(list.get(i).getLevel()==0){
-				//根层级
-				 builder=JsonTree.jsonTreeBuilder(String.valueOf(list.get(i).getServerId()),"root");
-			}else{
-				 builder=JsonTree.jsonTreeBuilder(String.valueOf(list.get(i).getServerId()),String.valueOf(list.get(i).getLeftParentId()));
-			}
-			builder.text(String.valueOf(list.get(i).getServerId()))
-			.group(String.valueOf(list.get(i).getGroupId()))
-			.level(String.valueOf(list.get(i).getLevel()))
-			.groupServerId(String.valueOf(list.get(i).getId()));
-			treeList.add(builder.build());
-		}
-		JsonTree rootTree=JsonTree.jsonTreeBuilder("root","#")
-		.text("root")
-		.group("-1")
-		.level("-1")
-		.groupServerId("-1")
-		.build();
-		treeList.add(rootTree);
-		String result =JSONArray.fromObject(treeList).toString();
+		String result=service.getMcuServerTree(groupMcuServer);
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=utf-8");
 		response.getWriter().printf(result);

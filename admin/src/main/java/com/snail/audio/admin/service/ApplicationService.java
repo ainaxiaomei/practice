@@ -43,6 +43,8 @@ import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
 import com.snail.audio.admin.exception.JSonException;
+import com.snail.audio.admin.json.jsonObject.JsonTree;
+import com.snail.audio.admin.json.jsonObject.JsonTreeBulider;
 
 import net.sf.json.JSONArray;
 @Service
@@ -452,6 +454,44 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public List<Device> getDevice(Device device, int start, int pagSize) {
 		return deviceDao.getDevice(device, start, pagSize);
+	}
+	@Override
+	public String getMcuServerTree(GroupMcuServers groupMcuServer) {
+		List<GroupMcuServers> list=this.getGroupMcuServer(groupMcuServer,-1,-1);
+		List<JsonTree> treeList=new ArrayList<JsonTree>();
+		for(int i=0;i<list.size();i++){
+			JsonTreeBulider builder=new JsonTreeBulider();
+			if(list.get(i).getLevel()==0){
+				//根层级
+				 builder=JsonTree.jsonTreeBuilder(String.valueOf(list.get(i).getServerId()),"root");
+			}else{
+				 builder=JsonTree.jsonTreeBuilder(String.valueOf(list.get(i).getServerId()),String.valueOf(list.get(i).getLeftParentId()));
+			}
+			//查询名称
+			McuServer mcu=new McuServer();
+			mcu.setServerId(list.get(i).getServerId());
+			List<McuServer> mcuList=mcuDao.getMCU(mcu, -1, -1);
+			if(list!=null&&!list.isEmpty()){
+				builder.text(mcuList.get(0).getServerName());
+			}else{
+				//其实是错误数据
+				builder.text(String.valueOf(list.get(i).getServerId()));
+			}
+			
+			builder.group(String.valueOf(list.get(i).getGroupId()))
+			.level(String.valueOf(list.get(i).getLevel()))
+			.groupServerId(String.valueOf(list.get(i).getId()));
+			treeList.add(builder.build());
+		}
+		JsonTree rootTree=JsonTree.jsonTreeBuilder("root","#")
+		.text("Mcu Server Tree")
+		.group("-1")
+		.level("-1")
+		.groupServerId("-1")
+		.build();
+		treeList.add(rootTree);
+		String result =JSONArray.fromObject(treeList).toString();
+		return result;
 	}
 
 }
