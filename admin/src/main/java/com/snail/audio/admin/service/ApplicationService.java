@@ -548,5 +548,26 @@ public class ApplicationService implements IApplicationService {
 		String result =JSONArray.fromObject(treeList).toString();
 		return result;
 	}
+	@Override
+	public List<App> selectApp(App app, Integer serverId, int start, int pageSize) {
+		//查出serverId中的applds
+		IndexDb indexDb=new IndexDb();
+		indexDb.setServerId(serverId);
+		if(serverId!=null&&serverId>0){
+			List<IndexDb> list=indeDbDao.getIndexDb(indexDb, -1, -1);
+			if(list!=null&&list.size()>0){
+				String[] appids=list.get(0).getAppids().split(",");
+				return appDao.selectApp(app, appids, start, pageSize);
+			}else{
+				//错误数据
+				return appDao.selectApp(app, null, start, pageSize);
+			}
+		}else{
+			return appDao.selectApp(app, null, start, pageSize);
+		}
+		
+		 
+		
+	}
 
 }

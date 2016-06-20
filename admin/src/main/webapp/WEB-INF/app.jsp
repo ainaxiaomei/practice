@@ -44,6 +44,7 @@
 						<form class="form-horizontal" role="form" id="searchForm">
 							<fieldset>
 					                       <div class="form-group">
+					                         <input style="display:none" class="form-control" id="serverId" name="serverId" type="text" />
 					                          <label class="col-sm-1 control-label" >App Id</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" id="appid" name="appid" type="text" />
@@ -171,6 +172,8 @@
                 	//样式处理
                 	var param=window.dialogArguments;
     	        	if(param&&param.action=="SELECT"){
+    	        		serverId=param.serverId;
+    	        		$("#serverId").val(serverId);
     	        		//选择页面
     	        		$("#modifyButton").hide();
     	        		$("#deleteButton").hide();
@@ -178,33 +181,59 @@
     	        		//$("#occupied").val(0);
     	        		//$("#occupied").attr("disabled","disabled");
     	        		$("#occupyDiv").html("<input class='form-control'  name='occupied' value='false' readonly='true' type='text' />");
+    	        		
+    	        		//初始化表格
+                	    appTable=$('#appTable').dataTable( {
+    					select:true,
+    					searching:false,
+    					paging: true,
+    					ajax: {
+    						"url": "<%=path%>/appSelect",
+    					    "type": "POST",
+    					    "dataSrc": "",
+    					    "data":condition2Json
+    					    
+    					},
+    					"columns": [
+    								{ "data": "appid" },
+    								{ "data": "companyId" },
+    				                { "data": "beginUid" },
+    				                { "data": "endUid" },
+    				                { "data": "curUid" },
+    				                { "data": "contacts" },
+    				                { "data": "description" },
+    				                { "data": "occupied" },
+    				                
+    				            ],
+    				} );
     	        	}else{
     	        		$("#selectButton").hide();
+    	        		//初始化表格
+                	    appTable=$('#appTable').dataTable( {
+    					select:true,
+    					searching:false,
+    					paging: true,
+    					ajax: {
+    						"url": "<%=path%>/appSearch",
+    					    "type": "POST",
+    					    "dataSrc": "",
+    					    "data":condition2Json
+    					    
+    					},
+    					"columns": [
+    								{ "data": "appid" },
+    								{ "data": "companyId" },
+    				                { "data": "beginUid" },
+    				                { "data": "endUid" },
+    				                { "data": "curUid" },
+    				                { "data": "contacts" },
+    				                { "data": "description" },
+    				                { "data": "occupied" },
+    				                
+    				            ],
+    				} );
     	        	}
-    	        	//初始化表格
-            	    appTable=$('#appTable').dataTable( {
-					select:true,
-					searching:false,
-					paging: true,
-					ajax: {
-						"url": "<%=path%>/appSearch",
-					    "type": "POST",
-					    "dataSrc": "",
-					    "data":condition2Json
-					    
-					},
-					"columns": [
-								{ "data": "appid" },
-								{ "data": "companyId" },
-				                { "data": "beginUid" },
-				                { "data": "endUid" },
-				                { "data": "curUid" },
-				                { "data": "contacts" },
-				                { "data": "description" },
-				                { "data": "occupied" },
-				                
-				            ],
-				} );
+    	        	
             	  //表格选择
             	    var table = $('#appTable').DataTable();
                 	table.on( 'select', function ( e, dt, type, indexes ) {

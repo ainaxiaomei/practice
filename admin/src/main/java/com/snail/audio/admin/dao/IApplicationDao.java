@@ -10,6 +10,7 @@ import com.snail.audio.admin.entity.Company;
 @Repository
 public interface IApplicationDao {
 	public List<App> getApplicationt(App app,int start,int end);
+	public List<App> selectApp(App app,String[] appids,int start,int end);
     public int ModityApplication(App app);
     public int deleteApplication(int appId);
     public int addApplication(App app);

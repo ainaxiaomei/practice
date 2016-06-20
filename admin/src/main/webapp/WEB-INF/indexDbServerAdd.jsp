@@ -250,6 +250,7 @@
         	 //传参
 	        	var object=new Object();
 	        	object.action="SELECT";
+	        	object.serverId=$("#serverId").val();
 	        	var returnVal=window.showModalDialog("<%=path%>/app",object,"dialogWidth=1200px;dialogHeight=800px");
 	        	//将返回值填到表单
 	        	$("#appids").val(returnVal);

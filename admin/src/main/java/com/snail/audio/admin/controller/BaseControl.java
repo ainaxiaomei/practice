@@ -270,6 +270,16 @@ public class BaseControl {
 		response.getWriter().printf(result);
 		
 	}
+	@RequestMapping("/appSelect")
+	public void appSelect(HttpServletRequest request,HttpServletResponse response,App app,@RequestParam(value="serverId",required=false)Integer serverId) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<App> list=service.selectApp(app, serverId,-1,-1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
 	@RequestMapping("/comapnySearch")
 	public void comapnySearch(HttpServletRequest request,HttpServletResponse response,Company company) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);

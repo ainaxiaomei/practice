@@ -23,6 +23,8 @@ import com.snail.audio.admin.entity.McuServer;
 public interface IApplicationService {
 	 //查询所有应用
      public List<App> getApplication(App app,int start,int pageSize);
+     //indexDb页面选择app
+     public List<App> selectApp(App app,Integer serverId,int start,int pageSize);
      //修改应用信息
      public int ModifyApplication(App app);
      //删除应用

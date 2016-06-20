@@ -21,7 +21,9 @@ public class MapperTest {
 		SqlSessionFactory sessionFactoryBean=(SqlSessionFactory)applicatioContext.getBean("sqlSessionFactory");
 		SqlSession session=sessionFactoryBean.openSession();
 		AppMapperExt mapper=session.getMapper(AppMapperExt.class);
-		List<App> result=mapper.getApplications(0,5);
+		App app=new App();
+		app.setOccupied(false);
+		List<App> result=mapper.selectApp(app, 123411, -1, -1);
 		System.out.println(result);
 	}
 

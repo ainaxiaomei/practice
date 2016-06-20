@@ -37,5 +37,9 @@ public class ApplicaitonDAO implements IApplicationDao{
 		String array[]=appids.split(",");
 		return appMapperExt.setAppOccupied(state, array);
 	}
+	@Override
+	public List<App> selectApp(App app, String[] appids, int start, int end) {
+		return appMapperExt.selectApp(app, appids, start, end);
+	}
 	
 }
