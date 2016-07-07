@@ -299,8 +299,10 @@
               		  data:"groupId="+id,
               		  success:function(data){
               		 // alert("Delete Success");
-              		  var dataArray=$.parseJSON(data); 
-                    	  sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId").val()+"&act=0");
+              		  var table=$('#groupAudioTable').DataTable(); 
+	                	  table.ajax.reload();
+              		 // var dataArray=$.parseJSON(data); 
+                    	  //sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId").val()+"&act=0");
               		 
               			  },
               		  error:function(msg){

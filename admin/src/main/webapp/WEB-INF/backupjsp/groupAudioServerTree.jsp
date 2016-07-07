@@ -42,7 +42,6 @@
         <!-- /.box-header -->
 		<div class="box-body" id="audioTree">
 		</div>
-		<button type="button" id="msgButton"  class="btn btn-primary">一键发送</button>
 					<!-- /.box-body -->
         <div class="box-footer">
         </div>
@@ -68,39 +67,11 @@
              
      </div>
  </div>
- <div class="modal fade" id="msgDialog" tabindex="-1" role="dialog" 
-   aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" 
-               data-dismiss="modal" aria-hidden="true">
-                  &times;
-            </button>
-            <h4 class="modal-title" id="myModalLabel">
-               模态框（Modal）标题
-            </h4>
-         </div>
-         <div class="modal-body">
-            在这里添加一些文本
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-default" 
-               data-dismiss="modal">关闭
-            </button>
-            <button type="button" class="btn btn-primary">
-               提交更改
-            </button>
-         </div>
-      </div><!-- /.modal-content -->
-</div>
 <!-- page script -->
  <script type="text/javascript">
-   var MSGQ=new Object();
    $(function () { 
 	$("#tables #audioConfig").attr("class","active");
    	$("#tables #groupAudioServers").attr("class","active");
-   	$("#msgButton").click(sendMsg);
       $('#audioTree').jstree({
     	  "core" : {
     		"check_callback" : true,
@@ -135,10 +106,9 @@
   							var returnVal=window.showModalDialog("<%=path%>/groupAudioServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
   			        	   if(returnVal=="success"){
   			        		   //创建成功
-  			        		   if(!MSGQ[group.toString()+"&act=1"]){
-  			        			 var msg ="cmd=mcugroup_change&id="+group+"&act=1"; 
-  			        			MSGQ[group.toString()+"&act=1"]=msg;
-  			        		   }
+  			        		// inst.create_node(obj, {}, "last", function (new_node) {
+   							//	setTimeout(function () { inst.edit(new_node); },0);
+   							// });
   			        		inst.refresh(); 
   			        	   }
   							
@@ -162,7 +132,7 @@
   								inst.delete_node(obj);
   							}*/
   						}
-  					}//end remove 
+  					}//end remove
   			    }
   			}
   		},
@@ -170,12 +140,6 @@
       
       }); 
         	});
-   function sendMsg(){
-  		var length=Object.getOwnPropertyNames(MSGQ).length;
-  		$('#dialog').modal({
-  	      keyboard: true
-  	   });
-  	}
    function sendHttpMsg(dataArray,msg){
    	var progressbar = $( "#progressbar" ).progressbar({
    		 max: dataArray.length

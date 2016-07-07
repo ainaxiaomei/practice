@@ -306,9 +306,11 @@
                     		  url:"<%=path%>/saveGroupAudioServer",
                     		  data:$("#groupAudioServer").serialize(),
                     		  success:function(data){
-                    			 var dataArray=$.parseJSON(data); 
-                          	  sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId")+"&act=2");
-                    			  },
+                    		  //	 var dataArray=$.parseJSON(data); 
+                          	 // sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId")+"&act=2");
+                    			  window.returnValue = "success";  //返回值
+                           		  window.close();
+                    		  },
                     		  error:function(msg){
                     		 window.returnValue = "error";  //返回值
                     			  alert("error!"+msg.responseText);

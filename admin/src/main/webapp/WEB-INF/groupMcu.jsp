@@ -301,7 +301,9 @@
               		  data:"groupId="+id,
               		  success:function(data){
               	      var dataArray=$.parseJSON(data); 
-                   	  sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId").val()+"&act=0");
+                   	  //sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId").val()+"&act=0");
+              	      var table=$('#groupMcuTable').DataTable(); 
+	                  table.ajax.reload();
               			  },
               		  error:function(msg){
               			  alert("error!"+msg);

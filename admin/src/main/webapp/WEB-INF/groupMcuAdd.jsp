@@ -167,7 +167,9 @@
                  		  data:$("#mcuForm").serialize(),
                  		  success:function(data){
                  			 var dataArray=$.parseJSON(data); 
-                    	      sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=1");
+                    	      //sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=1");
+                 			 window.returnValue = "success";  //返回值
+                   		     window.close();
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
@@ -185,7 +187,9 @@
                  		  data:$("#mcuForm").serialize(),
                  		  success:function(data){
                  			 var dataArray=$.parseJSON(data); 
-                   	      sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=2");
+                   	      //sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=2");
+                 			 window.returnValue = "success";  //返回值
+                   		     window.close();
                  			  },
                  		  error:function(msg){
                  		 window.returnValue = "error";  //返回值
