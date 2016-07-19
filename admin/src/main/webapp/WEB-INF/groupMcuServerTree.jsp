@@ -67,6 +67,22 @@
              
      </div>
  </div>
+<!-- dialog -->
+<div class="modal fade " id="model" tabindex="-1"  aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:1200px;height:850px">
+	      <div class="modal-content" style="width:1200px;height:850px">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	         </div>
+	         <div class="modal-body" style="width:1200px;height:800px;padding:0px" >
+	           <iframe id="modelFrame" width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="true" allowtransparency="yes"></iframe>
+	         </div>
+	      </div>
+     </div>
+</div>
 <!-- page script -->
  <script type="text/javascript">
    $(function () { 
@@ -103,8 +119,11 @@
   						    object.serverId=id;
   						    object.level=level;
   						    object.group=group;
-  							var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
-  			        	   if(returnVal=="success"){
+  							//var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
+  			        	    var iframe=$("#modelFrame");
+  			        	    iframe.src="<%=path%>/groupMcuServerAdd";
+      						$('#model').modal({backdrop: 'static', keyboard: false});
+  							if(returnVal=="success"){
   			        		   //创建成功
   			        		// inst.create_node(obj, {}, "last", function (new_node) {
    							//	setTimeout(function () { inst.edit(new_node); },0);
@@ -139,6 +158,7 @@
   		 "plugins" : [ "contextmenu" ]
       
       }); 
+     
         	});
    function sendHttpMsg(dataArray,msg){
    	var progressbar = $( "#progressbar" ).progressbar({
@@ -159,7 +179,7 @@
    	
    	setTimeout(function (){
    		process(a,dataArray,msg);
-   	},80);
+   	},80); 
 	
    	
    }
