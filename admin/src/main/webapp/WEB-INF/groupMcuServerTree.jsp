@@ -119,12 +119,9 @@
   						    object.serverId=id;
   						    object.level=level;
   						    object.group=group;
+  						    //为了兼容原先的window.showModelDialog
   						    var json="{\"serverId\":"+id+",\"level\":"+level+",\"group\":"+group+"}";
-  						    var param=encodeURI(json);
-  							//var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
-  			        	    var iframe=$("#modelFrame");
-  			        	    iframe.attr("src","<%=path%>/groupMcuServerAdd?param="+param);
-      						$('#model').modal({backdrop: 'static', keyboard: false});
+  						    showDialog("<%=path%>/groupMcuServerAdd",json);
   							if(returnVal=="success"){
   			        		   //创建成功
   			        		// inst.create_node(obj, {}, "last", function (new_node) {

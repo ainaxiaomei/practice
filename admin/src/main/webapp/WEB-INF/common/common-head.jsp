@@ -70,6 +70,12 @@
 		var r = window.location.search.substr(1).match(reg); 
 		if (r != null) return unescape(r[2]); return null; 
 		} 
+	function showDialog(url,json){
+		   var param=encodeURI(json);
+	 	   var iframe=$("#modelFrame");
+	 	   iframe.attr("src",url+"?param="+param);
+				$('#model').modal({backdrop: 'static', keyboard: false});
+	   }
 </script>
 
         
