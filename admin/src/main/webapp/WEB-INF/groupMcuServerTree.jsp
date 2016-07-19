@@ -77,8 +77,8 @@
 	                  &times;
 	            </button>
 	         </div>
-	         <div class="modal-body" style="width:1200px;height:800px;padding:0px" >
-	           <iframe id="modelFrame" width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="true" allowtransparency="yes"></iframe>
+	         <div class="modal-body" id="modalBody" style="width:1200px;height:800px;padding:0px" >
+	           <iframe id="modelFrame"  width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="true" allowtransparency="yes"></iframe>
 	         </div>
 	      </div>
      </div>
@@ -119,9 +119,11 @@
   						    object.serverId=id;
   						    object.level=level;
   						    object.group=group;
+  						    var json="{\"serverId\":"+id+",\"level\":"+level+",\"group\":"+group+"}";
+  						    var param=encodeURI(json);
   							//var returnVal=window.showModalDialog("<%=path%>/groupMcuServerAdd",object,"dialogWidth=1000px;dialogHeight=600px");
   			        	    var iframe=$("#modelFrame");
-  			        	    iframe.src="<%=path%>/groupMcuServerAdd";
+  			        	    iframe.attr("src","<%=path%>/groupMcuServerAdd?param="+param);
       						$('#model').modal({backdrop: 'static', keyboard: false});
   							if(returnVal=="success"){
   			        		   //创建成功

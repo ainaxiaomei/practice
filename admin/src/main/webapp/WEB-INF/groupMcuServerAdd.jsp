@@ -120,7 +120,9 @@
         		jQuery.validator.addMethod("NotSame", function(value, element) {
 	    	    	  return this.optional(element) || $("#leftParentId").val()!=$("#rightParentId").val();
 	    	    	}, "left and right parent can't be same");*/
-	        	var param=window.dialogArguments;
+	    	    var json=getUrlParam("param");
+	    	    var param=$.parseJSON(json);
+	        	//var param=window.dialogArguments;
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
 	        		//改变单击事件
@@ -169,7 +171,6 @@
 	        		
 	        	}
 	        });
-	        
 	       function selectServerId(e){
 	        	//传参
 	        	var object=new Object();
