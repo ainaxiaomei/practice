@@ -264,3 +264,19 @@
       </div>
     </nav>
   </header>
+  <!-- dialog -->
+<div class="modal fade " id="model" tabindex="-1"  aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:1200px;height:850px">
+	      <div class="modal-content" style="width:1200px;height:850px">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	         </div>
+	         <div class="modal-body" id="modalBody" style="width:1200px;height:800px;padding:0px" >
+	           <iframe id="modelFrame"  width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="true" allowtransparency="yes"></iframe>
+	         </div>
+	      </div>
+     </div>
+</div>

@@ -181,7 +181,9 @@
                 	    }
                 	} );
                 	//样式处理
-                	var param=window.dialogArguments;
+                	//var param=window.dialogArguments;
+                	var json=getUrlParam("param");
+	    	        var param=$.parseJSON(json);
     	        	if(param&&param.action=="SELECT"){
     	        		//选择页面
     	        		$("#modifyButton").hide();

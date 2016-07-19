@@ -175,7 +175,9 @@
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
+	        	//var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
+	        	var json="{\"action\":\"SELECT\""+"}";
+  				showDialog("<%=path%>/mcuServer",json);
 	        	//将返回值填到表单
 	        	$("#serverId").val(returnVal);
 	        }
