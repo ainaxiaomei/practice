@@ -32,7 +32,7 @@
   <!-- jQuery 2.2.0 -->
 <script src="<%=path%>/common/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="<%=path%>/common/bootstrap/js/bootstrap.min.js"></script>
+<script src="<%=path%>/common/bootstrap/js/bootstrap.js"></script>
 <!-- DataTables -->
 <script src="<%=path%>/common/plugins/datatables/js/jquery.dataTables.min.js"></script>
 <script src="<%=path%>/common/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
@@ -74,7 +74,11 @@
 		   var param=encodeURI(json);
 	 	   var iframe=$("#modelFrame");
 	 	   iframe.attr("src",url+"?param="+param);
-				$('#model').modal({backdrop: 'static', keyboard: false});
+		   var model=$(document.getElementById('model'));
+		   model.modal({backdrop: 'static', keyboard: false});
+		   model.attr("class","modal fade in");
+ 		   model.attr("style","display:block");
+ 		   $(".modal-backdrop,.fade,.in",window.parent.document).attr("style","display:block");
 	   }
 </script>
 

@@ -67,6 +67,21 @@
              
      </div>
  </div>
+ <div class="modal fade " id="model" tabindex="-1"  aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:1200px;height:850px">
+	      <div class="modal-content" style="width:1200px;height:850px">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	         </div>
+	         <div class="modal-body" id="modalBody" style="width:1200px;height:800px;padding:0px" >
+	           <iframe id="modelFrame"  width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="true" allowtransparency="yes"></iframe>
+	         </div>
+	      </div>
+     </div>
+</div>
 <!-- page script -->
  <script type="text/javascript">
    $(function () { 
@@ -106,6 +121,7 @@
   						    //为了兼容原先的window.showModelDialog
   						    var json="{\"serverId\":"+id+",\"level\":"+level+",\"group\":"+group+"}";
   						    showDialog("<%=path%>/groupMcuServerAdd",json);
+  						    
   							if(returnVal=="success"){
   			        		   //创建成功
   			        		// inst.create_node(obj, {}, "last", function (new_node) {

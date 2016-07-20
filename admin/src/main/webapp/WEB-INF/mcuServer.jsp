@@ -201,7 +201,14 @@
            	  var id= Tnode.cells[0].firstChild.nodeValue;
            	  //返回serverId
              window.returnValue = id;  //返回值
-   		     window.close();
+   		    // window.close();
+   		     var model=$("#model",window.parent.document);
+   		    // var model=$(window.parent.document.getElementById("model"));
+   		     model.attr("class","modal fade ");
+   		     model.attr("style","display:none");
+   		     $(".modal-backdrop,.fade,.in",window.parent.document).attr("style","display:none");
+		     //model.modal('hide');
+		    // model.context.hidden=true;
             }
             
             //查询
