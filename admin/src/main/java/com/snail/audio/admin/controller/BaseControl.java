@@ -2,12 +2,15 @@ package com.snail.audio.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.core.MediaType;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -402,6 +405,16 @@ public class BaseControl {
 	public String deleteApp(HttpServletRequest request,@RequestParam("appId")int appId){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.deleteApplication(appId);
+		return "success";
+		
+	}
+	@ResponseBody
+	@RequestMapping("/sendMessage")
+	public String send(HttpServletRequest request,@RequestParam("ips")String ips,@RequestParam("msg")String msg,@RequestParam("type")String type){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+	    List<String> list =new ArrayList<String>();
+	    list.addAll(Arrays.asList(ips.split(",")));
+	    service.send(list, msg, type);
 		return "success";
 		
 	}

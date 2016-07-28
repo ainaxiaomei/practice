@@ -2,8 +2,11 @@ package com.snail.audio.admin.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
@@ -141,6 +144,9 @@ public interface IApplicationService {
      public String getMcuServerTree(GroupMcuServers groupMcuServer);
      //查询audioServerTree返回json
      public String getAudioServerTree(GroupAudioServers groupMcuServer);
+     //发送http消息
+ 	 public String send(List<String> ips,String msg,String type);
+
      
      
 

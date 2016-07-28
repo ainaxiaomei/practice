@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
 import com.snail.audio.admin.dao.ApplicaitonDAO;
@@ -565,9 +567,49 @@ public class ApplicationService implements IApplicationService {
 		}else{
 			return appDao.selectApp(app, null, start, pageSize);
 		}
-		
-		 
-		
+	}
+	@Override
+	public String send(List<String> ips, String msg, String type) {
+		if(!ips.isEmpty()){
+			//属于重发操作直接发送给相应的ip
+		}else{
+			List<String> ipList=new ArrayList<String>();
+			if("GATE".equals(type)){
+				//向网关服务器发送
+				//查询网关服务器地址
+				List<IndexGate> list=gateDao.getGateServer(new IndexGate(), -1, -1);
+				for(int i=0;i<list.size();i++){
+					ipList.add(list.get(i).getHttpUrl());
+				}
+			}else if("DB".equals(type)){
+				//向DB服务器发送
+				//查询服务器地址
+				List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+				for(int i=0;i<list.size();i++){
+					ipList.add(list.get(i).getHttpUrl());
+				}
+			}else if("ALL".equals(type)){
+				//两个服务器都发送
+				List<IndexGate> list=gateDao.getGateServer(new IndexGate(), -1, -1);
+				for(int i=0;i<list.size();i++){
+					ipList.add(list.get(i).getHttpUrl());
+				}
+				List<IndexDb> list1=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+				for(int i=0;i<list1.size();i++){
+					ipList.add(list1.get(i).getHttpUrl());
+				}
+			}
+			for(int i=0;i<ips.size();i++){
+				Client client = ClientBuilder.newClient();
+		    	WebTarget target = client.target(ips.get(i));
+		    	Response response= target.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.json(msg));
+		    	response.readEntity(String.class);
+		    	response.close();
+		    	client.close();
+			}
+			
+		}
+		return null;
 	}
 
 }

@@ -163,8 +163,11 @@
                  		  url:"<%=path%>/deviceModify",
                  		  data:$("#deviceForm").serialize(),
                  		  success:function(data){
-                 			 var dataArray=$.parseJSON( data ); 
-                 			 sendHttpMsg(dataArray);
+                 			// var dataArray=$.parseJSON( data ); 
+                 			// sendHttpMsg(dataArray);
+                 			
+                 			 notifyServer({"ips":"","msg":"cmd=deviceparams_change","type":"GATE"});
+                 			// notifyServer("ips=''&msg='cmd\=deviceparams_change'&type='Gate'");
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
@@ -175,6 +178,24 @@
                  		  
                  	  );
 	        }
+	       function notifyServer(msg){
+	    	   $.ajax(
+                		{ type:"POST",
+                		  url:"<%=path%>/sendMessage",
+                		  data:msg,
+                		  //contentType:"application/json",
+                		  success:function(data){
+                			  alert(data);
+                			  },
+                		  error:function(data){
+                			  alert("error!");
+                			 window.returnValue = "error";  //返回值
+                		  	}
+                		 }
+                		  
+                		  
+                	  );
+	       }
            function saveMcu(){
         	   $.ajax(
                  		{ type:"POST",
