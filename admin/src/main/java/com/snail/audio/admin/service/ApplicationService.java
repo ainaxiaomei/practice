@@ -570,6 +570,7 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String send(List<String> ips, String msg, String type) {
+		List<String> failList=new ArrayList<String>();
 		if(!ips.isEmpty()){
 			//属于重发操作直接发送给相应的ip
 		}else{
@@ -599,17 +600,36 @@ public class ApplicationService implements IApplicationService {
 					ipList.add(list1.get(i).getHttpUrl());
 				}
 			}
-			for(int i=0;i<ips.size();i++){
+			for(int i=0;i<ipList.size();i++){
 				Client client = ClientBuilder.newClient();
-		    	WebTarget target = client.target(ips.get(i));
-		    	Response response= target.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.json(msg));
-		    	response.readEntity(String.class);
-		    	response.close();
-		    	client.close();
+		    	WebTarget target = client.target("http://"+ipList.get(i));
+		    	Response response=null;
+		    	try{
+		             response= target.request(MediaType.TEXT_PLAIN).post(Entity.text(msg));
+			    	if(response.getStatus()==200){
+			    		response.readEntity(String.class);
+			    	}else{
+			    		//发送失败
+			    		failList.add(ipList.get(i));
+			    	}
+		    	}catch(Exception e){
+		    		//发送失败
+		    		failList.add(ipList.get(i));
+		    	}finally{
+		    		if(response!=null){
+		    			response.close();
+		    		}
+		    		if(client!=null){
+		    			client.close();
+		    		}
+			    	
+		    	}
+		    	
+		    	
 			}
 			
 		}
-		return null;
+		return JSONArray.fromObject(failList).toString();
 	}
 
 }

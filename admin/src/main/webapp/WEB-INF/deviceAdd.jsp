@@ -84,6 +84,30 @@
              
      </div>
  </div>
+</style>  
+ <div class="modal fade" id="waitModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               Send Message To Server
+            </h4>
+         </div>
+         <div class="modal-body">
+            <img src="/admin/images/loader.gif" style="padding-left:50%"/>  
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
 <!-- page script -->
            <script type="text/javascript">
 	        $(function() {
@@ -128,7 +152,7 @@
 	        	
 	        }
 	        function process(a,dataArray){
-        		var httpurl=dataArray[a].httpUrl;
+        		var httpurl="http://"+dataArray[a].httpUrl;
         		$.ajax(
                  		{ type:"POST",
                  		  url:httpurl,
@@ -163,11 +187,14 @@
                  		  url:"<%=path%>/deviceModify",
                  		  data:$("#deviceForm").serialize(),
                  		  success:function(data){
-                 			// var dataArray=$.parseJSON( data ); 
-                 			// sendHttpMsg(dataArray);
-                 			
+                 			 //var dataArray=$.parseJSON( data ); 
+                 			 //sendHttpMsg(dataArray);
+                 			 
+                 			 $("#waitModal").modal({
+                 			      keyboard: true,
+                 			     backdrop:"static"
+                 			   });
                  			 notifyServer({"ips":"","msg":"cmd=deviceparams_change","type":"GATE"});
-                 			// notifyServer("ips=''&msg='cmd\=deviceparams_change'&type='Gate'");
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
@@ -185,9 +212,16 @@
                 		  data:msg,
                 		  //contentType:"application/json",
                 		  success:function(data){
-                			  alert(data);
+                			  
+                			  //alert(data);
+                			 setTimeout(function(){
+                				 $('#waitModal').modal('hide');
+                  			},200);
                 			  },
                 		  error:function(data){
+                			  setTimeout(function(){
+                 				 $('#waitModal').modal('hide');
+                   			},200);
                 			  alert("error!");
                 			 window.returnValue = "error";  //返回值
                 		  	}

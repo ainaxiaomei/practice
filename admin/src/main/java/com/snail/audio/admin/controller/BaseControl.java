@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpRequest;
@@ -413,9 +414,10 @@ public class BaseControl {
 	public String send(HttpServletRequest request,@RequestParam("ips")String ips,@RequestParam("msg")String msg,@RequestParam("type")String type){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 	    List<String> list =new ArrayList<String>();
-	    list.addAll(Arrays.asList(ips.split(",")));
-	    service.send(list, msg, type);
-		return "success";
+	    if(StringUtils.isNotBlank(ips)){
+	    	list.addAll(Arrays.asList(ips.split(",")));
+	    }
+	    return service.send(list, msg, type);
 		
 	}
 	@ResponseBody
