@@ -11,6 +11,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,10 +49,10 @@ import com.snail.audio.admin.entity.McuServer;
 import com.snail.audio.admin.exception.JSonException;
 import com.snail.audio.admin.json.jsonObject.JsonTree;
 import com.snail.audio.admin.json.jsonObject.JsonTreeBulider;
-
 import net.sf.json.JSONArray;
 @Service
 public class ApplicationService implements IApplicationService {
+	 static Logger logger = LoggerFactory.getLogger(ApplicationService.class);
 	@Autowired
 	private IApplicationDao appDao;
 	@Autowired
@@ -573,6 +575,32 @@ public class ApplicationService implements IApplicationService {
 		List<String> failList=new ArrayList<String>();
 		if(!ips.isEmpty()){
 			//属于重发操作直接发送给相应的ip
+			for(int i=0;i<ips.size();i++){
+				Client client = ClientBuilder.newClient();
+		    	WebTarget target = client.target(ips.get(i));
+		    	Response response=null;
+		    	try{
+		             response= target.request(MediaType.TEXT_PLAIN).get();
+			    	if(response.getStatus()==200){
+			    		String returnValue=response.readEntity(String.class);
+			    		System.out.println(returnValue);
+			    	}else{
+			    		//发送失败
+			    		failList.add(ips.get(i));
+			    	}
+		    	}catch(Exception e){
+		    		//发送失败
+		    		failList.add(ips.get(i));
+		    	}finally{
+		    		if(response!=null){
+		    			response.close();
+		    		}
+		    		if(client!=null){
+		    			client.close();
+		    		}
+			    	
+		    	}
+			}
 		}else{
 			List<String> ipList=new ArrayList<String>();
 			if("GATE".equals(type)){
@@ -580,34 +608,35 @@ public class ApplicationService implements IApplicationService {
 				//查询网关服务器地址
 				List<IndexGate> list=gateDao.getGateServer(new IndexGate(), -1, -1);
 				for(int i=0;i<list.size();i++){
-					ipList.add(list.get(i).getHttpUrl());
+					ipList.add("http://"+list.get(i).getHttpUrl()+"/"+msg);
 				}
 			}else if("DB".equals(type)){
 				//向DB服务器发送
 				//查询服务器地址
 				List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
 				for(int i=0;i<list.size();i++){
-					ipList.add(list.get(i).getHttpUrl());
+					ipList.add("http://"+list.get(i).getHttpUrl()+"/"+msg);
 				}
 			}else if("ALL".equals(type)){
 				//两个服务器都发送
 				List<IndexGate> list=gateDao.getGateServer(new IndexGate(), -1, -1);
 				for(int i=0;i<list.size();i++){
-					ipList.add(list.get(i).getHttpUrl());
+					ipList.add("http://"+list.get(i).getHttpUrl()+"/"+msg);
 				}
 				List<IndexDb> list1=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
 				for(int i=0;i<list1.size();i++){
-					ipList.add(list1.get(i).getHttpUrl());
+					ipList.add("http://"+list1.get(i).getHttpUrl()+"/"+msg);
 				}
 			}
 			for(int i=0;i<ipList.size();i++){
 				Client client = ClientBuilder.newClient();
-		    	WebTarget target = client.target("http://"+ipList.get(i));
+		    	WebTarget target = client.target(ipList.get(i));
 		    	Response response=null;
 		    	try{
-		             response= target.request(MediaType.TEXT_PLAIN).post(Entity.text(msg));
+		             response= target.request(MediaType.TEXT_PLAIN).get();
 			    	if(response.getStatus()==200){
-			    		response.readEntity(String.class);
+			    		String returnValue=response.readEntity(String.class);
+			    		System.out.println(returnValue);
 			    	}else{
 			    		//发送失败
 			    		failList.add(ipList.get(i));

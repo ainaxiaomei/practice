@@ -99,11 +99,20 @@
             </h4>
          </div>
          <div class="modal-body">
-            <img src="/admin/images/loader.gif" style="padding-left:50%"/>  
+            <img id="imgLoading"src="/admin/images/loader.gif" style="padding-left:45%"/>
+            <div id="opSuccess" style="display:none">
+                 Operation Success
+            </div>  
+            <div id="opError" style="display:none">
+                 Not All Server Received The Message...
+            </div>  
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-default" 
                data-dismiss="modal">关闭
+            </button>
+            <button type="button" style="display:none" class="btn btn-primary" 
+               data-dismiss="modal" onclick="showSideControl()" id="detail">详情
             </button>
          </div>
       </div><!-- /.modal-content -->
@@ -132,6 +141,14 @@
 	        		//改变单击事件
 	        		$("#saveButton").click(saveMcu);
 	        	}
+	        	//对话框
+	        	$('#waitModal').on('hide.bs.modal', function () {
+                 //恢复弹出框的状态
+	        	  $("#imgLoading").show();
+   				  $("#opError").hide();
+   				  $("#opSuccess").hide();
+   				  $("#detail").hide();
+                 });
 	        });
 	        function sendHttpMsg(dataArray){
 	        	var progressbar = $( "#progressbar" ).progressbar({
@@ -212,18 +229,41 @@
                 		  data:msg,
                 		  //contentType:"application/json",
                 		  success:function(data){
-                			  
+                			  var dataArray=$.parseJSON(data);
+                			  if(!dataArray.length||dataArray.lehgth<=0){
+                				  //没有发送失败
+                				  $("#imgLoading").hide();
+                				  $("#opSuccess").show();
+                			  }else{
+                				  //设置失败url列表
+                				  $.each(dataArray,function (id,value){
+                					  $("#failUrls").append(
+                     					     '<li><a href="javascript:resend(\"'+value+'\")"><i class="menu-icon fa fa-user bg-yellow"></i>'
+     										 +'<div class="menu-info"><h4 class="control-sidebar-subheading">'
+                     			              + value
+                     			              +'</div></a></li>'); 
+                				  })
+                				  $("#imgLoading").hide();
+                				  $("#opError").show();
+                				  $("#detail").show();
+                				  
+                				  
+                				  
+                			  }
                 			  //alert(data);
+                			  /*
                 			 setTimeout(function(){
                 				 $('#waitModal').modal('hide');
-                  			},200);
+                  			},1000);*/
                 			  },
                 		  error:function(data){
+                			  /*
                 			  setTimeout(function(){
                  				 $('#waitModal').modal('hide');
-                   			},200);
-                			  alert("error!");
-                			 window.returnValue = "error";  //返回值
+                   			},1000);*/
+                   			  $("#imgLoading").hide();
+          				      $("#opError").show();
+          				      $("#detail").show();
                 		  	}
                 		 }
                 		  

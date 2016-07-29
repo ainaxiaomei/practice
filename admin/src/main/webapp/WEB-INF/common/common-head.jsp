@@ -80,6 +80,32 @@
  		   model.attr("style","display:block");
  		   $(".modal-backdrop,.fade,.in",window.parent.document).attr("style","display:block");
 	   }
+	function showSideControl(){
+		$('#ctlSideBar').addClass("control-sidebar-open");
+	}
+	//重发消息
+	function resend(val,object){
+		 $.ajax(
+         		{ type:"POST",
+         		  url:"<%=path%>/sendMessage",
+         		  data:{"ips":val,"msg":"","type":""},
+         		  //contentType:"application/json",
+         		  success:function(data){
+         			  var dataArray=$.parseJSON(data);
+         			  if(!dataArray.length||dataArray.lehgth<=0){
+         				  alert("success!");
+         			  }else{
+         				  alert("fail");
+         			    }
+         			  },
+         		  error:function(data){
+         			     alert("error");
+         		  	}
+         		 }
+         		  
+         		  
+         	  );
+    }
 </script>
 
         
