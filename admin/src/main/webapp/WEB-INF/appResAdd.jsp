@@ -137,6 +137,14 @@
 	        		//改变单击事件
 	        		$("#saveButton").click(saveAppRes);
 	        	}
+	        	//对话框
+	        	$('#waitModal').on('hide.bs.modal', function () {
+                 //恢复弹出框的状态
+	        	  $("#imgLoading").show();
+   				  $("#opError").hide();
+   				  $("#opSuccess").hide();
+   				  $("#detail").hide();
+                 });
 	        });
            var groupSelectUrl="<%=path%>/groupMcu";
            function groupTypeChange(){
@@ -183,8 +191,8 @@
                  		  url:"<%=path%>/saveAppRes",
                  		  data:$("#appResForm").serialize(),
                  		  success:function(data){
-                 			 var dataArray=$.parseJSON(data); 
-                   	      sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=2");
+                 			 window.returnValue = "success";
+                   			 notifyServer({"ips":"","msg":"cmd=appres_change&id=appid&act=2","type":"DB"});
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
@@ -196,62 +204,14 @@
                  		  
                  	  );
            }
-           function sendHttpMsg(dataArray,msg){
-	        	var progressbar = $( "#progressbar" ).progressbar({
-	        		 max: dataArray.length
-	        	    });
-	        	$( "#dialog" ).dialog({
-	        		close: function( event, ui ) {
-	        			  window.returnValue = "success";  //返回值
-               		  window.close();
-	        		}
-	        	});
-	        	var a=0;
-	        	
-	        	setTimeout(function (){
-	        		process(a,dataArray,msg);
-	        	},80);
-       		
-	        	
-	        }
-	        function process(a,dataArray,msg){
-       		var httpurl=dataArray[a].httpUrl;
-       		$.ajax(
-                		{ type:"POST",
-                		  url:httpurl,
-                		  data:msg,
-                		   async :false,
-                		  success:function(){
-         	        		setProgress(httpurl,"success");
-                			  },
-                		  error:function(msg){
-                		     //发送服务器失败网路问题
-                			setProgress(httpurl,"error");
-                		  	}
-                		 }
-                		  
-                		  
-                	  );
-       		if(a<dataArray.length){
-       			setTimeout(function(){
-       				process(++a,dataArray,msg)
-       			},80);
-       		}
-       	}
-	        function setProgress(url,status){
-	        	var progressbar = $( "#progressbar" );
-	        	 var val = progressbar.progressbar( "value" ) || 0;
-   		      progressbar.progressbar( "value", val + 1 );
-   		     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
-	        }
            function modifyAppRes(){
         	   $.ajax(
                 		{ type:"POST",
                 		  url:"<%=path%>/appResModify",
                 		  data:$("#appResForm").serialize(),
                 		  success:function(data){
-                			  var dataArray=$.parseJSON(data); 
-                    	      sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=1");
+                			  window.returnValue = "success";
+                   			 notifyServer({"ips":"","msg":"cmd=appres_change&id=appid&act=1","type":"DB"});
                 			  },
                 		  error:function(msg){
                 			  alert("error!"+msg);

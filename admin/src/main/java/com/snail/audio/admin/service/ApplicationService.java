@@ -633,6 +633,8 @@ public class ApplicationService implements IApplicationService {
 			}
 			for(int i=0;i<ipList.size();i++){
 				Client client = ClientBuilder.newClient();
+				client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
+			    client.property(ClientProperties.READ_TIMEOUT,    1000);
 		    	WebTarget target = client.target(ipList.get(i));
 		    	Response response=null;
 		    	try{

@@ -121,6 +121,14 @@
 	        		//改变单击事件
 	        		$("#saveButton").click(saveMcu);
 	        	}
+	        	//对话框
+	        	$('#waitModal').on('hide.bs.modal', function () {
+                 //恢复弹出框的状态
+	        	  $("#imgLoading").show();
+   				  $("#opError").hide();
+   				  $("#opSuccess").hide();
+   				  $("#detail").hide();
+                 });
 	        })
 	       function modifyMcu(){
 	        	$.ajax(
@@ -128,11 +136,8 @@
                  		  url:"<%=path%>/dictionaryModify",
                  		  data:$("#dictForm").serialize(),
                  		  success:function(data){
-                 			 var dataArray=$.parseJSON(data); 
-                 			 sendHttpMsg(dataArray);
-                 		 // alert("Modify Success");
-                 		 // window.returnValue = "success";  //返回值
-                 		 // window.close();
+                 			 window.returnValue = "success";
+                 			 notifyServer({"ips":"","msg":"cmd=reload_dics","type":"GATE"});
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);

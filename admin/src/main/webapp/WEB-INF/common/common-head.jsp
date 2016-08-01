@@ -111,6 +111,10 @@
          	  );
     }
 	function notifyServer(msg){
+		 $("#waitModal").modal({
+		      keyboard: true,
+		     backdrop:"static"
+		   });
  	   $.ajax(
          		{ type:"POST",
          		  url:"<%=path%>/sendMessage",
@@ -149,7 +153,7 @@
          			  setTimeout(function(){
           				 $('#waitModal').modal('hide');
             			},1000);*/
-            			  $("#imgLoading").hide();
+            		  $("#imgLoading").hide();
    				      $("#opError").show();
    				      $("#detail").show();
          		  	}
