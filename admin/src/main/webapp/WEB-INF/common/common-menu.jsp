@@ -265,4 +265,36 @@
     </nav>
   </header>
   <!-- dialog -->
-
+ <div class="modal fade" id="waitModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               Send Message To Server
+            </h4>
+         </div>
+         <div class="modal-body">
+            <img id="imgLoading"src="/admin/images/loader.gif" style="padding-left:45%"/>
+            <div id="opSuccess" style="display:none">
+                 Operation Success
+            </div>  
+            <div id="opError" style="display:none">
+                 Not All Server Received The Message...
+            </div>  
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+            <button type="button" style="display:none" class="btn btn-primary" 
+               data-dismiss="modal" onclick="showSideControl()" id="detail">详情
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal -->
+</div>

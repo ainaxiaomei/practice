@@ -11,6 +11,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.client.ClientProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -577,6 +578,8 @@ public class ApplicationService implements IApplicationService {
 			//属于重发操作直接发送给相应的ip
 			for(int i=0;i<ips.size();i++){
 				Client client = ClientBuilder.newClient();
+				client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
+			    client.property(ClientProperties.READ_TIMEOUT,    1000);
 		    	WebTarget target = client.target(ips.get(i));
 		    	Response response=null;
 		    	try{

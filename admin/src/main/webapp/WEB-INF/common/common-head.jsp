@@ -84,7 +84,9 @@
 		$('#ctlSideBar').addClass("control-sidebar-open");
 	}
 	//重发消息
-	function resend(val,object){
+	function resend(val,id){
+		//显示等待
+		$("#i-"+id).show();
 		 $.ajax(
          		{ type:"POST",
          		  url:"<%=path%>/sendMessage",
@@ -94,12 +96,62 @@
          			  var dataArray=$.parseJSON(data);
          			  if(!dataArray.length||dataArray.lehgth<=0){
          				  alert("success!");
+         				 $("#li-"+id).remove();
          			  }else{
          				  alert("fail");
+         				 $("#i-"+id).hide();
          			    }
          			  },
          		  error:function(data){
          			     alert("error");
+         		  	}
+         		 }
+         		  
+         		  
+         	  );
+    }
+	function notifyServer(msg){
+ 	   $.ajax(
+         		{ type:"POST",
+         		  url:"<%=path%>/sendMessage",
+         		  data:msg,
+         		  //contentType:"application/json",
+         		  success:function(data){
+         			  var dataArray=$.parseJSON(data);
+         			  if(!dataArray.length||dataArray.lehgth<=0){
+         				  //没有发送失败
+         				  $("#imgLoading").hide();
+         				  $("#opSuccess").show();
+         			  }else{
+         				  //设置失败url列表
+         				  $.each(dataArray,function (id,value){
+         					  $("#failUrls").append(
+              					     '<li id=li-'+id+'>'+'<a href="javascript:resend('+'\''+value+'\''+","+'\''+id+'\''+')"><i class="menu-icon fa fa-user bg-yellow"></i>'
+										 +'<div class="menu-info"><h4 class="control-sidebar-subheading">'
+              			              + value
+              			              +'<i id="i-'+id+'"'+' class="fa fa-refresh fa-spin" style="display:none"></i>'+'</div></a></li>'); 
+         				  });
+         				  $("#imgLoading").hide();
+         				  $("#opError").show();
+         				  $("#detail").show();
+         				  
+         				  
+         				  
+         			  }
+         			  //alert(data);
+         			  /*
+         			 setTimeout(function(){
+         				 $('#waitModal').modal('hide');
+           			},1000);*/
+         			  },
+         		  error:function(data){
+         			  /*
+         			  setTimeout(function(){
+          				 $('#waitModal').modal('hide');
+            			},1000);*/
+            			  $("#imgLoading").hide();
+   				      $("#opError").show();
+   				      $("#detail").show();
          		  	}
          		 }
          		  

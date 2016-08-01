@@ -56,6 +56,7 @@
 					                    </fieldset>
 					                    <div >   
 					                     <button type="button" id="saveButton"  class="btn btn-primary">Save</button>
+					                     <button type="button" id="closeButton" style="display:none" class="btn btn-primary">Close</button>
 					                    </div>
 					                </form>
 					</div>
@@ -85,38 +86,7 @@
      </div>
  </div>
 </style>  
- <div class="modal fade" id="waitModal" tabindex="-1" role="dialog" 
-   aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" 
-               data-dismiss="modal" aria-hidden="true">
-                  &times;
-            </button>
-            <h4 class="modal-title" id="myModalLabel">
-               Send Message To Server
-            </h4>
-         </div>
-         <div class="modal-body">
-            <img id="imgLoading"src="/admin/images/loader.gif" style="padding-left:45%"/>
-            <div id="opSuccess" style="display:none">
-                 Operation Success
-            </div>  
-            <div id="opError" style="display:none">
-                 Not All Server Received The Message...
-            </div>  
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-default" 
-               data-dismiss="modal">关闭
-            </button>
-            <button type="button" style="display:none" class="btn btn-primary" 
-               data-dismiss="modal" onclick="showSideControl()" id="detail">详情
-            </button>
-         </div>
-      </div><!-- /.modal-content -->
-</div><!-- /.modal -->
+
 <!-- page script -->
            <script type="text/javascript">
 	        $(function() {
@@ -126,6 +96,7 @@
 	        		//是修改界面
 	        		//改变单击事件
 	        		$("#saveButton").click(modifyMcu);
+	        		$("#closeButton").click(closeWindow);
 	        		//填充表单
 	        		  var columns= [
 							"devtype" ,
@@ -150,53 +121,8 @@
    				  $("#detail").hide();
                  });
 	        });
-	        function sendHttpMsg(dataArray){
-	        	var progressbar = $( "#progressbar" ).progressbar({
-	        		 max: dataArray.length
-	        	    });
-	        	$( "#dialog" ).dialog({
-	        		close: function( event, ui ) {
-	        			  window.returnValue = "success";  //返回值
-                		  window.close();
-	        		}
-	        	});
-	        	var a=0;
-	        	
-	        	setTimeout(function (){
-	        		process(a,dataArray);
-	        	},80);
-        		
-	        	
-	        }
-	        function process(a,dataArray){
-        		var httpurl="http://"+dataArray[a].httpUrl;
-        		$.ajax(
-                 		{ type:"POST",
-                 		  url:httpurl,
-                 		  data:"cmd=deviceparams_change",
-                 		   async :false,
-                 		  success:function(){
-          	        		setProgress(httpurl,"success");
-                 			  },
-                 		  error:function(msg){
-                 		     //发送服务器失败网路问题
-                 			setProgress(httpurl,"error");
-                 		  	}
-                 		 }
-                 		  
-                 		  
-                 	  );
-        		if(a<dataArray.length){
-        			setTimeout(function(){
-        				process(++a,dataArray)
-        			},80);
-        		}
-        	}
-	        function setProgress(url,status){
-	        	var progressbar = $( "#progressbar" );
-	        	 var val = progressbar.progressbar( "value" ) || 0;
-    		      progressbar.progressbar( "value", val + 1 );
-    		     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
+	        function closeWindow(){
+	        	window.close();
 	        }
 	       function modifyMcu(){
 	        	$.ajax(
@@ -206,7 +132,7 @@
                  		  success:function(data){
                  			 //var dataArray=$.parseJSON( data ); 
                  			 //sendHttpMsg(dataArray);
-                 			 
+                 			 window.returnValue = "success";
                  			 $("#waitModal").modal({
                  			      keyboard: true,
                  			     backdrop:"static"
@@ -222,54 +148,7 @@
                  		  
                  	  );
 	        }
-	       function notifyServer(msg){
-	    	   $.ajax(
-                		{ type:"POST",
-                		  url:"<%=path%>/sendMessage",
-                		  data:msg,
-                		  //contentType:"application/json",
-                		  success:function(data){
-                			  var dataArray=$.parseJSON(data);
-                			  if(!dataArray.length||dataArray.lehgth<=0){
-                				  //没有发送失败
-                				  $("#imgLoading").hide();
-                				  $("#opSuccess").show();
-                			  }else{
-                				  //设置失败url列表
-                				  $.each(dataArray,function (id,value){
-                					  $("#failUrls").append(
-                     					     '<li><a href="javascript:resend(\"'+value+'\")"><i class="menu-icon fa fa-user bg-yellow"></i>'
-     										 +'<div class="menu-info"><h4 class="control-sidebar-subheading">'
-                     			              + value
-                     			              +'</div></a></li>'); 
-                				  })
-                				  $("#imgLoading").hide();
-                				  $("#opError").show();
-                				  $("#detail").show();
-                				  
-                				  
-                				  
-                			  }
-                			  //alert(data);
-                			  /*
-                			 setTimeout(function(){
-                				 $('#waitModal').modal('hide');
-                  			},1000);*/
-                			  },
-                		  error:function(data){
-                			  /*
-                			  setTimeout(function(){
-                 				 $('#waitModal').modal('hide');
-                   			},1000);*/
-                   			  $("#imgLoading").hide();
-          				      $("#opError").show();
-          				      $("#detail").show();
-                		  	}
-                		 }
-                		  
-                		  
-                	  );
-	       }
+	       
            function saveMcu(){
         	   $.ajax(
                  		{ type:"POST",
