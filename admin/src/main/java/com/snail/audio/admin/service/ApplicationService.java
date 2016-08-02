@@ -11,6 +11,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang.StringUtils;
 import org.glassfish.jersey.client.ClientProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -575,25 +576,33 @@ public class ApplicationService implements IApplicationService {
 	public String send(List<String> ips, String msg, String type) {
 		List<String> failList=new ArrayList<String>();
 		if(!ips.isEmpty()){
-			//属于重发操作直接发送给相应的ip
+			//直接发送给相应的ip
 			for(int i=0;i<ips.size();i++){
 				Client client = ClientBuilder.newClient();
 				client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
 			    client.property(ClientProperties.READ_TIMEOUT,    1000);
-		    	WebTarget target = client.target(ips.get(i));
+			    String url=ips.get(i);
+			    if(StringUtils.isBlank(url)){
+			    	logger.debug("illegel httpurl:"+url);
+			    	continue;
+			    }
+			    logger.debug("-----start send message to:"+url);
+		    	WebTarget target = client.target(url);
 		    	Response response=null;
 		    	try{
 		             response= target.request(MediaType.TEXT_PLAIN).get();
 			    	if(response.getStatus()==200){
 			    		String returnValue=response.readEntity(String.class);
-			    		System.out.println(returnValue);
+			    		logger.debug("-----send message success to:"+url);
 			    	}else{
 			    		//发送失败
-			    		failList.add(ips.get(i));
+			    		failList.add(url);
+			    		logger.debug("-----send message fail to:"+url);
 			    	}
 		    	}catch(Exception e){
 		    		//发送失败
-		    		failList.add(ips.get(i));
+		    		failList.add(url);
+		    		logger.debug("-----send message fail to:"+url);
 		    	}finally{
 		    		if(response!=null){
 		    			response.close();
@@ -641,7 +650,6 @@ public class ApplicationService implements IApplicationService {
 		             response= target.request(MediaType.TEXT_PLAIN).get();
 			    	if(response.getStatus()==200){
 			    		String returnValue=response.readEntity(String.class);
-			    		System.out.println(returnValue);
 			    	}else{
 			    		//发送失败
 			    		failList.add(ipList.get(i));

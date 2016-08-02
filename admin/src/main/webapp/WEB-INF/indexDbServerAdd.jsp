@@ -212,11 +212,14 @@
                  		  data:$("#indexDbForm").serialize(),
                  		  success:function(data){
                  		  var dataArray=$.parseJSON(data); 
-                 		 //增加当前indexDb的httpurl
-              			 var object=new Object();
-              			 object.httpUrl=$("#httpUrl").val();
-              			 dataArray.push(object);
-                 		  sendHttpMsg(dataArray);
+              			 var httpUrls="";
+              			$.each(dataArray,function (id,value){
+              					httpUrls=httpUrls+("http://"+value.httpUrl+"/cmd=indexdb_change"+",");
+              			});
+              		    //增加当前indexDb的httpurl
+              			httpUrls=httpUrls+"http://"+$("#httpUrl").val()+"/cmd=indexdb_change";;
+              			 window.returnValue = "success";
+            			 notifyServer({"ips":httpUrls,"msg":"","type":""});
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
