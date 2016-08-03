@@ -8,9 +8,10 @@
     <result column="svc_url" property="svcUrl" jdbcType="VARCHAR" />
     <result column="http_url" property="httpUrl" jdbcType="VARCHAR" />
     <result column="com_url" property="comUrl" jdbcType="VARCHAR" />
+    <result column="valid" property="valid" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    server_id, server_name, dspnum, svc_url, http_url, com_url
+    server_id, server_name, dspnum, svc_url, http_url, com_url, valid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,16 +25,18 @@
   </delete>
   <insert id="insert" parameterType="com.snail.audio.admin.entity.McuServer" >
     insert into mcu_servers (server_id, server_name, dspnum, 
-      svc_url, http_url, com_url
-      )
+      svc_url, http_url, com_url, 
+      valid)
     values (#{serverId,jdbcType=INTEGER}, #{serverName,jdbcType=VARCHAR}, #{dspnum,jdbcType=INTEGER}, 
-      #{svcUrl,jdbcType=VARCHAR}, #{httpUrl,jdbcType=VARCHAR}, #{comUrl,jdbcType=VARCHAR}
-      )
+      #{svcUrl,jdbcType=VARCHAR}, #{httpUrl,jdbcType=VARCHAR}, #{comUrl,jdbcType=VARCHAR}, 
+      #{valid,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.McuServer" keyProperty="server_id">
+  <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.McuServer" >
     insert into mcu_servers
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      
+      <if test="serverId != null" >
+        server_id,
+      </if>
       <if test="serverName != null" >
         server_name,
       </if>
@@ -49,9 +52,14 @@
       <if test="comUrl != null" >
         com_url,
       </if>
+      <if test="valid != null" >
+        valid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      
+      <if test="serverId != null" >
+        #{serverId,jdbcType=INTEGER},
+      </if>
       <if test="serverName != null" >
         #{serverName,jdbcType=VARCHAR},
       </if>
@@ -66,6 +74,9 @@
       </if>
       <if test="comUrl != null" >
         #{comUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -87,6 +98,9 @@
       <if test="comUrl != null" >
         com_url = #{comUrl,jdbcType=VARCHAR},
       </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=BIT},
+      </if>
     </set>
     where server_id = #{serverId,jdbcType=INTEGER}
   </update>
@@ -96,7 +110,8 @@
       dspnum = #{dspnum,jdbcType=INTEGER},
       svc_url = #{svcUrl,jdbcType=VARCHAR},
       http_url = #{httpUrl,jdbcType=VARCHAR},
-      com_url = #{comUrl,jdbcType=VARCHAR}
+      com_url = #{comUrl,jdbcType=VARCHAR},
+      valid = #{valid,jdbcType=BIT}
     where server_id = #{serverId,jdbcType=INTEGER}
   </update>
 </mapper>

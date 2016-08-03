@@ -67,6 +67,10 @@
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="comUrl" name="comUrl" type="text"/>
 					                          </div>
+					                          <label class="col-sm-1 control-label" >Valid</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control"  id="valid" name="valid" type="text"/>
+					                          </div>
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
@@ -114,7 +118,9 @@
 	   			                 "dspnum",
 	   			                "svcUrl" ,
 	   			                 "httpUrl" ,
-	   			                 "comUrl" 
+	   			                 "comUrl" ,
+	   			                 "valid" 
+	   			                 
 	   			                
 	   			            ];
 	        		for(var i=0;i<columns.length;i++){

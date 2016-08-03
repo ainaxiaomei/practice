@@ -95,21 +95,6 @@
              
      </div>
  </div>
- <div class="modal fade " id="model" tabindex="-1"  aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:1200px;height:850px">
-	      <div class="modal-content" style="width:1200px;height:850px">
-	         <div class="modal-header">
-	            <button type="button" class="close" 
-	               data-dismiss="modal" aria-hidden="true">
-	                  &times;
-	            </button>
-	         </div>
-	         <div class="modal-body" id="modalBody" style="width:1200px;height:800px;padding:0px" >
-	           <iframe id="modelFrame"  width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="true" allowtransparency="yes"></iframe>
-	         </div>
-	      </div>
-     </div>
-</div>
 <!-- page script -->
            <script type="text/javascript">
 	        $(function() {
@@ -135,9 +120,7 @@
         		jQuery.validator.addMethod("NotSame", function(value, element) {
 	    	    	  return this.optional(element) || $("#leftParentId").val()!=$("#rightParentId").val();
 	    	    	}, "left and right parent can't be same");*/
-	    	    var json=getUrlParam("param");
-	    	    var param=$.parseJSON(json);
-	        	//var param=window.dialogArguments;
+	        	var param=window.dialogArguments;
 	        	if(param.action=="MODIFY"){
 	        		//是修改界面
 	        		//改变单击事件
@@ -186,13 +169,12 @@
 	        		
 	        	}
 	        });
+	        
 	       function selectServerId(e){
 	        	//传参
 	        	var object=new Object();
 	        	object.action="SELECT";
-	        	//var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
-	        	var json="{\"action\":\"SELECT\""+"}";
-  				showDialog("<%=path%>/mcuServer",json);
+	        	var returnVal=window.showModalDialog("<%=path%>/mcuServer",object,"dialogWidth=1200px;dialogHeight=900px");
 	        	//将返回值填到表单
 	        	$("#serverId").val(returnVal);
 	        }
@@ -313,8 +295,9 @@
                     		  url:"<%=path%>/saveGroupMcuServer",
                     		  data:$("#groupMcuServer").serialize(),
                     		  success:function(data){
-                    			 var dataArray=$.parseJSON(data); 
-                      	      sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=2");
+                    			  window.returnValue = "success";
+                    			  var msg="cmd=mcugroup_change&id="+$("#groupId").val()+"&act=2";
+                       			notifyServer({"ips":"","msg":msg,"type":"DB"});
                     			  },
                     		  error:function(msg){
                     		 window.returnValue = "error";  //返回值

@@ -71,6 +71,16 @@
 										<input class="form-control" name="comUrl" type="text" />
 									</div>
 								</div>
+								<div class="form-group">
+								<label class="col-sm-1 control-label" >Valid</label>
+						            <div class="col-sm-3">
+						                  <select class="form-control" id="valid" name="valid"> 
+										  <option value=""></option> 
+										  <option value="0">false</option> 
+										  <option value="1">true</option> 
+										 </select>
+						            </div>
+					            </div>
 							</fieldset>
 							<div>
 								<button type="button" onclick="serachMcu()"
@@ -100,6 +110,7 @@
                         <th>SVC URL</th>
                         <th>HTTP URL</th>
                         <th>Com URL</th>
+                        <th>Valid</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -169,7 +180,8 @@
 				                { "data": "dspnum" },
 				                { "data": "svcUrl" },
 				                { "data": "httpUrl" },
-				                { "data": "comUrl" }
+				                { "data": "comUrl" },
+				                { "data": "valid" }
 				                
 				            ],
 				} );
@@ -181,9 +193,7 @@
                 	    }
                 	} );
                 	//样式处理
-                	//var param=window.dialogArguments;
-                	var json=getUrlParam("param");
-	    	        var param=$.parseJSON(json);
+                	var param=window.dialogArguments;
     	        	if(param&&param.action=="SELECT"){
     	        		//选择页面
     	        		$("#modifyButton").hide();
@@ -201,14 +211,7 @@
            	  var id= Tnode.cells[0].firstChild.nodeValue;
            	  //返回serverId
              window.returnValue = id;  //返回值
-   		    // window.close();
-   		     var model=$("#model",window.parent.document);
-   		    // var model=$(window.parent.document.getElementById("model"));
-   		     model.attr("class","modal fade ");
-   		     model.attr("style","display:none");
-   		     $(".modal-backdrop,.fade,.in",window.parent.document).attr("style","display:none");
-		     //model.modal('hide');
-		    // model.context.hidden=true;
+   		     window.close();
             }
             
             //查询
@@ -243,7 +246,9 @@
 			                 "dspnum",
 			                "svcUrl" ,
 			                 "httpUrl" ,
-			                 "comUrl" 
+			                 "comUrl" ,
+			                 "valid" 
+
 			                
 			            ];
  			   for(var i=0;i<cells.length;i++){

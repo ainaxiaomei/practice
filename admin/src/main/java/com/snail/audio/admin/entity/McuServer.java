@@ -13,6 +13,8 @@ public class McuServer {
 
     private String comUrl;
 
+    private Boolean valid;
+
     public Integer getServerId() {
         return serverId;
     }
@@ -59,5 +61,13 @@ public class McuServer {
 
     public void setComUrl(String comUrl) {
         this.comUrl = comUrl == null ? null : comUrl.trim();
+    }
+
+    public Boolean getValid() {
+        return valid;
+    }
+
+    public void setValid(Boolean valid) {
+        this.valid = valid;
     }
 }
