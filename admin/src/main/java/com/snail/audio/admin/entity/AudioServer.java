@@ -13,6 +13,12 @@ public class AudioServer {
 
     private String comUrl;
 
+    private String comUrlLan;
+
+    private Boolean bignode;
+
+    private Boolean valid;
+
     public Integer getServerId() {
         return serverId;
     }
@@ -59,5 +65,29 @@ public class AudioServer {
 
     public void setComUrl(String comUrl) {
         this.comUrl = comUrl == null ? null : comUrl.trim();
+    }
+
+    public String getComUrlLan() {
+        return comUrlLan;
+    }
+
+    public void setComUrlLan(String comUrlLan) {
+        this.comUrlLan = comUrlLan == null ? null : comUrlLan.trim();
+    }
+
+    public Boolean getBignode() {
+        return bignode;
+    }
+
+    public void setBignode(Boolean bignode) {
+        this.bignode = bignode;
+    }
+
+    public Boolean getValid() {
+        return valid;
+    }
+
+    public void setValid(Boolean valid) {
+        this.valid = valid;
     }
 }

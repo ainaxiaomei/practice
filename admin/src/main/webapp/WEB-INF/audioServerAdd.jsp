@@ -67,6 +67,20 @@
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="comUrl" name="comUrl" type="text"/>
 					                          </div>
+					                          <label class="col-sm-1 control-label" >ComUrlLan</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control"  id="comUrlLan" name="comUrlLan" type="text"/>
+					                          </div>
+					                       </div>
+					                       <div class="form-group">
+					                          <label class="col-sm-1 control-label" >BigNode</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control"  id="bignode" name="bignode" type="text"/>
+					                          </div>
+					                          <label class="col-sm-1 control-label" >Valid</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control"  id="valid" name="valid" type="text"/>
+					                          </div>
 					                       </div>
 					                    </fieldset> 
 					                    <div >   
@@ -115,7 +129,10 @@
    			                 "dspnum",
    			                "svcUrl" ,
    			                 "httpUrl" ,
-   			                 "comUrl" 
+   			                 "comUrl" ,
+   			                 "comUrlLan" ,
+   			                 "bignode" ,
+   			                 "valid" 
    			                
    			            ];
         		for(var i=0;i<columns.length;i++){

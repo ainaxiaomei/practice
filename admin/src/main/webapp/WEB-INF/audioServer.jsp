@@ -71,6 +71,24 @@
 										<input class="form-control" name="comUrl" type="text" />
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label">ComUrlLan</label>
+									<div class="col-sm-3">
+										<input class="form-control" name="comUrlLan" type="text" />
+									</div>
+									<label class="col-sm-1 control-label">BigNode</label>
+									<div class="col-sm-3">
+										<input class="form-control" name="bignode" type="text" />
+									</div>
+									<label class="col-sm-1 control-label" >Valid</label>
+						            <div class="col-sm-3">
+						                  <select class="form-control" id="valid" name="valid"> 
+										  <option value=""></option> 
+										  <option value="0">false</option> 
+										  <option value="1">true</option> 
+										 </select>
+						            </div>
+								</div>
 							</fieldset>
 							<div>
 								<button type="button" onclick="serachMcu()"
@@ -100,6 +118,9 @@
                      <th>SVC URL</th>
                      <th>HTTP URL</th>
                      <th>Com URL</th>
+                     <th>ComUrlLan</th>
+                     <th>BigNode</th>
+                     <th>Valid</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -169,7 +190,10 @@
 				                { "data": "dspnum" },
 				                { "data": "svcUrl" },
 				                { "data": "httpUrl" },
-				                { "data": "comUrl" }
+				                { "data": "comUrl" },
+				                { "data": "comUrlLan" },
+				                { "data": "bignode" },
+				                { "data": "valid" }
 				                
 				            ],
 				} );
@@ -228,7 +252,10 @@
 			                 "dspnum",
 			                "svcUrl" ,
 			                 "httpUrl" ,
-			                 "comUrl" 
+			                 "comUrl" ,
+			                 "comUrlLan" ,
+			                 "bignode" ,
+			                 "valid" 
 			                
 			            ];
  			   for(var i=0;i<cells.length;i++){

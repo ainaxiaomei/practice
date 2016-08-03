@@ -25,6 +25,15 @@
       <if test="audio.comUrl != null and audio.comUrl!='' " >
         and com_url=#{audio.comUrl,jdbcType=VARCHAR}
       </if>
+      <if test="audio.comUrlLan != null and audio.comUrlLan!='' " >
+        and com_url_lan=#{audio.comUrlLan,jdbcType=VARCHAR}
+      </if>
+      <if test="audio.valid != null " >
+        and valid=#{audio.valid,jdbcType=VARCHAR}
+      </if>
+      <if test="audio.bignode != null " >
+        and bignode=#{audio.bignode,jdbcType=VARCHAR}
+      </if>
       <if test="start>0 and end>0 " >
         limit #{start},#{end}
       </if>
