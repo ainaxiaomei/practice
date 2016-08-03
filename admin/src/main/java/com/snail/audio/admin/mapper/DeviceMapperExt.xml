@@ -12,6 +12,9 @@
       <if test="device.audioParams != null and device.audioParams!='' " >
         and audio_params=#{device.audioParams}
       </if>
+      <if test="device.datatype != null and device.datatype!='' " >
+        and datatype=#{device.datatype}
+      </if>
       <if test="start>0 and end>0 " >
         limit #{start},#{end}
       </if>

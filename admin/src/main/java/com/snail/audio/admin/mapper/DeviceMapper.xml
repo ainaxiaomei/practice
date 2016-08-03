@@ -4,9 +4,10 @@
   <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.Device" >
     <id column="devtype" property="devtype" jdbcType="VARCHAR" />
     <result column="audio_params" property="audioParams" jdbcType="VARCHAR" />
+    <result column="datatype" property="datatype" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    devtype, audio_params
+    devtype, audio_params, datatype
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -19,8 +20,10 @@
     where devtype = #{devtype,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.snail.audio.admin.entity.Device" >
-    insert into device (devtype, audio_params)
-    values (#{devtype,jdbcType=VARCHAR}, #{audioParams,jdbcType=VARCHAR})
+    insert into device (devtype, audio_params, datatype
+      )
+    values (#{devtype,jdbcType=VARCHAR}, #{audioParams,jdbcType=VARCHAR}, #{datatype,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.Device" >
     insert into device
@@ -31,6 +34,9 @@
       <if test="audioParams != null" >
         audio_params,
       </if>
+      <if test="datatype != null" >
+        datatype,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="devtype != null" >
@@ -38,6 +44,9 @@
       </if>
       <if test="audioParams != null" >
         #{audioParams,jdbcType=VARCHAR},
+      </if>
+      <if test="datatype != null" >
+        #{datatype,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -47,12 +56,16 @@
       <if test="audioParams != null" >
         audio_params = #{audioParams,jdbcType=VARCHAR},
       </if>
+      <if test="datatype != null" >
+        datatype = #{datatype,jdbcType=BIT},
+      </if>
     </set>
     where devtype = #{devtype,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.snail.audio.admin.entity.Device" >
     update device
-    set audio_params = #{audioParams,jdbcType=VARCHAR}
+    set audio_params = #{audioParams,jdbcType=VARCHAR},
+      datatype = #{datatype,jdbcType=BIT}
     where devtype = #{devtype,jdbcType=VARCHAR}
   </update>
 </mapper>

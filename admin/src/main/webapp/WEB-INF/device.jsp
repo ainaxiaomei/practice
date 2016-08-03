@@ -52,6 +52,10 @@
 					                  <div class="col-sm-3">
 					                        <input class="form-control" name="audioParams" type="text"/>
 					                   </div>
+					                   <label class="col-sm-1 control-label" >DataType</label>
+					                  <div class="col-sm-3">
+					                        <input class="form-control" name="datatype" type="text"/>
+					                   </div>
 					              </div>
 					                       
 					         </fieldset> 
@@ -79,6 +83,7 @@
                      <tr>
                        <th>Dev Type</th>
                        <th>AudioParams </th>
+                       <th>datatype </th>
                      </tr>
                  </thead>
                 <tbody>
@@ -143,7 +148,8 @@
 					},
 					"columns": [
 								{ "data": "devtype" },
-								{ "data": "audioParams" }
+								{ "data": "audioParams" },
+								{ "data": "datatype" }
 				                
 				            ],
 				} );
@@ -204,7 +210,8 @@
         	   var cells=Tnode.cells;
         	   var columns= [
 							"devtype" ,
-							 "audioParams" 
+							 "audioParams",
+							 "datatype"
 			                
 			            ];
  			   for(var i=0;i<cells.length;i++){

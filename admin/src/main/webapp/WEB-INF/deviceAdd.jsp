@@ -52,6 +52,10 @@
 					                          <div class="col-sm-3">
 					                             <input class="form-control" id="audioParams" name="audioParams" type="text"/>
 					                          </div>
+					                          <label class="col-sm-1 control-label" >AudioParams</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" id="datatype" name="datatype" type="text"/>
+					                          </div>
 					                       </div>
 					                    </fieldset>
 					                    <div >   
@@ -100,8 +104,8 @@
 	        		//填充表单
 	        		  var columns= [
 							"devtype" ,
-							 "audioParams" 
-			                
+							 "audioParams",
+							"datatype"
 			            ];
 	        		for(var i=0;i<columns.length;i++){
 	        			var a=$("#"+columns[i]);

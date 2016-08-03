@@ -47,7 +47,6 @@
                selectByExampleQueryId="false">
             
         </table>
-         -->
         
         <table tableName="audio_servers" domainObjectName="AudioServer"
                enableCountByExample="false" enableUpdateByExample="false"
@@ -55,7 +54,6 @@
                selectByExampleQueryId="false">
             
         </table>
-        <!--  
         <table tableName="mcu_servers" domainObjectName="McuServer"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -121,12 +119,13 @@
                selectByExampleQueryId="false">
            
         </table>
+        -->
         <table tableName="device" domainObjectName="Device"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
            
         </table>
-        -->
+        
     </context>
 </generatorConfiguration>

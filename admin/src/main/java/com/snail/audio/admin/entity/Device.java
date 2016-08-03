@@ -5,6 +5,8 @@ public class Device {
 
     private String audioParams;
 
+    private String datatype;
+
     public String getDevtype() {
         return devtype;
     }
@@ -19,5 +21,13 @@ public class Device {
 
     public void setAudioParams(String audioParams) {
         this.audioParams = audioParams == null ? null : audioParams.trim();
+    }
+
+    public String getDatatype() {
+        return datatype;
+    }
+
+    public void setDatatype(String datatype) {
+        this.datatype = datatype;
     }
 }
