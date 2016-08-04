@@ -37,6 +37,7 @@ import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
+import com.snail.audio.admin.entity.IndexDBServer;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
@@ -95,6 +96,12 @@ public class BaseControl {
 	public String toIndexDbServerAdd(Model model,HttpServletRequest request){
 		
 		return "indexDbServerAdd";
+		
+	}
+	@RequestMapping("/indexDbServersAdd")
+	public String toIndexDbServersAdd(Model model,HttpServletRequest request){
+		
+		return "indexDbServersAdd";
 		
 	}
 	@RequestMapping("/groupMcuServerAdd")
@@ -156,6 +163,12 @@ public class BaseControl {
 	public String toIndexDbServer(Model model,HttpServletRequest request){
 		
 		return "indexDbServer";
+		
+	}
+	@RequestMapping("/indexDbServers")
+	public String toIndexDbServers(Model model,HttpServletRequest request){
+		
+		return "indexDbServers";
 		
 	}
 	@RequestMapping("/groupAudio")
@@ -358,6 +371,16 @@ public class BaseControl {
 	public void indexDbServerSearch(HttpServletRequest request,HttpServletResponse response,IndexDb indexdb) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<IndexDb> list=service.getIndexDbServer(indexdb, -1, -1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/indexDbServerSearchs")
+	public void indexDbServerSearchs(HttpServletRequest request,HttpServletResponse response,IndexDBServer indexdb) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<IndexDBServer> list=service.getIndexDbServers(indexdb, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
 		response.setCharacterEncoding("utf-8");

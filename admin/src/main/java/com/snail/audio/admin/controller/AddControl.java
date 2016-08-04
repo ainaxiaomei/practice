@@ -19,6 +19,7 @@ import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
+import com.snail.audio.admin.entity.IndexDBServer;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
@@ -63,6 +64,14 @@ public class AddControl {
 	public String saveIndexDbServer(IndexDb indexdb,HttpServletRequest request){
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.saveIndexDbServer(indexdb);
+		return "success";
+		
+	}
+	@RequestMapping("/saveIndexDbServers")
+	@ResponseBody
+	public String saveIndexDbServers(IndexDBServer indexdb,HttpServletRequest request){
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.saveIndexDbServers(indexdb);
 		return "success";
 		
 	}

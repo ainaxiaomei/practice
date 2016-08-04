@@ -166,7 +166,7 @@
             }
             $(function() {
             	//设置sidebar
-            	var b=$("#tables #indexDbServers").attr("class","active");
+            	var b=$("#tables #indexDbServer").attr("class","active");
             	//初始化表格
             	    indexDbTable=$('#indexDbTable').dataTable( {
 					select:true,

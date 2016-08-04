@@ -119,8 +119,21 @@
                selectByExampleQueryId="false">
            
         </table>
-        -->
         <table tableName="device" domainObjectName="Device"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+           
+        </table>
+        -->
+        <table tableName="index_db_servers" domainObjectName="IndexDBServer"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+           
+        </table>
+        
+        <table tableName="index_db_group" domainObjectName="IndexDBGroup"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

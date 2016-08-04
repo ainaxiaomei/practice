@@ -50,6 +50,15 @@ public class DeleteControl {
 		
 		
 	}
+	@RequestMapping("/indexDbServersDelete")
+	@ResponseBody
+	public String indexDbServersDelete(HttpServletRequest request ,@RequestParam("serverId") int serverId) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.deleteIndexDbServers(Integer.valueOf(serverId));
+		return "success";
+		
+		
+	}
 	@RequestMapping("/groupMcuDelete")
 	@ResponseBody
 	public String groupServerDelete(HttpServletRequest request ,@RequestParam("groupId") int groupId) throws IOException{

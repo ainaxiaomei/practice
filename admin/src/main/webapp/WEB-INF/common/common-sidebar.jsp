@@ -46,7 +46,8 @@
             <li id="app"><a href="<%=path %>/app"><i class="fa fa-circle-o"></i> App Table</a></li>
             <li id="appResources"><a href="<%=path %>/appResource"><i class="fa fa-circle-o"></i> AppResource Table</a></li>
             <li id="gateServers" ><a href="<%=path %>/gateServer"><i class="fa fa-circle-o"></i> Gate Table</a></li>
-            <li id="indexDbServers" ><a href="<%=path %>/indexDbServer"><i class="fa fa-circle-o"></i> MemDb Table</a></li>
+            <li id="indexDbServer" ><a href="<%=path %>/indexDbServer"><i class="fa fa-circle-o"></i> MemDb Table</a></li>
+            <li id="indexDbServers" ><a href="<%=path %>/indexDbServers"><i class="fa fa-circle-o"></i> IndexDbServer Table</a></li>
             <li id="ftpServers"><a href="<%=path %>/ftpServer"><i class="fa fa-circle-o"></i> Ftp Table</a></li>
             <li id="devices" ><a href="<%=path %>/device"><i class="fa fa-circle-o"></i> Device Table</a></li>
             <li id="dictionarys"><a href="<%=path %>/dictionary"><i class="fa fa-circle-o"></i> Dictionary Table</a></li>

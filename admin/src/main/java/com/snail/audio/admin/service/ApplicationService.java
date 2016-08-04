@@ -34,6 +34,7 @@ import com.snail.audio.admin.dao.IGroupMcuServerDao;
 import com.snail.audio.admin.dao.IIndexDbDao;
 import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.dao.IndexDbDao;
+import com.snail.audio.admin.dao.IndexDbServersDao;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
@@ -45,6 +46,7 @@ import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
+import com.snail.audio.admin.entity.IndexDBServer;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
 import com.snail.audio.admin.entity.McuServer;
@@ -71,6 +73,8 @@ public class ApplicationService implements IApplicationService {
 	private IGateDao gateDao;
 	@Autowired
 	private IIndexDbDao indeDbDao;
+	@Autowired
+	private IndexDbServersDao indexDbServersDao;
 	@Autowired
 	private IGroupMCUDao groupMcuDao;
 	@Autowired
@@ -672,6 +676,29 @@ public class ApplicationService implements IApplicationService {
 			
 		}
 		return JSONArray.fromObject(failList).toString();
+	}
+	@Override
+	public List<IndexDBServer> getIndexDbServers(IndexDBServer indexdb, int start, int pageSize) {
+		return indexDbServersDao.getIndexDb(indexdb, start, pageSize);
+	}
+	@Override
+	public String deleteIndexDbServers(int serverId) {
+		 indexDbServersDao.deleteIndexDb(serverId);
+		//查寻所有的indexDb中的httpurl
+		 List<IndexDBServer> list=indexDbServersDao.getIndexDb(new IndexDBServer(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
+		
+	}
+	@Override
+	public int saveIndexDbServers(IndexDBServer indexdb) {
+		return indexDbServersDao.addIndexDb(indexdb);
+	}
+	@Override
+	public String modifyIndexDbServers(IndexDBServer indexdb) {
+		indexDbServersDao.modifyIndexDb(indexdb);
+		//查寻所有的indexGate中的httpurl
+		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
+		 return JSONArray.fromObject(list).toString();
 	}
 
 }
