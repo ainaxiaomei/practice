@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.IndexDBGroupMapperExt" >
+<select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from index_db_group
+    where 1=1
+      <if test="dbGroup.groupId != null and dbGroup.groupId!=''" >
+        and group_id=#{dbGroup.groupId}
+      </if>
+      <if test="dbGroup.valid != null " >
+        and valid=#{dbGroup.valid}
+      </if>
+      <if test="dbGroup.appids != null and dbGroup.appids!=''" >
+        and appids=#{dbGroup.appids}
+      </if>
+      <if test="dbGroup.roomidMin != null and dbGroup.roomidMin!=''" >
+        and roomid_min=#{dbGroup.roomidMin}
+      </if>
+      <if test="dbGroup.roomidMax != null and dbGroup.roomidMax!=''" >
+        and roomid_max=#{dbGroup.roomidMax}
+      </if>
+      <if test="dbGroup.description != null and dbGroup.description!=''" >
+        and description=#{dbGroup.description}
+      </if>
+      <if test="dbGroup.serverid1 != null and dbGroup.serverid1!=''" >
+        and serverid1=#{dbGroup.serverid1}
+      </if>
+      <if test="dbGroup.serverid2 != null and dbGroup.serverid2!=''" >
+        and serverid2=#{dbGroup.serverid2}
+      </if>
+      <if test="dbGroup.mainServerid != null and dbGroup.mainServerid!=''" >
+        and main_serverid=#{dbGroup.mainServerid}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
+  </select>
+</mapper>

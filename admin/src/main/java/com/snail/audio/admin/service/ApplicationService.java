@@ -32,6 +32,7 @@ import com.snail.audio.admin.dao.IGroupAudioServerDao;
 import com.snail.audio.admin.dao.IGroupMCUDao;
 import com.snail.audio.admin.dao.IGroupMcuServerDao;
 import com.snail.audio.admin.dao.IIndexDbDao;
+import com.snail.audio.admin.dao.IIndexDbGroupDao;
 import com.snail.audio.admin.dao.IMCUDao;
 import com.snail.audio.admin.dao.IndexDbDao;
 import com.snail.audio.admin.dao.IndexDbServersDao;
@@ -46,6 +47,7 @@ import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
+import com.snail.audio.admin.entity.IndexDBGroup;
 import com.snail.audio.admin.entity.IndexDBServer;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
@@ -87,6 +89,8 @@ public class ApplicationService implements IApplicationService {
 	private IDictionaryDao dictionaryDao;
 	@Autowired
 	private IDeviceDao deviceDao;
+	@Autowired
+	private IIndexDbGroupDao indexDbGroupDao;
 	
 	public List<App> getApplication(App app,int start, int pageSize) {
 		return appDao.getApplicationt(app, start,  pageSize);
@@ -699,6 +703,53 @@ public class ApplicationService implements IApplicationService {
 		//查寻所有的indexGate中的httpurl
 		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
 		 return JSONArray.fromObject(list).toString();
+	}
+	@Override
+	public List<IndexDBGroup> getIndexDbGroup(IndexDBGroup dbGrp, int start, int pageSize) {
+		return indexDbGroupDao.getIndexDbGroup(dbGrp, start, pageSize);
+	}
+	@Override
+	public int saveIndexDbGroup(IndexDBGroup dbGrp) {
+		indexDbGroupDao.addIndexDbGroup(dbGrp);
+		//设置indexDbServer的groupId
+		if(dbGrp.getServerid1()!=null&&dbGrp.getServerid1()>0){
+			IndexDBServer db=new IndexDBServer();
+			db.setServerId(dbGrp.getServerid1());
+			List<IndexDBServer> list =indexDbServersDao.getIndexDb(db, -1, -1);
+			if(list!=null&&list.size()>0){
+				db=list.get(0);
+				db.setGroupId(dbGrp.getGroupId());
+				indexDbServersDao.modifyIndexDb(db);
+			}
+		}
+		if(dbGrp.getServerid2()!=null&&dbGrp.getServerid2()>0){
+			IndexDBServer db=new IndexDBServer();
+			db.setServerId(dbGrp.getServerid2());
+			List<IndexDBServer> list =indexDbServersDao.getIndexDb(db, -1, -1);
+			if(list!=null&&list.size()>0){
+				db=list.get(0);
+				db.setGroupId(dbGrp.getGroupId());
+				indexDbServersDao.modifyIndexDb(db);
+			}
+		}
+		
+		//将IndexDBGroup中的appids都设为占用状态
+		appDao.setAppOccupied(dbGrp.getAppids(), true);
+		return 0;
+	}
+	@Override
+	public String modifyIndexDbGroup(IndexDBGroup dbGrp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String deleteIndexDbGroup(int grpId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<IndexDBServer> selectIndexDb(IndexDBServer indexDb, int start, int end) {
+		return indexDbServersDao.selectIndexDb(indexDb, start, end);
 	}
 
 }

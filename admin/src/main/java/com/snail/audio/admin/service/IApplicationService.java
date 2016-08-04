@@ -19,6 +19,7 @@ import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
+import com.snail.audio.admin.entity.IndexDBGroup;
 import com.snail.audio.admin.entity.IndexDBServer;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
@@ -75,6 +76,16 @@ public interface IApplicationService {
      public int modifyGate(IndexGate gate);
      //查询gate
      public List<IndexGate>getGateServer(IndexGate ftp,int start,int pageSize);
+     //查询indexdbgroup
+     public List<IndexDBGroup>getIndexDbGroup(IndexDBGroup dbGrp,int start,int pageSize);
+     //新增indexdbgroup
+     public int saveIndexDbGroup(IndexDBGroup dbGrp);
+     //修改indexdbgroup
+     public String modifyIndexDbGroup(IndexDBGroup dbGrp);
+     //删除indexdbgroup
+     public String deleteIndexDbGroup(int grpId);
+     //选择indexDB
+     public List<IndexDBServer> selectIndexDb(IndexDBServer indexDb,int start,int end);
      //查询indexDb
      public List<IndexDb>getIndexDbServer(IndexDb indexdb,int start,int pageSize);
      public List<IndexDBServer>getIndexDbServers(IndexDBServer indexdb,int start,int pageSize);

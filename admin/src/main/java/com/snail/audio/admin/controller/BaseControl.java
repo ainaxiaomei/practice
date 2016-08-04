@@ -37,6 +37,7 @@ import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
+import com.snail.audio.admin.entity.IndexDBGroup;
 import com.snail.audio.admin.entity.IndexDBServer;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
@@ -169,6 +170,18 @@ public class BaseControl {
 	public String toIndexDbServers(Model model,HttpServletRequest request){
 		
 		return "indexDbServers";
+		
+	}
+	@RequestMapping("/indexDbGroup")
+	public String toIndexDbGroup(Model model,HttpServletRequest request){
+		
+		return "indexDbGroup";
+		
+	}
+	@RequestMapping("/indexDbGroupAdd")
+	public String toindexDbGroupAdd(Model model,HttpServletRequest request){
+		
+		return "indexDbGroupAdd";
 		
 	}
 	@RequestMapping("/groupAudio")
@@ -387,6 +400,16 @@ public class BaseControl {
 		response.getWriter().printf(result);
 		
 	}
+	@RequestMapping("/indexDbGroupSearch")
+	public void indexDbGroupSearch(HttpServletRequest request,HttpServletResponse response,IndexDBGroup dbGrp) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<IndexDBGroup> list=service.getIndexDbGroup(dbGrp, -1, -1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
 	@RequestMapping("/groupMcuServerSearch")
 	public void groupMcuServerSearch(HttpServletRequest request,HttpServletResponse response,GroupMcuServers group) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
@@ -411,6 +434,16 @@ public class BaseControl {
 	public void dictionarySearch(HttpServletRequest request,HttpServletResponse response,Dictionary dict) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<Dictionary> list=service.getDictionary(dict, -1, -1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/selectIndexDb")
+	public void selectIndexDb(HttpServletRequest request,HttpServletResponse response,IndexDBServer db) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<IndexDBServer> list=service.selectIndexDb(db, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
 		response.setCharacterEncoding("utf-8");

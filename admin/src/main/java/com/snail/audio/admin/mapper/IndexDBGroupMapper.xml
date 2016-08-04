@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.IndexDBGroupMapperExt" >
+  <resultMap id="BaseResultMap" type="com.snail.audio.admin.entity.IndexDBGroup" >
+    <id column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="valid" property="valid" jdbcType="BIT" />
+    <result column="appids" property="appids" jdbcType="VARCHAR" />
+    <result column="roomid_min" property="roomidMin" jdbcType="INTEGER" />
+    <result column="roomid_max" property="roomidMax" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="serverid1" property="serverid1" jdbcType="INTEGER" />
+    <result column="serverid2" property="serverid2" jdbcType="INTEGER" />
+    <result column="main_serverid" property="mainServerid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    group_id, valid, appids, roomid_min, roomid_max, description, serverid1, serverid2, 
+    main_serverid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from index_db_group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from index_db_group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.snail.audio.admin.entity.IndexDBGroup" >
+    insert into index_db_group (group_id, valid, appids, 
+      roomid_min, roomid_max, description, 
+      serverid1, serverid2, main_serverid
+      )
+    values (#{groupId,jdbcType=INTEGER}, #{valid,jdbcType=BIT}, #{appids,jdbcType=VARCHAR}, 
+      #{roomidMin,jdbcType=INTEGER}, #{roomidMax,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{serverid1,jdbcType=INTEGER}, #{serverid2,jdbcType=INTEGER}, #{mainServerid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.IndexDBGroup" >
+    insert into index_db_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="valid != null" >
+        valid,
+      </if>
+      <if test="appids != null" >
+        appids,
+      </if>
+      <if test="roomidMin != null" >
+        roomid_min,
+      </if>
+      <if test="roomidMax != null" >
+        roomid_max,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="serverid1 != null" >
+        serverid1,
+      </if>
+      <if test="serverid2 != null" >
+        serverid2,
+      </if>
+      <if test="mainServerid != null" >
+        main_serverid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
+      </if>
+      <if test="appids != null" >
+        #{appids,jdbcType=VARCHAR},
+      </if>
+      <if test="roomidMin != null" >
+        #{roomidMin,jdbcType=INTEGER},
+      </if>
+      <if test="roomidMax != null" >
+        #{roomidMax,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="serverid1 != null" >
+        #{serverid1,jdbcType=INTEGER},
+      </if>
+      <if test="serverid2 != null" >
+        #{serverid2,jdbcType=INTEGER},
+      </if>
+      <if test="mainServerid != null" >
+        #{mainServerid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.snail.audio.admin.entity.IndexDBGroup" >
+    update index_db_group
+    <set >
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=BIT},
+      </if>
+      <if test="appids != null" >
+        appids = #{appids,jdbcType=VARCHAR},
+      </if>
+      <if test="roomidMin != null" >
+        roomid_min = #{roomidMin,jdbcType=INTEGER},
+      </if>
+      <if test="roomidMax != null" >
+        roomid_max = #{roomidMax,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="serverid1 != null" >
+        serverid1 = #{serverid1,jdbcType=INTEGER},
+      </if>
+      <if test="serverid2 != null" >
+        serverid2 = #{serverid2,jdbcType=INTEGER},
+      </if>
+      <if test="mainServerid != null" >
+        main_serverid = #{mainServerid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.snail.audio.admin.entity.IndexDBGroup" >
+    update index_db_group
+    set valid = #{valid,jdbcType=BIT},
+      appids = #{appids,jdbcType=VARCHAR},
+      roomid_min = #{roomidMin,jdbcType=INTEGER},
+      roomid_max = #{roomidMax,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      serverid1 = #{serverid1,jdbcType=INTEGER},
+      serverid2 = #{serverid2,jdbcType=INTEGER},
+      main_serverid = #{mainServerid,jdbcType=INTEGER}
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+</mapper>

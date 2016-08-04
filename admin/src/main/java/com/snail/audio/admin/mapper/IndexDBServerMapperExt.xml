@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snail.audio.admin.mapper.IndexDBServerMapperExt" >
+ <select id="selectByCondition"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from index_db_servers
+    where 1=1
+      <if test="db.serverId != null and db.serverId!=''" >
+        and server_id=#{db.serverId}
+      </if>
+      <if test="db.serverName != null and db.serverName!=''" >
+        and server_name=#{db.serverName}
+      </if>
+      <if test="db.dspnum != null and db.dspnum!=''" >
+        and dspnum=#{db.dspnum}
+      </if>
+      <if test="db.svcUrl != null and db.svcUrl!=''" >
+        and svc_url=#{db.svcUrl}
+      </if>
+      <if test="db.httpUrl != null and db.httpUrl!=''" >
+        and http_url=#{db.httpUrl}
+      </if>
+      <if test="db.comUrl != null and db.comUrl!=''" >
+        and com_url=#{db.comUrl}
+      </if>
+      <if test="db.valid != null" >
+        and valid=#{db.valid}
+      </if>
+      <if test="db.groupId != null and db.groupId!=''" >
+        and group_id=#{db.groupId}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
+  </select>
+ <select id="selectIndexDb"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from index_db_servers
+    where  (group_id=0 OR group_id="") and 1=1
+      <if test="db.serverId != null and db.serverId!=''" >
+        and server_id=#{db.serverId}
+      </if>
+      <if test="db.serverName != null and db.serverName!=''" >
+        and server_name=#{db.serverName}
+      </if>
+      <if test="db.dspnum != null and db.dspnum!=''" >
+        and dspnum=#{db.dspnum}
+      </if>
+      <if test="db.svcUrl != null and db.svcUrl!=''" >
+        and svc_url=#{db.svcUrl}
+      </if>
+      <if test="db.httpUrl != null and db.httpUrl!=''" >
+        and http_url=#{db.httpUrl}
+      </if>
+      <if test="db.comUrl != null and db.comUrl!=''" >
+        and com_url=#{db.comUrl}
+      </if>
+      <if test="db.valid != null" >
+        and valid=#{db.valid}
+      </if>
+      <if test="start>0 and end>0 " >
+        limit #{start},#{end}
+      </if>
+  </select>
+</mapper>
