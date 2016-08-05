@@ -97,7 +97,7 @@
       </if>
   </select>
   <select id="selectMaxEndUid"   resultType="String">
-    SELECT MAX(end_uid) FROM snail.app;
+    SELECT MAX(end_uid) FROM app;
   </select>
   <update id="setAppOccupied"  >
     update app

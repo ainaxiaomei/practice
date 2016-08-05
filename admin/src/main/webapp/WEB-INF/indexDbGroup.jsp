@@ -268,7 +268,7 @@
               		  url:"<%=path%>/indexDbGroupDelete",
               		  data:"groupId="+id,
               		  success:function(){
-              		  alert("Delete Success");
+              	      notifyServer({"ips":"","msg":"cmd=indexdb_change&id="+id+"&act=0","type":"GATE"});
               		  var table=$('#indexDbTable').DataTable(); 
                 	  table.ajax.reload();
               			  },

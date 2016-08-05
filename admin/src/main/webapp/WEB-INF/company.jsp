@@ -44,10 +44,7 @@
 						<form class="form-horizontal" role="form" id="searchForm">
 					                    <fieldset>
 					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >Company Id</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" name="companyId" type="text" />
-					                          </div>
+					                          <input class="form-control" style="display:none" name="companyId" type="text" />
 					                          <label class="col-sm-1 control-label" >Company Name</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" name="companyName" type="text"/>
@@ -91,10 +88,11 @@
                 
                 </tfoot>
               </table>
+                 <button type="button" onclick="selectCompany()" id="selectButton" class="btn btn-primary">Select</button>
                  <button type="button" onclick="addCompany()"  id="addButton" class="btn btn-primary">Add</button>
 				 <button type="button" onclick="modifyCompany()" id="modifyButton" class="btn btn-primary">Modify</button>
 			     <button type="button" onclick="deleteCompany()" id="deleteButton" class="btn btn-primary">Delete</button>
-			     <button type="button" onclick="selectCompany()" id="selectButton" class="btn btn-primary">Select</button>            </div>
+			                </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

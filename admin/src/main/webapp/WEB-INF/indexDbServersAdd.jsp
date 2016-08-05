@@ -203,15 +203,14 @@
                  		  url:"<%=path%>/indexDbServersModify",
                  		  data:$("#indexDbForm").serialize(),
                  		  success:function(data){
-                 		  var dataArray=$.parseJSON(data); 
-              			 var httpUrls="";
-              			$.each(dataArray,function (id,value){
-              					httpUrls=httpUrls+("http://"+value.httpUrl+"/cmd=indexdb_change"+",");
-              			});
-              		    //增加当前indexDb的httpurl
-              			httpUrls=httpUrls+"http://"+$("#httpUrl").val()+"/cmd=indexdb_change";;
-              			 window.returnValue = "success";
-            			 notifyServer({"ips":httpUrls,"msg":"","type":""});
+                 		  		var gid=$("#groupId").val();
+                 		  		window.returnValue = "success";  //返回值
+                 		  		if(gid&&gid>0){
+                 		  		 notifyServer({"ips":"","msg":"cmd=indexdb_change&id="+gid+"&act=2","type":"GATE"});
+                 		  		}else{
+                 		  			alert("Modify Success!");
+                           		    window.close();
+                 		  		}
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);

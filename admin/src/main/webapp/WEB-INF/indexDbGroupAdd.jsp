@@ -231,9 +231,9 @@
                  		  url:"<%=path%>/saveIndexDbGroup",
                  		  data:$("#indexDbForm").serialize(),
                  		  success:function(){
-                 		  alert("Add Success");
-                 		 window.returnValue = "success";  //返回值
-                 		  window.close();
+                 		 window.returnValue = "success";
+                 		var gid=$("#groupId").val();
+              			notifyServer({"ips":"","msg":"cmd=indexdb_change&id="+gid+"&act=1","type":"GATE"});
                  			  },
                  		  error:function(msg){
                  		 window.returnValue = "error";  //返回值
