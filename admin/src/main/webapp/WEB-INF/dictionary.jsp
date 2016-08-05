@@ -252,7 +252,7 @@
               		  url:"<%=path%>/dictionaryDelete",
               		  data:"key="+id,
               		  success:function(){
-              		  alert("Delete Success");
+             		  notifyServer({"ips":"","msg":"cmd=reload_dics","type":"GATE"});
               		  var table=$('#dictionaryTable').DataTable(); 
                 	  table.ajax.reload();
               			  },
