@@ -244,7 +244,8 @@
               		  url:"<%=path%>/deviceDelete",
               		  data:"type="+id,
               		  success:function(){
-              		  alert("Delete Success");
+             		  notifyServer({"ips":"","msg":"cmd=deviceparams_change","type":"GATE"});
+              		  //alert("Delete Success");
               		  var table=$('#deviceTable').DataTable(); 
                 	  table.ajax.reload();
               			  },

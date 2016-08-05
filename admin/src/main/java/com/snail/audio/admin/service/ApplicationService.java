@@ -103,8 +103,8 @@ public class ApplicationService implements IApplicationService {
 	public int deleteApplication(int appId) {
 		//删除app表
 		appDao.deleteApplication(appId);
-		//清除indexDb中的appid字段
-		List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		//清除indexDbGroup中的appid字段
+		List<IndexDBGroup> list=indexDbGroupDao.getIndexDbGroup(new IndexDBGroup(), -1, -1);
 		if(null!=list&&!list.isEmpty()){
 			for(int i=0;i<list.size();i++){
 				String appIds=list.get(i).getAppids();
@@ -121,10 +121,10 @@ public class ApplicationService implements IApplicationService {
 							newAppids.append(appidsList.get(a));
 						}
 					}
-					IndexDb indexDb=new IndexDb();
-					indexDb.setServerId(list.get(i).getServerId());
-					indexDb.setAppids(newAppids.toString());
-					indeDbDao.modifyIndexDb(indexDb);
+					IndexDBGroup dbgrp=new IndexDBGroup();
+					dbgrp.setGroupId(list.get(i).getGroupId());
+					dbgrp.setAppids(newAppids.toString());
+					indexDbGroupDao.modifyIndexDbGroup(dbgrp);
 					break;
 				}
 			}
@@ -687,10 +687,20 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String deleteIndexDbServers(int serverId) {
+		//如果groupId不为0或者空不能删除
+		IndexDBServer db =new IndexDBServer();
+		db.setServerId(serverId);
+		List<IndexDBServer> list=indexDbServersDao.getIndexDb(db, -1, -1);
+		if(list!=null&&!list.isEmpty()){
+			Integer gid=list.get(0).getGroupId();
+			if(gid!=null&&gid>0){
+				throw new RuntimeException("只有groupId为0才能删除!");
+			}
+		}
 		 indexDbServersDao.deleteIndexDb(serverId);
 		//查寻所有的indexDb中的httpurl
-		 List<IndexDBServer> list=indexDbServersDao.getIndexDb(new IndexDBServer(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		 List<IndexDBServer> list1=indexDbServersDao.getIndexDb(new IndexDBServer(), -1, -1);
+		 return JSONArray.fromObject(list1).toString();
 		
 	}
 	@Override
