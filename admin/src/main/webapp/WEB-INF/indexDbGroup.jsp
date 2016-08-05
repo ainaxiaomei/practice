@@ -227,15 +227,15 @@
         	   var Tnode=table.row(curSelectIndex).node();
         	   var cells=Tnode.cells;
         	   var columns= [
-	   							"serverId" ,
-	   							 "serverName" ,
-	   			                 "dspnum",
-	   			                "svcUrl" ,
-	   			                 "httpUrl" ,
-	   			                 "appids" ,
-	   			                 "roomidMin" ,
+	   							"groupId" ,
+	   							 "valid" ,
+	   			                 "appids",
+	   			                "roomidMin" ,
 	   			                 "roomidMax" ,
-	   			                 "valid" 
+	   			                "description",
+	   			                 "serverid1" ,
+	   			                 "serverid2" ,
+	   			                 "mainServerid" 
 	   			                
 	   			            ];
  			   for(var i=0;i<cells.length;i++){
@@ -265,8 +265,8 @@
          	  var id= Tnode.cells[0].firstChild.nodeValue;
          	 $.ajax(
               		{ type:"POST",
-              		  url:"<%=path%>/indexDbServerDelete",
-              		  data:"serverId="+id,
+              		  url:"<%=path%>/indexDbGroupDelete",
+              		  data:"groupId="+id,
               		  success:function(){
               		  alert("Delete Success");
               		  var table=$('#indexDbTable').DataTable(); 

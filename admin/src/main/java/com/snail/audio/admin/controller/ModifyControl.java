@@ -20,6 +20,7 @@ import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupAudioServers;
 import com.snail.audio.admin.entity.GroupMcu;
 import com.snail.audio.admin.entity.GroupMcuServers;
+import com.snail.audio.admin.entity.IndexDBGroup;
 import com.snail.audio.admin.entity.IndexDBServer;
 import com.snail.audio.admin.entity.IndexDb;
 import com.snail.audio.admin.entity.IndexGate;
@@ -53,6 +54,13 @@ public class ModifyControl {
 	public String indexDbServerModify(HttpServletRequest request,IndexDb indexdb) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		String gateInfo=service.modifyIndexDbServer(indexdb);
+		return gateInfo;
+	}
+	@RequestMapping("/indexDbGroupModify")
+	@ResponseBody
+	public String indexDbGroupModify(HttpServletRequest request,IndexDBGroup grp) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		String gateInfo=service.modifyIndexDbGroup(grp);
 		return gateInfo;
 	}
 	@RequestMapping("/indexDbServersModify")

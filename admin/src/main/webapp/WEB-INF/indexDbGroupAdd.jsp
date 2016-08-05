@@ -124,21 +124,24 @@
 	        		//是修改界面
 	        		$("#roomidMin").attr("readonly",true);
 	        		$("#roomidMax").attr("readonly",true);
+	        		$("#groupId").attr("readonly",true);
+	        		$("#serverid1").attr("readonly",true);
+	        		$("#serverid2").attr("readonly",true);
 	        		//改变单击事件
 	        		$("#saveButton").click(modifyIndexDb);
 	        		//填充表单
 	        		 var columns= [
-	   							"serverId" ,
-	   							 "serverName" ,
-	   			                 "dspnum",
-	   			                "svcUrl" ,
-	   			                 "httpUrl" ,
-	   			                 "appids" ,
-	   			                 "roomidMin" ,
-	   			                 "roomidMax" ,
-	   			                 "valid" 
-	   			                
-	   			            ];
+		   							"groupId" ,
+		   							 "valid" ,
+		   			                 "appids",
+		   			                "roomidMin" ,
+		   			                 "roomidMax" ,
+		   			                "description",
+		   			                 "serverid1" ,
+		   			                 "serverid2" ,
+		   			                 "mainServerid" 
+		   			                
+		   			            ];
 	        		for(var i=0;i<columns.length;i++){
 	        			var a=$("#"+columns[i]);
 	        			a.val(param[columns[i]]);
@@ -200,7 +203,7 @@
 	       function modifyIndexDb(){
 	        	$.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/indexDbServerModify",
+                 		  url:"<%=path%>/indexDbGroupModify",
                  		  data:$("#indexDbForm").serialize(),
                  		  success:function(data){
                  		  var dataArray=$.parseJSON(data); 

@@ -739,13 +739,72 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String modifyIndexDbGroup(IndexDBGroup dbGrp) {
-		// TODO Auto-generated method stub
-		return null;
+		//将indexdb中的appis设为可用状态
+		  IndexDBGroup dbgrp=new IndexDBGroup();
+		  dbgrp.setGroupId(dbGrp.getGroupId());
+		  List<IndexDBGroup> ls=indexDbGroupDao.getIndexDbGroup(dbgrp, -1, -1);
+	      appDao.setAppOccupied(ls.get(0).getAppids(), false);
+		//将indexdb中的appids都设为占用状态
+	    appDao.setAppOccupied(dbGrp.getAppids(), true);
+	    indexDbGroupDao.modifyIndexDbGroup(dbGrp);
+	    //时间不够简单实现
+	    int oldServiceId1=ls.get(0).getServerid1()==null?0:ls.get(0).getServerid1().intValue();
+	    int oldServiceId2=ls.get(0).getServerid2()==null?0:ls.get(0).getServerid2().intValue();
+	    int curServiceId1=dbGrp.getServerid1()==null?0:dbGrp.getServerid1().intValue();
+	    int curServiceId2=dbGrp.getServerid2()==null?0:dbGrp.getServerid2().intValue();
+	    if(oldServiceId1!=curServiceId1){
+	    	//将oldServiceId1的groupid设置为0
+	    	IndexDBServer old=new IndexDBServer();
+	    	old.setServerId(oldServiceId1);
+	    	old.setGroupId(0);
+	    	indexDbServersDao.modifyIndexDb(old);
+	    	//将curServiceId1的groupId设置为当前的groupid
+	    	IndexDBServer cur=new IndexDBServer();
+	    	cur.setServerId(curServiceId1);
+	    	cur.setGroupId(dbGrp.getGroupId());
+	    	indexDbServersDao.modifyIndexDb(cur);
+	    }
+	    if(oldServiceId2!=curServiceId2){
+	    	//将oldServiceId2的groupid设置为0
+	    	IndexDBServer old=new IndexDBServer();
+	    	old.setServerId(oldServiceId2);
+	    	old.setGroupId(0);
+	    	indexDbServersDao.modifyIndexDb(old);
+	    	//将curServiceId2的groupId设置为当前的groupid
+	    	IndexDBServer cur=new IndexDBServer();
+	    	cur.setServerId(curServiceId2);
+	    	cur.setGroupId(dbGrp.getGroupId());
+	    	indexDbServersDao.modifyIndexDb(cur);
+	    }
+		//查寻所有的indexGate中的httpurl
+		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public String deleteIndexDbGroup(int grpId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		 //将indexdb中的appis设为可用状态
+		  IndexDBGroup dbgrp=new IndexDBGroup();
+		  dbgrp.setGroupId(grpId);
+		  List<IndexDBGroup> ls=indexDbGroupDao.getIndexDbGroup(dbgrp, -1, -1);
+	      appDao.setAppOccupied(ls.get(0).getAppids(), false);
+	      //将service1和service简单实现时间不够
+	      IndexDBServer indexDb =new IndexDBServer();
+	      Integer serverId1=ls.get(0).getServerid1();
+	      if(serverId1!=null&&serverId1>0)
+	      indexDb.setServerId(serverId1);
+	      indexDb.setGroupId(0);
+	      indexDbServersDao.modifyIndexDb(indexDb);
+	      Integer serverId2=ls.get(0).getServerid2();
+	      if(serverId2!=null&&serverId2>0)
+	      indexDb.setServerId(serverId2);
+	      indexDb.setGroupId(0);
+	      indexDbServersDao.modifyIndexDb(indexDb);
+	      //删除
+	      indexDbGroupDao.deleteIndexDbGroup(grpId);
+		//查寻所有的httpurl
+		 List<IndexDBGroup> list=indexDbGroupDao.getIndexDbGroup(new IndexDBGroup(), -1, -1);
+		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
 	public List<IndexDBServer> selectIndexDb(IndexDBServer indexDb, int start, int end) {
