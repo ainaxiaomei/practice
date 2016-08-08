@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -94,9 +95,9 @@ public class AddControl {
 	}
 	@RequestMapping("/saveGroupMcuServer")
 	@ResponseBody
-	public String saveGroupMcuServer(GroupMcuServers groupMcuSercers,HttpServletRequest request) throws Exception{
+	public String saveGroupMcuServer(GroupMcuServers groupMcuSercers,HttpServletRequest request,@RequestParam(value="action",required=false)Integer action) throws Exception{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String indexDb=service.saveGroupMcuServer(groupMcuSercers);
+		String indexDb=service.saveGroupMcuServer(groupMcuSercers,action);
 		return indexDb;
 		
 	}

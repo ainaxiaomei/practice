@@ -91,7 +91,12 @@ public class ApplicationService implements IApplicationService {
 	private IDeviceDao deviceDao;
 	@Autowired
 	private IIndexDbGroupDao indexDbGroupDao;
-	
+	static class Action{
+		static final int None=0;
+		static final int Add=1;
+		static final int Modify=2;
+		static final int Delete=3;
+	}
 	public List<App> getApplication(App app,int start, int pageSize) {
 		return appDao.getApplicationt(app, start,  pageSize);
 	}
@@ -309,12 +314,14 @@ public class ApplicationService implements IApplicationService {
 		return groupMcuDao.getGroupMCU(groupMcu, start, pageSize);
 	}
 	@Override
-	public String saveGroupMcuServer(GroupMcuServers groupMcuServer) throws Exception {
-		mcuCheck(groupMcuServer);
+	public String saveGroupMcuServer(GroupMcuServers groupMcuServer,Integer action) throws Exception {
+		 mcuCheck(groupMcuServer);
 		 groupMcuServerDao.addGroupMcuServer(groupMcuServer);
-		 //查寻所有的indexDb中的httpurl
-		// List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-	    //return JSONArray.fromObject(list).toString();
+		 //将action保存到mcugroup
+		 GroupMcu groupMcu=new GroupMcu();
+		 groupMcu.setFlag(action);
+		 groupMcu.setGroupId(groupMcuServer.getGroupId());
+		 groupMcuDao.modifyGroupMCU(groupMcu);
 		 return "success";
 	}
 	private void mcuCheck(GroupMcuServers groupMcuServer) throws JSonException {
@@ -338,11 +345,13 @@ public class ApplicationService implements IApplicationService {
 		 return "success";
 	}
 	@Override
-	public String deleteGroupMcuServer(int id) {
+	public String deleteGroupMcuServer(int id,Integer action,Integer groupId) {
 		deleteMcuByParentid(id);
-		 //查寻所有的indexDb中的httpurl
-		 //List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		// return JSONArray.fromObject(list).toString();
+		 //将action保存到mcugroup
+		 GroupMcu groupMcu=new GroupMcu();
+		 groupMcu.setFlag(action);
+		 groupMcu.setGroupId(groupId);
+		 groupMcuDao.modifyGroupMCU(groupMcu);
 		return "success";
 	}
 	public int deleteMcuByParentid(int id){

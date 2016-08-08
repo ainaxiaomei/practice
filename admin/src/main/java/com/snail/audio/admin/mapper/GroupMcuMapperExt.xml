@@ -6,8 +6,11 @@
     <include refid="Base_Column_List" />
     from group_mcu
     where 1=1
-    <if test="groupMcu.groupId != null" >
+      <if test="groupMcu.groupId != null" >
         and group_id=#{groupMcu.groupId}
+      </if>
+      <if test="groupMcu.flag!= null and groupMcu.flag>=0" >
+        and flag=#{groupMcu.flag}
       </if>
       <if test="groupMcu.curUsernum != null and groupMcu.curUsernum>0 " >
         and cur_usernum=#{groupMcu.curUsernum}

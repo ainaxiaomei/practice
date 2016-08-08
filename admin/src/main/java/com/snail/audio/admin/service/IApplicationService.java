@@ -115,11 +115,11 @@ public interface IApplicationService {
      //查询groupMcu
      public List<GroupAudio>getGroupAudio(GroupAudio groupAudio,int start,int pageSize);
      //新增groupMcuserver
-     public String saveGroupMcuServer(GroupMcuServers groupMcu) throws Exception;
+     public String saveGroupMcuServer(GroupMcuServers groupMcu,Integer action) throws Exception;
      //修改groupMcuserver
      public String modifyGroupMcuServer(GroupMcuServers groupMcu)throws Exception;
      //删除groupMcuserver
-     public String deleteGroupMcuServer(int groupId);
+     public String deleteGroupMcuServer(int serverId,Integer action,Integer groupId);
      //查询groupMcuserver
      public List<GroupMcuServers>getGroupMcuServer(GroupMcuServers groupMcu,int start,int pageSize);
      //新增groupAudioserver

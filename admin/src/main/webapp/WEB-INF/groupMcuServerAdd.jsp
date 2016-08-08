@@ -44,6 +44,7 @@
 						 <form class="form-horizontal" role="form" id="groupMcuServer">
 					                     <fieldset>
 					                       <div class="form-group">
+					                          <input style="display:none" class="form-control" id="action" name="action" type="text" />
 					                          <input class="form-control" id="id" name="id" type="text" style="display:none"/>
 					                          <label class="col-sm-1 control-label" >Server Id</label>
 					                          <div class="col-sm-3">
@@ -222,54 +223,6 @@
 	        	//将返回值填到表单
 	        	$("#rightParentId").val(returnVal);
 	        }
-	       function sendHttpMsg(dataArray,msg){
-	        	var progressbar = $( "#progressbar" ).progressbar({
-	        		 max: dataArray.length
-	        	    });
-	        	$( "#dialog" ).dialog({
-	        		close: function( event, ui ) {
-	        			  window.returnValue = "success";  //返回值
-               		  window.close();
-	        		}
-	        	});
-	        	var a=0;
-	        	
-	        	setTimeout(function (){
-	        		process(a,dataArray,msg);
-	        	},80);
-       		
-	        	
-	        }
-	        function process(a,dataArray,msg){
-       		var httpurl=dataArray[a].httpUrl;
-       		$.ajax(
-                		{ type:"POST",
-                		  url:httpurl,
-                		  data:msg,
-                		   async :false,
-                		  success:function(){
-         	        		setProgress(httpurl,"success");
-                			  },
-                		  error:function(msg){
-                		     //发送服务器失败网路问题
-                			setProgress(httpurl,"error");
-                		  	}
-                		 }
-                		  
-                		  
-                	  );
-       		if(a<dataArray.length){
-       			setTimeout(function(){
-       				process(++a,dataArray,msg)
-       			},80);
-       		}
-       	}
-	        function setProgress(url,status){
-	        	var progressbar = $( "#progressbar" );
-	        	 var val = progressbar.progressbar( "value" ) || 0;
-   		      progressbar.progressbar( "value", val + 1 );
-   		     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
-	        }
 	       function modifyGroupMcuServer(){
 	        	$.ajax(
                  		{ type:"POST",
@@ -290,14 +243,22 @@
 	        }
            function saveMcuGroupServer(){
         	   if($("#groupMcuServer").valid()){
+        		   if($("#level").val()==0){
+        			   //对于组来说是新增
+        			   $("#action").val("1");
+        		   }else{
+        			   //对于组来说是修改
+        			   $("#action").val("2");
+        		   }
+        		   
         		   $.ajax(
                     		{ type:"POST",
                     		  url:"<%=path%>/saveGroupMcuServer",
                     		  data:$("#groupMcuServer").serialize(),
                     		  success:function(data){
                     			  window.returnValue = "success";
-                    			  var msg="cmd=mcugroup_change&id="+$("#groupId").val()+"&act=2";
-                       			notifyServer({"ips":"","msg":msg,"type":"DB"});
+                    			  alert("Add Success!");
+                    			  window.close();
                     			  },
                     		  error:function(msg){
                     		 window.returnValue = "error";  //返回值

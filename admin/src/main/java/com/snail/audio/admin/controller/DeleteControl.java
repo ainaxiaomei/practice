@@ -88,9 +88,9 @@ public class DeleteControl {
 	}
 	@RequestMapping("/groupMcuServerDelete")
 	@ResponseBody
-	public String groupMcuServerDelete(HttpServletRequest request ,@RequestParam("Id") int Id) throws IOException{
+	public String groupMcuServerDelete(HttpServletRequest request ,@RequestParam("Id") int Id,@RequestParam(value="action",required=false) Integer action,@RequestParam(value="groupId",required=false) Integer groupId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String indexDb=service.deleteGroupMcuServer(Integer.valueOf(Id));
+		String indexDb=service.deleteGroupMcuServer(Integer.valueOf(Id),action,groupId);
 		return indexDb;
 		
 		
