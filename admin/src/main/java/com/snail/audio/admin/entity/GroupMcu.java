@@ -7,6 +7,8 @@ public class GroupMcu {
 
     private Integer maxUsernum;
 
+    private Boolean flag;
+
     public Integer getGroupId() {
         return groupId;
     }
@@ -29,5 +31,13 @@ public class GroupMcu {
 
     public void setMaxUsernum(Integer maxUsernum) {
         this.maxUsernum = maxUsernum;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
     }
 }

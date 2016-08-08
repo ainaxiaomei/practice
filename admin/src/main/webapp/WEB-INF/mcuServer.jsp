@@ -286,7 +286,7 @@
                 	  table.ajax.reload();
               			  },
               		  error:function(msg){
-              			  alert("error!"+msg);
+              			  alert("error!"+msg.responseText);
               		  	}
               		 }
               		  

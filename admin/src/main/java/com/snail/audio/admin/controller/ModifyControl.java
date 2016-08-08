@@ -32,8 +32,7 @@ public class ModifyControl {
 	@ResponseBody
 	public String mcuServerModify(HttpServletRequest request,McuServer mcu) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		 service.modifyMcu(mcu);
-		 return "success";
+		 return service.modifyMcu(mcu)==1?"send":"success";
 	}
 	@RequestMapping("/gateServerModify")
 	@ResponseBody

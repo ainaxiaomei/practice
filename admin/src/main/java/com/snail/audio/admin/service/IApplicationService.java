@@ -41,7 +41,7 @@ public interface IApplicationService {
      //修改mcu
      public int modifyMcu(McuServer mcu);
      //删除mcu
-     public int deleteMcu(int id);
+     public int deleteMcu(int id)throws Exception;
      //查询mcu
      public List<McuServer>getMCUServer(McuServer mcu,int start,int pageSize);
      //查询audio

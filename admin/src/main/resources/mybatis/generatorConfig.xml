@@ -13,9 +13,9 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://120.25.167.84:3306/snail" 
-                        userId="root"
-                        password="00715701"/>
+                        connectionURL="jdbc:mysql://192.168.5.230:3306/snail_audio_db_v6" 
+                        userId="snailgame"
+                        password="201509#"/>
 
         <javaModelGenerator targetPackage="com.snail.audio.admin.entity"
                             targetProject="src/main/java">
@@ -88,24 +88,27 @@
            
         </table>
         
-         <table tableName="group_mcu" domainObjectName="GroupMcu"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            
-        </table>
+         
         <table tableName="group_mcu_servers" domainObjectName="GroupMcuServers"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             
         </table>
+        -->
         <table tableName="group_audio" domainObjectName="GroupAudio"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
            
         </table>
+        <table tableName="group_mcu" domainObjectName="GroupMcu"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            
+        </table>
+        <!--  
         <table tableName="group_audio_servers" domainObjectName="GroupAudioServers"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -125,7 +128,7 @@
                selectByExampleQueryId="false">
            
         </table>
-        -->
+        
         <table tableName="index_db_servers" domainObjectName="IndexDBServer"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -139,6 +142,7 @@
                selectByExampleQueryId="false">
            
         </table>
+        -->
         
     </context>
 </generatorConfiguration>

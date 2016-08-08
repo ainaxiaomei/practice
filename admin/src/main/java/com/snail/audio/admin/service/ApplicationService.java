@@ -160,7 +160,16 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int modifyMcu(McuServer mcu) {
-		return mcuDao.modifyMCU(mcu);
+		//如果mcu属于一个组需要发送消息
+		//检查mcu是否属于一个组，如果属于一个组不能删除
+		mcuDao.modifyMCU(mcu);
+		 GroupMcuServers groupMcuServer=new GroupMcuServers();
+		 groupMcuServer.setServerId(mcu.getServerId());
+		 List<GroupMcuServers> list=groupMcuServerDao.getMCU(groupMcuServer, -1, -1);
+		 if(list!=null&&!list.isEmpty()){
+			 return 1;
+		 } 
+		return 0;
 	}
 	@Override
 	public int saveFtp(FTPServer ftp) {
@@ -193,10 +202,17 @@ public class ApplicationService implements IApplicationService {
 		 return JSONArray.fromObject(list).toString();
 	}
 	@Override
-	public int deleteMcu(int id) {
-		 mcuDao.deleteMCU(id);
+	public int deleteMcu(int id) throws Exception {
+		 //检查mcu是否属于一个组，如果属于一个组不能删除
+		 GroupMcuServers groupMcuServer=new GroupMcuServers();
+		 groupMcuServer.setServerId(id);
+		 List<GroupMcuServers> list=groupMcuServerDao.getMCU(groupMcuServer, -1, -1);
+		 if(list!=null&&!list.isEmpty()){
+			 throw new RuntimeException("属于一个组，则需要从组中解除才能删除");
+		 } 
+		 return mcuDao.deleteMCU(id);
 		 //删除groupmcuserver同时删除子层级
-		 return deleteMcuByParentid(id);
+		 //return deleteMcuByParentid(id);
 	}
 	@Override
 	public int deleteAudioServer(int serverId) {
@@ -259,23 +275,34 @@ public class ApplicationService implements IApplicationService {
 	public String  saveGroupMcu(GroupMcu groupMcu) {
 		groupMcuDao.addGroupMCU(groupMcu);
 		//查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		// List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		// return JSONArray.fromObject(list).toString();
+		return "success";
 	}
 	@Override
 	public String modifyGroupMcu(GroupMcu groupMcu) {
 		 groupMcuDao.modifyGroupMCU(groupMcu);
-		//查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		//修改组，若group_mcu_servers有相关信息则发送http信息 cmd=mcugroup_change&id=组号&act=2
+		 GroupMcuServers groupMcuServer=new GroupMcuServers();
+		 groupMcuServer.setGroupId(groupMcu.getGroupId());
+		 List<GroupMcuServers> list=groupMcuServerDao.getMCU(groupMcuServer, -1, -1);
+		 if(list!=null&&!list.isEmpty()){
+			 return "send";
+		 }
+		 return "success";
 	}
 	@Override
 	public String deleteGroupMcu(int groupId) {
 		 groupMcuDao.deleteGroupMCU(groupId);
-		 groupMcuServerDao.deleteGroupMCUByGroupId(groupId);
-		//查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		 //查询是否有关联如果有关联需要发送消息
+		 GroupMcuServers groupMcuServer=new GroupMcuServers();
+		 groupMcuServer.setGroupId(groupId);
+		 List<GroupMcuServers> list=groupMcuServerDao.getMCU(groupMcuServer, -1, -1);
+		 if(list!=null&&!list.isEmpty()){
+			 groupMcuServerDao.deleteGroupMCUByGroupId(groupId);
+			 return "send";
+		 }
+		 return "success";
 	}
 	@Override
 	public List<GroupMcu> getGroupMcu(GroupMcu groupMcu, int start, int pageSize) {
@@ -286,8 +313,9 @@ public class ApplicationService implements IApplicationService {
 		mcuCheck(groupMcuServer);
 		 groupMcuServerDao.addGroupMcuServer(groupMcuServer);
 		 //查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		// List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+	    //return JSONArray.fromObject(list).toString();
+		 return "success";
 	}
 	private void mcuCheck(GroupMcuServers groupMcuServer) throws JSonException {
 		//检查serverId是否被占用
@@ -305,15 +333,17 @@ public class ApplicationService implements IApplicationService {
 		 //mcuCheck(groupMcu);
 		 groupMcuServerDao.modifyGroupMcuServer(groupMcu);
 		//查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		// List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		// return JSONArray.fromObject(list).toString();
+		 return "success";
 	}
 	@Override
 	public String deleteGroupMcuServer(int id) {
 		deleteMcuByParentid(id);
 		 //查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		 //List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		// return JSONArray.fromObject(list).toString();
+		return "success";
 	}
 	public int deleteMcuByParentid(int id){
 		//查出该节点的子节点
@@ -357,22 +387,25 @@ public class ApplicationService implements IApplicationService {
 	public String saveGroupAudio(GroupAudio groupAudio) {
 		 groupAudioDao.addGroupAudio(groupAudio);
 		 //查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		 //List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		// return JSONArray.fromObject(list).toString();
+		 return "success";
 	}
 	@Override
 	public String modifyGroupAudio(GroupAudio groupAudio) {
 		 groupAudioDao.modifyGroupAudio(groupAudio);
 		 //查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		 //List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 //return JSONArray.fromObject(list).toString();
+		 return "success";
 	}
 	@Override
 	public String deleteGroupAudio(int groupId) {
 		groupAudioDao.deleteGroupAudio(groupId);
 		 //查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		 //List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		 //return JSONArray.fromObject(list).toString();
+		return "success";
 	}
 	@Override
 	public List<GroupAudio> getGroupAudio(GroupAudio groupAudio, int start, int pageSize) {
@@ -633,7 +666,7 @@ public class ApplicationService implements IApplicationService {
 			}else if("DB".equals(type)){
 				//向DB服务器发送
 				//查询服务器地址
-				List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+				List<IndexDBServer> list=indexDbServersDao.getIndexDb(new IndexDBServer(), -1, -1);
 				for(int i=0;i<list.size();i++){
 					ipList.add("http://"+list.get(i).getHttpUrl()+"/"+msg);
 				}

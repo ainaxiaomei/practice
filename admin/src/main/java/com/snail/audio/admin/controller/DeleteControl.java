@@ -16,7 +16,7 @@ import com.snail.audio.admin.service.IApplicationService;
 public class DeleteControl {
 	@RequestMapping("/mcuServerDelete")
 	@ResponseBody
-	public String mcuServerDelete(HttpServletRequest request,@RequestParam("serverId") int serverId) throws IOException{
+	public String mcuServerDelete(HttpServletRequest request,@RequestParam("serverId") int serverId) throws Exception{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		service.deleteMcu(Integer.valueOf(serverId));
 		return "success";

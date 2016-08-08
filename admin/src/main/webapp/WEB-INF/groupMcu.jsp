@@ -300,11 +300,18 @@
               		  url:"<%=path%>/groupMcuDelete",
               		  data:"groupId="+id,
               		  success:function(data){
-              	      var dataArray=$.parseJSON(data); 
-                   	  //sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId").val()+"&act=0");
-              	      var table=$('#groupMcuTable').DataTable(); 
-	                  table.ajax.reload();
-              			  },
+	              			if(data&&data=="send"){
+	           				  //发送消息
+	                 		 notifyServer({"ips":"","msg":"cmd=mcugroup_change&id="+id+"&act=0","type":"DB"});
+	                 		 var table=$('#groupMcuTable').DataTable(); 
+	  	                     table.ajax.reload();
+	           			    }else{
+	           				  //不需要发送消息
+		           				 alert("Delete Success And Do Not Need Send Message!");
+		           				 var table=$('#groupMcuTable').DataTable(); 
+		  	                     table.ajax.reload();
+		           			     }
+              			},
               		  error:function(msg){
               			  alert("error!"+msg);
               		  	}

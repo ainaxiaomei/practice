@@ -186,10 +186,17 @@
                  		{ type:"POST",
                  		  url:"<%=path%>/mcuServerModify",
                  		  data:$("#mcuForm").serialize(),
-                 		  success:function(){
-                 		  alert("Modify Success");
-                 		  window.returnValue = "success";  //返回值
-                 		  window.close();
+                 		  success:function(data){
+                 			 if(data&&data=="send"){
+                				  //发送消息
+                				 var gid=$("#groupId").val();
+                      			notifyServer({"ips":"","msg":"cmd=mcugroup_change&id="+gid+"&act=2","type":"DB"});
+                			  }else{
+                				  //不需要发送消息
+                				 alert("Modify Success But Do Not Need To Send Message!");
+                				 window.returnValue = "success";  //返回值
+                      		     window.close();
+                			     }
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);

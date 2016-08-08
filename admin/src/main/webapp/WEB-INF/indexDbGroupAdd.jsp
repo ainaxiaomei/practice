@@ -209,10 +209,10 @@
                  		  var dataArray=$.parseJSON(data); 
               			 var httpUrls="";
               			$.each(dataArray,function (id,value){
-              					httpUrls=httpUrls+("http://"+value.httpUrl+"/cmd=indexdb_change"+",");
+              					httpUrls=httpUrls+("http://"+value.httpUrl+"/cmd=indexdb_change&act=2"+",");
               			});
               		    //增加当前indexDb的httpurl
-              			httpUrls=httpUrls+"http://"+$("#httpUrl").val()+"/cmd=indexdb_change";;
+              			httpUrls=httpUrls+"http://"+$("#httpUrl").val()+"/cmd=indexdb_change&act=2";;
               			 window.returnValue = "success";
             			 notifyServer({"ips":httpUrls,"msg":"","type":""});
                  			  },

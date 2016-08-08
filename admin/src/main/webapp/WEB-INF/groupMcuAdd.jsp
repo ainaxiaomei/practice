@@ -96,6 +96,7 @@
 	        		//是修改界面
 	        		//改变单击事件
 	        		$("#saveButton").click(modifyGroupMcu);
+	        		$("#groupId").attr("readonly","true");
 	        		//填充表单
 	        		 var columns= [
 	   							"groupId" ,
@@ -166,10 +167,17 @@
                  		  url:"<%=path%>/mcuGroupModify",
                  		  data:$("#mcuForm").serialize(),
                  		  success:function(data){
-                 			 var dataArray=$.parseJSON(data); 
-                    	      //sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=1");
-                 			 window.returnValue = "success";  //返回值
-                   		     window.close();
+                 			  if(data&&data=="send"){
+                 				  //发送消息
+                 				 var gid=$("#groupId").val();
+                       			notifyServer({"ips":"","msg":"cmd=mcugroup_change&id="+gid+"&act=2","type":"DB"});
+                 			  }else{
+                 				  //不需要发送消息
+                 				 alert("Modify Success But Do Not Need To Send Message!");
+                 				 window.returnValue = "success";  //返回值
+                       		     window.close();
+                 			  }
+                 			
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
@@ -186,8 +194,9 @@
                  		  url:"<%=path%>/saveGroupMcu",
                  		  data:$("#mcuForm").serialize(),
                  		  success:function(data){
-                 			 var dataArray=$.parseJSON(data); 
+                 	       // var dataArray=$.parseJSON(data); 
                    	      //sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+$("#groupId")+"&act=2");
+                   	         alert("success");
                  			 window.returnValue = "success";  //返回值
                    		     window.close();
                  			  },

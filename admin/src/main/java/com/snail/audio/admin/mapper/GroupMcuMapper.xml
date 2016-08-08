@@ -5,9 +5,10 @@
     <id column="group_id" property="groupId" jdbcType="INTEGER" />
     <result column="cur_usernum" property="curUsernum" jdbcType="INTEGER" />
     <result column="max_usernum" property="maxUsernum" jdbcType="INTEGER" />
+    <result column="flag" property="flag" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    group_id, cur_usernum, max_usernum
+    group_id, cur_usernum, max_usernum, flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -20,10 +21,10 @@
     where group_id = #{groupId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.snail.audio.admin.entity.GroupMcu" >
-    insert into group_mcu (group_id, cur_usernum, max_usernum
-      )
-    values (#{groupId,jdbcType=INTEGER}, #{curUsernum,jdbcType=INTEGER}, #{maxUsernum,jdbcType=INTEGER}
-      )
+    insert into group_mcu (group_id, cur_usernum, max_usernum, 
+      flag)
+    values (#{groupId,jdbcType=INTEGER}, #{curUsernum,jdbcType=INTEGER}, #{maxUsernum,jdbcType=INTEGER}, 
+      #{flag,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.GroupMcu" >
     insert into group_mcu
@@ -37,6 +38,9 @@
       <if test="maxUsernum != null" >
         max_usernum,
       </if>
+      <if test="flag != null" >
+        flag,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="groupId != null" >
@@ -47,6 +51,9 @@
       </if>
       <if test="maxUsernum != null" >
         #{maxUsernum,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -59,13 +66,17 @@
       <if test="maxUsernum != null" >
         max_usernum = #{maxUsernum,jdbcType=INTEGER},
       </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=BIT},
+      </if>
     </set>
     where group_id = #{groupId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.snail.audio.admin.entity.GroupMcu" >
     update group_mcu
     set cur_usernum = #{curUsernum,jdbcType=INTEGER},
-      max_usernum = #{maxUsernum,jdbcType=INTEGER}
+      max_usernum = #{maxUsernum,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=BIT}
     where group_id = #{groupId,jdbcType=INTEGER}
   </update>
 </mapper>
