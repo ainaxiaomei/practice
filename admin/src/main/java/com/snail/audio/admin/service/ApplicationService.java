@@ -203,15 +203,17 @@ public class ApplicationService implements IApplicationService {
 	public String saveAppRes(AppResource appRes) {
 		 appResourceDao.saveAppRes(appRes);
 		//查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		// List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		// return JSONArray.fromObject(list).toString();
+		 return "success";
 	}
 	@Override
 	public String modifyAppRes(AppResource appRes) {
 		 appResourceDao.modifyAppRes(appRes);
 		//查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		// List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		//return JSONArray.fromObject(list).toString();
+		 return "success";
 	}
 	@Override
 	public int deleteMcu(int id) throws Exception {
@@ -493,8 +495,9 @@ public class ApplicationService implements IApplicationService {
 	public String deleteAppRes(int id) {
 		 appResourceDao.deleteAppRes(id);
 		//查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		// List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
+		// return JSONArray.fromObject(list).toString();
+		 return "success";
 	}
 	@Override
 	public List<Company> getCompany(Company company, int start, int pagSize) {

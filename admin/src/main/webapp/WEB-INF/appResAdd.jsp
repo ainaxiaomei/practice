@@ -192,12 +192,12 @@
                  		  data:$("#appResForm").serialize(),
                  		  success:function(data){
                  			 window.returnValue = "success";
-                   			 notifyServer({"ips":"","msg":"cmd=appres_change&id=appid&act=2","type":"DB"});
+                 			 var appid=$("#appid").val();
+                   			 notifyServer({"ips":"","msg":"cmd=appres_change&id="+appid+"&act=1","type":"DB"});
                  			  },
                  		  error:function(msg){
-                 			  alert("error!"+msg);
+                 			  alert("error!"+msg.responseText);
                  			 window.returnValue = "error";  //返回值
-                    		  window.close();
                  		  	}
                  		 }
                  		  
@@ -211,10 +211,11 @@
                 		  data:$("#appResForm").serialize(),
                 		  success:function(data){
                 			  window.returnValue = "success";
-                   			 notifyServer({"ips":"","msg":"cmd=appres_change&id=appid&act=1","type":"DB"});
+                			  var appid=$("#appid").val();
+                    			 notifyServer({"ips":"","msg":"cmd=appres_change&id="+appid+"&act=1","type":"DB"});
                 			  },
                 		  error:function(msg){
-                			  alert("error!"+msg);
+                			  alert("error!"+msg.responseText);
                 			 window.returnValue = "error";  //返回值
                 		  	}
                 		 }
