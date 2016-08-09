@@ -103,9 +103,9 @@ public class AddControl {
 	}
 	@RequestMapping("/saveGroupAudioServer")
 	@ResponseBody
-	public String saveGroupAudioServer(GroupAudioServers groupAudioSercers,HttpServletRequest request) throws Exception{
+	public String saveGroupAudioServer(GroupAudioServers groupAudioSercers,HttpServletRequest request,@RequestParam(value="action",required=false)Integer action) throws Exception{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String indexDb=service.saveGroupAudioServer(groupAudioSercers);
+		String indexDb=service.saveGroupAudioServer(groupAudioSercers,action);
 		return indexDb;
 		
 	}

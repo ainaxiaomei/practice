@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.snail.audio.admin.entity.GroupAudio;
 import com.snail.audio.admin.entity.GroupMcu;
 @Repository
 public interface IGroupMCUDao {

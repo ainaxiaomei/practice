@@ -456,12 +456,15 @@ public class ApplicationService implements IApplicationService {
 		}
 	}
 	@Override
-	public String saveGroupAudioServer(GroupAudioServers groupAudio) throws Exception {
+	public String saveGroupAudioServer(GroupAudioServers groupAudio,Integer action) throws Exception {
 		 audioCheck(groupAudio);
 		 groupAudioServerDao.addGroupAudioServer(groupAudio);
-		//查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		 //将action保存到mcugroup
+		 GroupAudio group=new GroupAudio();
+		 group.setFlag(action);
+		 group.setGroupId(groupAudio.getGroupId());
+		 groupAudioDao.modifyGroupAudio(group);
+		 return "success";
 	}
 	@Override
 	public String modifyGroupAudioServer(GroupAudioServers groupAudio) throws Exception {
@@ -473,11 +476,14 @@ public class ApplicationService implements IApplicationService {
 		
 	}
 	@Override
-	public String deleteGroupAudioServer(int groupId) {
+	public String deleteGroupAudioServer(int groupId,Integer action,Integer gid) {
 		deleteAudioByParentid(groupId);
-		//查寻所有的indexDb中的httpurl
-		 List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 return JSONArray.fromObject(list).toString();
+		 //将action保存到mcugroup
+		 GroupAudio groupAudio=new GroupAudio();
+		 groupAudio.setFlag(action);
+		 groupAudio.setGroupId(gid);
+		 groupAudioDao.modifyGroupAudio(groupAudio);
+		 return "success";
 	}
 	@Override
 	public List<GroupAudioServers> getGroupAudioServer(GroupAudioServers groupAudio, int start, int pageSize) {
@@ -713,10 +719,10 @@ public class ApplicationService implements IApplicationService {
 				for(int i=0;i<list1.size();i++){
 					ipList.add("http://"+list1.get(i).getHttpUrl()+"/"+msg);
 				}
-			}else if("MCU".equals("MCU")){
-				return send4mcuandaudio("cmd=mcugroup_change");
-			}else if("AUDIO".equals("AUDIO")){
-				return send4mcuandaudio("cmd=audiogroup_change");
+			}else if("MCU".equals(type)){
+				return send4mcu("cmd=mcugroup_change");
+			}else if("AUDIO".equals(type)){
+				return send4audio("cmd=audiogroup_change");
 			}
 			doSendMessage(ipList,failList);
 			
@@ -757,7 +763,83 @@ public class ApplicationService implements IApplicationService {
 			
 		}
 	}
-	private String send4mcuandaudio(String cmd){
+	private String send4audio(String cmd){
+		//查询groupAudio中flage不为0的
+		GroupAudio groupAudio =new GroupAudio();
+		groupAudio.setFlag(0);
+		List<GroupAudio> list=groupAudioDao.getMessage(groupAudio, -1, -1);
+		List<IndexDBServer> dblist=indexDbServersDao.getIndexDb(new IndexDBServer(), -1, -1);
+		//消息=ip+cmd+组号+act
+		List<String> msgs=new ArrayList<String>();
+		for(GroupAudio gaudio:list){
+			switch (gaudio.getFlag()) {
+			case Action.Add:
+				for(IndexDBServer db:dblist){
+					StringBuilder sb=new StringBuilder();
+					sb.append("http://")
+					.append(db.getHttpUrl())
+					.append("/")
+					.append(cmd)
+					.append("&id=")
+					.append(gaudio.getGroupId())
+					.append("&act=")
+					.append(Action.Add);
+					msgs.add(sb.toString());
+				}
+				//清除标志
+				groupAudio.setFlag(0);
+				groupAudio.setGroupId(gaudio.getGroupId());
+				groupAudioDao.modifyGroupAudio(groupAudio);
+				break;
+			case Action.Modify:
+				for(IndexDBServer db:dblist){
+					StringBuilder sb=new StringBuilder();
+					sb.append("http://")
+					.append(db.getHttpUrl())
+					.append("/")
+					.append(cmd)
+					.append("&id=")
+					.append(gaudio.getGroupId())
+					.append("&act=")
+					.append(Action.Modify);
+					msgs.add(sb.toString());
+				}
+				//清除标志
+				groupAudio.setFlag(0);
+				groupAudio.setGroupId(gaudio.getGroupId());
+				groupAudioDao.modifyGroupAudio(groupAudio);
+				break;
+			case Action.Delete:
+				for(IndexDBServer db:dblist){
+					StringBuilder sb=new StringBuilder();
+					sb.append("http://")
+					.append(db.getHttpUrl())
+					.append("/")
+					.append(cmd)
+					.append("&id=")
+					.append(gaudio.getGroupId())
+					.append("&act=")
+					.append(Action.Delete-3);//删除是0
+					msgs.add(sb.toString());
+				}
+				//清除标志
+				groupAudio.setFlag(0);
+				groupAudio.setGroupId(gaudio.getGroupId());
+				groupAudioDao.modifyGroupAudio(groupAudio);
+				
+				break;
+
+			default:
+				break;
+			}
+		
+		}
+		List<String> failList=new ArrayList<String>();
+		doSendMessage(msgs, failList);
+		return JSONArray.fromObject(failList).toString();
+		
+	}
+	private String send4mcu(String cmd){
 		//查询groupmcu中flage不为0的
 		GroupMcu groupMcu =new GroupMcu();
 		groupMcu.setFlag(0);
@@ -822,11 +904,11 @@ public class ApplicationService implements IApplicationService {
 				groupMcuDao.modifyGroupMCU(groupMcu);
 				
 				break;
-
+				
 			default:
 				break;
 			}
-		
+			
 		}
 		List<String> failList=new ArrayList<String>();
 		doSendMessage(msgs, failList);

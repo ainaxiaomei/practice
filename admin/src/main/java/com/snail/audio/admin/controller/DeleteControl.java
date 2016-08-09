@@ -97,9 +97,9 @@ public class DeleteControl {
 	}
 	@RequestMapping("/groupAudioServerDelete")
 	@ResponseBody
-	public String groupAudioServerDelete(HttpServletRequest request ,@RequestParam("Id") int Id) throws IOException{
+	public String groupAudioServerDelete(HttpServletRequest request ,@RequestParam("Id") int Id,@RequestParam(value="action",required=false)Integer action,@RequestParam(value="groupId",required=false)Integer groupId) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		String indexDb=service.deleteGroupAudioServer(Integer.valueOf(Id));
+		String indexDb=service.deleteGroupAudioServer(Integer.valueOf(Id),action,groupId);
 		return indexDb;
 		
 		

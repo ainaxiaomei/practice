@@ -7,7 +7,7 @@ public class GroupAudio {
 
     private Integer maxUsernum;
 
-    private Boolean flag;
+    private Integer flag;
 
     public Integer getGroupId() {
         return groupId;
@@ -33,11 +33,11 @@ public class GroupAudio {
         this.maxUsernum = maxUsernum;
     }
 
-    public Boolean getFlag() {
+    public Integer getFlag() {
         return flag;
     }
 
-    public void setFlag(Boolean flag) {
+    public void setFlag(Integer flag) {
         this.flag = flag;
     }
 }

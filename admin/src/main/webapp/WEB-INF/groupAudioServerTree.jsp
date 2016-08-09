@@ -45,6 +45,9 @@
 					<!-- /.box-body -->
         <div class="box-footer">
         </div>
+        <div class="box-footer">
+          <button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
+        </div>
       </div>
       <!-- /.box -->
       
@@ -123,7 +126,7 @@
   						"action"			: function (data) {
   							var inst = $.jstree.reference(data.reference),
   								obj = inst.get_node(data.reference);
-  							deleteGroupMcuServer(obj);
+  							deleteGroupMcuServer(obj,inst);
   							/*
   							if(inst.is_selected(obj)) {
   								inst.delete_node(inst.get_selected());
@@ -140,61 +143,8 @@
       
       }); 
         	});
-   function sendHttpMsg(dataArray,msg){
-   	var progressbar = $( "#progressbar" ).progressbar({
-   		 max: dataArray.length
-   	    });
-   	$( "#dialog" ).dialog({
-   		close: function( event, ui ) {
-           	  //清空消息
-           	  $("#pragessMsg").text("");
-           	  //清空进度条
-           	  $( "#progressbar" ).progressbar( "value", 0 );
-           	  //刷新
-           	$.jstree.reference($('#audioTree')).refresh();
-           	 
-   		}
-   	});
-   	var a=0;
-   	
-   	setTimeout(function (){
-   		process(a,dataArray,msg);
-   	},80);
-	
-   	
-   }
-   function process(a,dataArray,msg){
-	var httpurl=dataArray[a].httpUrl;
-	$.ajax(
-     		{ type:"POST",
-     		  url:httpurl,
-     		  data:msg,
-     		   async :false,
-     		  success:function(){
-	        		setProgress(httpurl,"success");
-     			  },
-     		  error:function(msg){
-     		     //发送服务器失败网路问题
-     			setProgress(httpurl,"error");
-     		  	}
-     		 }
-     		  
-     		  
-     	  );
-	if(a<dataArray.length){
-		setTimeout(function(){
-			process(++a,dataArray,msg)
-		},80);
-	}
-}
-   function setProgress(url,status){
-   	var progressbar = $( "#progressbar" );
-   	 var val = progressbar.progressbar( "value" ) || 0;
-      progressbar.progressbar( "value", val + 1 );
-     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
-   }
    //删除
-   function deleteGroupMcuServer(object){
+   function deleteGroupMcuServer(object,inst){
 	   if(!confirm("Are You Sure To Delete ?")){
  		  return;
  	  }
@@ -212,14 +162,20 @@
 	 }
 	//关闭菜单
 		$.vakata.context.hide();
+		var action=0;
+		 if(level==0){
+			   //对于组来说是删除
+			 action=3;
+		   }else{
+			   //对于组来说是修改
+			 action=2;
+		   }
  	 $.ajax(
       		{ type:"POST",
       		  url:"<%=path%>/groupAudioServerDelete",
-      		  data:"Id="+serverId,
+      		 data:"Id="+serverId+"&action="+action+"&groupId="+group,
       		  success:function(data){
-      			  var dataArray=$.parseJSON(data); 
-               	  sendHttpMsg(dataArray,"cmd=mcugroup_change&id="+group+"&act=0");
-      		 
+      			inst.refresh(); 
       			  },
       		  error:function(msg){
       			  alert("error!"+msg);
@@ -228,6 +184,9 @@
       		  
       		  
       	  );
+   }
+   function sendMessage(){
+	   notifyServer({"ips":"","msg":"","type":"AUDIO"});
    }
   </script>
 </body>

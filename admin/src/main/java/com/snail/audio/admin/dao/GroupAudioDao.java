@@ -38,6 +38,11 @@ public class GroupAudioDao implements IGroupAudioDao{
 		return groupAudioMapperExt.selectByCondition(groupMcu, start, pageSize);
 	}
 
+	@Override
+	public List<GroupAudio> getMessage(GroupAudio groupMcu, int start, int end) {
+		return groupAudioMapperExt.getMessage(groupMcu, start, end);
+	}
+
 	
 	
 	

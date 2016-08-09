@@ -123,11 +123,11 @@ public interface IApplicationService {
      //查询groupMcuserver
      public List<GroupMcuServers>getGroupMcuServer(GroupMcuServers groupMcu,int start,int pageSize);
      //新增groupAudioserver
-     public String saveGroupAudioServer(GroupAudioServers groupMcu)throws Exception;
+     public String saveGroupAudioServer(GroupAudioServers groupMcu,Integer action)throws Exception;
      //修改groupAudioserver
      public String modifyGroupAudioServer(GroupAudioServers groupMcu)throws Exception;
      //删除groupAudioserver
-     public String deleteGroupAudioServer(int groupId);
+     public String deleteGroupAudioServer(int groupId,Integer action,Integer gid);
      //查询groupAudioserver
      public List<GroupAudioServers>getGroupAudioServer(GroupAudioServers groupMcu,int start,int pageSize);
      //查询company
