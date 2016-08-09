@@ -689,39 +689,125 @@ public class ApplicationService implements IApplicationService {
 				for(int i=0;i<list1.size();i++){
 					ipList.add("http://"+list1.get(i).getHttpUrl()+"/"+msg);
 				}
+			}else if("MCU".equals("MCU")){
+				return send4mcuandaudio("cmd=mcugroup_change");
+			}else if("AUDIO".equals("AUDIO")){
+				return send4mcuandaudio("cmd=audiogroup_change");
 			}
-			for(int i=0;i<ipList.size();i++){
-				Client client = ClientBuilder.newClient();
-				client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
-			    client.property(ClientProperties.READ_TIMEOUT,    1000);
-		    	WebTarget target = client.target(ipList.get(i));
-		    	Response response=null;
-		    	try{
-		             response= target.request(MediaType.TEXT_PLAIN).get();
-			    	if(response.getStatus()==200){
-			    		String returnValue=response.readEntity(String.class);
-			    	}else{
-			    		//发送失败
-			    		failList.add(ipList.get(i));
-			    	}
-		    	}catch(Exception e){
-		    		//发送失败
-		    		failList.add(ipList.get(i));
-		    	}finally{
-		    		if(response!=null){
-		    			response.close();
-		    		}
-		    		if(client!=null){
-		    			client.close();
-		    		}
-			    	
-		    	}
-		    	
-		    	
-			}
+			doSendMessage(ipList,failList);
 			
 		}
 		return JSONArray.fromObject(failList).toString();
+	}
+	private void doSendMessage(List<String> ipList,List<String> failList) {
+		if(failList==null){
+			return ;
+		}
+		for(int i=0;i<ipList.size();i++){
+			Client client = ClientBuilder.newClient();
+			client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
+		    client.property(ClientProperties.READ_TIMEOUT,    1000);
+			WebTarget target = client.target(ipList.get(i));
+			Response response=null;
+			try{
+		         response= target.request(MediaType.TEXT_PLAIN).get();
+		    	if(response.getStatus()==200){
+		    		String returnValue=response.readEntity(String.class);
+		    	}else{
+		    		//发送失败
+		    		failList.add(ipList.get(i));
+		    	}
+			}catch(Exception e){
+				//发送失败
+				failList.add(ipList.get(i));
+			}finally{
+				if(response!=null){
+					response.close();
+				}
+				if(client!=null){
+					client.close();
+				}
+		    	
+			}
+			
+			
+		}
+	}
+	private String send4mcuandaudio(String cmd){
+		//查询groupmcu中flage不为0的
+		GroupMcu groupMcu =new GroupMcu();
+		groupMcu.setFlag(0);
+		List<GroupMcu> list=groupMcuDao.getMessages(groupMcu, -1, -1);
+		List<IndexDBServer> dblist=indexDbServersDao.getIndexDb(new IndexDBServer(), -1, -1);
+		//消息=ip+cmd+组号+act
+		List<String> msgs=new ArrayList<String>();
+		for(GroupMcu gmcu:list){
+			switch (gmcu.getFlag()) {
+			case Action.Add:
+				for(IndexDBServer db:dblist){
+					StringBuilder sb=new StringBuilder();
+					sb.append("http://")
+					.append(db.getHttpUrl())
+					.append("/")
+					.append(cmd)
+					.append("&id=")
+					.append(gmcu.getGroupId())
+					.append("&act=")
+					.append(Action.Add);
+					msgs.add(sb.toString());
+				}
+				//清除标志
+				groupMcu.setFlag(0);
+				groupMcu.setGroupId(gmcu.getGroupId());
+				groupMcuDao.modifyGroupMCU(groupMcu);
+				break;
+			case Action.Modify:
+				for(IndexDBServer db:dblist){
+					StringBuilder sb=new StringBuilder();
+					sb.append("http://")
+					.append(db.getHttpUrl())
+					.append("/")
+					.append(cmd)
+					.append("&id=")
+					.append(gmcu.getGroupId())
+					.append("&act=")
+					.append(Action.Modify);
+					msgs.add(sb.toString());
+				}
+				//清除标志
+				groupMcu.setFlag(0);
+				groupMcu.setGroupId(gmcu.getGroupId());
+				groupMcuDao.modifyGroupMCU(groupMcu);
+				break;
+			case Action.Delete:
+				for(IndexDBServer db:dblist){
+					StringBuilder sb=new StringBuilder();
+					sb.append("http://")
+					.append(db.getHttpUrl())
+					.append("/")
+					.append(cmd)
+					.append("&id=")
+					.append(gmcu.getGroupId())
+					.append("&act=")
+					.append(Action.Delete-3);//删除是0
+					msgs.add(sb.toString());
+				}
+				//清除标志
+				groupMcu.setFlag(0);
+				groupMcu.setGroupId(gmcu.getGroupId());
+				groupMcuDao.modifyGroupMCU(groupMcu);
+				
+				break;
+
+			default:
+				break;
+			}
+		
+		}
+		List<String> failList=new ArrayList<String>();
+		doSendMessage(msgs, failList);
+		return JSONArray.fromObject(failList).toString();
+		
 	}
 	@Override
 	public List<IndexDBServer> getIndexDbServers(IndexDBServer indexdb, int start, int pageSize) {

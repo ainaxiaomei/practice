@@ -184,20 +184,7 @@
       	  );
    }
    function sendMessage(){
-	   $.ajax(
-	      		{ type:"POST",
-	      		  url:"<%=path%>/groupMcuSend",
-	      		  data:"",
-	      		  success:function(data){
-	      			inst.refresh(); 
-	      			  },
-	      		  error:function(msg){
-	      			  alert("error!"+msg);
-	      		  	}
-	      		 }
-	      		  
-	      		  
-	      	  );
+	   notifyServer({"ips":"","msg":"","type":"MCU"});
    }
   </script>
 </body>

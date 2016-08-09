@@ -37,6 +37,11 @@ public class GroupMCUDao implements IGroupMCUDao{
 		return groupMcuMapperExt.selectByCondition(groupMcu, start, pageSize);
 	}
 
+	@Override
+	public List<GroupMcu> getMessages(GroupMcu groupMcu, int start, int end) {
+		return groupMcuMapperExt.getMessages(groupMcu, start, end);
+	}
+
 	
 	
 	
