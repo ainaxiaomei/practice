@@ -227,58 +227,6 @@
              	  table.ajax.reload();
         	   }
            }
-           function sendHttpMsg(dataArray,msg){
-	        	var progressbar = $( "#progressbar" ).progressbar({
-	        		 max: dataArray.length
-	        	    });
-	        	$( "#dialog" ).dialog({
-	        		close: function( event, ui ) {
-	        			 var table=$('#groupAudioTable').DataTable(); 
-	                	  table.ajax.reload();
-	                	  //清空消息
-	                	  $("#pragessMsg").text("");
-	                	  //清空进度条
-	                	  $( "#progressbar" ).progressbar( "value", 0 );
-	        		}
-	        	});
-	        	var a=0;
-	        	
-	        	setTimeout(function (){
-	        		process(a,dataArray,msg);
-	        	},80);
-       		
-	        	
-	        }
-	        function process(a,dataArray,msg){
-       		var httpurl=dataArray[a].httpUrl;
-       		$.ajax(
-                		{ type:"POST",
-                		  url:httpurl,
-                		  data:msg,
-                		   async :false,
-                		  success:function(){
-         	        		setProgress(httpurl,"success");
-                			  },
-                		  error:function(msg){
-                		     //发送服务器失败网路问题
-                			setProgress(httpurl,"error");
-                		  	}
-                		 }
-                		  
-                		  
-                	  );
-       		if(a<dataArray.length){
-       			setTimeout(function(){
-       				process(++a,dataArray,msg)
-       			},80);
-       		}
-       	}
-	        function setProgress(url,status){
-	        	var progressbar = $( "#progressbar" );
-	        	 var val = progressbar.progressbar( "value" ) || 0;
-   		      progressbar.progressbar( "value", val + 1 );
-   		     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
-	        }
            //删除
            function deelteGroupAudio(){
         	   if(curSelectIndex<0){
@@ -298,12 +246,18 @@
               		  url:"<%=path%>/groupAudioDelete",
               		  data:"groupId="+id,
               		  success:function(data){
-              		 // alert("Delete Success");
-              		  var table=$('#groupAudioTable').DataTable(); 
+              			if(data&&data=="send"){
+        				    //发送消息
+        				    var gid=$("#groupId").val();
+              			   notifyServer({"ips":"","msg":"audiogroup_change&id="+gid+"&act=2","type":"DB"});
+              			  var table=$('#groupAudioTable').DataTable(); 
 	                	  table.ajax.reload();
-              		 // var dataArray=$.parseJSON(data); 
-                    	  //sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId").val()+"&act=0");
-              		 
+        			      }else{
+        				     //不需要发送消息
+	           				 alert("Modify Success But Do Not Need To Send Message!");
+	           				 var table=$('#groupAudioTable').DataTable(); 
+		                	  table.ajax.reload();
+        			          }
               			  },
               		  error:function(msg){
               			  alert("error!"+msg);

@@ -45,8 +45,7 @@ public class ModifyControl {
 	@ResponseBody
 	public String audioServerModify(HttpServletRequest request,AudioServer audio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.modifyAudioServer(audio);
-		return "success";
+		return service.modifyAudioServer(audio)==1?"send":"success";
 	}
 	@RequestMapping("/indexDbServerModify")
 	@ResponseBody

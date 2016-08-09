@@ -15,7 +15,7 @@ public class AudioServer {
 
     private String comUrlLan;
 
-    private Boolean bignode;
+    private Integer bignode;
 
     private Boolean valid;
 
@@ -75,11 +75,11 @@ public class AudioServer {
         this.comUrlLan = comUrlLan == null ? null : comUrlLan.trim();
     }
 
-    public Boolean getBignode() {
+    public Integer getBignode() {
         return bignode;
     }
 
-    public void setBignode(Boolean bignode) {
+    public void setBignode(Integer bignode) {
         this.bignode = bignode;
     }
 

@@ -190,7 +190,14 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int modifyAudioServer(AudioServer audio) {
-		return audioDao.modifyAudioServer(audio);
+		 audioDao.modifyAudioServer(audio);
+		 GroupAudioServers groupAudioServer=new GroupAudioServers();
+		 groupAudioServer.setServerId(audio.getServerId());
+		 List<GroupAudioServers> list=groupAudioServerDao.getAudio(groupAudioServer, -1, -1);
+		 if(list!=null&&!list.isEmpty()){
+			 return 1;
+		 } 
+		return 0;
 	}
 	@Override
 	public String saveAppRes(AppResource appRes) {
@@ -221,8 +228,16 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public int deleteAudioServer(int serverId) {
-		 audioDao.deleteAudio(serverId);
-		 return deleteAudioByParentid(serverId);
+		//如果有关联不能删除
+		 
+		 GroupAudioServers groupAudioServer=new GroupAudioServers();
+		 groupAudioServer.setServerId(serverId);
+		 List<GroupAudioServers> list=groupAudioServerDao.getAudio(groupAudioServer, -1, -1);
+		 if(list!=null&&!list.isEmpty()){
+			 throw new RuntimeException("属于一个组，则需要从组中解除才能删除");
+		 } 
+		 return audioDao.deleteAudio(serverId);
+		 //return deleteAudioByParentid(serverId);
 	}
 	@Override
 	public int deleteGateServer(int serverId) {
@@ -403,18 +418,27 @@ public class ApplicationService implements IApplicationService {
 	@Override
 	public String modifyGroupAudio(GroupAudio groupAudio) {
 		 groupAudioDao.modifyGroupAudio(groupAudio);
-		 //查寻所有的indexDb中的httpurl
-		 //List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 //return JSONArray.fromObject(list).toString();
+		//修改组，若group_mcu_servers有相关信息则发送http信息 cmd=mcugroup_change&id=组号&act=2
+		 GroupAudioServers groupAudioServer=new GroupAudioServers();
+		 groupAudioServer.setGroupId(groupAudio.getGroupId());
+		 List<GroupAudioServers> list=groupAudioServerDao.getAudio(groupAudioServer,  -1, -1);
+		 if(list!=null&&!list.isEmpty()){
+			 return "send";
+		 }
 		 return "success";
 	}
 	@Override
 	public String deleteGroupAudio(int groupId) {
-		groupAudioDao.deleteGroupAudio(groupId);
-		 //查寻所有的indexDb中的httpurl
-		 //List<IndexDb> list=indeDbDao.getIndexDb(new IndexDb(), -1, -1);
-		 //return JSONArray.fromObject(list).toString();
-		return "success";
+		 groupAudioDao.deleteGroupAudio(groupId);
+		 //查询是否有关联如果有关联需要发送消息
+		 GroupAudioServers groupAudioServer=new GroupAudioServers();
+		 groupAudioServer.setGroupId(groupId);
+		 List<GroupAudioServers> list=groupAudioServerDao.getAudio(groupAudioServer, -1, -1);
+		 if(list!=null&&!list.isEmpty()){
+			 groupAudioServerDao.deleteByGroupId(groupId);
+			 return "send";
+		 }
+		 return "success";
 	}
 	@Override
 	public List<GroupAudio> getGroupAudio(GroupAudio groupAudio, int start, int pageSize) {

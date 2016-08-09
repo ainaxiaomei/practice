@@ -118,13 +118,19 @@
                  		  url:"<%=path%>/audioGroupModify",
                  		  data:$("#audioForm").serialize(),
                  		  success:function(data){
-                 	      var dataArray=$.parseJSON(data); 
-                 	      //sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId")+"&act=1");
-                 	     window.returnValue = "success";  //返回值
-               		     window.close();
+                 			 if(data&&data=="send"){
+                				    //发送消息
+                				    var gid=$("#groupId").val();
+                      			notifyServer({"ips":"","msg":"audiogroup_change&id="+gid+"&act=2","type":"DB"});
+                			      }else{
+                				     //不需要发送消息
+     	           				 alert("Modify Success But Do Not Need To Send Message!");
+     	           				 window.returnValue = "success";  //返回值
+                      		     window.close();
+                			          }
                  			  },
                  		  error:function(msg){
-                 			  alert("error!"+msg);
+                 			  alert("error!"+msg.responseText);
                  			 window.returnValue = "error";  //返回值
                  		  	}
                  		 }
@@ -132,68 +138,18 @@
                  		  
                  	  );
 	        }
-	        function sendHttpMsg(dataArray,msg){
-	        	var progressbar = $( "#progressbar" ).progressbar({
-	        		 max: dataArray.length
-	        	    });
-	        	$( "#dialog" ).dialog({
-	        		close: function( event, ui ) {
-	        			  window.returnValue = "success";  //返回值
-                		  window.close();
-	        		}
-	        	});
-	        	var a=0;
-	        	
-	        	setTimeout(function (){
-	        		process(a,dataArray,msg);
-	        	},80);
-        		
-	        	
-	        }
-	        function process(a,dataArray,msg){
-        		var httpurl=dataArray[a].httpUrl;
-        		$.ajax(
-                 		{ type:"POST",
-                 		  url:httpurl,
-                 		  data:msg,
-                 		   async :false,
-                 		  success:function(){
-          	        		setProgress(httpurl,"success");
-                 			  },
-                 		  error:function(msg){
-                 		     //发送服务器失败网路问题
-                 			setProgress(httpurl,"error");
-                 		  	}
-                 		 }
-                 		  
-                 		  
-                 	  );
-        		if(a<dataArray.length){
-        			setTimeout(function(){
-        				process(++a,dataArray,msg)
-        			},80);
-        		}
-        	}
-	        function setProgress(url,status){
-	        	var progressbar = $( "#progressbar" );
-	        	 var val = progressbar.progressbar( "value" ) || 0;
-    		      progressbar.progressbar( "value", val + 1 );
-    		     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
-	        }
            function saveGroupMcu(){
         	   $.ajax(
                  		{ type:"POST",
                  		  url:"<%=path%>/saveGroupAudio",
                  		  data:$("#audioForm").serialize(),
                  		  success:function(data){
-                 		  var dataArray=$.parseJSON(data); 
-                    	 // sendHttpMsg(dataArray,"cmd=audiogroup_change&id="+$("#groupId")+"&act=2");
                  		 window.returnValue = "success";  //返回值
                		     window.close();
                  			  },
                  		  error:function(msg){
                  		 window.returnValue = "error";  //返回值
-                 			  alert("error!"+msg);
+                 			  alert("error!"+msg.responseText);
                  		  	}
                  		 }
                  		  
