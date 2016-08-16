@@ -12,6 +12,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.Company;
+import com.snail.audio.admin.entity.ConfigServer;
 import com.snail.audio.admin.entity.Device;
 import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
@@ -39,7 +40,7 @@ public interface IApplicationService {
      //新增mcu
      public int addMcu(McuServer mcu);
      //修改mcu
-     public int modifyMcu(McuServer mcu);
+     public String modifyMcu(McuServer mcu);
      //删除mcu
      public int deleteMcu(int id)throws Exception;
      //查询mcu
@@ -49,7 +50,7 @@ public interface IApplicationService {
      //新增audio
      public int saveAudioServer(AudioServer audio);
      //修改audio
-     public int modifyAudioServer(AudioServer audio);
+     public String modifyAudioServer(AudioServer audio);
      //删除audio
      public int deleteAudioServer(int serverId);
      //查询appResource
@@ -138,14 +139,22 @@ public interface IApplicationService {
      public int ModifyCompany(Company company);
      //删除company 
      public int deleteCompany(int CompanyId);
+     //查询configServer
+     public List<ConfigServer> getConfigServer(ConfigServer configServer,int start,int pagSize);
+     //新增configServer
+     public int saveConfigServer(ConfigServer configServer);
+     //修改configServer
+     public int modifyConfigServer(ConfigServer configServer);
+     //删除configServer
+     public int deleteConfigServer(int serverId);
      //查询最大endUid
      public String getMaxEndUid();
      //新增dictionary
-     public int saveDictionary(Dictionary dict);
+     public String saveDictionary(Dictionary dict);
      //修改dictionary
      public String modifyDictionary(Dictionary dict);
      //删除dictionary 
-     public int deleteDictionary(String key);
+     public String deleteDictionary(String key);
      //查询dictionary
      public List<Dictionary> getDictionary(Dictionary dict,int start,int pagSize);
      //新增device

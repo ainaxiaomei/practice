@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Device Server Config</title>
+  <title>ConfigServer Config</title>
   <%String path=getServletContext().getContextPath();%>
   <jsp:include page="common/common-head.jsp"></jsp:include>
 </head>
@@ -19,7 +19,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Device Server Configuration
+        ConfigServer Configuration
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -32,7 +32,7 @@
     <section class="content">
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Device Information</h3>
+          <h3 class="box-title">Config Information</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -43,21 +43,36 @@
 					<div class="box-body">
 						<form class="form-horizontal" role="form" id="deviceForm">
 					                     <fieldset>
-					                       <div class="form-group">
-					                          <label class="col-sm-1 control-label" >Dev Type</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" id="devtype" name="devtype" type="text" />
-					                          </div>
-					                          <label class="col-sm-1 control-label" >AudioParams</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" id="audioParams" name="audioParams" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >DataType</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" id="datatype" name="datatype" type="text"/>
-					                          </div>
-					                       </div>
-					                    </fieldset>
+					             <div class="form-group">
+					                 <label class="col-sm-1 control-label" >ServerId</label>
+					                  <div class="col-sm-3">
+					                        <input class="form-control" id="serverId" name="serverId" type="text" />
+					                  </div>
+					                        <label class="col-sm-1 control-label" >ServerName</label>
+					                  <div class="col-sm-3">
+					                        <input class="form-control" id="serverName" name="serverName" type="text"/>
+					                   </div>
+					                   <label class="col-sm-1 control-label" >DspNum</label>
+					                  <div class="col-sm-3">
+					                        <input class="form-control" id="dspnum" name="dspnum" type="text"/>
+					                   </div>
+					              </div>
+					             <div class="form-group">
+					                 <label class="col-sm-1 control-label" >Svc URL</label>
+					                  <div class="col-sm-3">
+					                        <input class="form-control" id="svcUrl" name="svcUrl" type="text" />
+					                  </div>
+					                        <label class="col-sm-1 control-label" >Http URL</label>
+					                  <div class="col-sm-3">
+					                        <input class="form-control" id="httpUrl" name="httpUrl" type="text"/>
+					                   </div>
+					                   <label class="col-sm-1 control-label" >Valid</label>
+					                  <div class="col-sm-3">
+					                        <input class="form-control" id="valid" name="valid" type="text"/>
+					                   </div>
+					              </div>
+					                       
+					         </fieldset> 
 					                    <div >   
 					                     <button type="button" id="saveButton"  class="btn btn-primary">Save</button>
 					                     <button type="button" id="closeButton" style="display:none" class="btn btn-primary">Close</button>
@@ -96,17 +111,20 @@
 	        $(function() {
 	        	var param=window.dialogArguments;
 	        	if(param.action=="MODIFY"){
-	        		$("#devtype").attr("readonly",true);
+	        		$("#serverId").attr("readonly",true);
 	        		//是修改界面
 	        		//改变单击事件
-	        		$("#saveButton").click(modifyMcu);
+	        		$("#saveButton").click(modifyConfigServer);
 	        		$("#closeButton").click(closeWindow);
 	        		//填充表单
 	        		  var columns= [
-							"devtype" ,
-							 "audioParams",
-							"datatype"
-			            ];
+	    							"serverId" ,
+	   							 "serverName",
+	   							 "dspnum",
+	   							 "svcUrl",
+	   							 "httpUrl",
+	   							 "valid"
+	   			            ];
 	        		for(var i=0;i<columns.length;i++){
 	        			var a=$("#"+columns[i]);
 	        			a.val(param[columns[i]]);
@@ -114,7 +132,7 @@
 	        	}else{
 	        		//是新增页面
 	        		//改变单击事件
-	        		$("#saveButton").click(saveMcu);
+	        		$("#saveButton").click(saveConfigServer);
 	        	}
 	        	//对话框
 	        	$('#waitModal').on('hide.bs.modal', function () {
@@ -128,19 +146,17 @@
 	        function closeWindow(){
 	        	window.close();
 	        }
-	       function modifyMcu(){
+	       function modifyConfigServer(){
 	        	$.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/deviceModify",
+                 		  url:"<%=path%>/configServerModify",
                  		  data:$("#deviceForm").serialize(),
                  		  success:function(data){
-                 			 //var dataArray=$.parseJSON( data ); 
-                 			 //sendHttpMsg(dataArray);
                  			 window.returnValue = "success";
-                 			 notifyServer({"ips":"","msg":"cmd=deviceparams_change","type":"GATE"});
+                 			 window.close();
                  			  },
                  		  error:function(msg){
-                 			  alert("error!"+msg);
+                 			  alert("error!"+msg.responseText);
                  			 window.returnValue = "error";  //返回值
                  		  	}
                  		 }
@@ -149,18 +165,18 @@
                  	  );
 	        }
 	       
-           function saveMcu(){
+           function saveConfigServer(){
         	   $.ajax(
                  		{ type:"POST",
-                 		  url:"<%=path%>/saveDevice",
+                 		  url:"<%=path%>/saveConfigServer",
                  		  data:$("#deviceForm").serialize(),
                  		  success:function(){
                  			window.returnValue = "success";
-                 			notifyServer({"ips":"","msg":"cmd=deviceparams_change","type":"GATE"});
+                 			window.close();
                  			  },
                  		  error:function(msg){
                  		 window.returnValue = "error";  //返回值
-                 			  alert("error!"+msg);
+                 			  alert("error!"+msg.responseText);
                  		  	}
                  		 }
                  		  

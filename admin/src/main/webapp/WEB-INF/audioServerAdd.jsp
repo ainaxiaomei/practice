@@ -44,15 +44,16 @@
 						 <form class="form-horizontal" role="form" id="audioForm">
 					                    <fieldset>
 					                       <div class="form-group">
-					                          <input class="form-control" id="serverId" name="serverId" type="text" style="display:none"/>
+					                          <label class="col-sm-1 control-label" >Server Id</label>
+					                          <div class="col-sm-3">
+					                              <input class="form-control" id="serverId" name="serverId" type="text" />
+					                          </div>
+					                         
 					                          <label class="col-sm-1 control-label" >Server Name</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control" id="serverName" name="serverName" type="text"/>
 					                          </div>
-					                          <label class="col-sm-1 control-label" >Dsp Number</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" id="dspnum" name="dspnum" type="text"/>
-					                          </div>
+					                          
 					                          <label class="col-sm-1 control-label" >SVC Url</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="svcUrl" name="svcUrl" type="text" />
@@ -80,6 +81,10 @@
 					                          <label class="col-sm-1 control-label" >Valid</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="valid" name="valid" type="text"/>
+					                          </div>
+					                          <label class="col-sm-1 control-label" >Dsp Number</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" id="dspnum" name="dspnum" type="text"/>
 					                          </div>
 					                       </div>
 					                    </fieldset> 
@@ -151,11 +156,11 @@
              		  url:"<%=path%>/audioServerModify",
              		  data:$("#audioForm").serialize(),
              		  success:function(data){
-             			  if(data&&data=="send"){
-           				    //发送消息
-           				    var gid=$("#groupId").val();
-                 			notifyServer({"ips":"","msg":"audiogroup_change&id="+gid+"&act=2","type":"DB"});
-           			      }else{
+             			 var result=$.parseJSON(data);
+             			 if(result&&result.send=='yes'){
+            				  //发送消息
+                  			notifyServer({"ips":"","msg":"cmd=mcugroup_change&id="+result.gid+"&act=2","type":"DB"});
+            			  }else{
            				     //不需要发送消息
 	           				 alert("Modify Success But Do Not Need To Send Message!");
 	           				 window.returnValue = "success";  //返回值

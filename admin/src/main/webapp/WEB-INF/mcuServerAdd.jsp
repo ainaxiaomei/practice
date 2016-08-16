@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dictionary Server Config</title>
+  <title>Mcu Server Config</title>
   <%String path=getServletContext().getContextPath();%>
   <jsp:include page="common/common-head.jsp"></jsp:include>
 </head>
@@ -19,7 +19,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        GroupMcu  Configuration
+        Mcu  Configuration
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -44,14 +44,13 @@
 						 <form class="form-horizontal" role="form" id="mcuForm">
 					                    <fieldset>
 					                       <div class="form-group">
+					                          <label class="col-sm-1 control-label" >Server Id</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" id="serverId" name="serverId" type="text" />
+					                          </div>
 					                          <label class="col-sm-1 control-label" >Server Name</label>
 					                          <div class="col-sm-3">
-					                             <input class="form-control" id="serverId" name="serverId" type="text" style="display:none"/>
 					                             <input class="form-control" id="serverName" name="serverName" type="text"/>
-					                          </div>
-					                          <label class="col-sm-1 control-label" >Dsp Number</label>
-					                          <div class="col-sm-3">
-					                             <input class="form-control" id="dspnum" name="dspnum" type="text"/>
 					                          </div>
 					                          <label class="col-sm-1 control-label" >SVC Url</label>
 					                          <div class="col-sm-3">
@@ -70,6 +69,12 @@
 					                          <label class="col-sm-1 control-label" >Valid</label>
 					                          <div class="col-sm-3">
 					                             <input class="form-control"  id="valid" name="valid" type="text"/>
+					                          </div>
+					                       </div>
+					                       <div class="form-group">
+					                         <label class="col-sm-1 control-label" >Dsp Number</label>
+					                          <div class="col-sm-3">
+					                             <input class="form-control" id="dspnum" name="dspnum" type="text"/>
 					                          </div>
 					                       </div>
 					                    </fieldset> 
@@ -187,10 +192,10 @@
                  		  url:"<%=path%>/mcuServerModify",
                  		  data:$("#mcuForm").serialize(),
                  		  success:function(data){
-                 			 if(data&&data=="send"){
+                 			 var result=$.parseJSON(data);
+                 			 if(result&&result.send=='yes'){
                 				  //发送消息
-                				 var gid=$("#groupId").val();
-                      			notifyServer({"ips":"","msg":"cmd=mcugroup_change&id="+gid+"&act=2","type":"DB"});
+                      			notifyServer({"ips":"","msg":"cmd=mcugroup_change&id="+result.gid+"&act=2","type":"DB"});
                 			  }else{
                 				  //不需要发送消息
                 				 alert("Modify Success But Do Not Need To Send Message!");

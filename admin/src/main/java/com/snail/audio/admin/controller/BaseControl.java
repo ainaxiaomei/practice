@@ -30,6 +30,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.Company;
+import com.snail.audio.admin.entity.ConfigServer;
 import com.snail.audio.admin.entity.Device;
 import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
@@ -244,6 +245,18 @@ public class BaseControl {
 		return "groupMcuServerTree";
 		
 	}
+	@RequestMapping("/configServerAdd")
+	public String toConfigServerAdd(Model model,HttpServletRequest request){
+		
+		return "configServerAdd";
+		
+	}
+	@RequestMapping("/configServer")
+	public String toConfigServer(Model model,HttpServletRequest request){
+		
+		return "configServer";
+		
+	}
 	@RequestMapping("/device")
 	public String toDevice(Model model,HttpServletRequest request){
 		
@@ -284,6 +297,16 @@ public class BaseControl {
 	public void deviceSearch(HttpServletRequest request,HttpServletResponse response,Device device) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
 		List<Device> list=service.getDevice(device, -1, -1);
+		//将list转换为json字符创
+		String result =JSONArray.fromObject(list).toString();
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().printf(result);
+		
+	}
+	@RequestMapping("/configServerSearch")
+	public void configServerSearch(HttpServletRequest request,HttpServletResponse response,ConfigServer config) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		List<ConfigServer> list=service.getConfigServer(config, -1, -1);
 		//将list转换为json字符创
 		String result =JSONArray.fromObject(list).toString();
 		response.setCharacterEncoding("utf-8");

@@ -212,7 +212,7 @@
                 		  success:function(data){
                 			  window.returnValue = "success";
                 			  var appid=$("#appid").val();
-                    			 notifyServer({"ips":"","msg":"cmd=appres_change&id="+appid+"&act=1","type":"DB"});
+                    			 notifyServer({"ips":"","msg":"cmd=appres_change&id="+appid+"&act=2","type":"DB"});
                 			  },
                 		  error:function(msg){
                 			  alert("error!"+msg.responseText);

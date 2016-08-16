@@ -267,6 +267,7 @@
                     		  data:$("#groupAudioServer").serialize(),
                     		  success:function(data){
                     			  alert("Add Success!");
+                    			  window.returnValue = "success"
                     			  window.close();
                     		  },
                     		  error:function(msg){

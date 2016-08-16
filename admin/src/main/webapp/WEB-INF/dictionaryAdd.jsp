@@ -136,8 +136,20 @@
                  		  url:"<%=path%>/dictionaryModify",
                  		  data:$("#dictForm").serialize(),
                  		  success:function(data){
+                 			 var httpIps=$.parseJSON(data);
+                 			 var urls="";
+                 			$.each(httpIps,function(id,obj){
+                 				if(id!=httpIps.length-1){
+                 					urls= urls+"http://"+obj+"/cmd=reload_dics"+",";
+                 				}else{
+                 					urls= urls+"http://"+obj+"/cmd=reload_dics"
+                 				}
+                 				
+                 			 });
+                 				 
+                 			 
                  			 window.returnValue = "success";
-                 			 notifyServer({"ips":"","msg":"cmd=reload_dics","type":"GATE"});
+                 			 notifyServer({"ips":urls,"msg":"cmd=reload_dics","type":"GATE"});
                  			  },
                  		  error:function(msg){
                  			  alert("error!"+msg);
@@ -148,62 +160,24 @@
                  		  
                  	  );
 	        }
-	        function sendHttpMsg(dataArray){
-	        	var progressbar = $( "#progressbar" ).progressbar({
-	        		 max: dataArray.length
-	        	    });
-	        	$( "#dialog" ).dialog({
-	        		close: function( event, ui ) {
-	        			  window.returnValue = "success";  //返回值
-                		  window.close();
-	        		}
-	        	});
-	        	var a=0;
-	        	
-	        	setTimeout(function (){
-	        		process(a,dataArray);
-	        	},80);
-        		
-	        	
-	        }
-	        function process(a,dataArray){
-        		var httpurl=dataArray[a].httpUrl;
-        		$.ajax(
-                 		{ type:"POST",
-                 		  url:httpurl,
-                 		  data:"cmd=reload_dics",
-                 		   async :false,
-                 		  success:function(){
-          	        		setProgress(httpurl,"success");
-                 			  },
-                 		  error:function(msg){
-                 		     //发送服务器失败网路问题
-                 			setProgress(httpurl,"error");
-                 		  	}
-                 		 }
-                 		  
-                 		  
-                 	  );
-        		if(a<dataArray.length){
-        			setTimeout(function(){
-        				process(++a,dataArray)
-        			},80);
-        		}
-        	}
-	        function setProgress(url,status){
-	        	var progressbar = $( "#progressbar" );
-	        	 var val = progressbar.progressbar( "value" ) || 0;
-    		      progressbar.progressbar( "value", val + 1 );
-    		     $("#pragessMsg").append("<span>Sending Message to "+url+"...</span><span style='color:red'>"+status+"</span><br/>");
-	        }
            function saveMcu(){
         	   $.ajax(
                  		{ type:"POST",
                  		  url:"<%=path%>/saveDictionary",
                  		  data:$("#dictForm").serialize(),
-                 		  success:function(){
+                 		  success:function(data){
+                 			 var httpIps=$.parseJSON(data);
+                 			 var urls="";
+                 			$.each(httpIps,function(id,obj){
+                 				if(id!=httpIps.length-1){
+                 					urls= urls+"http://"+obj+"/cmd=reload_dics"+",";
+                 				}else{
+                 					urls= urls+"http://"+obj+"/cmd=reload_dics"
+                 				}
+                 				
+                 			 });
                  		 window.returnValue = "success";
-             			 notifyServer({"ips":"","msg":"cmd=reload_dics","type":"GATE"});
+             			 notifyServer({"ips":urls,"msg":"cmd=reload_dics","type":"GATE"});
                  			  },
                  		  error:function(msg){
                  		 window.returnValue = "error";  //返回值

@@ -32,6 +32,15 @@ public class DeleteControl {
 		
 		
 	}
+	@ResponseBody
+	@RequestMapping("/configServerDelete")
+	public String configServerDelete(HttpServletRequest request ,@RequestParam("serverId") int serverId) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		service.deleteConfigServer(Integer.valueOf(serverId));
+		return "success";
+		
+		
+	}
 	@RequestMapping("/audioServerDelete")
 	@ResponseBody
 	public String audioServerDelete(HttpServletRequest request ,@RequestParam("serverId") int serverId) throws IOException{
@@ -126,8 +135,7 @@ public class DeleteControl {
 	@ResponseBody
 	public String dictionaryDelete(HttpServletRequest request ,@RequestParam("key") String key) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		service.deleteDictionary(key);
-		return "success";
+		return service.deleteDictionary(key);
 		
 		
 	}

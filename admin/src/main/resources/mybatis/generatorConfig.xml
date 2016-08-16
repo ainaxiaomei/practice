@@ -95,7 +95,7 @@
                selectByExampleQueryId="false">
             
         </table>
-        -->
+       
         <table tableName="group_audio" domainObjectName="GroupAudio"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -108,6 +108,7 @@
                selectByExampleQueryId="false">
             
         </table>
+         -->
         <!--  
         <table tableName="group_audio_servers" domainObjectName="GroupAudioServers"
                enableCountByExample="false" enableUpdateByExample="false"
@@ -143,6 +144,11 @@
            
         </table>
         -->
-        
+        <table tableName="config_servers" domainObjectName="configServer"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+           
+        </table>
     </context>
 </generatorConfiguration>

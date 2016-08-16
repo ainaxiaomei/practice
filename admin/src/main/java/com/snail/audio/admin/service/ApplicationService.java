@@ -19,10 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.snail.audio.admin.dao.ApplicaitonDAO;
+import com.snail.audio.admin.dao.ConfigDao;
 import com.snail.audio.admin.dao.IAppResourceDao;
 import com.snail.audio.admin.dao.IApplicationDao;
 import com.snail.audio.admin.dao.IAudioDao;
 import com.snail.audio.admin.dao.ICompanyDao;
+import com.snail.audio.admin.dao.IConfigDao;
 import com.snail.audio.admin.dao.IDeviceDao;
 import com.snail.audio.admin.dao.IDictionaryDao;
 import com.snail.audio.admin.dao.IFtpServerDao;
@@ -40,6 +42,7 @@ import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
 import com.snail.audio.admin.entity.Company;
+import com.snail.audio.admin.entity.ConfigServer;
 import com.snail.audio.admin.entity.Device;
 import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
@@ -91,6 +94,8 @@ public class ApplicationService implements IApplicationService {
 	private IDeviceDao deviceDao;
 	@Autowired
 	private IIndexDbGroupDao indexDbGroupDao;
+	@Autowired
+	private IConfigDao configDao;
 	static class Action{
 		static final int None=0;
 		static final int Add=1;
@@ -164,7 +169,7 @@ public class ApplicationService implements IApplicationService {
 		return mcuDao.addMCU(mcu);
 	}
 	@Override
-	public int modifyMcu(McuServer mcu) {
+	public String modifyMcu(McuServer mcu) {
 		//如果mcu属于一个组需要发送消息
 		//检查mcu是否属于一个组，如果属于一个组不能删除
 		mcuDao.modifyMCU(mcu);
@@ -172,9 +177,9 @@ public class ApplicationService implements IApplicationService {
 		 groupMcuServer.setServerId(mcu.getServerId());
 		 List<GroupMcuServers> list=groupMcuServerDao.getMCU(groupMcuServer, -1, -1);
 		 if(list!=null&&!list.isEmpty()){
-			 return 1;
+			 return "{\"send\":\"yes\",\"gid\":"+list.get(0).getGroupId()+"}";
 		 } 
-		return 0;
+		return "{\"send\":\"no\"}";
 	}
 	@Override
 	public int saveFtp(FTPServer ftp) {
@@ -189,15 +194,15 @@ public class ApplicationService implements IApplicationService {
 		return audioDao.saveAudioServer(audio);
 	}
 	@Override
-	public int modifyAudioServer(AudioServer audio) {
+	public String modifyAudioServer(AudioServer audio) {
 		 audioDao.modifyAudioServer(audio);
 		 GroupAudioServers groupAudioServer=new GroupAudioServers();
 		 groupAudioServer.setServerId(audio.getServerId());
 		 List<GroupAudioServers> list=groupAudioServerDao.getAudio(groupAudioServer, -1, -1);
 		 if(list!=null&&!list.isEmpty()){
-			 return 1;
+			 return "{\"send\":\"yes\",\"gid\":"+list.get(0).getGroupId()+"}";
 		 } 
-		return 0;
+		return "{\"send\":\"no\"}";
 	}
 	@Override
 	public String saveAppRes(AppResource appRes) {
@@ -523,29 +528,79 @@ public class ApplicationService implements IApplicationService {
 	public int deleteFtp(int serverId) {
 		return ftpDao.deleteFtp(serverId);
 	}
+	
 	@Override
-	public int saveDictionary(Dictionary dict) {
-		return dictionaryDao.addDictionary(dict);
+	public String saveDictionary(Dictionary dict) {
+		dictionaryDao.addDictionary(dict);
+		
+		// 查询ConfigServer中的http
+		List<ConfigServer> configServerList = configDao.getConfigServer(new ConfigServer(), -1, -1);
+		// 查询indexGate中的http
+		List<IndexGate> indexGateList = gateDao.getGateServer(new IndexGate(), -1, -1);
+		List<String> httpList = new ArrayList<String>();
+		
+		for (ConfigServer config : configServerList) {
+			httpList.add(config.getHttpUrl());
+		}
+		
+		for (IndexGate IndexGate : indexGateList) {
+			httpList.add(IndexGate.getHttpUrl());
+		}
+		
+		return JSONArray.fromObject(httpList).toString();
 	}
+	
 	@Override
 	public String modifyDictionary(Dictionary dict) {
-		 dictionaryDao.modifyDictionary(dict);
-		 //查寻所有的indexGate中的httpurl
-		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
-		 return JSONArray.fromObject(list).toString();
+		dictionaryDao.modifyDictionary(dict);
+
+		// 查询ConfigServer中的http
+		List<ConfigServer> configServerList = configDao.getConfigServer(new ConfigServer(), -1, -1);
+		// 查询indexGate中的http
+		List<IndexGate> indexGateList = gateDao.getGateServer(new IndexGate(), -1, -1);
+		List<String> httpList = new ArrayList<String>();
+
+		for (ConfigServer config : configServerList) {
+			httpList.add(config.getHttpUrl());
+		}
+
+		for (IndexGate IndexGate : indexGateList) {
+			httpList.add(IndexGate.getHttpUrl());
+		}
+
+		return JSONArray.fromObject(httpList).toString();
 	}
+	
 	@Override
-	public int deleteDictionary(String key) {
-		return dictionaryDao.deleteDictionary(key);
+	public String deleteDictionary(String key) {
+		dictionaryDao.deleteDictionary(key);
+		// 查询ConfigServer中的http
+		List<ConfigServer> configServerList = configDao.getConfigServer(new ConfigServer(), -1, -1);
+		// 查询indexGate中的http
+		List<IndexGate> indexGateList = gateDao.getGateServer(new IndexGate(), -1, -1);
+		List<String> httpList = new ArrayList<String>();
+
+		for (ConfigServer config : configServerList) {
+			httpList.add(config.getHttpUrl());
+		}
+
+		for (IndexGate IndexGate : indexGateList) {
+			httpList.add(IndexGate.getHttpUrl());
+		}
+
+		return JSONArray.fromObject(httpList).toString();
 	}
+	
 	@Override
 	public List<Dictionary> getDictionary(Dictionary dict, int start, int pagSize) {
 		return dictionaryDao.getDictionary(dict, start, pagSize);
 	}
+	
 	@Override
 	public int saveDevice(Device device) {
 		return deviceDao.addDevice(device);
 	}
+	
 	@Override
 	public String modifyDevice(Device device) {
 		  deviceDao.modifyDevice(device);
@@ -553,6 +608,7 @@ public class ApplicationService implements IApplicationService {
 		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
 		 return JSONArray.fromObject(list).toString();
 	}
+	
 	@Override
 	public int deleteDevice(String key) {
 		return deviceDao.deleteDevice(key);
@@ -565,6 +621,7 @@ public class ApplicationService implements IApplicationService {
 	public String getMcuServerTree(GroupMcuServers groupMcuServer) {
 		List<GroupMcuServers> list=this.getGroupMcuServer(groupMcuServer,-1,-1);
 		List<JsonTree> treeList=new ArrayList<JsonTree>();
+		
 		for(int i=0;i<list.size();i++){
 			JsonTreeBulider builder=new JsonTreeBulider();
 			if(list.get(i).getLevel()==0){
@@ -578,7 +635,7 @@ public class ApplicationService implements IApplicationService {
 			mcu.setServerId(list.get(i).getServerId());
 			List<McuServer> mcuList=mcuDao.getMCU(mcu, -1, -1);
 			if(list!=null&&!list.isEmpty()){
-				builder.text(mcuList.get(0).getServerName());
+				builder.text(mcuList.get(0).getServerName()+"("+list.get(i).getGroupId()+")");
 			}else{
 				//其实是错误数据
 				builder.text(String.valueOf(list.get(i).getServerId()));
@@ -589,6 +646,7 @@ public class ApplicationService implements IApplicationService {
 			.groupServerId(String.valueOf(list.get(i).getId()));
 			treeList.add(builder.build());
 		}
+		
 		JsonTree rootTree=JsonTree.jsonTreeBuilder("root","#")
 		.text("Mcu Server Tree")
 		.group("-1")
@@ -597,8 +655,10 @@ public class ApplicationService implements IApplicationService {
 		.build();
 		treeList.add(rootTree);
 		String result =JSONArray.fromObject(treeList).toString();
+		
 		return result;
 	}
+	
 	@Override
 	public String getAudioServerTree(GroupAudioServers groupAudioServer) {
 		List<GroupAudioServers> list=this.getGroupAudioServer(groupAudioServer,-1,-1);
@@ -616,7 +676,7 @@ public class ApplicationService implements IApplicationService {
 			audio.setServerId(list.get(i).getServerId());
 			List<AudioServer> mcuList=audioDao.getAudioServer(audio, -1, -1);
 			if(list!=null&&!list.isEmpty()){
-				builder.text(mcuList.get(0).getServerName());
+				builder.text(mcuList.get(0).getServerName()+"("+list.get(i).getGroupId()+")");
 			}else{
 				//其实是错误数据
 				builder.text(String.valueOf(list.get(i).getServerId()));
@@ -850,7 +910,9 @@ public class ApplicationService implements IApplicationService {
 		List<IndexDBServer> dblist=indexDbServersDao.getIndexDb(new IndexDBServer(), -1, -1);
 		//消息=ip+cmd+组号+act
 		List<String> msgs=new ArrayList<String>();
+		
 		for(GroupMcu gmcu:list){
+			
 			switch (gmcu.getFlag()) {
 			case Action.Add:
 				for(IndexDBServer db:dblist){
@@ -870,6 +932,7 @@ public class ApplicationService implements IApplicationService {
 				groupMcu.setGroupId(gmcu.getGroupId());
 				groupMcuDao.modifyGroupMCU(groupMcu);
 				break;
+				
 			case Action.Modify:
 				for(IndexDBServer db:dblist){
 					StringBuilder sb=new StringBuilder();
@@ -888,6 +951,7 @@ public class ApplicationService implements IApplicationService {
 				groupMcu.setGroupId(gmcu.getGroupId());
 				groupMcuDao.modifyGroupMCU(groupMcu);
 				break;
+				
 			case Action.Delete:
 				for(IndexDBServer db:dblist){
 					StringBuilder sb=new StringBuilder();
@@ -905,7 +969,6 @@ public class ApplicationService implements IApplicationService {
 				groupMcu.setFlag(0);
 				groupMcu.setGroupId(gmcu.getGroupId());
 				groupMcuDao.modifyGroupMCU(groupMcu);
-				
 				break;
 				
 			default:
@@ -913,6 +976,7 @@ public class ApplicationService implements IApplicationService {
 			}
 			
 		}
+		
 		List<String> failList=new ArrayList<String>();
 		doSendMessage(msgs, failList);
 		return JSONArray.fromObject(failList).toString();
@@ -986,46 +1050,69 @@ public class ApplicationService implements IApplicationService {
 	}
 	@Override
 	public String modifyIndexDbGroup(IndexDBGroup dbGrp) {
-		//将indexdb中的appis设为可用状态
-		  IndexDBGroup dbgrp=new IndexDBGroup();
-		  dbgrp.setGroupId(dbGrp.getGroupId());
-		  List<IndexDBGroup> ls=indexDbGroupDao.getIndexDbGroup(dbgrp, -1, -1);
-	      appDao.setAppOccupied(ls.get(0).getAppids(), false);
-		//将indexdb中的appids都设为占用状态
-	    appDao.setAppOccupied(dbGrp.getAppids(), true);
-	    indexDbGroupDao.modifyIndexDbGroup(dbGrp);
-	    //时间不够简单实现
-	    int oldServiceId1=ls.get(0).getServerid1()==null?0:ls.get(0).getServerid1().intValue();
-	    int oldServiceId2=ls.get(0).getServerid2()==null?0:ls.get(0).getServerid2().intValue();
-	    int curServiceId1=dbGrp.getServerid1()==null?0:dbGrp.getServerid1().intValue();
-	    int curServiceId2=dbGrp.getServerid2()==null?0:dbGrp.getServerid2().intValue();
-	    if(oldServiceId1!=curServiceId1){
-	    	//将oldServiceId1的groupid设置为0
-	    	IndexDBServer old=new IndexDBServer();
-	    	old.setServerId(oldServiceId1);
-	    	old.setGroupId(0);
-	    	indexDbServersDao.modifyIndexDb(old);
-	    	//将curServiceId1的groupId设置为当前的groupid
-	    	IndexDBServer cur=new IndexDBServer();
-	    	cur.setServerId(curServiceId1);
-	    	cur.setGroupId(dbGrp.getGroupId());
-	    	indexDbServersDao.modifyIndexDb(cur);
-	    }
-	    if(oldServiceId2!=curServiceId2){
-	    	//将oldServiceId2的groupid设置为0
-	    	IndexDBServer old=new IndexDBServer();
-	    	old.setServerId(oldServiceId2);
-	    	old.setGroupId(0);
-	    	indexDbServersDao.modifyIndexDb(old);
-	    	//将curServiceId2的groupId设置为当前的groupid
-	    	IndexDBServer cur=new IndexDBServer();
-	    	cur.setServerId(curServiceId2);
-	    	cur.setGroupId(dbGrp.getGroupId());
-	    	indexDbServersDao.modifyIndexDb(cur);
-	    }
-		//查寻所有的indexGate中的httpurl
-		 List<IndexGate> list=gateDao.getGateServer(new IndexGate(),  -1, -1); 
-		 return JSONArray.fromObject(list).toString();
+		// 将indexdb中的appis设为可用状态
+		IndexDBGroup dbgrp = new IndexDBGroup();
+		dbgrp.setGroupId(dbGrp.getGroupId());
+		List<IndexDBGroup> ls = indexDbGroupDao.getIndexDbGroup(dbgrp, -1, -1);
+		appDao.setAppOccupied(ls.get(0).getAppids(), false);
+		// 将indexdb中的appids都设为占用状态
+		appDao.setAppOccupied(dbGrp.getAppids(), true);
+		indexDbGroupDao.modifyIndexDbGroup(dbGrp);
+		
+		// 时间不够简单实现
+		int oldServiceId1 = ls.get(0).getServerid1() == null ? 0 : ls.get(0).getServerid1().intValue();
+		int oldServiceId2 = ls.get(0).getServerid2() == null ? 0 : ls.get(0).getServerid2().intValue();
+		int curServiceId1 = dbGrp.getServerid1() == null ? 0 : dbGrp.getServerid1().intValue();
+		int curServiceId2 = dbGrp.getServerid2() == null ? 0 : dbGrp.getServerid2().intValue();
+
+		if (oldServiceId1 != curServiceId1) {
+			// 将oldServiceId1的groupid设置为0
+			IndexDBServer old = new IndexDBServer();
+			old.setServerId(oldServiceId1);
+			old.setGroupId(0);
+			indexDbServersDao.modifyIndexDb(old);
+			// 将curServiceId1的groupId设置为当前的groupid
+			IndexDBServer cur = new IndexDBServer();
+			cur.setServerId(curServiceId1);
+			cur.setGroupId(dbGrp.getGroupId());
+			indexDbServersDao.modifyIndexDb(cur);
+		}
+		if (oldServiceId2 != curServiceId2) {
+			// 将oldServiceId2的groupid设置为0
+			IndexDBServer old = new IndexDBServer();
+			old.setServerId(oldServiceId2);
+			old.setGroupId(0);
+			indexDbServersDao.modifyIndexDb(old);
+			// 将curServiceId2的groupId设置为当前的groupid
+			IndexDBServer cur = new IndexDBServer();
+			cur.setServerId(curServiceId2);
+			cur.setGroupId(dbGrp.getGroupId());
+			indexDbServersDao.modifyIndexDb(cur);
+		}
+		
+		List<String> reslut = new ArrayList<String>();
+		// 查出server1的httpUrl
+		IndexDBServer dbServer=new IndexDBServer();
+		dbServer.setServerId(dbGrp.getServerid1());
+		List<IndexDBServer> s1List=indexDbServersDao.getIndexDb(dbServer, -1, -1);
+		if(s1List != null && !s1List.isEmpty()){
+			reslut.add(s1List.get(0).getHttpUrl());
+		}
+		
+		// 查出server2的httpUrl
+		dbServer.setServerId(dbGrp.getServerid2());
+		List<IndexDBServer> s2List=indexDbServersDao.getIndexDb(dbServer, -1, -1);
+		if(s2List != null && !s2List.isEmpty()){
+			reslut.add(s2List.get(0).getHttpUrl());
+		}
+		
+		// 查寻所有的indexGate中的httpurl
+		List<IndexGate> gatelist = gateDao.getGateServer(new IndexGate(), -1, -1);
+		for(IndexGate indexgate:gatelist){
+			reslut.add(indexgate.getHttpUrl());
+		}
+		
+		return JSONArray.fromObject(reslut).toString();
 	}
 	@Override
 	public String deleteIndexDbGroup(int grpId) {
@@ -1053,9 +1140,30 @@ public class ApplicationService implements IApplicationService {
 		 List<IndexDBGroup> list=indexDbGroupDao.getIndexDbGroup(new IndexDBGroup(), -1, -1);
 		 return JSONArray.fromObject(list).toString();
 	}
+	
 	@Override
 	public List<IndexDBServer> selectIndexDb(IndexDBServer indexDb, int start, int end) {
 		return indexDbServersDao.selectIndexDb(indexDb, start, end);
+	}
+	
+	@Override
+	public List<ConfigServer> getConfigServer(ConfigServer configServer, int start, int pagSize) {
+		return configDao.getConfigServer(configServer, start, pagSize);
+	}
+	
+	@Override
+	public int saveConfigServer(ConfigServer configServer) {
+		return configDao.addConfigServer(configServer);
+	}
+	
+	@Override
+	public int modifyConfigServer(ConfigServer configServer) {
+		return configDao.modifyConfigServer(configServer);
+	}
+	
+	@Override
+	public int deleteConfigServer(int serverId) {
+		return configDao.deleteConfigServer(serverId);
 	}
 
 }

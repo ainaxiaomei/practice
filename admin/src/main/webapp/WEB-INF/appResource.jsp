@@ -258,7 +258,7 @@
                		  url:"<%=path%>/appResDelete",
                		  data:"Id="+id,
                		  success:function(data){
-               			 notifyServer({"ips":"","msg":"cmd=appres_change&id="+appid+"&act=1","type":"DB"});
+               			 notifyServer({"ips":"","msg":"cmd=appres_change&id="+appid+"&act=0","type":"DB"});
 
                			  },
                		  error:function(msg){

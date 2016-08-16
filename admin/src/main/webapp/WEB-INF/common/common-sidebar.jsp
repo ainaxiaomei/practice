@@ -51,6 +51,7 @@
             <li id="ftpServers"><a href="<%=path %>/ftpServer"><i class="fa fa-circle-o"></i> Ftp Table</a></li>
             <li id="devices" ><a href="<%=path %>/device"><i class="fa fa-circle-o"></i> Device Table</a></li>
             <li id="dictionarys"><a href="<%=path %>/dictionary"><i class="fa fa-circle-o"></i> Dictionary Table</a></li>
+            <li id="configServer"><a href="<%=path %>/configServer"><i class="fa fa-circle-o"></i> ConfigServer Table</a></li>
             <li id="mcuConfig">
               <a href="#"><i class="fa fa-circle-o"></i> Mcu Config Table <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">

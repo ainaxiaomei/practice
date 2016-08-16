@@ -13,6 +13,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.snail.audio.admin.entity.App;
 import com.snail.audio.admin.entity.AppResource;
 import com.snail.audio.admin.entity.AudioServer;
+import com.snail.audio.admin.entity.ConfigServer;
 import com.snail.audio.admin.entity.Device;
 import com.snail.audio.admin.entity.Dictionary;
 import com.snail.audio.admin.entity.FTPServer;
@@ -32,7 +33,7 @@ public class ModifyControl {
 	@ResponseBody
 	public String mcuServerModify(HttpServletRequest request,McuServer mcu) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		 return service.modifyMcu(mcu)==1?"send":"success";
+		 return service.modifyMcu(mcu);
 	}
 	@RequestMapping("/gateServerModify")
 	@ResponseBody
@@ -45,7 +46,13 @@ public class ModifyControl {
 	@ResponseBody
 	public String audioServerModify(HttpServletRequest request,AudioServer audio) throws IOException{
 		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
-		return service.modifyAudioServer(audio)==1?"send":"success";
+		return service.modifyAudioServer(audio);
+	}
+	@RequestMapping("/configServerModify")
+	@ResponseBody
+	public int configServerModify(HttpServletRequest request,ConfigServer config) throws IOException{
+		IApplicationService service=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()).getBean(IApplicationService.class);
+		return service.modifyConfigServer(config);
 	}
 	@RequestMapping("/indexDbServerModify")
 	@ResponseBody

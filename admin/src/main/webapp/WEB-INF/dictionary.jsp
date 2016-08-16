@@ -251,8 +251,19 @@
               		{ type:"POST",
               		  url:"<%=path%>/dictionaryDelete",
               		  data:"key="+id,
-              		  success:function(){
-             		  notifyServer({"ips":"","msg":"cmd=reload_dics","type":"GATE"});
+              		  success:function(data){
+              			 var httpIps=$.parseJSON(data);
+             			 var urls="";
+             			$.each(httpIps,function(id,obj){
+             				if(id!=httpIps.length-1){
+             					urls= urls+"http://"+obj+"/cmd=reload_dics"+",";
+             				}else{
+             					urls= urls+"http://"+obj+"/cmd=reload_dics"
+             				}
+             				
+             			 });
+             		 window.returnValue = "success";
+         			 notifyServer({"ips":urls,"msg":"cmd=reload_dics","type":"GATE"});
               		  var table=$('#dictionaryTable').DataTable(); 
                 	  table.ajax.reload();
               			  },
