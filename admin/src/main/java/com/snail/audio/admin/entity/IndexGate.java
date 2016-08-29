@@ -11,6 +11,8 @@ public class IndexGate {
 
     private Integer dspnum;
 
+    private Boolean valid;
+
     public Integer getServerId() {
         return serverId;
     }
@@ -49,5 +51,13 @@ public class IndexGate {
 
     public void setDspnum(Integer dspnum) {
         this.dspnum = dspnum;
+    }
+
+    public Boolean getValid() {
+        return valid;
+    }
+
+    public void setValid(Boolean valid) {
+        this.valid = valid;
     }
 }

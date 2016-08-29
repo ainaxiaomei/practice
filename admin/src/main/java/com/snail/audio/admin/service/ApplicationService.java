@@ -534,9 +534,14 @@ public class ApplicationService implements IApplicationService {
 		dictionaryDao.addDictionary(dict);
 		
 		// 查询ConfigServer中的http
-		List<ConfigServer> configServerList = configDao.getConfigServer(new ConfigServer(), -1, -1);
+		ConfigServer configServer=new ConfigServer();
+		configServer.setValid(true);
+		List<ConfigServer> configServerList = configDao.getConfigServer(configServer, -1, -1);
+		
 		// 查询indexGate中的http
-		List<IndexGate> indexGateList = gateDao.getGateServer(new IndexGate(), -1, -1);
+		IndexGate gate=new IndexGate();
+		gate.setValid(true);
+		List<IndexGate> indexGateList = gateDao.getGateServer(gate, -1, -1);
 		List<String> httpList = new ArrayList<String>();
 		
 		for (ConfigServer config : configServerList) {
@@ -555,9 +560,14 @@ public class ApplicationService implements IApplicationService {
 		dictionaryDao.modifyDictionary(dict);
 
 		// 查询ConfigServer中的http
-		List<ConfigServer> configServerList = configDao.getConfigServer(new ConfigServer(), -1, -1);
+		ConfigServer configServer = new ConfigServer();
+		configServer.setValid(true);
+		List<ConfigServer> configServerList = configDao.getConfigServer(configServer, -1, -1);
+		
 		// 查询indexGate中的http
-		List<IndexGate> indexGateList = gateDao.getGateServer(new IndexGate(), -1, -1);
+		IndexGate gate=new IndexGate();
+		gate.setValid(true);
+		List<IndexGate> indexGateList = gateDao.getGateServer(gate, -1, -1);
 		List<String> httpList = new ArrayList<String>();
 
 		for (ConfigServer config : configServerList) {
@@ -575,9 +585,14 @@ public class ApplicationService implements IApplicationService {
 	public String deleteDictionary(String key) {
 		dictionaryDao.deleteDictionary(key);
 		// 查询ConfigServer中的http
-		List<ConfigServer> configServerList = configDao.getConfigServer(new ConfigServer(), -1, -1);
-		// 查询indexGate中的http
-		List<IndexGate> indexGateList = gateDao.getGateServer(new IndexGate(), -1, -1);
+				ConfigServer configServer = new ConfigServer();
+				configServer.setValid(true);
+				List<ConfigServer> configServerList = configDao.getConfigServer(configServer, -1, -1);
+				
+				// 查询indexGate中的http
+				IndexGate gate=new IndexGate();
+				gate.setValid(true);
+				List<IndexGate> indexGateList = gateDao.getGateServer(gate, -1, -1);
 		List<String> httpList = new ArrayList<String>();
 
 		for (ConfigServer config : configServerList) {
@@ -761,14 +776,18 @@ public class ApplicationService implements IApplicationService {
 			if("GATE".equals(type)){
 				//向网关服务器发送
 				//查询网关服务器地址
-				List<IndexGate> list=gateDao.getGateServer(new IndexGate(), -1, -1);
+				IndexGate indexGate = new IndexGate();
+				indexGate.setValid(true);
+				List<IndexGate> list=gateDao.getGateServer(indexGate, -1, -1);
 				for(int i=0;i<list.size();i++){
 					ipList.add("http://"+list.get(i).getHttpUrl()+"/"+msg);
 				}
 			}else if("DB".equals(type)){
 				//向DB服务器发送
 				//查询服务器地址
-				List<IndexDBServer> list=indexDbServersDao.getIndexDb(new IndexDBServer(), -1, -1);
+				IndexDBServer indexDb=new IndexDBServer();
+				indexDb.setValid(true);
+				List<IndexDBServer> list=indexDbServersDao.getIndexDb(indexDb, -1, -1);
 				for(int i=0;i<list.size();i++){
 					ipList.add("http://"+list.get(i).getHttpUrl()+"/"+msg);
 				}
@@ -1094,6 +1113,7 @@ public class ApplicationService implements IApplicationService {
 		// 查出server1的httpUrl
 		IndexDBServer dbServer=new IndexDBServer();
 		dbServer.setServerId(dbGrp.getServerid1());
+		dbServer.setValid(true);
 		List<IndexDBServer> s1List=indexDbServersDao.getIndexDb(dbServer, -1, -1);
 		if(s1List != null && !s1List.isEmpty()){
 			reslut.add(s1List.get(0).getHttpUrl());

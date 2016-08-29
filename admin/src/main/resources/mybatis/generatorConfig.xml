@@ -81,6 +81,7 @@
                selectByExampleQueryId="false">
             
         </table>
+        -->
         <table tableName="index_gate" domainObjectName="IndexGate"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -88,7 +89,7 @@
            
         </table>
         
-         
+         <!--  
         <table tableName="group_mcu_servers" domainObjectName="GroupMcuServers"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -143,12 +144,13 @@
                selectByExampleQueryId="false">
            
         </table>
-        -->
+       
         <table tableName="config_servers" domainObjectName="configServer"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
            
         </table>
+         -->
     </context>
 </generatorConfiguration>

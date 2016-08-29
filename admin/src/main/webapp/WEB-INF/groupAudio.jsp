@@ -248,7 +248,7 @@
               		  success:function(data){
               			if(data&&data=="send"){
         				    //发送消息
-              			   notifyServer({"ips":"","msg":"audiogroup_change&id="+id+"&act=2","type":"DB"});
+              			   notifyServer({"ips":"","msg":"audiogroup_change&id="+id+"&act=0","type":"DB"});
               			  var table=$('#groupAudioTable').DataTable(); 
 	                	  table.ajax.reload();
         			      }else{

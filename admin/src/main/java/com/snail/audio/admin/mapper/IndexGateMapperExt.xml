@@ -21,6 +21,9 @@
       <if test="gate.httpUrl != null and gate.httpUrl!='' " >
         and http_url=#{gate.httpUrl,jdbcType=VARCHAR}
       </if>
+      <if test="gate.valid != null  " >
+        and valid=#{gate.valid}
+      </if>
       <if test="start>0 and end>0 " >
         limit #{start},#{end}
       </if>

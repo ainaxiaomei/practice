@@ -7,9 +7,10 @@
     <result column="svc_url" property="svcUrl" jdbcType="VARCHAR" />
     <result column="http_url" property="httpUrl" jdbcType="VARCHAR" />
     <result column="dspnum" property="dspnum" jdbcType="INTEGER" />
+    <result column="valid" property="valid" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    server_id, server_name, svc_url, http_url, dspnum
+    server_id, server_name, svc_url, http_url, dspnum, valid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,14 +24,18 @@
   </delete>
   <insert id="insert" parameterType="com.snail.audio.admin.entity.IndexGate" >
     insert into index_gate (server_id, server_name, svc_url, 
-      http_url, dspnum)
+      http_url, dspnum, valid
+      )
     values (#{serverId,jdbcType=INTEGER}, #{serverName,jdbcType=VARCHAR}, #{svcUrl,jdbcType=VARCHAR}, 
-      #{httpUrl,jdbcType=VARCHAR}, #{dspnum,jdbcType=INTEGER})
+      #{httpUrl,jdbcType=VARCHAR}, #{dspnum,jdbcType=INTEGER}, #{valid,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.snail.audio.admin.entity.IndexGate" >
     insert into index_gate
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      
+      <if test="serverId != null" >
+        server_id,
+      </if>
       <if test="serverName != null" >
         server_name,
       </if>
@@ -43,9 +48,14 @@
       <if test="dspnum != null" >
         dspnum,
       </if>
+      <if test="valid != null" >
+        valid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      
+      <if test="serverId != null" >
+        #{serverId,jdbcType=INTEGER},
+      </if>
       <if test="serverName != null" >
         #{serverName,jdbcType=VARCHAR},
       </if>
@@ -57,6 +67,9 @@
       </if>
       <if test="dspnum != null" >
         #{dspnum,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -75,6 +88,9 @@
       <if test="dspnum != null" >
         dspnum = #{dspnum,jdbcType=INTEGER},
       </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=TINYINT},
+      </if>
     </set>
     where server_id = #{serverId,jdbcType=INTEGER}
   </update>
@@ -83,7 +99,8 @@
     set server_name = #{serverName,jdbcType=VARCHAR},
       svc_url = #{svcUrl,jdbcType=VARCHAR},
       http_url = #{httpUrl,jdbcType=VARCHAR},
-      dspnum = #{dspnum,jdbcType=INTEGER}
+      dspnum = #{dspnum,jdbcType=INTEGER},
+      valid = #{valid,jdbcType=TINYINT}
     where server_id = #{serverId,jdbcType=INTEGER}
   </update>
 </mapper>
